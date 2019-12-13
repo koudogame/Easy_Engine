@@ -3,7 +3,7 @@
 
 // 作成者 : 板場
 
-#include <stack>
+#include <vector>
 #include "easy_engine.hpp"
 
 BEGIN_EG_EG
@@ -36,27 +36,29 @@ public :
     //
     // アクティブなシーンを取得する
     //
-    inline Scene* getActive() const { return scene_list_.back(); }
+    inline Scene* getActive() const { return scenes_.back(); }
     //
     // シーンを追加する。
     // この時追加される位置は 一番最後
     // 
     // in Push : 追加するシーン
     //
-    inline void push( Scene* Push ) { scene_list_.push_back( Push ); }
+    inline void push( Scene* Next ) { scenes_.push_back( Next ); }
+    //
+    // シーンを入れ替える。
+    // この時入れ替えの対象となるシーンは 最後に追加されたシーン。
+    // 
+    // in Next : 入れ替え後のシーン
+    //
+    void swap( Scene* Next );
     //
     // シーンを除外する。
     // この時除外の対象となるシーンは 最後に追加されたシーン。
     //
     void pop();
-    //
-    // シーンを入れ替える。
-    // この時入れ替えの対象となるシーンは 最後に追加されたシーン。
-    //
-    void swap( Scene* Swap );
 
 private :
-    std::stack<Scene*> scene_list_;
+    std::vector<Scene*> scenes_;
 
     Scene* poped_scene_ = nullptr;
     SceneManager() = default;

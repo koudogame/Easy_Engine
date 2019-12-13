@@ -12,5 +12,4 @@ int WINAPI WinMain(
 {
     easy_engine::Application::instance()->execute();
 }
-
 // EOF
