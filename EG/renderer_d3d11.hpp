@@ -15,8 +15,11 @@ class RendererD3D11 :
     public IRenderer
 {
 public :
-    // 初期化済みのインターフェイスを返却します。
+    // インターフェイスの生成処理。
     static IRenderer* create();
+
+    bool initialize() override;
+    void finalize() override;
 
     //bool loadResource( const wchar_t FilePath[], Texture* pOut ) override;
     //void unloadResource( Texture* pTexture ) override;
@@ -24,12 +27,11 @@ public :
     //bool loadPixelShader( const char FilePath[], IShader* pOut ) override;
     //void unloadShader( IShader* pOut );
 
-    void clear( float R = 1.0F, float G = 1.0F, float B = 1.0F, float A = 1.0F ) override;
-    void render( const Model& Object ) override;
+    void beginRender( float* ) override;
+    void render( const Model& ) override;
+    void endRender() override;
 
 private :
-    bool initialize();
-    void finalize();
 
     unsigned referenced_num_ = 0;
 

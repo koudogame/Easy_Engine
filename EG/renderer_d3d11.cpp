@@ -12,7 +12,7 @@
 #endif
 
 // レンダラーファクトリにRendererD3D11を登録
-//REGISTER_RENDERER( EG_EG RendererID::kDirect3D11, &RendererD3D11::create )
+ADD_RENDERER( EG_EG RendererID::kDirect3D11, &RendererD3D11::create )
 
 
 // unnamed namespace
@@ -45,12 +45,7 @@ BEGIN_EG_EG
 // 生成
 IRenderer* RendererD3D11::create()
 {
-    RendererD3D11* p =  new RendererD3D11();
-    if( p->initialize() == false )
-    {
-        delete p;
-        p = nullptr;
-    }
+    RendererD3D11* p =  new(std::nothrow) RendererD3D11();
     return p;
 }
 //
@@ -137,17 +132,6 @@ IRenderer* RendererD3D11::create()
 //
 //}
 
-// 画面のクリア
-void RendererD3D11::clear( float R, float G, float B, float A )
-{
-
-}
-// モデルの描画
-void RendererD3D11::render( const Model& Object )
-{
-
-}
-
 
 // 初期化処理
 bool RendererD3D11::initialize()
@@ -214,13 +198,29 @@ void RendererD3D11::finalize()
     ::safeRelease( p_immediate_context_ );
     ::safeRelease( p_device_ );
 }
+
+// 描画開始
+void RendererD3D11::beginRender(float* Color )
+{
+    p_immediate_context_->ClearRenderTargetView( p_render_target_view_, Color );
+}
+// モデルの描画
+void RendererD3D11::render(const Model& Object)
+{
+
+}
+// 描画終了
+void RendererD3D11::endRender()
+{
+    p_swap_chain_->Present(0, 0);
+}
 END_EG_EG
 
 // unnamed namespace
 /*===========================================================================*/
 namespace
 {
-    //スワップチェインの定義を設定
+    // スワップチェインの定義を設定
     //
     // in pOut   : 出力用構造体のアドレス
     // in hWnd   : 描画先ウィンドウハンドル

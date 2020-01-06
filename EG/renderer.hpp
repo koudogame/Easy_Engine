@@ -5,6 +5,10 @@
 #include "model.hpp"
 
 BEGIN_EG_EG
+enum RendererID
+{
+    kDirect3D11,
+};
 //
 // レンダラーインターフェイス
 // RendererFactoryにより生成されることを前提としています。
@@ -16,6 +20,9 @@ class IRenderer
 {
 public :
     virtual ~IRenderer() = default;
+
+    virtual bool initialize() = 0;
+    virtual void finalize() = 0;
     
 // FileIO
 /*-----------------------------------------------------------------*/
@@ -30,10 +37,12 @@ public :
     
 // Render
 /*-----------------------------------------------------------------*/
-    // 画面のクリア
-    virtual void clear( float R, float G, float B, float A ) = 0;
+    // レンダー開始
+    virtual void beginRender( float BackColorRGBA[4] ) = 0;
     // モデルの描画
     virtual void render( const Model& Object ) = 0;
+    // レンダー終了
+    virtual void endRender() = 0;
 
 protected :
     IRenderer() = default;

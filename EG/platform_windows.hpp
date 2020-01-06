@@ -17,13 +17,13 @@ class PlatformWindows :
 public :
     static IPlatform* create();
 
+    bool initialize() override;
     void finalize() override;
     void gameLoop( std::function<bool(long long)> ) override;
     void showDialogBox( const char * ) override;
 
 
 private :
-    bool initialize();
 
     HWND window_handle_;
 };

@@ -30,12 +30,6 @@ BEGIN_EG_EG
 IPlatform* PlatformWindows::create()
 {
     PlatformWindows* i = new (std::nothrow) PlatformWindows();
-    if( i->initialize() == false )
-    {
-        delete i;
-        return nullptr;
-    }
-
     return i;
 }
 

@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include "platform.hpp"
 
+// プラットフォームの追加
 #define ADD_PLATFORM( ID, pCreateFunction ) \
 BEGIN_EG_EG \
 namespace impl{} namespace { namespace impl { \
@@ -12,11 +13,6 @@ AddPlatform add_platform( ID, pCreateFunction ); \
 
 
 BEGIN_EG_EG
-enum PlatformID
-{
-    kWindows,
-    kNintendoSwitch,
-};
 //
 // プラットフォーム用ファクトリ
 // シングルトンクラスです。アクセスには instance関数を使用して下さい。
@@ -28,26 +24,36 @@ public :
     static PlatformFactory* instance() { static PlatformFactory i; return &i; }
 
     //
-    // プラットフォームの追加
+    // プラットフォームの登録
     //
     // in ID : プラットフォームID
     // in pCreateFunction : 生成処理を実装した関数へのポインタ
     //
-    void registerCreateFunction( PlatformID ID, IPlatform*(*pCreateFunction)() )
+    void registerPlatform( PlatformID ID, IPlatform*(*pCreateFunction)() )
     {
         functions_[ID] = pCreateFunction;
     }
 
     //
     // プラットフォームの生成
+    // 
+    // in ID : 生成するプラットフォームのID
+    // in pOutPtr : 生成したオブジェクトへのポインタを格納する変数のアドレス
     //
-    IPlatform* create( PlatformID ID )
+    // out true  : 生成成功
+    // out false : 生成失敗
+    //
+    bool create( PlatformID ID, IPlatform** pOutPtr )
     {
         auto function = functions_.find(ID);
-        return function->second();
+        if( function == functions_.end() ) return false;
+
+        *pOutPtr = function->second();
+        return true;
     }
 
 private :
+    PlatformFactory() = default;
     std::unordered_map<PlatformID, IPlatform*(*)()> functions_;
 };
 
@@ -56,7 +62,7 @@ class AddPlatform
 public :
     AddPlatform( PlatformID ID, IPlatform*(*pFunc)() )
     {
-        PlatformFactory::instance()->registerCreateFunction(ID, pFunc);
+        PlatformFactory::instance()->registerPlatform(ID, pFunc);
     }
 };
 END_EG_EG

@@ -6,6 +6,11 @@
 #include "renderer.hpp"
 
 BEGIN_EG_EG
+enum PlatformID
+{
+    kWindows,
+    kNintendoSwitch,
+};
 //
 // プラットフォームに依存する機能を提供するインターフェイス
 //
@@ -18,6 +23,12 @@ class IPlatform
 {
 public :
     virtual ~IPlatform() = default;
+
+    //
+    // 初期化処理
+    // 初期化に必要な処理を実装してください。
+    //
+    virtual bool initialize() = 0;
 
     //
     // 終了処理

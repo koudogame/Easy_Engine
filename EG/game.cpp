@@ -1,10 +1,9 @@
 // 作成者 : 板場
 #include "game.hpp"
-#include "platform_factory.hpp"
+#include "director.hpp"
 
 
 BEGIN_EG_EG
-
 // 関数の実装
 /*===========================================================================*/
 // ゲームの実行処理
@@ -15,7 +14,7 @@ void Game::execute()
         return;
 
     // ゲームループ
-    platform_->gameLoop( std::bind( &Game::update, this, std::placeholders::_1) );
+    director_->getPlatform()->gameLoop( std::bind( &Game::update, this, std::placeholders::_1) );
 
     // ゲームの終了
     finalize();
@@ -29,7 +28,9 @@ void Game::execute()
 // 初期化に失敗した場合は  false を戻り値として返却すること。
 bool Game::initialize()
 {
-    platform_ = PlatformFactory::instance()->create( PlatformID::kWindows );
+    director_ = Director::instance();
+    bool res = director_->initialize( PlatformID::kWindows, RendererID::kDirect3D11 );
+    if( res == false ) return false;
 
     return true;
 }
@@ -39,8 +40,7 @@ bool Game::initialize()
 // ゲームの終了時に必要な処理を記述する
 void Game::finalize()
 {
-    platform_->finalize();
-    delete platform_;
+    director_->finalize();
 }
 
 // 更新処理
@@ -53,8 +53,16 @@ void Game::finalize()
 // 更新を終了(ゲームを終了)する場合は　false を戻り値として返却すること。
 bool Game::update( long long ErapsedMS )
 {
+    // 更新処理
+
+
+    // 描画処理
+    float back_color[4] { 1.0F, 0.0F, 0.0F, 1.0F };
+    director_->getRenderer()->beginRender( back_color );
+
+    director_->getRenderer()->endRender();
+
     return true;
 }
-
 END_EG_EG
 // EOF

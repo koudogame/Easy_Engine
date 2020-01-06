@@ -4,8 +4,7 @@
 #include "easy_engine.hpp"
 
 BEGIN_EG_EG
-class IPlatform;
-class IRenderer;
+class Director;
 //
 // ゲームクラス ≒　シーンの実行者
 // ゲームの中核を内部で扱うクラスです。
@@ -28,8 +27,7 @@ private:
     void finalize();
     bool update(long long Erapsed);
 
-    IPlatform* platform_ = nullptr;
-    IRenderer* renderer_ = nullptr;
+    Director* director_ = nullptr;
 };
 END_EG_EG
 #endif // INCLUDED_EG_EG_GAME_HEADER_

@@ -24,9 +24,6 @@
     <Filter Include="EG\01_Render">
       <UniqueIdentifier>{79fc43db-f00a-4207-959d-9d23ef80afec}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EG\01_Render\Shader">
-      <UniqueIdentifier>{25561a60-cc2f-4fd5-ab65-1c99934bcb5a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="EG\01_Render\Model">
       <UniqueIdentifier>{342a623a-4821-4a5f-8576-3128943fe089}</UniqueIdentifier>
     </Filter>
@@ -35,6 +32,15 @@
     </Filter>
     <Filter Include="EG\04_Platform">
       <UniqueIdentifier>{9f22f91a-539e-4136-b8a3-dedc5e88078c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EG\01_Render\DirectX">
+      <UniqueIdentifier>{59337087-9066-4128-93cf-021ff1d7b29b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EG\04_Platform\Windows">
+      <UniqueIdentifier>{a2f825c4-6909-4957-95c7-92a820b30bb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EG\01_Render\DirectX\Shader">
+      <UniqueIdentifier>{25561a60-cc2f-4fd5-ab65-1c99934bcb5a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -54,9 +60,6 @@
       <Filter>EG\03_Utility</Filter>
     </ClInclude>
     <ClInclude Include="renderer.hpp">
-      <Filter>EG\01_Render</Filter>
-    </ClInclude>
-    <ClInclude Include="renderer_d3d11.hpp">
       <Filter>EG\01_Render</Filter>
     </ClInclude>
     <ClInclude Include="mesh.hpp">
@@ -81,13 +84,10 @@
       <Filter>EG\01_Render\Model</Filter>
     </ClInclude>
     <ClInclude Include="vertex_shader.hpp">
-      <Filter>EG\01_Render\Shader</Filter>
+      <Filter>EG\01_Render\DirectX\Shader</Filter>
     </ClInclude>
     <ClInclude Include="pixel_shader.hpp">
-      <Filter>EG\01_Render\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="rendering_manager.hpp">
-      <Filter>EG\01_Render</Filter>
+      <Filter>EG\01_Render\DirectX\Shader</Filter>
     </ClInclude>
     <ClInclude Include="director.hpp">
       <Filter>EG\99_System</Filter>
@@ -95,14 +95,17 @@
     <ClInclude Include="platform.hpp">
       <Filter>EG\04_Platform</Filter>
     </ClInclude>
-    <ClInclude Include="platform_windows.hpp">
-      <Filter>EG\04_Platform</Filter>
-    </ClInclude>
     <ClInclude Include="renderer_factory.hpp">
       <Filter>EG\01_Render</Filter>
     </ClInclude>
     <ClInclude Include="platform_factory.hpp">
       <Filter>EG\04_Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="platform_windows.hpp">
+      <Filter>EG\04_Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer_d3d11.hpp">
+      <Filter>EG\01_Render\DirectX</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -115,20 +118,17 @@
     <ClCompile Include="scene_manager.cpp">
       <Filter>EG\00_Scene</Filter>
     </ClCompile>
-    <ClCompile Include="renderer_d3d11.cpp">
-      <Filter>EG\01_Render</Filter>
-    </ClCompile>
-    <ClCompile Include="rendering_manager.cpp">
-      <Filter>EG\01_Render</Filter>
-    </ClCompile>
     <ClCompile Include="director.cpp">
       <Filter>EG\99_System</Filter>
     </ClCompile>
-    <ClCompile Include="platform_windows.cpp">
-      <Filter>EG\04_Platform</Filter>
-    </ClCompile>
     <ClCompile Include="scene_manager.cpp">
       <Filter>EG\00_Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="platform_windows.cpp">
+      <Filter>EG\04_Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer_d3d11.cpp">
+      <Filter>EG\01_Render\DirectX</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

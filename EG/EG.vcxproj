@@ -129,7 +129,6 @@
     <ClInclude Include="renderer.hpp" />
     <ClInclude Include="renderer_d3d11.hpp" />
     <ClInclude Include="renderer_factory.hpp" />
-    <ClInclude Include="rendering_manager.hpp" />
     <ClInclude Include="scene.hpp" />
     <ClInclude Include="scene_manager.hpp" />
     <ClInclude Include="sprite.hpp" />
@@ -142,7 +141,6 @@
     <ClCompile Include="director.cpp" />
     <ClCompile Include="platform_windows.cpp" />
     <ClCompile Include="renderer_d3d11.cpp" />
-    <ClCompile Include="rendering_manager.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="scene_manager.cpp" />
