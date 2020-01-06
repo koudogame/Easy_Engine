@@ -18,8 +18,8 @@ public :
     // インターフェイスの生成処理。
     static IRenderer* create();
 
-    bool initialize() override;
-    void finalize() override;
+    void addRef() override { ++ref_cnt_; }
+    void release() override;
 
     //bool loadResource( const wchar_t FilePath[], Texture* pOut ) override;
     //void unloadResource( Texture* pTexture ) override;
@@ -28,12 +28,17 @@ public :
     //void unloadShader( IShader* pOut );
 
     void beginRender( float* ) override;
-    void render( const Model& ) override;
+    void setVertexShader( IVertexShader* ) override;
+    void setPixelShader( IPixelShader* ) override;
+    void setTexture( ITexture* ) override;
+    void render( const Mesh& ) override;
     void endRender() override;
 
 private :
+    bool initialize();
+    void finalize();
 
-    unsigned referenced_num_ = 0;
+    unsigned ref_cnt_ = 0;
 
     HWND                    window_handle_;
     D3D_FEATURE_LEVEL       feature_level_;

@@ -19,12 +19,10 @@ Director::~Director()
 // ‰Šú‰»ˆ—
 bool Director::initialize( PlatformID Platform, RendererID Renderer )
 {
-    if( !(PlatformFactory::instance()->create(Platform, &p_platform_) &&
-        p_platform_->initialize()) )
+    if( PlatformFactory::instance()->create(Platform, &p_platform_) == false )
         return false;
 
-    if( !(RendererFactory::instance()->create(Renderer, &p_renderer_) &&
-        p_renderer_->initialize()) )
+    if( RendererFactory::instance()->create(Renderer, &p_renderer_) == false )
         return false;
 
     return true;
@@ -35,14 +33,12 @@ void Director::finalize()
 {
     if( p_renderer_ )
     {
-        p_renderer_->finalize();
-        delete p_renderer_;
+        p_renderer_->release();
     }
 
     if( p_platform_ )
     {
-        p_platform_->finalize();
-        delete p_platform_;
+        p_platform_->release();
     }
 }
 END_EG_EG

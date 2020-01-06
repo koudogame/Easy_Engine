@@ -2,7 +2,7 @@
 #define INCLUDED_EG_EG_MESH_HEADER_
 // çÏê¨é“ : î¬èÍ
 #include <vector>
-#include "polygon.hpp"
+#include "face.hpp"
 
 BEGIN_EG_EG
 //
@@ -10,7 +10,7 @@ BEGIN_EG_EG
 //
 struct Mesh
 {
-    std::vector<Polygon> faces;
+    std::vector<Face> faces_;
 };
 END_EG_EG
 #endif // INCLUDED_EG_EG_MESH_HEADER_

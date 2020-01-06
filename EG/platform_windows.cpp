@@ -30,7 +30,24 @@ BEGIN_EG_EG
 IPlatform* PlatformWindows::create()
 {
     PlatformWindows* i = new (std::nothrow) PlatformWindows();
+    if( i == nullptr ) return nullptr;
+    i->addRef();
+    if( i->initialize() == false )
+    {
+        i->release();
+        return nullptr;
+    }
+
     return i;
+}
+// ‰ğ•úˆ—
+void PlatformWindows::release()
+{
+    if( --ref_cnt_ <= 0 )
+    {
+        finalize();
+        delete this;
+    }
 }
 
 // ‰Šú‰»ˆ—

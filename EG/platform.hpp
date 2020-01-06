@@ -2,8 +2,7 @@
 #define INCLUDED_EG_EG_PLATFORM_HEADER_
 // 作成者 : 板場
 #include <functional>
-#include "easy_engine.hpp"
-#include "renderer.hpp"
+#include "interface.hpp"
 
 BEGIN_EG_EG
 enum PlatformID
@@ -19,23 +18,10 @@ enum PlatformID
 // 
 // このインターフェイスはPlatformFactoryによって生成されます。
 //
-class IPlatform
+class IPlatform :
+    public Interface
 {
 public :
-    virtual ~IPlatform() = default;
-
-    //
-    // 初期化処理
-    // 初期化に必要な処理を実装してください。
-    //
-    virtual bool initialize() = 0;
-
-    //
-    // 終了処理
-    // 解放前に必要な処理を実装して下さい。
-    //
-    virtual void finalize() = 0;
-
     //
     // ゲームループ
     // 

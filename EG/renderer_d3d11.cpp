@@ -205,7 +205,7 @@ void RendererD3D11::beginRender(float* Color )
     p_immediate_context_->ClearRenderTargetView( p_render_target_view_, Color );
 }
 // ƒ‚ƒfƒ‹‚Ì•`‰æ
-void RendererD3D11::render(const Model& Object)
+void RendererD3D11::render(const Mesh& Object)
 {
 
 }

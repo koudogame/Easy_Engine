@@ -49,6 +49,8 @@ public :
         if( function == functions_.end() ) return false;
 
         *pOutPtr = function->second();
+        if( *pOutPtr == nullptr ) return false;
+
         return true;
     }
 

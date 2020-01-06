@@ -118,14 +118,14 @@
     <ClInclude Include="director.hpp" />
     <ClInclude Include="eg_math.hpp" />
     <ClInclude Include="easy_engine.hpp" />
+    <ClInclude Include="face.hpp" />
     <ClInclude Include="game.hpp" />
+    <ClInclude Include="interface.hpp" />
     <ClInclude Include="mesh.hpp" />
-    <ClInclude Include="model.hpp" />
     <ClInclude Include="pixel_shader.hpp" />
     <ClInclude Include="platform.hpp" />
     <ClInclude Include="platform_factory.hpp" />
     <ClInclude Include="platform_windows.hpp" />
-    <ClInclude Include="polygon.hpp" />
     <ClInclude Include="renderer.hpp" />
     <ClInclude Include="renderer_d3d11.hpp" />
     <ClInclude Include="renderer_factory.hpp" />
@@ -133,6 +133,7 @@
     <ClInclude Include="scene_manager.hpp" />
     <ClInclude Include="sprite.hpp" />
     <ClInclude Include="sprite_component.hpp" />
+    <ClInclude Include="sprite_manager.hpp" />
     <ClInclude Include="texture.hpp" />
     <ClInclude Include="vertex_data.hpp" />
     <ClInclude Include="vertex_shader.hpp" />

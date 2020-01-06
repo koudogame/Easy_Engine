@@ -39,7 +39,7 @@
     <Filter Include="EG\04_Platform\Windows">
       <UniqueIdentifier>{a2f825c4-6909-4957-95c7-92a820b30bb8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EG\01_Render\DirectX\Shader">
+    <Filter Include="EG\01_Render\Model\Shader">
       <UniqueIdentifier>{25561a60-cc2f-4fd5-ab65-1c99934bcb5a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -62,12 +62,6 @@
     <ClInclude Include="renderer.hpp">
       <Filter>EG\01_Render</Filter>
     </ClInclude>
-    <ClInclude Include="mesh.hpp">
-      <Filter>EG\01_Render\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="polygon.hpp">
-      <Filter>EG\01_Render\Model</Filter>
-    </ClInclude>
     <ClInclude Include="sprite.hpp">
       <Filter>EG\01_Render\Model\Sprite</Filter>
     </ClInclude>
@@ -80,14 +74,11 @@
     <ClInclude Include="vertex_data.hpp">
       <Filter>EG\01_Render\Model</Filter>
     </ClInclude>
-    <ClInclude Include="model.hpp">
-      <Filter>EG\01_Render\Model</Filter>
-    </ClInclude>
     <ClInclude Include="vertex_shader.hpp">
-      <Filter>EG\01_Render\DirectX\Shader</Filter>
+      <Filter>EG\01_Render\Model\Shader</Filter>
     </ClInclude>
     <ClInclude Include="pixel_shader.hpp">
-      <Filter>EG\01_Render\DirectX\Shader</Filter>
+      <Filter>EG\01_Render\Model\Shader</Filter>
     </ClInclude>
     <ClInclude Include="director.hpp">
       <Filter>EG\99_System</Filter>
@@ -106,6 +97,18 @@
     </ClInclude>
     <ClInclude Include="renderer_d3d11.hpp">
       <Filter>EG\01_Render\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite_manager.hpp">
+      <Filter>EG\01_Render\Model\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="interface.hpp">
+      <Filter>EG\99_System</Filter>
+    </ClInclude>
+    <ClInclude Include="mesh.hpp">
+      <Filter>EG\01_Render\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="face.hpp">
+      <Filter>EG\01_Render\Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

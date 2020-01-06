@@ -1,8 +1,11 @@
 #ifndef INCLUDED_EG_EG_RENDERER_HEADER_
 #define INCLUDED_EG_EG_RENDERER_HEADER_
 // 作成者 : 板場
+#include "interface.hpp"
+#include "vertex_shader.hpp"
+#include "pixel_shader.hpp"
 #include "texture.hpp"
-#include "model.hpp"
+#include "mesh.hpp"
 
 BEGIN_EG_EG
 enum RendererID
@@ -16,13 +19,11 @@ enum RendererID
 // 初期化が済んでいないインターフェイスの生成を防ぐため、
 // インスタンス化を制限しています。
 //
-class IRenderer
+class IRenderer :
+    public Interface
 {
 public :
     virtual ~IRenderer() = default;
-
-    virtual bool initialize() = 0;
-    virtual void finalize() = 0;
     
 // FileIO
 /*-----------------------------------------------------------------*/
@@ -39,8 +40,14 @@ public :
 /*-----------------------------------------------------------------*/
     // レンダー開始
     virtual void beginRender( float BackColorRGBA[4] ) = 0;
-    // モデルの描画
-    virtual void render( const Model& Object ) = 0;
+    // 頂点シェーダの設定
+    virtual void setVertexShader( IVertexShader* pVertexShader ) = 0;
+    // ピクセルシェーダの設定
+    virtual void setPixelShader( IPixelShader* pPixelShader ) = 0;
+    // テクスチャの設定
+    virtual void setTexture( ITexture* pTexture ) = 0;
+    // メッシュの描画
+    virtual void render( const Mesh& Object ) = 0;
     // レンダー終了
     virtual void endRender() = 0;
 
