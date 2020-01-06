@@ -1,7 +1,6 @@
 // 作成者 : 板場
-
 #include "game.hpp"
-#include "game_loop.hpp"
+#include "platform_factory.hpp"
 
 
 BEGIN_EG_EG
@@ -12,10 +11,11 @@ BEGIN_EG_EG
 void Game::execute()
 {
     // ゲームの初期化
-    initialize();
+    if( initialize() == false )
+        return;
 
     // ゲームループ
-    GameLoop::loop( std::bind( &Game::update, this, std::placeholders::_1) );
+    platform_->gameLoop( std::bind( &Game::update, this, std::placeholders::_1) );
 
     // ゲームの終了
     finalize();
@@ -29,7 +29,7 @@ void Game::execute()
 // 初期化に失敗した場合は  false を戻り値として返却すること。
 bool Game::initialize()
 {
-
+    platform_ = PlatformFactory::instance()->create( PlatformID::kWindows );
 
     return true;
 }
@@ -39,7 +39,8 @@ bool Game::initialize()
 // ゲームの終了時に必要な処理を記述する
 void Game::finalize()
 {
-
+    platform_->finalize();
+    delete platform_;
 }
 
 // 更新処理

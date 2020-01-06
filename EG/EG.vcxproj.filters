@@ -5,10 +5,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="DirectX">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="EG">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
@@ -16,25 +12,34 @@
     <Filter Include="EG\99_System">
       <UniqueIdentifier>{6dd9983f-41fa-4276-b023-1c394bd8b79d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EG\02_Sound">
-      <UniqueIdentifier>{d6bb831e-f5d7-4002-947c-6bf2780986a0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EG\01_Image">
-      <UniqueIdentifier>{79fc43db-f00a-4207-959d-9d23ef80afec}</UniqueIdentifier>
-    </Filter>
     <Filter Include="EG\00_Scene">
       <UniqueIdentifier>{b67e4008-a74c-44c4-93bc-84f869bd29fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EG\02_Audio">
+      <UniqueIdentifier>{d6bb831e-f5d7-4002-947c-6bf2780986a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EG\03_Utility">
+      <UniqueIdentifier>{1ff4626d-47cc-475c-9f14-e893394ec478}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EG\01_Render">
+      <UniqueIdentifier>{79fc43db-f00a-4207-959d-9d23ef80afec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EG\01_Render\Shader">
+      <UniqueIdentifier>{25561a60-cc2f-4fd5-ab65-1c99934bcb5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EG\01_Render\Model">
+      <UniqueIdentifier>{342a623a-4821-4a5f-8576-3128943fe089}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EG\01_Render\Model\Sprite">
+      <UniqueIdentifier>{d88a3649-cb37-4b21-89f0-52df80b2cb71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EG\04_Platform">
+      <UniqueIdentifier>{9f22f91a-539e-4136-b8a3-dedc5e88078c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.hpp">
       <Filter>EG</Filter>
-    </ClInclude>
-    <ClInclude Include="application.hpp">
-      <Filter>EG\99_System</Filter>
-    </ClInclude>
-    <ClInclude Include="game_loop.hpp">
-      <Filter>EG\99_System</Filter>
     </ClInclude>
     <ClInclude Include="easy_engine.hpp">
       <Filter>EG\99_System</Filter>
@@ -45,19 +50,82 @@
     <ClInclude Include="scene_manager.hpp">
       <Filter>EG\00_Scene</Filter>
     </ClInclude>
+    <ClInclude Include="eg_math.hpp">
+      <Filter>EG\03_Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer.hpp">
+      <Filter>EG\01_Render</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer_d3d11.hpp">
+      <Filter>EG\01_Render</Filter>
+    </ClInclude>
+    <ClInclude Include="mesh.hpp">
+      <Filter>EG\01_Render\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="polygon.hpp">
+      <Filter>EG\01_Render\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite.hpp">
+      <Filter>EG\01_Render\Model\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite_component.hpp">
+      <Filter>EG\01_Render\Model\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="texture.hpp">
+      <Filter>EG\01_Render\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="vertex_data.hpp">
+      <Filter>EG\01_Render\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="model.hpp">
+      <Filter>EG\01_Render\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="vertex_shader.hpp">
+      <Filter>EG\01_Render\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="pixel_shader.hpp">
+      <Filter>EG\01_Render\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering_manager.hpp">
+      <Filter>EG\01_Render</Filter>
+    </ClInclude>
+    <ClInclude Include="director.hpp">
+      <Filter>EG\99_System</Filter>
+    </ClInclude>
+    <ClInclude Include="platform.hpp">
+      <Filter>EG\04_Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="platform_windows.hpp">
+      <Filter>EG\04_Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer_factory.hpp">
+      <Filter>EG\01_Render</Filter>
+    </ClInclude>
+    <ClInclude Include="platform_factory.hpp">
+      <Filter>EG\04_Platform</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp">
       <Filter>EG</Filter>
     </ClCompile>
-    <ClCompile Include="application.cpp">
-      <Filter>EG\99_System</Filter>
-    </ClCompile>
-    <ClCompile Include="game_loop.cpp">
-      <Filter>EG\99_System</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>EG\99_System</Filter>
+    </ClCompile>
+    <ClCompile Include="scene_manager.cpp">
+      <Filter>EG\00_Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer_d3d11.cpp">
+      <Filter>EG\01_Render</Filter>
+    </ClCompile>
+    <ClCompile Include="rendering_manager.cpp">
+      <Filter>EG\01_Render</Filter>
+    </ClCompile>
+    <ClCompile Include="director.cpp">
+      <Filter>EG\99_System</Filter>
+    </ClCompile>
+    <ClCompile Include="platform_windows.cpp">
+      <Filter>EG\04_Platform</Filter>
     </ClCompile>
     <ClCompile Include="scene_manager.cpp">
       <Filter>EG\00_Scene</Filter>

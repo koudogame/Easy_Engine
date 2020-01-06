@@ -115,17 +115,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="application.hpp" />
+    <ClInclude Include="director.hpp" />
+    <ClInclude Include="eg_math.hpp" />
     <ClInclude Include="easy_engine.hpp" />
     <ClInclude Include="game.hpp" />
-    <ClInclude Include="game_loop.hpp" />
+    <ClInclude Include="mesh.hpp" />
+    <ClInclude Include="model.hpp" />
+    <ClInclude Include="pixel_shader.hpp" />
+    <ClInclude Include="platform.hpp" />
+    <ClInclude Include="platform_factory.hpp" />
+    <ClInclude Include="platform_windows.hpp" />
+    <ClInclude Include="polygon.hpp" />
+    <ClInclude Include="renderer.hpp" />
+    <ClInclude Include="renderer_d3d11.hpp" />
+    <ClInclude Include="renderer_factory.hpp" />
+    <ClInclude Include="rendering_manager.hpp" />
     <ClInclude Include="scene.hpp" />
     <ClInclude Include="scene_manager.hpp" />
+    <ClInclude Include="sprite.hpp" />
+    <ClInclude Include="sprite_component.hpp" />
+    <ClInclude Include="texture.hpp" />
+    <ClInclude Include="vertex_data.hpp" />
+    <ClInclude Include="vertex_shader.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="application.cpp" />
+    <ClCompile Include="director.cpp" />
+    <ClCompile Include="platform_windows.cpp" />
+    <ClCompile Include="renderer_d3d11.cpp" />
+    <ClCompile Include="rendering_manager.cpp" />
     <ClCompile Include="game.cpp" />
-    <ClCompile Include="game_loop.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="scene_manager.cpp" />
   </ItemGroup>
