@@ -28,13 +28,11 @@ public :
 // FileIO
 /*-----------------------------------------------------------------*/
     // テクスチャリソースのロード
-    //virtual bool loadResource( const wchar_t FilePath[], ITexture* pOut ) = 0;
-
-    //// シェーダのロード
-    //virtual bool loadVertexShader( const char FilePath[], IShader* pOut ) = 0;
-    //virtual bool loadPixelShader( const char FilePath[], IShader* pOut ) = 0;
-    //// シェーダのアンロード
-    //virtual void unloadShader( IShader* pOut ) = 0;
+    virtual bool loadTexture( const wchar_t FilePath[], ITexture** ppOutTexture ) = 0;
+    // 頂点シェーダのロード
+    virtual bool loadVertexShader( const char FilePath[], IVertexShader** ppOutShader ) = 0;
+    // ピクセルシェーダのロード
+    virtual bool loadPixelShader( const char FilePath[], IPixelShader** ppOutShader ) = 0;
     
 // Render
 /*-----------------------------------------------------------------*/

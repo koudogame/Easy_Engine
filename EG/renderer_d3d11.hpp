@@ -21,12 +21,9 @@ public :
     void addRef() override { ++ref_cnt_; }
     void release() override;
 
-    //bool loadResource( const wchar_t FilePath[], Texture* pOut ) override;
-    //void unloadResource( Texture* pTexture ) override;
-    //bool loadVertexShader( const char FilePath[], IShader* pOut ) override;
-    //bool loadPixelShader( const char FilePath[], IShader* pOut ) override;
-    //void unloadShader( IShader* pOut );
-
+    bool loadTexture( const wchar_t*, ITexture** ) override;
+    bool loadVertexShader( const char*, IVertexShader** ) override;
+    bool loadPixelShader( const char*, IPixelShader** ) override;
     void beginRender( float* ) override;
     void setVertexShader( IVertexShader* ) override;
     void setPixelShader( IPixelShader* ) override;
@@ -34,6 +31,10 @@ public :
     void render( const Mesh& ) override;
     void endRender() override;
 
+
+    void notifyRelease( ITexture* );
+    void notifyRelease( IVertexShader* );
+    void notifyRelease( IPixelShader* );
 private :
     bool initialize();
     void finalize();
@@ -47,9 +48,9 @@ private :
     IDXGISwapChain*         p_swap_chain_ = nullptr;
     ID3D11RenderTargetView* p_render_target_view_ = nullptr;
 
-    std::unordered_map<const wchar_t*, ID3D11ShaderResourceView*> textures_;
-    std::unordered_map<const char*, ID3D11VertexShader*> vertex_shaderes_;
-    std::unordered_map<const char*, ID3D11PixelShader*> pixel_shaderes_;
+    std::unordered_map<const wchar_t*, ITexture*> textures_;
+    std::unordered_map<const char*, IVertexShader*> vertex_shaderes_;
+    std::unordered_map<const char*, IPixelShader*> pixel_shaderes_;
 };
 END_EG_EG
 #endif // INCLUDED_EG_EG_RENDERER_D3D11_HEADER_

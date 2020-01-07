@@ -1,5 +1,6 @@
 // 作成者 : 板場
 #include "renderer_d3d11.hpp"
+#include <fstream>
 #include "DirectXTex/DirectXTex.h"
 #include "renderer_factory.hpp"
 
@@ -14,6 +15,102 @@
 // レンダラーファクトリにRendererD3D11を登録
 ADD_RENDERER( EG_EG RendererID::kDirect3D11, &RendererD3D11::create )
 
+// RendererD3D11内部で使用するクラスの定義
+BEGIN_EG_EG
+class RendererD3D11Child
+{
+public :
+    RendererD3D11Child( RendererD3D11* pOwner ) :
+        p_owner_( pOwner )
+    {}
+    virtual ~RendererD3D11Child()
+    {
+     //   p_owner_->notifyRelease( this );
+    }
+
+private :
+    RendererD3D11* p_owner_;
+};
+
+class TextureD3D11 : public ITexture
+{
+public :
+    TextureD3D11( RendererD3D11* pOwner ) :
+        p_owner_( pOwner )
+    {}
+
+    void addRef() override { ++ref_cnt_; }
+    void release() override
+    {
+        if( --ref_cnt_ <= 0 )
+        {
+            p_owner_->notifyRelease( this );
+            p_resource_->Release();
+            delete this;
+        }
+    }
+
+    void set( ID3D11ShaderResourceView* pSRV ) { p_resource_ = pSRV; }
+    ID3D11ShaderResourceView* get() const { return p_resource_; }
+
+private :
+    unsigned ref_cnt_ = 0;
+    RendererD3D11* p_owner_ = nullptr;
+    ID3D11ShaderResourceView* p_resource_ = nullptr;
+};
+class VertexShaderD3D11 : public IVertexShader
+{
+public :
+    VertexShaderD3D11( RendererD3D11* pOwner ) :
+        p_owner_( pOwner )
+    {}
+
+    void addRef() override { ++ref_cnt_; }
+    void release() override 
+    {
+        if( --ref_cnt_ <= 0 )
+        {
+            p_owner_->notifyRelease( this );
+            p_vertex_shader_->Release();
+            delete this;
+        }
+    }
+
+    void set( ID3D11VertexShader* pVS ) { p_vertex_shader_ = pVS; }
+    ID3D11VertexShader* get() const { return p_vertex_shader_; }
+
+private :
+    unsigned ref_cnt_ = 0;
+    RendererD3D11* p_owner_ = nullptr;
+    ID3D11VertexShader* p_vertex_shader_ = nullptr;
+};
+class PixelShaderD3D11 : public IPixelShader
+{
+public :
+    PixelShaderD3D11( RendererD3D11* pOwner ) :
+        p_owner_( pOwner )
+    {}
+
+    void addRef() override { ++ref_cnt_; }
+    void release() override
+    {
+        if( --ref_cnt_ <= 0 )
+        {
+            p_owner_->notifyRelease( this );
+            p_pixel_shader_->Release();
+            delete this;
+        }
+    }
+
+    void set( ID3D11PixelShader* pPS ) { p_pixel_shader_ = pPS; }
+    ID3D11PixelShader* get() const { return p_pixel_shader_; }
+
+private :
+    unsigned ref_cnt_ = 0;
+    RendererD3D11* p_owner_ = nullptr;
+    ID3D11PixelShader* p_pixel_shader_ = nullptr;
+};
+END_EG_EG // RendererD3D11内部で使用するクラスの定義
 
 // unnamed namespace
 /*===========================================================================*/
@@ -22,8 +119,6 @@ namespace
     void setSwapChainDesc( DXGI_SWAP_CHAIN_DESC*, HWND, UINT, UINT );
     void setViewportDesc( D3D11_VIEWPORT*, float, float );
     template<typename Interface> void safeRelease( Interface*& );
-
-    bool loadBinary( const char*, char*, long* );
 
 #ifdef _DEBUG
     constexpr UINT kD3D11CreateFlags = 0;
@@ -48,90 +143,144 @@ IRenderer* RendererD3D11::create()
     RendererD3D11* p =  new(std::nothrow) RendererD3D11();
     return p;
 }
-//
-//// テクスチャリソースのロード
-//// 同一リソースはコピーする。
-//bool RendererD3D11::loadResource( const wchar_t FilePath[], Texture* pOut )
-//{
-//    using namespace DirectX;
-//
-//    auto find = textures_.find( FilePath );
-//
-//    // 既に読み込まれている場合
-//    if( find != textures_.end() )
-//    {
-//        find->second->AddRef();
-//        pOut->setResource( find->second );
-//    }
-//    // 新規呼び込みの場合
-//    else
-//    {
-//        // ファイルからデータを読み込む
-//        TexMetadata mdata;
-//        ScratchImage image;
-//        if( FAILED(LoadFromWICFile(FilePath, 0, &mdata, image)) )
-//            return false;
-//
-//        // ビューを作成
-//        ID3D11ShaderResourceView* view;
-//        if( FAILED(CreateShaderResourceViewEx(
-//            p_device_,
-//            image.GetImages(),
-//            image.GetImageCount(),
-//            mdata,
-//            D3D11_USAGE_DEFAULT,
-//            D3D11_BIND_SHADER_RESOURCE,
-//            0,
-//            0,
-//            false,
-//            &view)) )
-//            return false;
-//
-//        textures_.insert( std::make_pair(FilePath, view) );
-//    }
-//
-//    return true;
-//}
-//// テクスチャリソースのアンロード
-//void RendererD3D11::unloadResource( Texture* pOut )
-//{
-//    static_cast<ID3D11ShaderResourceView*>( pOut->getResource() )->Release();
-//    pOut->setResource( nullptr );
-//}
-//
-//// シェーダーのロード
-//// 同一シェーダーはコピーする。
-//bool RendererD3D11::loadVertexShader( const char FilePath[], IShader* pOut )
-//{ 
-//    if( pOut->getID() != ShaderID::kVertexShader ) 
-//        return false;
-//
-//    char* blob;
-//    long  length;
-//    ::loadBinary( FilePath, blob, &length );
-//
-//    ID3D11VertexShader* shader;
-//    if( FAILED(p_device_->CreateVertexShader(blob, length, nullptr, &shader)) )
-//    {
-//        delete blob;
-//        return false;
-//    }
-//
-//    return true;
-//}
-//bool RendererD3D11::loadPixelShader( const char FilePath[], IShader* pOut )
-//{
-//
-//
-//    return true;
-//}
-//// シェーダ―のアンロード
-//void RendererD3D11::unloadShader( IShader* pShader )
-//{
-//
-//
-//}
 
+// 破棄
+void RendererD3D11::release()
+{
+    if( --ref_cnt_ <= 0 )
+    {
+        finalize();
+        delete this;
+    }
+}
+
+// テクスチャのロード
+bool RendererD3D11::loadTexture( const wchar_t* FilePath, ITexture** ppOut )
+{
+    using namespace DirectX;
+
+    auto find = textures_.find( FilePath );
+
+    // キャッシュにある場合
+    if( find != textures_.end() )
+    {
+        find->second->addRef();
+        *ppOut = find->second;
+    }
+    // 新規に読み込む場合
+    else
+    {
+        // ファイルからデータを読み込む
+        TexMetadata mdata;
+        ScratchImage image;
+        if( FAILED(LoadFromWICFile(FilePath, 0, &mdata, image)) )
+            return false;
+
+        // ビューを作成
+        ID3D11ShaderResourceView* view;
+        if( FAILED(CreateShaderResourceViewEx(
+            p_device_,
+            image.GetImages(),
+            image.GetImageCount(),
+            mdata,
+            D3D11_USAGE_DEFAULT,
+            D3D11_BIND_SHADER_RESOURCE,
+            0,
+            0,
+            false,
+            &view)) )
+            return false;
+
+        TextureD3D11* p_tex = new TextureD3D11( this );
+        p_tex->set( view );
+        p_tex->addRef();
+        *ppOut = p_tex;
+    }
+
+    return true;
+}
+
+// 頂点シェーダのロード
+bool RendererD3D11::loadVertexShader( const char* FilePath, IVertexShader** ppOut )
+{
+    auto find = vertex_shaderes_.find( FilePath );
+
+    // キャッシュにある場合
+    if( find != vertex_shaderes_.end() )
+    {
+        find->second->addRef();
+        *ppOut = find->second;
+    }
+    // 新規に読み込む場合
+    else
+    {
+        std::fstream stream( FilePath, std::ios::binary | std::ios::in );
+        if( stream.is_open() == false )
+            return false;
+
+        stream.seekg( 0, std::ios::end );
+        auto end = stream.tellg();
+        stream.clear();
+        stream.seekg( 0, std::ios::beg );
+        auto beg = stream.tellg();
+        UINT size = static_cast<UINT>(end - beg);
+        char* blob = new char [size];
+        stream.read( blob, size );
+        stream.close();
+
+        VertexShaderD3D11* p_vs = new VertexShaderD3D11( this );
+        ID3D11VertexShader* p_d3dvs;
+        if( FAILED(p_device_->CreateVertexShader(blob, size, nullptr, &p_d3dvs)) )
+            return false;
+
+        p_vs->set( p_d3dvs );
+        p_vs->addRef();
+        *ppOut = p_vs;
+    }
+
+    return true;
+}
+
+// ピクセルシェーダのロード
+bool RendererD3D11::loadPixelShader( const char* FilePath, IPixelShader** ppOut )
+{
+    auto find = pixel_shaderes_.find( FilePath );
+
+    // キャッシュにある場合
+    if( find != pixel_shaderes_.end() )
+    {
+        find->second->addRef();
+        *ppOut = find->second;
+    }
+    // 新規に読み込む場合
+    else
+    {
+        std::fstream stream(FilePath, std::ios::binary | std::ios::in);
+        if (stream.is_open() == false)
+            return false;
+
+        stream.seekg(0, std::ios::end);
+        auto end = stream.tellg();
+        stream.clear();
+        stream.seekg(0, std::ios::beg);
+        auto beg = stream.tellg();
+        UINT size = static_cast<UINT>(end - beg);
+        char* blob = new char[size];
+        stream.read(blob, size);
+        stream.close();
+
+        PixelShaderD3D11* p_ps = new PixelShaderD3D11(this);
+        ID3D11PixelShader* p_d3dps;
+        if (FAILED(p_device_->CreatePixelShader(blob, size, nullptr, &p_d3dps)))
+            return false;
+
+        p_ps->set(p_d3dps);
+        p_ps->addRef();
+        *ppOut = p_ps;
+    }
+
+    return true;
+}
 
 // 初期化処理
 bool RendererD3D11::initialize()
@@ -213,6 +362,58 @@ void RendererD3D11::render(const Mesh& Object)
 void RendererD3D11::endRender()
 {
     p_swap_chain_->Present(0, 0);
+}
+
+// テクスチャ開放メッセージの受け取り
+// 通知者がキャッシュに存在したら、キャッシュから抜き出す
+//
+// in pNotifier : 開放を知らせるテクスチャリソース
+void RendererD3D11::notifyRelease( ITexture* pNotifier )
+{
+    for( auto itr = textures_.begin(), end = textures_.end();
+        itr != end; ++itr )
+    {
+        if( itr->second == pNotifier )
+        {
+            textures_.erase( itr->first );
+            break;
+        }
+    }
+}
+// 頂点シェーダ開放メッセージの受け取り
+// 通知者がキャッシュに存在したら、キャッシュから抜き出す
+//
+// in pNotifier : 開放を知らせる頂点シェーダ
+//
+void RendererD3D11::notifyRelease( IVertexShader* pNotifier )
+{
+    for( auto itr = vertex_shaderes_.begin(), end = vertex_shaderes_.end();
+        itr != end; ++itr )
+    {
+        if( itr->second == pNotifier )
+        {
+            vertex_shaderes_.erase( itr->first );
+            break;
+        }
+    }
+}
+//
+// ピクセルシェーダ開放メッセージの受け取り
+// 通知者がキャッシュに存在したら、キャッシュから抜き出す
+//
+// in pNotifier
+//
+void RendererD3D11::notifyRelease( IPixelShader* pNotifier )
+{
+    for( auto itr = pixel_shaderes_.begin(), end = pixel_shaderes_.end();
+        itr != end; ++itr )
+    {
+        if( itr->second == pNotifier )
+        {
+            pixel_shaderes_.erase( itr->first );
+            break;
+        }
+    }
 }
 END_EG_EG
 
