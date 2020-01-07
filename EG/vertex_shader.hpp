@@ -1,12 +1,14 @@
-#ifndef INCLUDED_EG_EG_VERTEX_SHADER_HEADER
-#define INCLUDED_EG_EG_VERTEX_SHADER_HEADER
-// 作成者 : 板場
+///
+/// @file   vertex_shader.hpp
+/// @author 板場
+///
+/// @brief  頂点シェーダインターフェイス
+///
+///
+#ifndef INCLUDED_EG_EG_VERTEX_SHADER_HEADER_
+#define INCLUDED_EG_EG_VERTEX_SHADER_HEADER_
 #include "interface.hpp"
-
 BEGIN_EG_EG
-//
-// 頂点シェーダー
-//
 class IVertexShader :
     public Interface
 {
@@ -14,5 +16,5 @@ public:
 
 };
 END_EG_EG
-#endif
-// EOF
+#endif /// INCLUDED_EG_EG_VERTEX_SHADER_HEADER_
+/// EOF

@@ -155,6 +155,7 @@ void RendererD3D11::release()
 }
 
 // テクスチャのロード
+// 
 bool RendererD3D11::loadTexture( const wchar_t* FilePath, ITexture** ppOut )
 {
     using namespace DirectX;
@@ -282,72 +283,6 @@ bool RendererD3D11::loadPixelShader( const char* FilePath, IPixelShader** ppOut 
     return true;
 }
 
-// 初期化処理
-bool RendererD3D11::initialize()
-{
-    HWND this_window = FindWindow( "Game_Abyabyabyabyabya", nullptr );
-
-    // ウィンドウ領域の取得
-    RECT region;
-    if( GetClientRect( this_window, &region ) == false )
-        return false;
-    const long kRegionWidth = region.right;         // ウィンドウ領域幅
-    const long kRegionHeight = region.bottom;       // ウィンドウ領域高さ
-
-    // D3DデバイスとDXGIスワップチェインの作成
-    DXGI_SWAP_CHAIN_DESC sc_desc = {};
-    ::setSwapChainDesc( &sc_desc, this_window, (UINT)kRegionWidth, (UINT)kRegionHeight );
-    if( FAILED(D3D11CreateDeviceAndSwapChain(
-        nullptr,
-        D3D_DRIVER_TYPE_HARDWARE,
-        nullptr,
-        ::kD3D11CreateFlags,
-        ::kFeatureLevels,
-        sizeof(::kFeatureLevels) / sizeof(D3D_FEATURE_LEVEL),
-        D3D11_SDK_VERSION,
-        &sc_desc,
-        &p_swap_chain_,
-        &p_device_,
-        &feature_level_,
-        &p_immediate_context_)) )
-        return false;
-
-    // 描画ターゲットをパイプラインに設定
-    ID3D11Texture2D* buffer;
-    if( FAILED(p_swap_chain_->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&buffer)) )
-        return false;
-    if( FAILED(p_device_->CreateRenderTargetView(buffer, nullptr, &p_render_target_view_)) )
-    {
-        buffer->Release();
-        return false;
-    }
-    p_immediate_context_->OMSetRenderTargets( 1, &p_render_target_view_, nullptr );
-
-    // ビューポートをパイプラインに設定
-    D3D11_VIEWPORT vp = {};
-    ::setViewportDesc( &vp, (float)kRegionWidth, (float)kRegionHeight );
-    p_immediate_context_->RSSetViewports( 1, &vp );
-
-    return true;
-}
-// 終了処理
-void RendererD3D11::finalize()
-{
-    // フルスクリーンモードを解除
-    if( p_swap_chain_ )
-        p_swap_chain_->SetFullscreenState( false, nullptr );
-
-    // パイプラインのステート設定をクリア
-    if( p_immediate_context_ )
-        p_immediate_context_->ClearState();
-
-    // 各種インターフェイスを解放
-    ::safeRelease( p_render_target_view_ );
-    ::safeRelease( p_swap_chain_ );
-    ::safeRelease( p_immediate_context_ );
-    ::safeRelease( p_device_ );
-}
-
 // 描画開始
 void RendererD3D11::beginRender(float* Color )
 {
@@ -414,6 +349,72 @@ void RendererD3D11::notifyRelease( IPixelShader* pNotifier )
             break;
         }
     }
+}
+
+// 初期化処理
+bool RendererD3D11::initialize()
+{
+    HWND this_window = FindWindow( "Game_Abyabyabyabyabya", nullptr );
+
+    // ウィンドウ領域の取得
+    RECT region;
+    if( GetClientRect( this_window, &region ) == false )
+        return false;
+    const long kRegionWidth = region.right;         // ウィンドウ領域幅
+    const long kRegionHeight = region.bottom;       // ウィンドウ領域高さ
+
+    // D3DデバイスとDXGIスワップチェインの作成
+    DXGI_SWAP_CHAIN_DESC sc_desc = {};
+    ::setSwapChainDesc( &sc_desc, this_window, (UINT)kRegionWidth, (UINT)kRegionHeight );
+    if( FAILED(D3D11CreateDeviceAndSwapChain(
+        nullptr,
+        D3D_DRIVER_TYPE_HARDWARE,
+        nullptr,
+        ::kD3D11CreateFlags,
+        ::kFeatureLevels,
+        sizeof(::kFeatureLevels) / sizeof(D3D_FEATURE_LEVEL),
+        D3D11_SDK_VERSION,
+        &sc_desc,
+        &p_swap_chain_,
+        &p_device_,
+        &feature_level_,
+        &p_immediate_context_)) )
+        return false;
+
+    // 描画ターゲットをパイプラインに設定
+    ID3D11Texture2D* buffer;
+    if( FAILED(p_swap_chain_->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&buffer)) )
+        return false;
+    if( FAILED(p_device_->CreateRenderTargetView(buffer, nullptr, &p_render_target_view_)) )
+    {
+        buffer->Release();
+        return false;
+    }
+    p_immediate_context_->OMSetRenderTargets( 1, &p_render_target_view_, nullptr );
+
+    // ビューポートをパイプラインに設定
+    D3D11_VIEWPORT vp = {};
+    ::setViewportDesc( &vp, (float)kRegionWidth, (float)kRegionHeight );
+    p_immediate_context_->RSSetViewports( 1, &vp );
+
+    return true;
+}
+// 終了処理
+void RendererD3D11::finalize()
+{
+    // フルスクリーンモードを解除
+    if( p_swap_chain_ )
+        p_swap_chain_->SetFullscreenState( false, nullptr );
+
+    // パイプラインのステート設定をクリア
+    if( p_immediate_context_ )
+        p_immediate_context_->ClearState();
+
+    // 各種インターフェイスを解放
+    ::safeRelease( p_render_target_view_ );
+    ::safeRelease( p_swap_chain_ );
+    ::safeRelease( p_immediate_context_ );
+    ::safeRelease( p_device_ );
 }
 END_EG_EG
 

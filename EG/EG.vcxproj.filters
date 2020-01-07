@@ -50,9 +50,6 @@
     <ClInclude Include="easy_engine.hpp">
       <Filter>EG\99_System</Filter>
     </ClInclude>
-    <ClInclude Include="scene.hpp">
-      <Filter>EG\00_Scene</Filter>
-    </ClInclude>
     <ClInclude Include="scene_manager.hpp">
       <Filter>EG\00_Scene</Filter>
     </ClInclude>
@@ -109,6 +106,9 @@
     </ClInclude>
     <ClInclude Include="face.hpp">
       <Filter>EG\01_Render\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="scene.hpp">
+      <Filter>EG\00_Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

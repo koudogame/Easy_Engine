@@ -1,65 +1,71 @@
+///
+/// @file    scene_manager.hpp
+/// @author  板場
+///
+/// @brief   シーン管理クラス<br>
+/// @details シングルトンクラスです。アクセスにはinstance関数を使用して下さい。<br>
+///          シーンの扱いはstack(後入れ先出し)です。<br>
+///          最後に追加されたシーンをアクティブなシーンとして扱います。
+///
+///
 #ifndef INCLUDED_EG_EG_SCENE_MANAGER_HEADER_
 #define INCLUDED_EG_EG_SCENE_MANAGER_HEADER_
-// 作成者 : 板場
 #include <vector>
 #include "easy_engine.hpp"
-
 BEGIN_EG_EG
 class Scene;
-
-//
-// シーン管理クラス
-//
-// シングルトンクラス。インスタンスへのアクセスは instance関数を使用してください。
-// シーンの扱いは stack(後入れ先出し) です。 
-// アクティブなシーンは最後に追加されたシーンを指します。
-// update関数 及び draw関数 はリストに保存してある全てのシーンに対して関数の呼び出しを行います。
-//
 class SceneManager
 {
 public :
-    // インスタンスへのアドレスを取得します。
+    ///
+    /// @brief  インスタンスへのアクセス
+    ///
+    /// @return インスタンスへのポインタ
+    ///
     static SceneManager* instance() { static SceneManager i; return &i; }
 
-    //
-    // アクティブなシーンのupdate関数を呼び出します。
-    //
+    ///
+    /// @brief 保持しているシーンすべてのupdata関数を呼び出します。
+    ///
     void update();
-    //
-    // アクティブなシーンのdraw関数を呼び出します。
-    //
+    
+    ///
+    /// @brief  保持しているシーンすべてのdraw関数を呼び出します。
+    ///
     void draw();
 
-    //
-    // アクティブなシーンを取得します。
-    //
+    ///
+    /// @brief  アクティブなシーンを取得します。
+    ///
+    /// @return アクティブなシーンへのポインタ
+    ///
     inline Scene* getActive() const { return scenes_.back(); }
-    //
-    // シーンを追加します。
-    // この時追加される位置は 一番最後です。
-    // 
-    // in Next : 追加するシーン
-    //
-    inline void push( Scene* Next ) { scenes_.push_back( Next ); }
-    //
-    // シーンを除外します。
-    // この時除外の対象となるシーンは 最後に追加されたシーンです。
-    //
+
+    ///
+    /// @brief      シーンを追加します。
+    ///
+    /// @param[in]  pNext : 追加するシーンのアドレス
+    ///
+    inline void push( Scene* pNext ) { scenes_.push_back( pNext ); }
+
+    ///
+    /// @brief シーンを除外します。
+    ///
     void pop();
-    //
-    // シーンを入れ替えます。
-    // この時入れ替えの対象となるシーンは 最後に追加されたシーンです。
-    //
-    // in Next : 入れ替え後のシーン
-    //
-    void swap( Scene* Next );
+
+    ///
+    /// @brief シーンを入れ替えます。
+    ///
+    /// @param[in] pNext : 入れ替え後のシーンのアドレス
+    ///
+    void swap( Scene* pNext );
 
 private :
-    std::vector<Scene*> scenes_;
+    std::vector<Scene*> scenes_;    ///<    @brief シーンリスト
+    Scene* poped_scene_ = nullptr;  ///<    @brief 除外したシーンを一時格納しておく
 
-    Scene* poped_scene_ = nullptr;
     SceneManager() = default;
 };
 END_EG_EG
-#endif // INCLUDED_EG_EG_SCENE_MANAGER_HEADER_
-// EOF
+#endif /// INCLUDED_EG_EG_SCENE_MANAGER_HEADER_
+/// EOF

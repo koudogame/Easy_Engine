@@ -1,6 +1,11 @@
+///
+/// @file   eg_math.hpp
+/// @author 板場
+///
+/// @brief  数学ライブラリ
+///
 #ifndef INCLUDED_EG_EG_MATH_HEADER_
 #define INCLUDED_EG_EG_MATH_HEADER_
-// 作成者 : 板場
 #include <cassert>
 #include <corecrt_math_defines.h>
 #include "easy_engine.hpp"
@@ -8,11 +13,26 @@
 BEGIN_EG_EG
 // 角度変換
 /*===========================================================================*/
+///
+/// @brief  度数法の値を弧度法の値へ変換します。
+///
+/// @param[in] Degrees : 変換したい値( 度数法 )
+///
+/// @return 引数の値を弧度法へ変換した値
+///
 inline float convertToRadians( float Degrees )
 {
     static constexpr float kToRadians = static_cast<float>(M_PI) / 180.0F;
     return Degrees * kToRadians;
 }
+
+///
+/// @brief  弧度法の値を度数法の値へ変換します。
+///
+/// @param[in] Radians : 変換したい値( 弧度法 )
+///
+/// @return 引数の値を度数法へ変換した値
+///
 inline float convertToDegrees( float Radians )
 {
     static constexpr float kToDegrees = 180.0F / static_cast<float>(M_PI);
