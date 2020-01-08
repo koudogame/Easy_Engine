@@ -38,7 +38,7 @@ public :
     void notifyRelease( IPixelShader* );    ///<  ピクセルシェーダーの解放通知を受け取ります。
 private :
     bool initialize();  /// 初期化処理 * 生成時に呼び出されます。
-    void finalize();    /// 終了処理   * 解放時に呼び出されます。
+    ~RendererD3D11();
 
     unsigned ref_cnt_ = 0;  /// 参照数カウント
 

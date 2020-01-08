@@ -141,6 +141,9 @@ BEGIN_EG_EG
 IRenderer* RendererD3D11::create()
 {
     RendererD3D11* p =  new(std::nothrow) RendererD3D11();
+    if( p == nullptr || p->initialize() == false )
+        return nullptr;
+
     return p;
 }
 
@@ -149,13 +152,11 @@ void RendererD3D11::release()
 {
     if( --ref_cnt_ <= 0 )
     {
-        finalize();
         delete this;
     }
 }
 
 // テクスチャのロード
-// 
 bool RendererD3D11::loadTexture( const wchar_t* FilePath, ITexture** ppOut )
 {
     using namespace DirectX;
@@ -288,6 +289,30 @@ void RendererD3D11::beginRender(float* Color )
 {
     p_immediate_context_->ClearRenderTargetView( p_render_target_view_, Color );
 }
+// 頂点シェーダ―のセット
+void RendererD3D11::setVertexShader( IVertexShader* pVertexShader )
+{
+    ID3D11VertexShader* p_d3d11_vs = 
+        static_cast<VertexShaderD3D11*>(pVertexShader)->get();
+
+    p_immediate_context_->VSSetShader( p_d3d11_vs, nullptr, 0 ); 
+}
+// ピクセルシェーダのセット
+void RendererD3D11::setPixelShader( IPixelShader* pPixelShader )
+{
+    ID3D11PixelShader* p_d3d11_ps =
+        static_cast<PixelShaderD3D11*>(pPixelShader)->get();
+
+    p_immediate_context_->PSSetShader( p_d3d11_ps, nullptr, 0 );
+}
+// テクスチャのセット
+void RendererD3D11::setTexture( ITexture* pTexture )
+{
+    ID3D11ShaderResourceView* p_d3d11_srv =
+        static_cast<TextureD3D11*>(pTexture)->get();
+
+    p_immediate_context_->PSSetShaderResources( 0, 0, &p_d3d11_srv );
+}
 // モデルの描画
 void RendererD3D11::render(const Mesh& Object)
 {
@@ -296,7 +321,8 @@ void RendererD3D11::render(const Mesh& Object)
 // 描画終了
 void RendererD3D11::endRender()
 {
-    p_swap_chain_->Present(0, 0);
+    if( p_swap_chain_->Present(0, DXGI_PRESENT_TEST) == S_OK )
+        p_swap_chain_->Present( 0, 0 );
 }
 
 // テクスチャ開放メッセージの受け取り
@@ -399,22 +425,23 @@ bool RendererD3D11::initialize()
 
     return true;
 }
-// 終了処理
-void RendererD3D11::finalize()
+
+// デストラクタ
+RendererD3D11::~RendererD3D11()
 {
     // フルスクリーンモードを解除
-    if( p_swap_chain_ )
-        p_swap_chain_->SetFullscreenState( false, nullptr );
+    if (p_swap_chain_)
+        p_swap_chain_->SetFullscreenState(false, nullptr);
 
     // パイプラインのステート設定をクリア
-    if( p_immediate_context_ )
+    if (p_immediate_context_)
         p_immediate_context_->ClearState();
 
     // 各種インターフェイスを解放
-    ::safeRelease( p_render_target_view_ );
-    ::safeRelease( p_swap_chain_ );
-    ::safeRelease( p_immediate_context_ );
-    ::safeRelease( p_device_ );
+    ::safeRelease(p_render_target_view_);
+    ::safeRelease(p_swap_chain_);
+    ::safeRelease(p_immediate_context_);
+    ::safeRelease(p_device_);
 }
 END_EG_EG
 

@@ -7,7 +7,6 @@
 ///          シーンの扱いはstack(後入れ先出し)です。<br>
 ///          最後に追加されたシーンをアクティブなシーンとして扱います。
 ///
-///
 #ifndef INCLUDED_EG_EG_SCENE_MANAGER_HEADER_
 #define INCLUDED_EG_EG_SCENE_MANAGER_HEADER_
 #include <vector>
