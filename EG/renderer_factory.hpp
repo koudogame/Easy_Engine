@@ -3,7 +3,7 @@
 /// @author  板場
 ///
 /// @brief   レンダラーのファクトリ
-/// @details シングルトンクラスです。アクセスにはinstance関数を使用して下さい。
+/// @details シングルトンクラスです。アクセスにはinstance関数を使用して下さい。<br>
 ///          新しいレンダラーの登録はADD_RENDERERマクロを使うと簡単に済みます。
 ///
 #ifndef INCLUDED_EG_EG_RENDERER_FACTORY_HEADER_
@@ -16,7 +16,7 @@
 /// @brief   レンダラーの登録処理
 /// @details ヘッダーファイルで呼び出さないでください。
 ///
-/// @param[in] ID : 登録するレンダラーID
+/// @param[in] ID : 登録するレンダラー識別ID
 /// @param[in] pCreateFunction : 生成処理を実装した関数のアドレス
 ///
 #define ADD_RENDERER( ID, pCreateFunction ) \
@@ -30,7 +30,7 @@ class RendererFactory
 {
 public :
     ///
-    /// @brief  インスタンスのアドレスを取得します。
+    /// @brief  インスタンスを取得します。
     ///
     /// @return インスタンスのアドレス
     ///
@@ -40,7 +40,7 @@ public :
     /// @brief  レンダラーの登録
     ///
     /// @param[in]  ID : レンダラー識別ID
-    /// @param[in]  pCreateFunction : レンダラー生成関数のアドレス
+    /// @param[in]  pCreateFunction : レンダラー生成関数へのポインタ
     ///
     void registerRenderer( RendererID ID, IRenderer*(*pCreateFunction)() )
     {
@@ -50,8 +50,8 @@ public :
     ///
     /// @brief  レンダラーの生成
     ///
-    /// @param[in]  ID : 生成するレンダラー識別ID
-    /// @param[out] ppOutRenderer : 生成したレンダラーを受け取るインターフェイス
+    /// @param[in]  ID : 生成するレンダラーの識別ID
+    /// @param[out] ppOutRenderer : 生成したレンダラーを受け取るインターフェイスのアドレス
     ///
     /// @return 生成に成功した場合[ true ] 失敗した場合[ false ]を返却します。
     ///

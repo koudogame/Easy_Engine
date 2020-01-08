@@ -18,9 +18,9 @@ class SceneManager
 {
 public :
     ///
-    /// @brief  インスタンスへのアクセス
+    /// @brief  インスタンスを取得します。
     ///
-    /// @return インスタンスへのポインタ
+    /// @return インスタンスへのアドレス
     ///
     static SceneManager* instance() { static SceneManager i; return &i; }
 

@@ -4,7 +4,7 @@
 ///          
 /// @brief   レンダラーインターフェイス
 /// @details RendererFactoryにより提供されます。<br>
-///          新しいレンダラーを作成する際、RendererFactoryへの登録を必ず行って下さい。
+///          新しいレンダラーを作成する際、RendererFactoryへの登録を必ず行って下さい。<br>
 ///          登録の際はIDも一緒に登録するため、RendererIDに識別IDを追加して下さい。
 ///
 #ifndef INCLUDED_EG_EG_RENDERER_HEADER_
@@ -34,7 +34,7 @@ public :
     /// @brief  テクスチャのロード
     ///
     /// @param[in]  FilePath : 読み込む画像のファイルパス
-    /// @param[out] ppOutTexture : 生成したテクスチャを受け取るインターフェイス
+    /// @param[out] ppOutTexture : 生成したテクスチャを受け取るインターフェイスのアドレス
     ///
     /// @return 生成に成功した場合[ true ] 失敗した場合[ false ]を返却します。
     ///
@@ -43,7 +43,7 @@ public :
     /// @brief  頂点シェーダのロード
     ///
     /// @param[in]  FilePath : コンパイル済み頂点シェーダのファイルパス
-    /// @param[out] ppOutShader : 生成したシェーダーを受け取るインターフェイス
+    /// @param[out] ppOutShader : 生成したシェーダーを受け取るインターフェイスのアドレス
     ///
     /// @return 生成に成功した場合[ true ] 失敗した場合[ false ]を返却します。
     ///
@@ -52,7 +52,7 @@ public :
     /// @brief  ピクセルシェーダのロード
     ///
     /// @param[in]  FilePath : コンパイル済みピクセルシェーダのファイルパス
-    /// @param[out] ppOutshader : 生成したシェーダーを受け取るインターフェイス
+    /// @param[out] ppOutshader : 生成したシェーダーを受け取るインターフェイスのアドレス
     ///
     /// @return 生成に成功した場合[ true ] 失敗した場合[ false ]を返却します。
     ///
@@ -97,6 +97,7 @@ public :
 
 protected :
     IRenderer() = default;
+    virtual ~IRenderer() = default;
 };
 END_EG_EG
 #endif ///INCLUDED_EG_EG_RENDERER_HEADER_

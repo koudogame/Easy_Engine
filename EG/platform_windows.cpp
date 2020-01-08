@@ -45,7 +45,6 @@ void PlatformWindows::release()
 {
     if( --ref_cnt_ <= 0 )
     {
-        finalize();
         delete this;
     }
 }
@@ -93,8 +92,8 @@ bool PlatformWindows::initialize()
     return true;
 }
 
-// 終了処理
-void PlatformWindows::finalize()
+// 終了処理( デストラクタ )
+PlatformWindows::~PlatformWindows()
 {
 
 }

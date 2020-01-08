@@ -14,6 +14,15 @@ Director::Director()
 // デストラクタ
 Director::~Director()
 {
+    if( p_renderer_ )
+    {
+        p_renderer_->release();
+    }
+
+    if( p_platform_ )
+    {
+        p_platform_->release();
+    }
 }
 
 // 初期化処理
@@ -26,20 +35,6 @@ bool Director::initialize( PlatformID Platform, RendererID Renderer )
         return false;
 
     return true;
-}
-
-// 終了処理
-void Director::finalize()
-{
-    if( p_renderer_ )
-    {
-        p_renderer_->release();
-    }
-
-    if( p_platform_ )
-    {
-        p_platform_->release();
-    }
 }
 END_EG_EG
 // EOF

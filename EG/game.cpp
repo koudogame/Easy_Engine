@@ -40,7 +40,6 @@ bool Game::initialize()
 // ゲームの終了時に必要な処理を記述する
 void Game::finalize()
 {
-    director_->finalize();
 }
 
 // 更新処理

@@ -1,23 +1,31 @@
+///
+/// @file   interface.hpp
+/// @author 板場
+///
+/// @brief  インターフェイス基底クラス 
+///         外部からの開放を制限しています。<br>
+///         release関数で自身の開放処理を記述してください。
+///
 #ifndef INCLUDED_EG_EG_INTERFACE_HEADER_
 #define INCLUDED_EG_EG_INTERFACE_HEADER_
-// 作成者 : 板場
 #include "easy_engine.hpp"
-
 BEGIN_EG_EG
-//
-// インターフェイス用基底クラス
-//
 class Interface
 {
 public :
-    // 参照数カウントアップ
+    ///
+    /// @brief  参照数インクリメント
+    ///
     virtual void addRef() = 0;
-    // 解放　参照数が0になったら自身のメモリ領域を解放すること
+    ///
+    /// @brief   開放処理
+    /// @details 参照数をデクリメントし、参照者がいなくなったときに開放されます。
+    ///
     virtual void release() = 0;
 
 protected :
     virtual ~Interface() = default;
 };
 END_EG_EG
-#endif // INCLUDED_EG_EG_INTERFACE_HEADER_
-// EOF
+#endif /// INCLUDED_EG_EG_INTERFACE_HEADER_
+/// EOF

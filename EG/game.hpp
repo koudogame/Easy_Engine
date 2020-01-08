@@ -1,23 +1,29 @@
+///
+/// @file    game.hpp
+/// @author  板場
+///          
+/// @brief   ゲームクラス
+/// @details ゲームの中核を内部で扱います。<br>
+///          シングルトンクラスです。アクセスにはinstance関数を使用してください。
+///
 #ifndef INCLUDED_EG_EG_GAME_HEADER_
 #define INCLUDED_EG_EG_GAME_HEADER_
-// 作成者 : 板場
 #include "easy_engine.hpp"
-
 BEGIN_EG_EG
 class Director;
-//
-// ゲームクラス ≒　シーンの実行者
-// ゲームの中核を内部で扱うクラスです。
-// シングルトンクラスです。アクセスにはinstance関数を使用して下さい。
-//
 class Game
 {
 public:
+    ///
+    /// @brief  インスタンスを取得します。
+    ///
+    /// @return インスタンスのアドレス
+    ///
     static Game* instance() { static Game game; return &game; }
 
-    //
-    // ゲームの実行
-    //
+    ///
+    /// @brief  ゲームの実行
+    ///
     void execute();
 
 private:
@@ -30,5 +36,5 @@ private:
     Director* director_ = nullptr;
 };
 END_EG_EG
-#endif // INCLUDED_EG_EG_GAME_HEADER_
-// EOF
+#endif /// INCLUDED_EG_EG_GAME_HEADER_
+/// EOF

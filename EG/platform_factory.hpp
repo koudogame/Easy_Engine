@@ -1,48 +1,59 @@
+///
+/// @file    platform_factory.hpp
+/// @author  板場
+///          
+/// @brief   プラットフォームファクトリ
+/// @details シングルトンクラスです。アクセスにはinstance関数を使用してください。
+///
 #ifndef INCLUDED_EG_EG_PLATFORM_FACTORY_HEADER_
 #define INCLUDED_EG_EG_PLATFORM_FACTORY_HEADER_
-// 作成者 : 板場
 #include <unordered_map>
 #include "platform.hpp"
 
-// プラットフォームの追加
+///
+/// @def     ADD_PLATFORM
+/// @brief   プラットフォームの登録処理
+/// @details ヘッダーファイルで呼び出さないでください。
+///
+/// @param[in] ID : 登録するプラットフォーム識別ID
+/// @param[in] pCreateFunction : 生成処理を実装した関数のアドレス
+///
 #define ADD_PLATFORM( ID, pCreateFunction ) \
 BEGIN_EG_EG \
 namespace impl{} namespace { namespace impl { \
 AddPlatform add_platform( ID, pCreateFunction ); \
 }} END_EG_EG
 
-
 BEGIN_EG_EG
-//
-// プラットフォーム用ファクトリ
-// シングルトンクラスです。アクセスには instance関数を使用して下さい。
-//
 class PlatformFactory
 {
 public :
-    // インスタンスへのアクセス
+    ///
+    /// @brief  インスタンスを取得します。
+    ///
+    /// @return インスタンスのアドレス
+    ///
     static PlatformFactory* instance() { static PlatformFactory i; return &i; }
 
-    //
-    // プラットフォームの登録
-    //
-    // in ID : プラットフォームID
-    // in pCreateFunction : 生成処理を実装した関数へのポインタ
-    //
+    ///
+    /// @brief  プラットフォームの登録
+    ///
+    /// @param[in] ID : プラットフォーム識別ID
+    /// @param[in] pCreateFunction : プラットフォーム生成関数へのポインタ
+    ///
     void registerPlatform( PlatformID ID, IPlatform*(*pCreateFunction)() )
     {
         functions_[ID] = pCreateFunction;
     }
 
-    //
-    // プラットフォームの生成
-    // 
-    // in ID : 生成するプラットフォームのID
-    // in pOutPtr : 生成したオブジェクトへのポインタを格納する変数のアドレス
-    //
-    // out true  : 生成成功
-    // out false : 生成失敗
-    //
+    ///
+    /// @brief  プラットフォームの生成
+    ///
+    /// @param[in] ID : 生成するプラットフォームの識別ID
+    /// @param[out] ppOutPlatform : 生成したプラットフォームを受け取るインターフェイスのアドレス
+    ///
+    /// @return 生成に成功した場合[ true ] 失敗した場合[ false ]を返却します。
+    ///
     bool create( PlatformID ID, IPlatform** pOutPtr )
     {
         auto function = functions_.find(ID);
@@ -56,7 +67,7 @@ public :
 
 private :
     PlatformFactory() = default;
-    std::unordered_map<PlatformID, IPlatform*(*)()> functions_;
+    std::unordered_map<PlatformID, IPlatform*(*)()> functions_; /// プラットフォーム生成処理関数のアドレス群
 };
 
 class AddPlatform
@@ -68,5 +79,5 @@ public :
     }
 };
 END_EG_EG
-#endif // INCLUDED_EG_EG_PLATFORM_FACTORY_HEADER_
-// EOF
+#endif /// INCLUDED_EG_EG_PLATFORM_FACTORY_HEADER_
+/// EOF
