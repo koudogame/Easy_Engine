@@ -36,5 +36,5 @@ private :
     HWND window_handle_;    /// ウィンドウハンドル
 };
 END_EG_EG
-#endif /// INCLUDED_EG_EG_PLATFORM_WINDOWS_HEADER_
+#endif /// !INCLUDED_EG_EG_PLATFORM_WINDOWS_HEADER_
 /// EOF

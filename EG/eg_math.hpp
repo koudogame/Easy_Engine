@@ -837,5 +837,5 @@ inline Matrix4x4 operator/( const Matrix4x4& M, float S )
     return matrix;
 }
 END_EG_EG
-#endif // INCLUDED_EG_EG_MATH_HEADER_
-// EOF
+#endif /// !INCLUDED_EG_EG_MATH_HEADER_
+/// EOF

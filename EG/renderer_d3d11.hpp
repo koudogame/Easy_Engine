@@ -21,10 +21,6 @@ public :
 
     void addRef() override { ++ref_cnt_; }
     void release() override;
-
-    bool loadTexture( const wchar_t*, ITexture** ) override;
-    bool loadVertexShader( const char*, IVertexShader** ) override;
-    bool loadPixelShader( const char*, IPixelShader** ) override;
     void beginRender( float* ) override;
     void setVertexShader( IVertexShader* ) override;
     void setPixelShader( IPixelShader* ) override;
@@ -54,5 +50,5 @@ private :
     std::unordered_map<const char*, IPixelShader*> pixel_shaderes_;     /// ピクセルシェーダキャッシュ
 };
 END_EG_EG
-#endif /// INCLUDED_EG_EG_RENDERER_D3D11_HEADER_
+#endif /// !INCLUDED_EG_EG_RENDERER_D3D11_HEADER_
 /// EOF

@@ -15,5 +15,5 @@ struct VertexData
     Float4 color;       ///< ’¸“_F
 };
 END_EG_EG
-#endif /// INCLUDED_EG_EG_VERTEX_DATA_HEADER_
+#endif /// !INCLUDED_EG_EG_VERTEX_DATA_HEADER_
 /// EOF

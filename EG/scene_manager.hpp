@@ -66,5 +66,5 @@ private :
     SceneManager() = default;
 };
 END_EG_EG
-#endif /// INCLUDED_EG_EG_SCENE_MANAGER_HEADER_
+#endif /// !INCLUDED_EG_EG_SCENE_MANAGER_HEADER_
 /// EOF

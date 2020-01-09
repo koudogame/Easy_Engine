@@ -11,6 +11,9 @@
 #define INCLUDED_EG_EG_PLATFORM_HEADER_
 #include <functional>
 #include "interface.hpp"
+#include "renderer.hpp"
+#include "texture_loader.hpp"
+#include "shader_loader.hpp"
 BEGIN_EG_EG
 ///
 /// @enum   PlatformID
@@ -26,6 +29,8 @@ class IPlatform :
     public Interface
 {
 public :
+// プラットフォーム依存の機能
+/*-----------------------------------------------------------------*/
     ///
     /// @brief   ゲームループ
     /// @details 引数の関数について<br>
@@ -42,11 +47,32 @@ public :
     /// @param[in]  Message : ダイアログボックスに表示する文字列
     ///
     virtual void showDialogBox( const char Message[] ) = 0;
+    
+// 各種インターフェイスの取得
+/*-----------------------------------------------------------------*/
+    ///
+    ///@brief   レンダラーの取得
+    ///
+    /// @return レンダラーのアドレス
+    ///
+    virtual IRenderer* getRenderer() const = 0;
+    ///
+    /// @brief  テクスチャローダーの取得
+    ///
+    /// @return テクスチャローダー
+    ///
+    virtual ITextureLoader* getTextureLoader() const = 0;
+    ///
+    /// @brief  シェーダーローダーの取得
+    ///
+    /// @return シェーダーローダー
+    ///
+    virtual IShaderLoader* getShaderLoader() const = 0;
 
 protected :
     IPlatform() = default;
     virtual ~IPlatform() = default;
 };
 END_EG_EG
-#endif /// INCLUDED_EG_EG_PLATFORM_HEADER_
+#endif /// !INCLUDED_EG_EG_PLATFORM_HEADER_
 /// EOF

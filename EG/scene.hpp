@@ -44,5 +44,5 @@ protected :
     SceneManager* manager_; ///< @brief シーンマネージャー
 };
 END_EG_EG
-#endif /// INCLUDED_EG_EG_SCENE_HEADER_
+#endif /// !INCLUDED_EG_EG_SCENE_HEADER_
 /// EOF

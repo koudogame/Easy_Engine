@@ -53,5 +53,5 @@ private :
     IRenderer* p_renderer_; /// ¶¬‚µ‚½ƒŒƒ“ƒ_ƒ‰[‚ğŠi”[
 };
 END_EG_EG
-#endif /// INCLUDED_EG_EG_DIRECTOR_HEADER_
+#endif /// !INCLUDED_EG_EG_DIRECTOR_HEADER_
 /// EOF

@@ -24,8 +24,8 @@ public :
     virtual void release() = 0;
 
 protected :
-    virtual ~Interface() = default;
+    virtual ~Interface() = default; ///< 外部からのデストラクタ呼び出しを制限しています。
 };
 END_EG_EG
-#endif /// INCLUDED_EG_EG_INTERFACE_HEADER_
+#endif /// !INCLUDED_EG_EG_INTERFACE_HEADER_
 /// EOF

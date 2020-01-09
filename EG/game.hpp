@@ -36,5 +36,5 @@ private:
     Director* director_ = nullptr;
 };
 END_EG_EG
-#endif /// INCLUDED_EG_EG_GAME_HEADER_
+#endif /// !INCLUDED_EG_EG_GAME_HEADER_
 /// EOF

@@ -118,10 +118,8 @@
     <ClInclude Include="director.hpp" />
     <ClInclude Include="eg_math.hpp" />
     <ClInclude Include="easy_engine.hpp" />
-    <ClInclude Include="face.hpp" />
     <ClInclude Include="game.hpp" />
     <ClInclude Include="interface.hpp" />
-    <ClInclude Include="mesh.hpp" />
     <ClInclude Include="pixel_shader.hpp" />
     <ClInclude Include="platform.hpp" />
     <ClInclude Include="platform_factory.hpp" />
@@ -131,12 +129,16 @@
     <ClInclude Include="renderer_factory.hpp" />
     <ClInclude Include="scene.hpp" />
     <ClInclude Include="scene_manager.hpp" />
+    <ClInclude Include="shader_loader.hpp" />
+    <ClInclude Include="shader_loader_d3d11.hpp" />
     <ClInclude Include="sprite.hpp" />
     <ClInclude Include="sprite_component.hpp" />
     <ClInclude Include="sprite_manager.hpp" />
     <ClInclude Include="texture.hpp" />
+    <ClInclude Include="texture_d3d11.hpp" />
+    <ClInclude Include="texture_loader.hpp" />
+    <ClInclude Include="texture_loader_d3d11.hpp" />
     <ClInclude Include="vertex_data.hpp" />
-    <ClInclude Include="vertex_shader.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="director.cpp" />
@@ -145,6 +147,7 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="scene_manager.cpp" />
+    <ClCompile Include="texture_loader_d3d11.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

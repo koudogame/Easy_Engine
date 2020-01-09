@@ -39,5 +39,5 @@ private :
     SpriteManager() = default;
 };
 END_EG_EG
-#endif /// INCLUDED_EG_EG_SPRITE_MANAGER_HEADER_
+#endif /// !INCLUDED_EG_EG_SPRITE_MANAGER_HEADER_
 /// EOF

@@ -16,5 +16,5 @@ public :
 
 };
 END_EG_EG
-#endif /// INCLUDED_EG_EG_PIXEL_SHADER_HEADER_
+#endif /// !INCLUDED_EG_EG_PIXEL_SHADER_HEADER_
 /// EOF

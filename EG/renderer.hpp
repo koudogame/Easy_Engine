@@ -10,10 +10,10 @@
 #ifndef INCLUDED_EG_EG_RENDERER_HEADER_
 #define INCLUDED_EG_EG_RENDERER_HEADER_
 #include "interface.hpp"
-#include "vertex_shader.hpp"
 #include "pixel_shader.hpp"
-#include "texture.hpp"
+#include "vertex_shader.hpp"
 #include "mesh.hpp"
+#include "texture.hpp"
 BEGIN_EG_EG
 ///
 /// @enum  RendererID
@@ -28,44 +28,12 @@ class IRenderer :
     public Interface
 {
 public :
-// FileIO
-/*-----------------------------------------------------------------*/
-    ///
-    /// @brief  テクスチャのロード
-    ///
-    /// @param[in]  FilePath : 読み込む画像のファイルパス
-    /// @param[out] ppOutTexture : 生成したテクスチャを受け取るインターフェイスのアドレス
-    ///
-    /// @return 生成に成功した場合[ true ] 失敗した場合[ false ]を返却します。
-    ///
-    virtual bool loadTexture( const wchar_t FilePath[], ITexture** ppOutTexture ) = 0;
-    ///
-    /// @brief  頂点シェーダのロード
-    ///
-    /// @param[in]  FilePath : コンパイル済み頂点シェーダのファイルパス
-    /// @param[out] ppOutShader : 生成したシェーダーを受け取るインターフェイスのアドレス
-    ///
-    /// @return 生成に成功した場合[ true ] 失敗した場合[ false ]を返却します。
-    ///
-    virtual bool loadVertexShader( const char FilePath[], IVertexShader** ppOutShader ) = 0;
-    ///
-    /// @brief  ピクセルシェーダのロード
-    ///
-    /// @param[in]  FilePath : コンパイル済みピクセルシェーダのファイルパス
-    /// @param[out] ppOutshader : 生成したシェーダーを受け取るインターフェイスのアドレス
-    ///
-    /// @return 生成に成功した場合[ true ] 失敗した場合[ false ]を返却します。
-    ///
-    virtual bool loadPixelShader( const char FilePath[], IPixelShader** ppOutShader ) = 0;
-    
-// Render
-/*-----------------------------------------------------------------*/
     ///
     /// @brief  レンダー開始
     ///
-    /// @param[in] BackColorRGBA : クリア色 { R, G, B, A }
+    /// @param[in] ClearColorRGBA : クリア色 { R, G, B, A }
     ///
-    virtual void beginRender( float BackColorRGBA[4] ) = 0;
+    virtual void beginRender( float ClearColorRGBA[4] ) = 0;
     ///
     /// @brief  グラフィックスパイプラインに頂点シェーダを設定
     ///
@@ -100,5 +68,5 @@ protected :
     virtual ~IRenderer() = default;
 };
 END_EG_EG
-#endif ///INCLUDED_EG_EG_RENDERER_HEADER_
+#endif /// !INCLUDED_EG_EG_RENDERER_HEADER_
 /// EOF

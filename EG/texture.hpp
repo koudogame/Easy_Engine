@@ -12,8 +12,9 @@ class ITexture :
     public Interface
 {
 public :
-    
+protected :
+    virtual ~ITexture() = default;
 };
 END_EG_EG
-#endif /// INCLUDED_EG_EG_TEXTURE_HEADER_
+#endif /// !INCLUDED_EG_EG_TEXTURE_HEADER_
 /// EOF
