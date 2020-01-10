@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include <crtdbg.h>
 #include "game.hpp"
+#include "shader_loader_d3d11.hpp"
 
 // エントリーポイント
 int WINAPI WinMain(

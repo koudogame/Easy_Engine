@@ -29,7 +29,7 @@ void Game::execute()
 bool Game::initialize()
 {
     director_ = Director::instance();
-    bool res = director_->initialize( PlatformID::kWindows, RendererID::kDirect3D11 );
+    bool res = director_->initialize( PlatformID::kWindows );
     if( res == false ) return false;
 
     return true;
@@ -40,6 +40,7 @@ bool Game::initialize()
 // ゲームの終了時に必要な処理を記述する
 void Game::finalize()
 {
+    director_->getPlatform()->release();
 }
 
 // 更新処理
@@ -56,10 +57,10 @@ bool Game::update( long long ErapsedMS )
 
 
     // 描画処理
-    float back_color[4] { 1.0F, 0.0F, 0.0F, 1.0F };
+    /*float back_color[4] { 1.0F, 0.0F, 0.0F, 1.0F };
     director_->getRenderer()->beginRender( back_color );
 
-    director_->getRenderer()->endRender();
+    director_->getRenderer()->endRender();*/
 
     return true;
 }

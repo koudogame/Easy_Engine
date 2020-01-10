@@ -1,6 +1,7 @@
 // 作成者 : 板場
 #include "texture_loader_d3d11.hpp"
 #include "DirectXTex//DirectXTex.h"
+#include "texture_d3d11.hpp"
 
 #ifdef _DEBUG
 #pragma comment( lib, "DirectXTex/Debug/DirectXTex.lib" )
@@ -48,13 +49,27 @@ bool TextureLoaderD3D11::load( const wchar_t* Path, ITexture** ppOut )
             &view)) )
             return false;
 
-        TextureD3D11* p_tex = new TextureD3D11( this );
-        p_tex->set( view );
-        p_tex->addRef();
+        TextureD3D11* p_tex = new TextureD3D11( this, view );
+        view->Release();
+
         *ppOut = p_tex;
     }
 
     return true;
+}
+
+// テクスチャの開放を受け取る
+void TextureLoaderD3D11::notifyTextureRelease( ITexture* Notifier )
+{
+    for( auto itr = textures_.begin(), end = textures_.end();
+        itr != end; ++itr )
+    {
+        if( itr->second == Notifier )
+        {
+            textures_.erase( itr );
+            break;
+        }
+    }
 }
 END_EG_EG
 // EOF

@@ -4,7 +4,6 @@
 ///
 /// @brief  ピクセルシェーダインターフェイス
 ///
-///
 #ifndef INCLUDED_EG_EG_PIXEL_SHADER_HEADER_
 #define INCLUDED_EG_EG_PIXEL_SHADER_HEADER_
 #include "interface.hpp"
@@ -13,7 +12,8 @@ class IPixelShader :
     public Interface
 {
 public :
-
+protected :
+    virtual ~IPixelShader() = default;
 };
 END_EG_EG
 #endif /// !INCLUDED_EG_EG_PIXEL_SHADER_HEADER_

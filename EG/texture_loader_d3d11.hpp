@@ -16,19 +16,28 @@ class TextureLoaderD3D11 :
 public :
     TextureLoaderD3D11( ID3D11Device* pDevice ) :
         p_device_( pDevice )
-    {}
+    {
+        p_device_->AddRef();
+    }
     
+    ///
+    /// @brief   テクスチャの開放通知を受け取ります。
+    /// @details 受け取ったテクスチャを、キャッシュから削除します。
+    /// 
+    /// @param[in] Notifier : 通知者( 削除の対象者 )
+    ///
+    void notifyTextureRelease( ITexture* Notifier );
+
 // ITextureLoader
 /*-----------------------------------------------------------------*/
     bool load( const wchar_t*, ITexture** ) override;
 
-// Interface
-/*-----------------------------------------------------------------*/
-    void addRef() override { ++ref_cnt_; }
-    void release() override;
-
 private :
-    unsigned ref_cnt_ = 0;      ///< 参照数
+    ~TextureLoaderD3D11()
+    {
+        p_device_->Release();
+    }
+
     ID3D11Device* p_device_;    ///< D3Dデバイス
     std::unordered_map<const wchar_t*, ITexture*> textures_;    ///< テクスチャキャッシュ
 };

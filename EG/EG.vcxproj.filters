@@ -18,29 +18,17 @@
     <Filter Include="EG\02_Audio">
       <UniqueIdentifier>{d6bb831e-f5d7-4002-947c-6bf2780986a0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EG\03_Utility">
-      <UniqueIdentifier>{1ff4626d-47cc-475c-9f14-e893394ec478}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EG\01_Render">
-      <UniqueIdentifier>{79fc43db-f00a-4207-959d-9d23ef80afec}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EG\01_Render\Model">
-      <UniqueIdentifier>{342a623a-4821-4a5f-8576-3128943fe089}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EG\01_Render\Model\Sprite">
-      <UniqueIdentifier>{d88a3649-cb37-4b21-89f0-52df80b2cb71}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EG\04_Platform">
-      <UniqueIdentifier>{9f22f91a-539e-4136-b8a3-dedc5e88078c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EG\01_Render\DirectX">
+    <Filter Include="EG\99_System\DirectX">
       <UniqueIdentifier>{59337087-9066-4128-93cf-021ff1d7b29b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EG\04_Platform\Windows">
+    <Filter Include="EG\99_System\Windows">
       <UniqueIdentifier>{a2f825c4-6909-4957-95c7-92a820b30bb8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EG\01_Render\Model\Shader">
-      <UniqueIdentifier>{25561a60-cc2f-4fd5-ab65-1c99934bcb5a}</UniqueIdentifier>
+    <Filter Include="EG\01_Image">
+      <UniqueIdentifier>{79fc43db-f00a-4207-959d-9d23ef80afec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EG\01_Image\Sprite">
+      <UniqueIdentifier>{d88a3649-cb37-4b21-89f0-52df80b2cb71}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -53,38 +41,23 @@
     <ClInclude Include="scene_manager.hpp">
       <Filter>EG\00_Scene</Filter>
     </ClInclude>
-    <ClInclude Include="eg_math.hpp">
-      <Filter>EG\03_Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="renderer.hpp">
-      <Filter>EG\01_Render</Filter>
-    </ClInclude>
     <ClInclude Include="sprite.hpp">
-      <Filter>EG\01_Render\Model\Sprite</Filter>
+      <Filter>EG\01_Image\Sprite</Filter>
     </ClInclude>
     <ClInclude Include="sprite_component.hpp">
-      <Filter>EG\01_Render\Model\Sprite</Filter>
-    </ClInclude>
-    <ClInclude Include="vertex_data.hpp">
-      <Filter>EG\01_Render\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="pixel_shader.hpp">
-      <Filter>EG\01_Render\Model\Shader</Filter>
+      <Filter>EG\01_Image\Sprite</Filter>
     </ClInclude>
     <ClInclude Include="director.hpp">
       <Filter>EG\99_System</Filter>
     </ClInclude>
-    <ClInclude Include="renderer_factory.hpp">
-      <Filter>EG\01_Render</Filter>
-    </ClInclude>
     <ClInclude Include="platform_windows.hpp">
-      <Filter>EG\04_Platform\Windows</Filter>
+      <Filter>EG\99_System\Windows</Filter>
     </ClInclude>
     <ClInclude Include="renderer_d3d11.hpp">
-      <Filter>EG\01_Render\DirectX</Filter>
+      <Filter>EG\99_System\DirectX</Filter>
     </ClInclude>
     <ClInclude Include="sprite_manager.hpp">
-      <Filter>EG\01_Render\Model\Sprite</Filter>
+      <Filter>EG\01_Image\Sprite</Filter>
     </ClInclude>
     <ClInclude Include="interface.hpp">
       <Filter>EG\99_System</Filter>
@@ -105,16 +78,37 @@
       <Filter>EG\99_System</Filter>
     </ClInclude>
     <ClInclude Include="texture_loader_d3d11.hpp">
-      <Filter>EG\01_Render\DirectX</Filter>
+      <Filter>EG\99_System\DirectX</Filter>
     </ClInclude>
     <ClInclude Include="texture_d3d11.hpp">
-      <Filter>EG\01_Render\DirectX</Filter>
+      <Filter>EG\99_System\DirectX</Filter>
     </ClInclude>
     <ClInclude Include="texture.hpp">
       <Filter>EG\99_System</Filter>
     </ClInclude>
     <ClInclude Include="shader_loader_d3d11.hpp">
-      <Filter>EG\01_Render\DirectX</Filter>
+      <Filter>EG\99_System\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="vertex_shader_d3d11.hpp">
+      <Filter>EG\99_System\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="pixel_shader_d3d11.hpp">
+      <Filter>EG\99_System\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="pixel_shader.hpp">
+      <Filter>EG\99_System</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer.hpp">
+      <Filter>EG\99_System</Filter>
+    </ClInclude>
+    <ClInclude Include="vertex_data.hpp">
+      <Filter>EG\99_System</Filter>
+    </ClInclude>
+    <ClInclude Include="eg_math.hpp">
+      <Filter>EG\99_System</Filter>
+    </ClInclude>
+    <ClInclude Include="texture_manager.hpp">
+      <Filter>EG\01_Image</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -134,13 +128,16 @@
       <Filter>EG\00_Scene</Filter>
     </ClCompile>
     <ClCompile Include="platform_windows.cpp">
-      <Filter>EG\04_Platform\Windows</Filter>
+      <Filter>EG\99_System\Windows</Filter>
     </ClCompile>
     <ClCompile Include="renderer_d3d11.cpp">
-      <Filter>EG\01_Render\DirectX</Filter>
+      <Filter>EG\99_System\DirectX</Filter>
     </ClCompile>
     <ClCompile Include="texture_loader_d3d11.cpp">
-      <Filter>EG\01_Render\DirectX</Filter>
+      <Filter>EG\99_System\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_loader_d3d11.cpp">
+      <Filter>EG\99_System\DirectX</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

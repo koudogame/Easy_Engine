@@ -22,7 +22,7 @@ public :
     ///
     /// @return ロードに成功した場合[ true ] 失敗した場合[ false ]を返却します。
     ///
-    virtual bool loadVertexShader( const char* FilePath, IVertexShader* ppOutShader ) = 0;
+    virtual bool loadVertexShader( const char* FilePath, IVertexShader** ppOutShader ) = 0;
 
     ///
     /// @brief  ピクセルシェーダ－のロード
@@ -32,7 +32,7 @@ public :
     ///
     /// @return ロードに成功した場合[ true ] 失敗した場合[ false ]を返却します。
     ///
-    virtual bool loadPixelShader( const char* FilePath, IPixelShader* ppOutShader ) = 0;
+    virtual bool loadPixelShader( const char* FilePath, IPixelShader** ppOutShader ) = 0;
 
 protected :
     virtual ~IShaderLoader() = default;

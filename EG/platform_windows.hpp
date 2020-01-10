@@ -9,8 +9,11 @@
 #ifndef INCLUDED_EG_EG_PLATFORM_WINDOWS_HEADER_
 #define INCLUDED_EG_EG_PLATFORM_WINDOWS_HEADER_
 #include <Windows.h>
+#include <d3d11.h>
 #include "platform.hpp"
 #include "renderer.hpp"
+#include "shader_loader.hpp"
+#include "texture_loader.hpp"
 BEGIN_EG_EG
 class PlatformWindows :
     public IPlatform
@@ -18,22 +21,26 @@ class PlatformWindows :
 public :
     static IPlatform* create();
 
-// Interface override
-/*-----------------------------------------------------------------*/
-    void addRef() override { ++ref_cnt_; }
-    void release() override;
-
-// IPlatform override
+// IPlatform
 /*-----------------------------------------------------------------*/
     void gameLoop( std::function<bool(long long)> ) override;
     void showDialogBox( const char * ) override;
 
-private :
-    bool initialize();      /// 初期化処理 * 生成時に呼び出されます。
-    ~PlatformWindows();
+    IRenderer* getRenderer() const override { return p_renderer_; }
+    IShaderLoader* getShaderLoader() const override { return p_shader_loader_; }
+    ITextureLoader* getTextureLoader() const override { return p_texture_loader_; }
 
-    unsigned ref_cnt_ = 0;  /// 参照数カウント
-    HWND window_handle_;    /// ウィンドウハンドル
+private :
+    bool initialize();          /// 初期化処理 * 生成時に呼び出す。
+    ~PlatformWindows();
+    bool initializeWindow();    /// ウィンドウ初期化
+    bool initializeDirect3D();  /// Direct3D初期化
+
+    HWND window_handle_;                /// ウィンドウハンドル
+    D3D_FEATURE_LEVEL feature_level_;   /// D3D機能レベル
+    IRenderer* p_renderer_;             /// レンダラー
+    IShaderLoader* p_shader_loader_;    /// シェーダーローダー
+    ITextureLoader* p_texture_loader_;  /// テクスチャローダー
 };
 END_EG_EG
 #endif /// !INCLUDED_EG_EG_PLATFORM_WINDOWS_HEADER_

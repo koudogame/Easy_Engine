@@ -24,7 +24,7 @@ public :
     virtual bool load( const wchar_t* FilePath, ITexture** ppOutTexture ) = 0;
 
 protected :
-    ~ITextureLoader() = default;
+    virtual ~ITextureLoader() = default;
 };
 END_EG_EG
 #endif /// !INCLUDED_EG_EG_TEXTURE_LOADER_HEADER_

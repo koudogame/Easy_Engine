@@ -3,9 +3,6 @@
 /// @author  板場
 ///          
 /// @brief   レンダラーインターフェイス
-/// @details RendererFactoryにより提供されます。<br>
-///          新しいレンダラーを作成する際、RendererFactoryへの登録を必ず行って下さい。<br>
-///          登録の際はIDも一緒に登録するため、RendererIDに識別IDを追加して下さい。
 ///
 #ifndef INCLUDED_EG_EG_RENDERER_HEADER_
 #define INCLUDED_EG_EG_RENDERER_HEADER_
@@ -15,15 +12,6 @@
 #include "mesh.hpp"
 #include "texture.hpp"
 BEGIN_EG_EG
-///
-/// @enum  RendererID
-/// @brief レンダラーを識別するID群です。
-///
-enum RendererID
-{
-    kDirect3D11,
-};
-
 class IRenderer :
     public Interface
 {
