@@ -3,7 +3,7 @@
 /// @author  板場
 ///          
 /// @brief   プラットフォームファクトリ
-/// @details シングルトンクラスです。アクセスにはinstance関数を使用してください。
+/// @details シングルトンクラスです。アクセスにはinstance関数を使用してください。<br>
 ///          新しいプラットフォームの登録はREGISTER_PLATFORMマクロを使用してください。
 ///
 #ifndef INCLUDED_EG_EG_PLATFORM_FACTORY_HEADER_
@@ -67,7 +67,7 @@ public :
 };
 ///
 /// @def     REGISTER_PLATFORM
-/// @brief   プラットフォームの登録処理
+/// @brief   プラットフォームをファクトリに登録します。
 /// @details ヘッダーファイルで呼び出さないでください。
 ///
 /// @param[in] ID : 登録するプラットフォームの識別ID

@@ -17,59 +17,33 @@ bool TextureLoaderD3D11::load( const wchar_t* Path, ITexture** ppOut )
 {
     using namespace DirectX;
 
-    auto find = textures_.find( Path );
+    // ファイルからデータを読み込む
+    TexMetadata mdata;
+    ScratchImage image;
+    if( FAILED(LoadFromWICFile(Path, 0, &mdata, image)) )
+        return false;
 
-    // キャッシュにある場合
-    if( find != textures_.end() )
-    {
-        find->second->addRef();
-        *ppOut = find->second;
-    }
-    // 新規に読み込む場合
-    else
-    {
-        // ファイルからデータを読み込む
-        TexMetadata mdata;
-        ScratchImage image;
-        if( FAILED(LoadFromWICFile(Path, 0, &mdata, image)) )
-            return false;
+    // ビューを作成
+    ID3D11ShaderResourceView* view;
+    if( FAILED(CreateShaderResourceViewEx(
+        p_device_,
+        image.GetImages(),
+        image.GetImageCount(),
+        mdata,
+        D3D11_USAGE_DEFAULT,
+        D3D11_BIND_SHADER_RESOURCE,
+        0,
+        0,
+        false,
+        &view)) )
+        return false;
 
-        // ビューを作成
-        ID3D11ShaderResourceView* view;
-        if( FAILED(CreateShaderResourceViewEx(
-            p_device_,
-            image.GetImages(),
-            image.GetImageCount(),
-            mdata,
-            D3D11_USAGE_DEFAULT,
-            D3D11_BIND_SHADER_RESOURCE,
-            0,
-            0,
-            false,
-            &view)) )
-            return false;
+    TextureD3D11* p_tex = new TextureD3D11( this, view );
+    view->Release();
 
-        TextureD3D11* p_tex = new TextureD3D11( this, view );
-        view->Release();
-
-        *ppOut = p_tex;
-    }
+    *ppOut = p_tex;
 
     return true;
-}
-
-// テクスチャの開放を受け取る
-void TextureLoaderD3D11::notifyTextureRelease( ITexture* Notifier )
-{
-    for( auto itr = textures_.begin(), end = textures_.end();
-        itr != end; ++itr )
-    {
-        if( itr->second == Notifier )
-        {
-            textures_.erase( itr );
-            break;
-        }
-    }
 }
 END_EG_EG
 // EOF

@@ -1,6 +1,6 @@
 // ì¬Ò : ”Âê
 #include "game.hpp"
-#include "director.hpp"
+#include "core.hpp"
 
 
 BEGIN_EG_EG
@@ -14,7 +14,7 @@ void Game::execute()
         return;
 
     // ƒQ[ƒ€ƒ‹[ƒv
-    director_->getPlatform()->gameLoop( std::bind( &Game::update, this, std::placeholders::_1) );
+    Core::instance()->getPlatform()->gameLoop( std::bind( &Game::update, this, std::placeholders::_1) );
 
     // ƒQ[ƒ€‚ÌI—¹
     finalize();
@@ -28,8 +28,7 @@ void Game::execute()
 // ‰Šú‰»‚É¸”s‚µ‚½ê‡‚Í  false ‚ğ–ß‚è’l‚Æ‚µ‚Ä•Ô‹p‚·‚é‚±‚ÆB
 bool Game::initialize()
 {
-    director_ = Director::instance();
-    bool res = director_->initialize( PlatformID::kWindows );
+    bool res = Core::instance()->initialize( Game::kTargetPlatform );
     if( res == false ) return false;
 
     return true;
@@ -40,7 +39,7 @@ bool Game::initialize()
 // ƒQ[ƒ€‚ÌI—¹‚É•K—v‚Èˆ—‚ğ‹Lq‚·‚é
 void Game::finalize()
 {
-    director_->getPlatform()->release();
+    Core::instance()->finalize();
 }
 
 // XVˆ—
@@ -57,10 +56,6 @@ bool Game::update( long long ErapsedMS )
 
 
     // •`‰æˆ—
-    /*float back_color[4] { 1.0F, 0.0F, 0.0F, 1.0F };
-    director_->getRenderer()->beginRender( back_color );
-
-    director_->getRenderer()->endRender();*/
 
     return true;
 }

@@ -41,7 +41,6 @@ private :
     ~TextureD3D11()
     {
         p_view_->Release();
-        p_manager_->notifyTextureRelease( this );
     }
 
     TextureLoaderD3D11* p_manager_;

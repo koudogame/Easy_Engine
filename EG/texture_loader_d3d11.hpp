@@ -19,14 +19,6 @@ public :
     {
         p_device_->AddRef();
     }
-    
-    ///
-    /// @brief   テクスチャの開放通知を受け取ります。
-    /// @details 受け取ったテクスチャを、キャッシュから削除します。
-    /// 
-    /// @param[in] Notifier : 通知者( 削除の対象者 )
-    ///
-    void notifyTextureRelease( ITexture* Notifier );
 
 // ITextureLoader
 /*-----------------------------------------------------------------*/
@@ -39,7 +31,6 @@ private :
     }
 
     ID3D11Device* p_device_;    ///< D3Dデバイス
-    std::unordered_map<const wchar_t*, ITexture*> textures_;    ///< テクスチャキャッシュ
 };
 END_EG_EG
 #endif /// !INCLUDED_EG_EG_TEXTURE_LOADER_D3D11_HEADER_

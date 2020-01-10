@@ -115,6 +115,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="core.hpp" />
     <ClInclude Include="director.hpp" />
     <ClInclude Include="eg_math.hpp" />
     <ClInclude Include="easy_engine.hpp" />
@@ -131,6 +132,7 @@
     <ClInclude Include="scene_manager.hpp" />
     <ClInclude Include="shader_loader.hpp" />
     <ClInclude Include="shader_loader_d3d11.hpp" />
+    <ClInclude Include="shader_manager.hpp" />
     <ClInclude Include="sprite.hpp" />
     <ClInclude Include="sprite_component.hpp" />
     <ClInclude Include="sprite_manager.hpp" />
@@ -143,6 +145,7 @@
     <ClInclude Include="vertex_shader_d3d11.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="core.cpp" />
     <ClCompile Include="director.cpp" />
     <ClCompile Include="platform_windows.cpp" />
     <ClCompile Include="renderer_d3d11.cpp" />
@@ -150,7 +153,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="scene_manager.cpp" />
     <ClCompile Include="shader_loader_d3d11.cpp" />
+    <ClCompile Include="shader_manager.cpp" />
     <ClCompile Include="texture_loader_d3d11.cpp" />
+    <ClCompile Include="texture_manager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

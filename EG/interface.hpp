@@ -17,6 +17,13 @@ public :
     Interface() : ref_cnt_( 1U ) {}
 
     ///
+    /// @brief  参照集を取得します。
+    ///
+    /// @return 参照数
+    ///
+    unsigned getReferencedNum() const { return ref_cnt_; }
+
+    ///
     /// @brief  参照数インクリメント
     ///
     void addRef() { ++ref_cnt_; }
