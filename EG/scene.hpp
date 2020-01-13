@@ -8,7 +8,7 @@
 #ifndef INCLUDED_EG_EG_SCENE_HEADER_
 #define INCLUDED_EG_EG_SCENE_HEADER_
 #include "easy_engine.hpp"
-BEGIN_EG_EG
+BEGIN_EGEG
 class SceneManager;
 class Scene
 {
@@ -43,6 +43,6 @@ public :
 protected :
     SceneManager* manager_; ///< @brief シーンマネージャー
 };
-END_EG_EG
+END_EGEG
 #endif /// !INCLUDED_EG_EG_SCENE_HEADER_
 /// EOF

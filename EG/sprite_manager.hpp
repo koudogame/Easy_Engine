@@ -11,7 +11,7 @@
 #ifndef INCLUDED_EG_EG_SPRITE_MANAGER_HEADER_
 #define INCLUDED_EG_EG_SPRITE_MANAGER_HEADER_
 #include "sprite.hpp"
-BEGIN_EG_EG
+BEGIN_EGEG
 class SpriteManager
 {
 public :
@@ -38,6 +38,6 @@ public :
 private :
     SpriteManager() = default;
 };
-END_EG_EG
+END_EGEG
 #endif /// !INCLUDED_EG_EG_SPRITE_MANAGER_HEADER_
 /// EOF

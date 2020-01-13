@@ -2,7 +2,7 @@
 #include "core.hpp"
 #include "platform_factory.hpp"
 
-BEGIN_EG_EG
+BEGIN_EGEG
 // ŠÖ”‚ÌŽÀ‘•
 /*===========================================================================*/
 // ‰Šú‰»ˆ—
@@ -18,5 +18,5 @@ void Core::finalize()
 {
     if( p_platform_ ) p_platform_->release();
 }
-END_EG_EG
+END_EGEG
 // EOF

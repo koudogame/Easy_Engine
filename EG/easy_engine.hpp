@@ -7,9 +7,9 @@
 #ifndef INCLUDED_EG_EG_HEADER_
 #define INCLUDED_EG_EG_HEADER_
 
-#define EG_EG       ::easy_engine::
-#define BEGIN_EG_EG namespace easy_engine {
-#define END_EG_EG   }
+#define EGEG       ::easy_engine::
+#define BEGIN_EGEG namespace easy_engine {
+#define END_EGEG   }
 
 #endif /// !INCLUDED_EG_EG_HEADER_
 /// EOF

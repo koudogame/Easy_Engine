@@ -12,7 +12,7 @@
 #include <Windows.h>
 #include <d3d11.h>
 #include "renderer.hpp"
-BEGIN_EG_EG
+BEGIN_EGEG
 class RendererD3D11 :
     public IRenderer
 {
@@ -57,6 +57,6 @@ private :
     IDXGISwapChain*         p_swap_chain_ = nullptr;            /// DXGIスワップチェインインターフェス
     ID3D11RenderTargetView* p_render_target_view_ = nullptr;    /// D3D描画ターゲットビューインターフェイス
 };
-END_EG_EG
+END_EGEG
 #endif /// !INCLUDED_EG_EG_RENDERER_D3D11_HEADER_
 /// EOF

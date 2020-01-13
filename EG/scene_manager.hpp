@@ -11,7 +11,7 @@
 #define INCLUDED_EG_EG_SCENE_MANAGER_HEADER_
 #include <vector>
 #include "easy_engine.hpp"
-BEGIN_EG_EG
+BEGIN_EGEG
 class Scene;
 class SceneManager
 {
@@ -65,6 +65,6 @@ private :
 
     SceneManager() = default;
 };
-END_EG_EG
+END_EGEG
 #endif /// !INCLUDED_EG_EG_SCENE_MANAGER_HEADER_
 /// EOF

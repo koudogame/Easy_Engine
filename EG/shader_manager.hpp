@@ -2,7 +2,7 @@
 /// @file    shader_manager.hpp
 /// @author  板場
 ///          
-/// @brief   シェーダー管理者
+/// @brief   シェーダーマネージャ―
 /// @details シングルトンクラスです。アクセスにはinstance関数を使用して下さい。<br>
 ///          このクラスのload関数を使用して読み込んだテクスチャは、<br>
 ///          このクラスのrelease関数を使用して解放してください。
@@ -15,6 +15,11 @@ BEGIN_EG_EG
 class ShaderManager
 {
 public :
+    ///
+    /// @brief  インスタンスを取得します。
+    ///
+    /// @return インスタンスのアドレス
+    ///
     static ShaderManager* instance() { static ShaderManager i; return &i; }
 
     ///

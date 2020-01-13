@@ -14,7 +14,7 @@
 #pragma comment( lib, "DirectXTex/Release/DirectXTex.lib" )
 #endif
 
-BEGIN_EG_EG
+BEGIN_EGEG
 // ŠÖ”‚ÌŽÀ‘•
 /*===========================================================================*/
 // •`‰æŠJŽn
@@ -102,5 +102,5 @@ RendererD3D11::~RendererD3D11()
     p_immediate_context_->Release();
     p_device_->Release();
 }
-END_EG_EG
+END_EGEG
 // EOF

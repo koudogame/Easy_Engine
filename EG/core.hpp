@@ -9,7 +9,7 @@
 #define INCLUDED_EG_EG_CORE_HEADER_
 #include "easy_engine.hpp"
 #include "platform.hpp"
-BEGIN_EG_EG
+BEGIN_EGEG
 class Core
 {
 public :
@@ -46,6 +46,6 @@ private :
 
     IPlatform* p_platform_ = nullptr;
 };
-END_EG_EG
+END_EGEG
 #endif /// !INCLUDED_EG_EG_CORE_HEADER_
 /// EOF

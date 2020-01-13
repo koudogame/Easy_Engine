@@ -8,11 +8,11 @@
 #define INCLUDED_EG_EG_MESH_HEADER_
 #include <vector>
 #include "face.hpp"
-BEGIN_EG_EG
+BEGIN_EGEG
 struct Mesh
 {
     std::vector<Face> faces_;   ///< フェース
 };
-END_EG_EG
+END_EGEG
 #endif /// INCLUDED_EG_EG_MESH_HEADER_
 /// EOF

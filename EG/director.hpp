@@ -9,7 +9,7 @@
 #define INCLUDED_EG_EG_DIRECTOR_HEADER_
 #include "platform.hpp"
 #include "renderer.hpp"
-BEGIN_EG_EG
+BEGIN_EGEG
 class Director
 {
 public :
@@ -66,6 +66,6 @@ private :
 
     IPlatform* p_platform_; /// 生成したプラットフォームを格納
 };
-END_EG_EG
+END_EGEG
 #endif /// !INCLUDED_EG_EG_DIRECTOR_HEADER_
 /// EOF

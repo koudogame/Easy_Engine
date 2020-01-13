@@ -9,7 +9,7 @@
 #include "texture_loader.hpp"
 #include <unordered_map>
 #include <d3d11.h>
-BEGIN_EG_EG
+BEGIN_EGEG
 class TextureLoaderD3D11 :
     public ITextureLoader
 {
@@ -20,11 +20,12 @@ public :
         p_device_->AddRef();
     }
 
-// ITextureLoader
-/*-----------------------------------------------------------------*/
-    bool load( const wchar_t*, ITexture** ) override;
 
 private :
+// ITextureLoader
+/*-----------------------------------------------------------------*/
+    bool loadFromFile( const wchar_t*, ITexture** ) override;
+
     ~TextureLoaderD3D11()
     {
         p_device_->Release();
@@ -32,6 +33,6 @@ private :
 
     ID3D11Device* p_device_;    ///< D3Dデバイス
 };
-END_EG_EG
+END_EGEG
 #endif /// !INCLUDED_EG_EG_TEXTURE_LOADER_D3D11_HEADER_
 /// EOF

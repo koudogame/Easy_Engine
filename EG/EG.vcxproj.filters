@@ -30,6 +30,12 @@
     <Filter Include="EG\99_System\Windows\DirectX">
       <UniqueIdentifier>{59337087-9066-4128-93cf-021ff1d7b29b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EG\99_System\Windows\DirectX\Shaders">
+      <UniqueIdentifier>{36f91ac6-cec1-48e1-a00e-9ec4f558abf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EG\99_System\Windows\DirectX\Shaders\2D">
+      <UniqueIdentifier>{dc70b78b-e0e8-4dac-bcaf-25473bd18be6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.hpp">
@@ -74,9 +80,6 @@
     <ClInclude Include="texture_loader.hpp">
       <Filter>EG\99_System</Filter>
     </ClInclude>
-    <ClInclude Include="shader_loader.hpp">
-      <Filter>EG\99_System</Filter>
-    </ClInclude>
     <ClInclude Include="texture_loader_d3d11.hpp">
       <Filter>EG\99_System\Windows\DirectX</Filter>
     </ClInclude>
@@ -101,20 +104,38 @@
     <ClInclude Include="renderer.hpp">
       <Filter>EG\99_System</Filter>
     </ClInclude>
-    <ClInclude Include="vertex_data.hpp">
-      <Filter>EG\99_System</Filter>
-    </ClInclude>
     <ClInclude Include="eg_math.hpp">
       <Filter>EG\99_System</Filter>
-    </ClInclude>
-    <ClInclude Include="texture_manager.hpp">
-      <Filter>EG\01_Image</Filter>
     </ClInclude>
     <ClInclude Include="core.hpp">
       <Filter>EG\99_System</Filter>
     </ClInclude>
     <ClInclude Include="shader_manager.hpp">
       <Filter>EG\01_Image</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering_manager.hpp">
+      <Filter>EG\01_Image</Filter>
+    </ClInclude>
+    <ClInclude Include="face.hpp">
+      <Filter>EG\01_Image</Filter>
+    </ClInclude>
+    <ClInclude Include="mesh.hpp">
+      <Filter>EG\01_Image</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_factory.hpp">
+      <Filter>EG\99_System</Filter>
+    </ClInclude>
+    <ClInclude Include="shader.hpp">
+      <Filter>EG\99_System</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_factory_d3d11.hpp">
+      <Filter>EG\99_System\Windows\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_2d_d3d11.hpp">
+      <Filter>EG\99_System\Windows\DirectX\Shaders\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_d3d11.hpp">
+      <Filter>EG\99_System\Windows\DirectX\Shaders</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -148,11 +169,11 @@
     <ClCompile Include="core.cpp">
       <Filter>EG\99_System</Filter>
     </ClCompile>
-    <ClCompile Include="texture_manager.cpp">
-      <Filter>EG\01_Image</Filter>
-    </ClCompile>
     <ClCompile Include="shader_manager.cpp">
       <Filter>EG\01_Image</Filter>
+    </ClCompile>
+    <ClCompile Include="texture_loader.cpp">
+      <Filter>EG\99_System</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -8,7 +8,7 @@
 #define INCLUDED_EG_EG_PIXEL_SHADER_D3D11_HEADER_
 #include <d3d11.h>
 #include "pixel_shader.hpp"
-BEGIN_EG_EG
+BEGIN_EGEG
 class PixelShaderD3D11 :
     public IPixelShader
 {
@@ -39,6 +39,6 @@ private :
 
     ID3D11PixelShader* p_pixel_shader_;
 };
-END_EG_EG
+END_EGEG
 #endif  /// !INCLUDED_EG_EG_PIXEL_SHADER_D3D11_HEADER_
 /// EOF

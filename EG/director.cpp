@@ -1,9 +1,9 @@
 // 作成者 : 板場
 #include "director.hpp"
-#include "platform_factory.hpp"
+#include "Platform/platform_factory.hpp"
 
 
-BEGIN_EG_EG
+BEGIN_EGEG
 // 関数の実装
 /*===========================================================================*/
 // コンストラクタ
@@ -27,5 +27,5 @@ bool Director::initialize( PlatformID Platform )
 
     return true;
 }
-END_EG_EG
+END_EGEG
 // EOF

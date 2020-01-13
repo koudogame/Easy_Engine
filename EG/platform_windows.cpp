@@ -12,7 +12,7 @@
 // ウィンドウプロシージャ
 LRESULT CALLBACK WinProc( HWND, UINT, WPARAM, LPARAM );
 // プラットフォームのファクトリにPlatformWindowsを登録
-REGISTER_PLATFORM( EG_EG PlatformID::kWindows, &PlatformWindows::create )
+REGISTER_PLATFORM( EGEG PlatformID::kWindows, &PlatformWindows::create )
 
 // unnamed namespace
 /*===========================================================================*/
@@ -39,7 +39,7 @@ namespace
     };
 } // unnamed namespace
 
-BEGIN_EG_EG
+BEGIN_EGEG
 // 関数の実装
 /*===========================================================================*/
 // 生成処理
@@ -217,7 +217,7 @@ bool PlatformWindows::initializeDirect3D()
 
     return true;
 }
-END_EG_EG
+END_EGEG
 
 // unnamed namespace
 namespace

@@ -10,7 +10,7 @@
 #define INCLUDED_EG_EG_PLATFORM_FACTORY_HEADER_
 #include <unordered_map>
 #include "platform.hpp"
-BEGIN_EG_EG
+BEGIN_EGEG
 class PlatformFactory
 {
 public :
@@ -74,11 +74,11 @@ public :
 /// @param[in] pCreateFunction : ê∂ê¨èàóùÇé¿ëïÇµÇΩä÷êîÇÃÉAÉhÉåÉX
 ///
 #define REGISTER_PLATFORM( ID, pCreateFunction ) \
-BEGIN_EG_EG \
+BEGIN_EGEG \
 namespace register_platform{} namespace { namespace register_platform { \
 REGISTER_PLATFORM register_the_platform( ID, pCreateFunction ); \
-}} END_EG_EG
+}} END_EGEG
 
-END_EG_EG
+END_EGEG
 #endif /// !INCLUDED_EG_EG_PLATFORM_FACTORY_HEADER_
 /// EOF

@@ -3,7 +3,7 @@
 #include "core.hpp"
 
 
-BEGIN_EG_EG
+BEGIN_EGEG
 // ŠÖ”‚ÌÀ‘•
 /*===========================================================================*/
 // ƒQ[ƒ€‚ÌÀsˆ—
@@ -59,5 +59,5 @@ bool Game::update( long long ErapsedMS )
 
     return true;
 }
-END_EG_EG
+END_EGEG
 // EOF

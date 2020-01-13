@@ -10,7 +10,7 @@
 #include <corecrt_math_defines.h>
 #include "easy_engine.hpp"
 
-BEGIN_EG_EG
+BEGIN_EGEG
 // Šp“x•ÏŠ·
 /*===========================================================================*/
 ///
@@ -836,6 +836,6 @@ inline Matrix4x4 operator/( const Matrix4x4& M, float S )
     }
     return matrix;
 }
-END_EG_EG
+END_EGEG
 #endif /// !INCLUDED_EG_EG_MATH_HEADER_
 /// EOF

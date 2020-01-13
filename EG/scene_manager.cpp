@@ -6,7 +6,7 @@
 #include "scene_manager.hpp"
 #include "scene.hpp"
 
-BEGIN_EG_EG
+BEGIN_EGEG
 
 // ä÷êîÇÃé¿ëï
 /*===========================================================================*/
@@ -48,5 +48,5 @@ void SceneManager::pop()
     scenes_.pop_back();
 }
 
-END_EG_EG
+END_EGEG
 // EOF

@@ -9,11 +9,11 @@
 #pragma comment( lib, "DirectXTex/Release/DirectXTex.lib" )
 #endif
 
-BEGIN_EG_EG
+BEGIN_EGEG
 // 関数の実装
 /*===========================================================================*/
 // テクスチャのロード
-bool TextureLoaderD3D11::load( const wchar_t* Path, ITexture** ppOut )
+bool TextureLoaderD3D11::loadFromFile( const wchar_t* Path, ITexture** ppOut )
 {
     using namespace DirectX;
 
@@ -45,5 +45,5 @@ bool TextureLoaderD3D11::load( const wchar_t* Path, ITexture** ppOut )
 
     return true;
 }
-END_EG_EG
+END_EGEG
 // EOF

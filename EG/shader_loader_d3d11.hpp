@@ -9,7 +9,7 @@
 #include <unordered_map>
 #include <d3d11.h>
 #include "shader_loader.hpp"
-BEGIN_EG_EG
+BEGIN_EGEG
 class ShaderLoaderD3D11 :
     public IShaderLoader
 {

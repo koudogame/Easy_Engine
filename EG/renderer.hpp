@@ -11,7 +11,7 @@
 #include "vertex_shader.hpp"
 #include "mesh.hpp"
 #include "texture.hpp"
-BEGIN_EG_EG
+BEGIN_EGEG
 class IRenderer :
     public Interface
 {
@@ -55,6 +55,6 @@ protected :
     IRenderer() = default;
     virtual ~IRenderer() = default;
 };
-END_EG_EG
+END_EGEG
 #endif /// !INCLUDED_EG_EG_RENDERER_HEADER_
 /// EOF

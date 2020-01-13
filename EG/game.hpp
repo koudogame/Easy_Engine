@@ -9,7 +9,7 @@
 #define INCLUDED_EG_EG_GAME_HEADER_
 #include "easy_engine.hpp"
 #include "platform.hpp"
-BEGIN_EG_EG
+BEGIN_EGEG
 class Game
 {
 public:
@@ -35,6 +35,6 @@ private:
     void finalize();
     bool update(long long Erapsed);
 };
-END_EG_EG
+END_EGEG
 #endif /// !INCLUDED_EG_EG_GAME_HEADER_
 /// EOF

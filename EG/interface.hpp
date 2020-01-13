@@ -10,7 +10,7 @@
 #ifndef INCLUDED_EG_EG_INTERFACE_HEADER_
 #define INCLUDED_EG_EG_INTERFACE_HEADER_
 #include "easy_engine.hpp"
-BEGIN_EG_EG
+BEGIN_EGEG
 class Interface
 {
 public :
@@ -44,6 +44,6 @@ protected :
 private :
     unsigned ref_cnt_;  /// éQè∆êî
 };
-END_EG_EG
+END_EGEG
 #endif /// !INCLUDED_EG_EG_INTERFACE_HEADER_
 /// EOF

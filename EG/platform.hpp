@@ -13,8 +13,8 @@
 #include "interface.hpp"
 #include "renderer.hpp"
 #include "texture_loader.hpp"
-#include "shader_loader.hpp"
-BEGIN_EG_EG
+#include "shader_factory.hpp"
+BEGIN_EGEG
 ///
 /// @enum   PlatformID
 /// @brief  プラットフォームを識別するIDです。
@@ -63,16 +63,16 @@ public :
     ///
     virtual ITextureLoader* getTextureLoader() const = 0;
     ///
-    /// @brief  シェーダーローダーの取得
+    /// @brief  シェーダーファクトリの取得
     ///
-    /// @return シェーダーローダー
+    /// @return シェーダーファクトリ
     ///
-    virtual IShaderLoader* getShaderLoader() const = 0;
+    virtual IShaderFactory* getShaderLoader() const = 0;
 
 protected :
     IPlatform() = default;
     virtual ~IPlatform() = default;
 };
-END_EG_EG
+END_EGEG
 #endif /// !INCLUDED_EG_EG_PLATFORM_HEADER_
 /// EOF

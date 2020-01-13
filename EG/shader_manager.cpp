@@ -2,7 +2,7 @@
 #include "shader_manager.hpp"
 #include "core.hpp"
 
-BEGIN_EG_EG
+BEGIN_EGEG
 // 関数の実装
 /*===========================================================================*/
 // コンストラクタ
@@ -123,5 +123,5 @@ void ShaderManager::releasePixelShader( IPixelShader** ppShader )
         (*ppShader)->release();
     }
 }
-END_EG_EG
+END_EGEG
 // EOF

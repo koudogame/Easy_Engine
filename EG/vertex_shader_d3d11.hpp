@@ -8,7 +8,7 @@
 #define INCLUDED_EG_EG_VERTEX_SHADER_D3D11_HEADER_
 #include <d3d11.h>
 #include "vertex_shader.hpp"
-BEGIN_EG_EG
+BEGIN_EGEG
 class VertexShaderD3D11 :
     public IVertexShader
 {
@@ -39,6 +39,6 @@ private :
 
     ID3D11VertexShader* p_vertex_shader_;
 };
-END_EG_EG
+END_EGEG
 #endif /// !INCLUDED_EG_EG_VERTEX_SHADER_D3D11_HEADER_
 /// EOF

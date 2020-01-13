@@ -4,7 +4,7 @@
 #include "vertex_shader_d3d11.hpp"
 #include "pixel_shader_d3d11.hpp"
 
-BEGIN_EG_EG
+BEGIN_EGEG
 // 関数の実装
 /*===========================================================================*/
 // 頂点シェーダ―のロード
@@ -92,5 +92,5 @@ bool ShaderLoaderD3D11::loadPixelShader( const char* Path, IPixelShader** ppOut 
 
     return true;
 }
-END_EG_EG
+END_EGEG
 // EOF

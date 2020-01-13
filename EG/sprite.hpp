@@ -8,7 +8,7 @@
 #ifndef INCLUDED_EG_EG_SPRITE_HEADER_
 #define INCLUDED_EG_EG_SPRITE_HEADER_
 #include "texture.hpp"
-BEGIN_EG_EG
+BEGIN_EGEG
 class Sprite
 {
 public :
@@ -17,6 +17,6 @@ public :
 private :
 
 };
-END_EG_EG
+END_EGEG
 #endif /// !INCLUDED_EG_EG_SPRITE_HEADER_
 /// EOF

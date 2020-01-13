@@ -14,7 +14,7 @@
 #include "renderer.hpp"
 #include "shader_loader.hpp"
 #include "texture_loader.hpp"
-BEGIN_EG_EG
+BEGIN_EGEG
 class PlatformWindows :
     public IPlatform
 {
@@ -42,6 +42,6 @@ private :
     IShaderLoader* p_shader_loader_;    /// シェーダーローダー
     ITextureLoader* p_texture_loader_;  /// テクスチャローダー
 };
-END_EG_EG
+END_EGEG
 #endif /// !INCLUDED_EG_EG_PLATFORM_WINDOWS_HEADER_
 /// EOF
