@@ -1,6 +1,6 @@
 // ì¬Ò : ”Âê
 #include "director.hpp"
-#include "Platform/platform_factory.hpp"
+#include "platform_factory.hpp"
 
 
 BEGIN_EGEG
