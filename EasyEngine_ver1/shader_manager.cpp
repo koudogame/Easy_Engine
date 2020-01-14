@@ -107,7 +107,7 @@ bool ShaderManager::loadPixelShader( const char* Path, IPixelShader** ppShader )
         return false;
 
     // ƒŠƒXƒg‚É•Û‚·‚é
-    ps_list_.emplace( ppShader );
+    ps_list_.emplace( *ppShader );
 
     return true;
 }
