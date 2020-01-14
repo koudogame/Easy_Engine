@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="EasyEngine">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="EasyEngine\System">
+      <UniqueIdentifier>{264a1397-7f7d-4fee-b4aa-ac89d4e4cd1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\Tools">
+      <UniqueIdentifier>{313b7cd1-d0fa-4865-b6c7-ccca14fbe907}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>EasyEngine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="easy_engine.cpp">
+      <Filter>EasyEngine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="texture_manager.cpp">
+      <Filter>EasyEngine\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_manager.cpp">
+      <Filter>EasyEngine\Tools</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="egeg_common.hpp">
+      <Filter>EasyEngine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="easy_engine.hpp">
+      <Filter>EasyEngine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer.hpp">
+      <Filter>EasyEngine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="interface.hpp">
+      <Filter>EasyEngine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="platform.hpp">
+      <Filter>EasyEngine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="texture_loader.hpp">
+      <Filter>EasyEngine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_loader.hpp">
+      <Filter>EasyEngine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="texture.hpp">
+      <Filter>EasyEngine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="vertex_shader.hpp">
+      <Filter>EasyEngine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="geometry_shader.hpp">
+      <Filter>EasyEngine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="pixel_shader.hpp">
+      <Filter>EasyEngine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="texture_manager.hpp">
+      <Filter>EasyEngine\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_manager.hpp">
+      <Filter>EasyEngine\Tools</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

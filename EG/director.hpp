@@ -52,7 +52,7 @@ public :
     ///
     /// @return シェーダーローダーのアドレス
     ///
-    IShaderLoader* getShaderLoader() const { return p_platform_->getShaderLoader(); }
+    //IShaderLoader* getShaderLoader() const { return p_platform_->getShaderLoader(); }
     ///
     /// @brief   テクスチャローダーを取得します。
     /// @details addRef関数の呼び出しは行っていません。
