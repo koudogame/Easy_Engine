@@ -9,7 +9,7 @@
 #ifndef INCLUDED_EGEG_EASY_ENGINE_HEADER_
 #define INCLUDED_EGEG_EASY_ENGINE_HEADER_
 #ifdef _DEBUG
-#include <assert.h>
+#include <cassert>
 #endif /// !_DEBUG
 #include "egeg_common.hpp"
 BEGIN_EGEG

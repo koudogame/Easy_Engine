@@ -57,6 +57,9 @@ public :
     ///
     static void destroy( EasyEngine* pDeleter );
     ~TextureManager();
+
+    TextureManager( const TextureManager& ) = delete;
+    TextureManager& operator=( const TextureManager& ) = delete;
 private :
     TextureManager( ITextureLoader* );
     static TextureManager* instance_;

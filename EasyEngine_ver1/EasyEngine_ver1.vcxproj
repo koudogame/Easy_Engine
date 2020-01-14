@@ -145,11 +145,16 @@
   <ItemGroup>
     <ClInclude Include="easy_engine.hpp" />
     <ClInclude Include="egeg_common.hpp" />
+    <ClInclude Include="egeg_math.hpp" />
     <ClInclude Include="geometry_shader.hpp" />
     <ClInclude Include="interface.hpp" />
+    <ClInclude Include="mesh.hpp" />
+    <ClInclude Include="model.hpp" />
     <ClInclude Include="pixel_shader.hpp" />
     <ClInclude Include="platform.hpp" />
+    <ClInclude Include="platform_factory.hpp" />
     <ClInclude Include="renderer.hpp" />
+    <ClInclude Include="rendering_manager.hpp" />
     <ClInclude Include="shader_loader.hpp" />
     <ClInclude Include="shader_manager.hpp" />
     <ClInclude Include="texture.hpp" />
@@ -161,6 +166,7 @@
   <ItemGroup>
     <ClCompile Include="easy_engine.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="platform_factory.cpp" />
     <ClCompile Include="shader_manager.cpp" />
     <ClCompile Include="texture_manager.cpp" />
   </ItemGroup>

@@ -88,6 +88,9 @@ public :
     ///
     static void destroy( EasyEngine* pDeleter );
     ~ShaderManager();
+
+    ShaderManager( const ShaderManager& ) = delete;
+    ShaderManager& operator=( const ShaderManager& ) = delete;
 private :
     ShaderManager( IShaderLoader* );
     static ShaderManager* instance_;

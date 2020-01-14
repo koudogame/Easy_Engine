@@ -59,6 +59,21 @@
     <ClInclude Include="vertex_shader.hpp">
       <Filter>EasyEngine\1_System</Filter>
     </ClInclude>
+    <ClInclude Include="egeg_math.hpp">
+      <Filter>EasyEngine\0_Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="mesh.hpp">
+      <Filter>EasyEngine\1_System</Filter>
+    </ClInclude>
+    <ClInclude Include="model.hpp">
+      <Filter>EasyEngine\1_System</Filter>
+    </ClInclude>
+    <ClInclude Include="platform_factory.hpp">
+      <Filter>EasyEngine\1_System</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering_manager.hpp">
+      <Filter>EasyEngine\0_Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="shader_manager.cpp">
@@ -71,6 +86,9 @@
       <Filter>EasyEngine\1_System</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
+      <Filter>EasyEngine\1_System</Filter>
+    </ClCompile>
+    <ClCompile Include="platform_factory.cpp">
       <Filter>EasyEngine\1_System</Filter>
     </ClCompile>
   </ItemGroup>
