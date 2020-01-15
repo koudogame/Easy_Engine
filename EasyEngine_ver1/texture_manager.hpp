@@ -49,13 +49,13 @@ public :
     /// @param[in] pCreator : 生成者
     /// @param[in] pTextureLoader : 使用するテクスチャローダー
     ///
-    static void create( EasyEngine* pCreator, ITextureLoader* pTextureLoader );
+    static void create( const EasyEngine* pCreator, ITextureLoader* pTextureLoader );
     ///
     /// @brief  インスタンスの破棄
     ///
     /// @param[in] pDeleter : 破棄者
     ///
-    static void destroy( EasyEngine* pDeleter );
+    static void destroy( const EasyEngine* pDeleter );
     ~TextureManager();
 
     TextureManager( const TextureManager& ) = delete;

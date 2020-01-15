@@ -12,11 +12,12 @@
 #define INCLUDED_EGEG_MESH_HEADER_
 #include <vector>
 #include "vertex_data.hpp"
+#include "vertex_index.hpp"
 BEGIN_EGEG
 struct Mesh
 {
     std::vector<VertexData> vertices;   ///< 頂点データ
-    std::vector<unsigned[3]> indices;   ///< 頂点のインデックス
+    std::vector<VertexIndex> indices;   ///< 頂点のインデックス
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_MESH_HEADER_

@@ -6,6 +6,7 @@
 ///
 #ifndef INCLUDED_EGEG_PLATFORM_HEADER_
 #define INCLUDED_EGEG_PLATFORM_HEADER_
+#include <functional>
 #include "interface.hpp"
 #include "renderer.hpp"
 #include "shader_loader.hpp"
@@ -16,25 +17,40 @@ class IPlatform :
 {
 public :
     ///
-    /// @brief  レンダラーの生成
+    /// @brief   メインループ
+    /// @details 引数の関数について<br>
+    ///          引数には呼び出し毎の経過時間(: ミリ秒)を与えます。<br>
+    ///          戻り値で[ false ] が返ってきた場合、ループを終了します。
     ///
-    /// @return 生成したレンダラー
+    /// @param[in] pUpdateFunction : ループ中に実行するゲームの更新関数
     ///
-    virtual IRenderer* createRenderer() const = 0;
+    virtual void MainLoop( std::function<bool(long long)> pUpdateFunction ) = 0;
 
     ///
-    /// @brief  シェーダーローダーの生成
+    /// @brief  ダイアログボックスの表示
     ///
-    /// @return 生成したシェーダーローダー
+    /// @param[in] Message : ダイアログボックスに表示する文字列
     ///
-    virtual IShaderLoader* createShaderLoader() const = 0;
+    virtual void showDialogBox( const wchar_t* Message ) = 0;
 
     ///
-    /// @brief  テクスチャローダーの生成
+    /// @brief   レンダラーの取得
     ///
-    /// @return 生成したテクスチャローダー
+    /// @return  レンダラーのアドレス
     ///
-    virtual ITextureLoader* createTextureLoader() const = 0;
+    virtual IRenderer* getRenderer() const = 0;
+    ///
+    /// @brief   シェーダーローダーの取得
+    ///
+    /// @return  シェーダーローダーのアドレス
+    ///
+    virtual IShaderLoader* getShaderLoader() const = 0;
+    ///
+    /// @brief   テクスチャローダーの取得
+    ///
+    /// @return  テクスチャローダーのアドレス
+    ///
+    virtual ITextureLoader* getTextureLoader() const = 0;
 
 protected :
     virtual ~IPlatform() = 0 {}

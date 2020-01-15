@@ -34,7 +34,7 @@ public :
     /// @brief   EasyEngine本体である証明
     /// @details この関数が呼び出せれば、EasyEngineクラス本体である。
     ///
-    void proof() {}
+    void proof() const {}
 private :
 #ifdef _DEBUG
     static int create_cnt_;

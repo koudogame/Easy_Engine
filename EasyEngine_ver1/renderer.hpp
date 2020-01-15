@@ -19,7 +19,7 @@ public :
     ///
     /// @param[in] ColorRGBA : 画面のクリア色 { R, G, B, A }
     ///
-    virtual void beginRender( const Vector4D& Color ) = 0;
+    virtual void beginRender( const Vector4D& ColorRGBA ) = 0;
     ///
     /// @brief   描画のエントリー
     /// @details 実際に描画は行いません。

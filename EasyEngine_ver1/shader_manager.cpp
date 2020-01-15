@@ -130,7 +130,7 @@ void ShaderManager::releasePixelShader( IPixelShader** ppShader )
 }
 
 // ¶¬ˆ—
-void ShaderManager::create( EasyEngine* pCreator, IShaderLoader* pLoader )
+void ShaderManager::create( const EasyEngine* pCreator, IShaderLoader* pLoader )
 {
     pCreator->proof();
 
@@ -138,7 +138,7 @@ void ShaderManager::create( EasyEngine* pCreator, IShaderLoader* pLoader )
     instance_ = new ShaderManager( pLoader );
 }
 // ”jŠüˆ—
-void ShaderManager::destroy( EasyEngine* pDeleter )
+void ShaderManager::destroy( const EasyEngine* pDeleter )
 {
     pDeleter->proof();
 

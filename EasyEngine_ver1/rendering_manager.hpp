@@ -26,7 +26,7 @@ public :
     ///
     /// @param[in] ColorRGBA : 画面のクリア色 { R, G, B, A }
     ///
-    void beginRender( const Vector4D& Color );
+    void beginRender( const Vector4D& ColorRGBA );
     ///
     /// @brief   描画のエントリー
     /// @details 実際に描画は行いません。
@@ -59,13 +59,13 @@ public :
     /// @param[in] pCreator : 生成者
     /// @param[in] pRenderer : 使用するレンダラー
     ///
-    static void create( EasyEngine* pCreator, IRenderer* pRenderer );
+    static void create( const EasyEngine* pCreator, IRenderer* pRenderer );
     ///
     /// @brief  インスタンスの破棄
     ///
     /// @param[in] pDeleter : 破棄者
     ///
-    static void destroy( EasyEngine* pDeleter );
+    static void destroy( const EasyEngine* pDeleter );
     ~RenderingManager();
 
     RenderingManager( const RenderingManager& ) = delete;

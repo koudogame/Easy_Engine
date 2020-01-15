@@ -3,6 +3,7 @@
 #ifdef _DEBUG
 #include <crtdbg.h>
 #endif // !_DEBUG
+#include "easy_engine.hpp"
 
 // エントリーポイント
 int WINAPI WinMain(
@@ -12,9 +13,11 @@ int WINAPI WinMain(
     INT       nCmdShow)
 {
 #ifdef  _DEBUG
-    //メモリリークのチェック
-    //_CrtSetBreakAlloc();
+    //_CrtSetBreakAlloc(155);
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
+
+    EGEG EasyEngine engine;
+    engine.run( "Windows" );
 }
 // EOF

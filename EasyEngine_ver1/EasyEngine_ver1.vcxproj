@@ -153,7 +153,9 @@
     <ClInclude Include="pixel_shader.hpp" />
     <ClInclude Include="platform.hpp" />
     <ClInclude Include="platform_factory.hpp" />
+    <ClInclude Include="platform_windows.hpp" />
     <ClInclude Include="renderer.hpp" />
+    <ClInclude Include="renderer_windows.hpp" />
     <ClInclude Include="rendering_manager.hpp" />
     <ClInclude Include="shader_loader.hpp" />
     <ClInclude Include="shader_manager.hpp" />
@@ -161,12 +163,16 @@
     <ClInclude Include="texture_loader.hpp" />
     <ClInclude Include="texture_manager.hpp" />
     <ClInclude Include="vertex_data.hpp" />
+    <ClInclude Include="vertex_index.hpp" />
     <ClInclude Include="vertex_shader.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="easy_engine.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="platform_factory.cpp" />
+    <ClCompile Include="platform_windows.cpp" />
+    <ClCompile Include="renderer_windows.cpp" />
+    <ClCompile Include="rendering_manager.cpp" />
     <ClCompile Include="shader_manager.cpp" />
     <ClCompile Include="texture_manager.cpp" />
   </ItemGroup>

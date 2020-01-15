@@ -76,7 +76,7 @@ void TextureManager::release( ITexture** ppTexture )
 }
 
 // ¶¬ˆ—
-void TextureManager::create( EasyEngine* pCreator, ITextureLoader* pLoader )
+void TextureManager::create( const EasyEngine* pCreator, ITextureLoader* pLoader )
 {
     pCreator->proof();
 
@@ -84,7 +84,7 @@ void TextureManager::create( EasyEngine* pCreator, ITextureLoader* pLoader )
     instance_ = new TextureManager( pLoader );
 }
 // ”jŠüˆ—
-void TextureManager::destroy( EasyEngine* pDeleter )
+void TextureManager::destroy( const EasyEngine* pDeleter )
 {
     pDeleter->proof();
 

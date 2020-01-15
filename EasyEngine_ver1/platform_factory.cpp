@@ -30,6 +30,7 @@ void PlatformFactory::registerPlatform( const char* Name, IPlatform*(*pFunc)() )
     assert( find == create_funcs_.end() &&
             "既に登録済みの名前でプラットフォームを登録しようとしました。" );
 #endif // !_DEBUG
+
     create_funcs_.emplace( Name, pFunc );
 }
 END_EGEG

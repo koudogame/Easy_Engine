@@ -12,8 +12,14 @@
     <Filter Include="EasyEngine\0_Tools">
       <UniqueIdentifier>{6c370306-71e7-4675-aea9-af31144b93cc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EasyEngine\1_System">
+    <Filter Include="EasyEngine\1_Core">
       <UniqueIdentifier>{cd975d7f-61e7-44e8-b232-2b98da5d5ece}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\99_System">
+      <UniqueIdentifier>{b337d101-0f30-4c78-b56d-a63d85c7b7e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\99_System\Windows">
+      <UniqueIdentifier>{020c3a86-e112-43b7-b8dc-8e556c3ee71a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -24,55 +30,64 @@
       <Filter>EasyEngine\0_Tools</Filter>
     </ClInclude>
     <ClInclude Include="easy_engine.hpp">
-      <Filter>EasyEngine\1_System</Filter>
+      <Filter>EasyEngine\1_Core</Filter>
     </ClInclude>
     <ClInclude Include="egeg_common.hpp">
-      <Filter>EasyEngine\1_System</Filter>
+      <Filter>EasyEngine\1_Core</Filter>
     </ClInclude>
     <ClInclude Include="geometry_shader.hpp">
-      <Filter>EasyEngine\1_System</Filter>
+      <Filter>EasyEngine\1_Core</Filter>
     </ClInclude>
     <ClInclude Include="interface.hpp">
-      <Filter>EasyEngine\1_System</Filter>
+      <Filter>EasyEngine\1_Core</Filter>
     </ClInclude>
     <ClInclude Include="pixel_shader.hpp">
-      <Filter>EasyEngine\1_System</Filter>
+      <Filter>EasyEngine\1_Core</Filter>
     </ClInclude>
     <ClInclude Include="platform.hpp">
-      <Filter>EasyEngine\1_System</Filter>
+      <Filter>EasyEngine\1_Core</Filter>
     </ClInclude>
     <ClInclude Include="renderer.hpp">
-      <Filter>EasyEngine\1_System</Filter>
+      <Filter>EasyEngine\1_Core</Filter>
     </ClInclude>
     <ClInclude Include="shader_loader.hpp">
-      <Filter>EasyEngine\1_System</Filter>
+      <Filter>EasyEngine\1_Core</Filter>
     </ClInclude>
     <ClInclude Include="texture.hpp">
-      <Filter>EasyEngine\1_System</Filter>
+      <Filter>EasyEngine\1_Core</Filter>
     </ClInclude>
     <ClInclude Include="texture_loader.hpp">
-      <Filter>EasyEngine\1_System</Filter>
+      <Filter>EasyEngine\1_Core</Filter>
     </ClInclude>
     <ClInclude Include="vertex_data.hpp">
-      <Filter>EasyEngine\1_System</Filter>
+      <Filter>EasyEngine\1_Core</Filter>
     </ClInclude>
     <ClInclude Include="vertex_shader.hpp">
-      <Filter>EasyEngine\1_System</Filter>
+      <Filter>EasyEngine\1_Core</Filter>
     </ClInclude>
     <ClInclude Include="egeg_math.hpp">
       <Filter>EasyEngine\0_Tools</Filter>
     </ClInclude>
     <ClInclude Include="mesh.hpp">
-      <Filter>EasyEngine\1_System</Filter>
+      <Filter>EasyEngine\1_Core</Filter>
     </ClInclude>
     <ClInclude Include="model.hpp">
-      <Filter>EasyEngine\1_System</Filter>
+      <Filter>EasyEngine\1_Core</Filter>
     </ClInclude>
     <ClInclude Include="platform_factory.hpp">
-      <Filter>EasyEngine\1_System</Filter>
+      <Filter>EasyEngine\1_Core</Filter>
     </ClInclude>
     <ClInclude Include="rendering_manager.hpp">
       <Filter>EasyEngine\0_Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="vertex_index.hpp">
+      <Filter>EasyEngine\1_Core</Filter>
+    </ClInclude>
+    <ClInclude Include="platform_windows.hpp">
+      <Filter>EasyEngine\99_System\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer_windows.hpp">
+      <Filter>EasyEngine\99_System\Windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -83,13 +98,22 @@
       <Filter>EasyEngine\0_Tools</Filter>
     </ClCompile>
     <ClCompile Include="easy_engine.cpp">
-      <Filter>EasyEngine\1_System</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>EasyEngine\1_System</Filter>
+      <Filter>EasyEngine\1_Core</Filter>
     </ClCompile>
     <ClCompile Include="platform_factory.cpp">
-      <Filter>EasyEngine\1_System</Filter>
+      <Filter>EasyEngine\1_Core</Filter>
+    </ClCompile>
+    <ClCompile Include="rendering_manager.cpp">
+      <Filter>EasyEngine\0_Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>EasyEngine\99_System</Filter>
+    </ClCompile>
+    <ClCompile Include="platform_windows.cpp">
+      <Filter>EasyEngine\99_System\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer_windows.cpp">
+      <Filter>EasyEngine\99_System\Windows</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

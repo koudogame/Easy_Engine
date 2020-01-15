@@ -28,7 +28,6 @@ public :
     bool create( const char* Platform, IPlatform** ppPlatform );
 
     ///
-    ///
     /// @brief   プラットフォームの登録
     /// @details 実際は生成処理の登録です。
     ///

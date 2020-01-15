@@ -80,13 +80,13 @@ public :
     /// @param[in] pCreator : 生成者
     /// @param[in] pShaderLoader : 使用するシェーダーローダー
     ///
-    static void create( EasyEngine* pCreator, IShaderLoader* pShaderLoader );
+    static void create( const EasyEngine* pCreator, IShaderLoader* pShaderLoader );
     ///
     /// @brief  インスタンスの破棄
     ///
     /// @param[in] pDeleter : 破棄者
     ///
-    static void destroy( EasyEngine* pDeleter );
+    static void destroy( const EasyEngine* pDeleter );
     ~ShaderManager();
 
     ShaderManager( const ShaderManager& ) = delete;
