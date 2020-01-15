@@ -38,9 +38,6 @@
     <ClInclude Include="geometry_shader.hpp">
       <Filter>EasyEngine\1_Core</Filter>
     </ClInclude>
-    <ClInclude Include="interface.hpp">
-      <Filter>EasyEngine\1_Core</Filter>
-    </ClInclude>
     <ClInclude Include="pixel_shader.hpp">
       <Filter>EasyEngine\1_Core</Filter>
     </ClInclude>
@@ -88,6 +85,9 @@
     </ClInclude>
     <ClInclude Include="renderer_windows.hpp">
       <Filter>EasyEngine\99_System\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="shared_object.hpp">
+      <Filter>EasyEngine\1_Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

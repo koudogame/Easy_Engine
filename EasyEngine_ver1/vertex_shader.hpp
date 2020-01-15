@@ -6,10 +6,10 @@
 ///
 #ifndef INCLUDED_EGEG_VERTEX_SHADER_HEADER_
 #define INCLUDED_EGEG_VERTEX_SHADER_HEADER_
-#include "interface.hpp"
+#include "shared_object.hpp"
 BEGIN_EGEG
 class IVertexShader :
-    public Interface
+    public SharedObject
 {
 protected :
     virtual ~IVertexShader() = 0 {}

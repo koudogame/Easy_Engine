@@ -13,7 +13,7 @@
 #include "texture.hpp"
 BEGIN_EGEG
 class IRenderer :
-    public Interface
+    public SharedObject
 {
 public :
     ///

@@ -147,7 +147,7 @@
     <ClInclude Include="egeg_common.hpp" />
     <ClInclude Include="egeg_math.hpp" />
     <ClInclude Include="geometry_shader.hpp" />
-    <ClInclude Include="interface.hpp" />
+    <ClInclude Include="shared_object.hpp" />
     <ClInclude Include="mesh.hpp" />
     <ClInclude Include="model.hpp" />
     <ClInclude Include="pixel_shader.hpp" />

@@ -9,7 +9,7 @@
 #include "shader.hpp"
 BEGIN_EGEG
 class IShaderFactory :
-    public Interface
+    public SharedObject
 {
 public :
     ///

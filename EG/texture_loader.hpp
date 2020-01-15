@@ -12,7 +12,7 @@
 BEGIN_EGEG
 class ITexture;
 class ITextureLoader :
-    public Interface
+    public SharedObject
 {
 public :
     ///

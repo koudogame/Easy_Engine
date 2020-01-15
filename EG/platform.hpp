@@ -26,7 +26,7 @@ enum PlatformID
 };
 
 class IPlatform :
-    public Interface
+    public SharedObject
 {
 public :
 // プラットフォーム依存の機能

@@ -6,11 +6,11 @@
 ///
 #ifndef INCLUDED_EGEG_RENDERER_HEADER_
 #define INCLUDED_EGEG_RENDERER_HEADER_
-#include "interface.hpp"
+#include "shared_object.hpp"
 #include "model.hpp"
 BEGIN_EGEG
 class IRenderer :
-    public Interface
+    public SharedObject
 {
 public :
     ///

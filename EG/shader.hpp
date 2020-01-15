@@ -9,7 +9,7 @@
 #include "interface.hpp"
 BEGIN_EGEG
 class IShader :
-    public Interface
+    public SharedObject
 {
 protected :
     virtual ~IShader() = default;

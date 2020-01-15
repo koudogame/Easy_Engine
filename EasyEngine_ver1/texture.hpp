@@ -6,10 +6,10 @@
 ///
 #ifndef INCLUDED_EGEG_TEXTURE_HEADER_
 #define INCLUDED_EGEG_TEXTURE_HEADER_
-#include "interface.hpp"
+#include "shared_object.hpp"
 BEGIN_EGEG
 class ITexture :
-    public Interface
+    public SharedObject
 {
 protected :
     virtual ~ITexture() = 0 {}

@@ -6,13 +6,13 @@
 ///
 #ifndef INCLUDED_EGEG_SHADER_LOADER_
 #define INCLUDED_EGEG_SHADER_LOADER_
-#include "interface.hpp"
+#include "shared_object.hpp"
 #include "vertex_shader.hpp"
 #include "geometry_shader.hpp"
 #include "pixel_shader.hpp"
 BEGIN_EGEG
 class IShaderLoader :
-    public Interface
+    public SharedObject
 {
 public :
     ///

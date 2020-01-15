@@ -16,7 +16,7 @@ ShaderManager::ShaderManager( IShaderLoader *pLoader ) :
 ShaderManager::~ShaderManager()
 {
     // 開放されていないシェーダーを開放する
-    auto forcedRelease = []( Interface* I )
+    auto forcedRelease = []( SharedObject* I )
     {
         for( int i = I->getRefCount(); i > 0; --i )
         {

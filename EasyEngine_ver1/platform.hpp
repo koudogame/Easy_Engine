@@ -7,13 +7,13 @@
 #ifndef INCLUDED_EGEG_PLATFORM_HEADER_
 #define INCLUDED_EGEG_PLATFORM_HEADER_
 #include <functional>
-#include "interface.hpp"
+#include "shared_object.hpp"
 #include "renderer.hpp"
 #include "shader_loader.hpp"
 #include "texture_loader.hpp"
 BEGIN_EGEG
 class IPlatform :
-    public Interface
+    public SharedObject
 {
 public :
     ///

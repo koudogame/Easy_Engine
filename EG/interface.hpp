@@ -11,10 +11,10 @@
 #define INCLUDED_EG_EG_INTERFACE_HEADER_
 #include "easy_engine.hpp"
 BEGIN_EGEG
-class Interface
+class SharedObject
 {
 public :
-    Interface() : ref_cnt_( 1U ) {}
+    SharedObject() : ref_cnt_( 1U ) {}
 
     ///
     /// @brief  参照集を取得します。
@@ -40,7 +40,7 @@ public :
     }
 
 protected :
-    virtual ~Interface() = default; ///< 外部からのデストラクタ呼び出しを制限しています。
+    virtual ~SharedObject() = default; ///< 外部からのデストラクタ呼び出しを制限しています。
 private :
     unsigned ref_cnt_;  /// 参照数
 };

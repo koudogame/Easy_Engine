@@ -6,11 +6,11 @@
 ///
 #ifndef INCLUDED_EGEG_TEXTURE_LOADER_HEADER_
 #define INCLUDED_EGEG_TEXTURE_LOADER_HEADER_
-#include "interface.hpp"
+#include "shared_object.hpp"
 #include "texture.hpp"
 BEGIN_EGEG
 class ITextureLoader :
-    public Interface
+    public SharedObject
 {
 public :
     ///

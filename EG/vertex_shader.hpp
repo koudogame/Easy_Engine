@@ -9,7 +9,7 @@
 #include "interface.hpp"
 BEGIN_EGEG
 class IVertexShader :
-    public Interface
+    public SharedObject
 {
 public :
 protected :

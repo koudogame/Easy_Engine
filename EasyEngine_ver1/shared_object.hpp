@@ -1,16 +1,16 @@
 ///
-/// @file    interface.hpp
+/// @file    shared_object.hpp
 /// @author  板場
 ///          
-/// @brief   インターフェイス基底クラス
+/// @brief   共有オブジェクト
 /// @details 外部からdeleteされないよう、デストラクタの呼び出しを制限しています。<br>
 ///          各派生クラスはデストラクタに終了処理を実装してください。
 ///
-#ifndef INCLUDED_EGEG_INTERFACE_HEADER_
-#define INCLUDED_EGEG_INTERFACE_HEADER_
+#ifndef INCLUDED_EGEG_SHARED_OBJECT_HEADER_
+#define INCLUDED_EGEG_SHARED_OBJECT_HEADER_
 #include "egeg_common.hpp"
 BEGIN_EGEG
-class Interface
+class SharedObject
 {
 public :
     void addRef() { ++ref_cnt_; }
@@ -25,10 +25,10 @@ public :
     unsigned getRefCount() const { return ref_cnt_; }
 
 protected :
-    virtual ~Interface() = 0 {}
+    virtual ~SharedObject() = 0 {}
 private :
     unsigned ref_cnt_ = 1U;
 };
 END_EGEG
-#endif /// !INCLUDED_EGEG_INTERFACE_HEADER_
+#endif /// !INCLUDED_EGEG_SHARED_OBJECT_HEADER_
 /// EOF

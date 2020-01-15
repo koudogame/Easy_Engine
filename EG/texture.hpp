@@ -10,7 +10,7 @@
 #include "texture_loader.hpp"
 BEGIN_EGEG
 class ITexture :
-    public Interface
+    public SharedObject
 {
 public :
     ///
