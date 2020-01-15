@@ -23,7 +23,6 @@ public :
     RendererWindows( ID3D11Device* pDevice, 
                      ID3D11DeviceContext* pImmediateContext,
                      IDXGISwapChain* pSwapChain );
-
     ///
     /// @brief   ‰Šú‰»
     /// @details ¶¬Œã‚É•K‚¸ŒÄ‚Ño‚µ‚Ä‚­‚¾‚³‚¢B

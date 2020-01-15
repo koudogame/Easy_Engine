@@ -14,12 +14,15 @@ class SharedObject
 {
 public :
     void addRef() { ++ref_cnt_; }
-    void release()
+    unsigned release()
     {
-        if( --ref_cnt_ <= 0 )
+        unsigned after_ref_cnt = --ref_cnt_;
+
+        if( after_ref_cnt <= 0 )
         {
             delete this;
         }
+        return after_ref_cnt;
     }
 
     unsigned getRefCount() const { return ref_cnt_; }

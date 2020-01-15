@@ -146,7 +146,11 @@
     <ClInclude Include="easy_engine.hpp" />
     <ClInclude Include="egeg_common.hpp" />
     <ClInclude Include="egeg_math.hpp" />
+    <ClInclude Include="game.hpp" />
     <ClInclude Include="geometry_shader.hpp" />
+    <ClInclude Include="geometry_shader_windows.hpp" />
+    <ClInclude Include="pixel_shader_windows.hpp" />
+    <ClInclude Include="shader_loader_windows.hpp" />
     <ClInclude Include="shared_object.hpp" />
     <ClInclude Include="mesh.hpp" />
     <ClInclude Include="model.hpp" />
@@ -161,10 +165,13 @@
     <ClInclude Include="shader_manager.hpp" />
     <ClInclude Include="texture.hpp" />
     <ClInclude Include="texture_loader.hpp" />
+    <ClInclude Include="texture_loader_windows.hpp" />
     <ClInclude Include="texture_manager.hpp" />
+    <ClInclude Include="texture_windows.hpp" />
     <ClInclude Include="vertex_data.hpp" />
     <ClInclude Include="vertex_index.hpp" />
     <ClInclude Include="vertex_shader.hpp" />
+    <ClInclude Include="vertex_shader_windows.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="easy_engine.cpp" />
@@ -173,7 +180,9 @@
     <ClCompile Include="platform_windows.cpp" />
     <ClCompile Include="renderer_windows.cpp" />
     <ClCompile Include="rendering_manager.cpp" />
+    <ClCompile Include="shader_loader_windows.cpp" />
     <ClCompile Include="shader_manager.cpp" />
+    <ClCompile Include="texture_loader_windows.cpp" />
     <ClCompile Include="texture_manager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -3,6 +3,8 @@
 #include <chrono>
 #include "platform_factory.hpp"
 #include "renderer_windows.hpp"
+#include "shader_loader_windows.hpp"
+#include "texture_loader_windows.hpp"
 
 #pragma comment( lib, "d3d11.lib" )
 
@@ -43,9 +45,9 @@ BEGIN_EGEG
 // デストラクタ
 PlatformWindows::~PlatformWindows()
 {
-    texture_loader_->release();
-    shader_loader_->release();
-    renderer_->release();
+    if( texture_loader_ )   texture_loader_->release();
+    if( shader_loader_ )    shader_loader_->release();
+    if( renderer_)          renderer_->release();
 }
 
 // PlatformWindows生成
@@ -54,7 +56,7 @@ IPlatform* PlatformWindows::create()
     PlatformWindows* created = new PlatformWindows();
     if( created->initialize() == false )
     {
-        delete created;
+        created->release();
         return nullptr;
     }
 
@@ -70,13 +72,13 @@ void PlatformWindows::MainLoop( std::function<bool(long long)> pUpdateFunc )
     time_point<high_resolution_clock> curr_time;
 
     MSG msg = {};
-    while (msg.message != WM_QUIT)
+    while( msg.message != WM_QUIT )
     {
         // メッセージ処理
-        if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+        if( PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE) )
         {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
+            TranslateMessage( &msg );
+            DispatchMessage( &msg );
         }
         // ゲーム処理
         else
@@ -84,11 +86,11 @@ void PlatformWindows::MainLoop( std::function<bool(long long)> pUpdateFunc )
             // フレームレート制御
             curr_time = high_resolution_clock::now();
             auto erapsed_time = curr_time - last_time;
-            if (duration_cast<microseconds>(erapsed_time).count() >= ::kFramePerUS)
+            if( duration_cast<microseconds>(erapsed_time).count() >= ::kFramePerUS )
             {
                 last_time = curr_time;
 
-                if (!pUpdateFunc(duration_cast<milliseconds>(erapsed_time).count()))
+                if( !pUpdateFunc(duration_cast<milliseconds>(erapsed_time).count()) )
                     break;
             }
         }
@@ -116,9 +118,11 @@ bool PlatformWindows::initialize()
     AdjustWindowRectEx( &region, ::kWindowStyle, false, ::kWindowStyleEx );
     long window_width = region.right - region.left;
     long window_height = region.bottom - region.top;
-    ::createWindow( region.right - region.left, region.bottom - region.top, &h_window_ );
+    if( ::createWindow( window_width, window_height, &h_window_ ) == false )
+        return false;
+    ShowWindow( h_window_, SW_NORMAL );
 
-    DXGI_SWAP_CHAIN_DESC sc_desc;
+    DXGI_SWAP_CHAIN_DESC sc_desc = {};
     ::setSwapChainDesc( &sc_desc, h_window_, (UINT)window_width, (UINT)window_height );
     ID3D11Device* p_device;
     ID3D11DeviceContext* p_immediate_context;
@@ -126,25 +130,22 @@ bool PlatformWindows::initialize()
     if( FAILED(::createD3DDevice( &sc_desc, &p_device, &p_immediate_context, &p_swap_chain, &feature_level_)) )
         return false;
 
-    auto allRelease = [&]()
-    {
-        p_swap_chain->Release();
-        p_immediate_context->Release();
-        p_device->Release();
-    };
-
     // レンダラーの生成
     renderer_ = new RendererWindows( p_device, p_immediate_context, p_swap_chain );
     if( static_cast<RendererWindows*>(renderer_)->initialize() == false )
     {
-        allRelease();
+        p_swap_chain->Release();
+        p_immediate_context->Release();
+        p_device->Release();
         renderer_->release();
         return false;
     }
 
     // シェーダーローダーの生成
+    shader_loader_ = new ShaderLoaderWindows( p_device );
 
     // テクスチャローダーの生成
+    texture_loader_ = new TextureLoaderWindows( p_device );
 
 
     // 不要になったインターフェイスを開放
