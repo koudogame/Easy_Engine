@@ -22,9 +22,9 @@ public :
 
 // IShaderLoader
 /*-----------------------------------------------------------------*/
-    bool loadVertexShader( const char*, IVertexShader** ) override;
-    bool loadGeometryShader( const char*, IGeometryShader** ) override;
-    bool loadPixelShader( const char*, IPixelShader** ) override;
+    bool loadVertexShader( const std::string&, IVertexShader** ) override;
+    bool loadGeometryShader( const std::string&, IGeometryShader** ) override;
+    bool loadPixelShader( const std::string&, IPixelShader** ) override;
 
 private :
     ~ShaderLoaderWindows();

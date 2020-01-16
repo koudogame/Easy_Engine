@@ -26,14 +26,14 @@ TextureLoaderWindows::~TextureLoaderWindows()
 }
 
 // テクスチャリソースの読み込み
-bool TextureLoaderWindows::load( const wchar_t* Path, ITexture** ppTexture )
+bool TextureLoaderWindows::load( const std::wstring& Path, ITexture** ppTexture )
 {
     using namespace DirectX;
 
     // ファイルからデータを読み込む
     TexMetadata mdata;
     ScratchImage image;
-    if( FAILED(LoadFromWICFile(Path, 0, &mdata, image)) )
+    if( FAILED(LoadFromWICFile(Path.c_str(), 0, &mdata, image)) )
         return false;
 
     // シェーダーリソースビューを作成

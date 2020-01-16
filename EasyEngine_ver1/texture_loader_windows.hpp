@@ -22,7 +22,7 @@ public :
         
 // ITextureLoader
 /*-----------------------------------------------------------------*/
-    bool load( const wchar_t*, ITexture** ) override;
+    bool load( const std::wstring&, ITexture** ) override;
 
 private :
     ~TextureLoaderWindows();

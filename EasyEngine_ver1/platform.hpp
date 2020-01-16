@@ -7,13 +7,11 @@
 #ifndef INCLUDED_EGEG_PLATFORM_HEADER_
 #define INCLUDED_EGEG_PLATFORM_HEADER_
 #include <functional>
-#include "shared_object.hpp"
 #include "renderer.hpp"
 #include "shader_loader.hpp"
 #include "texture_loader.hpp"
 BEGIN_EGEG
-class IPlatform :
-    public SharedObject
+class IPlatform
 {
 public :
     ///
@@ -31,29 +29,34 @@ public :
     ///
     /// @param[in] Message : ダイアログボックスに表示する文字列
     ///
-    virtual void showDialogBox( const wchar_t* Message ) = 0;
+    virtual void showDialogBox( const std::string& Message ) = 0;
 
     ///
-    /// @brief   レンダラーの取得
+    /// @brief   レンダラーの生成
     ///
-    /// @return  レンダラーのアドレス
+    /// @param[out] ppRenderer : 生成したレンダラーを格納するインターフェイス
     ///
-    virtual IRenderer* getRenderer() const = 0;
+    /// @return 生成に成功[ true ] 生成に失敗[ false ]
     ///
-    /// @brief   シェーダーローダーの取得
+    virtual bool createRenderer( IRenderer** ppRenderer ) = 0;
     ///
-    /// @return  シェーダーローダーのアドレス
+    /// @brief   シェーダーローダーの生成
+    ///    
+    /// @param[out] ppShaderLoader : 生成したシェーダーローダーを格納するインターフェイス
     ///
-    virtual IShaderLoader* getShaderLoader() const = 0;
+    /// @return 生成に成功[ true ] 生成に失敗[ false ]
     ///
-    /// @brief   テクスチャローダーの取得
+    virtual bool createShaderLoader( IShaderLoader** ppShaderLoader ) = 0;
     ///
-    /// @return  テクスチャローダーのアドレス
+    /// @brief   テクスチャローダーの生成
     ///
-    virtual ITextureLoader* getTextureLoader() const = 0;
+    /// @param[out] ppTextureLoader : 生成したテクスチャローダーを格納するインターフェイス
+    ///
+    /// @return 生成に成功[ true ] 生成に失敗[ false ]
+    ///
+    virtual bool createTextureLoader( ITextureLoader** ppTextureLoader ) = 0;
 
-protected :
-    virtual ~IPlatform() = 0 {}
+    virtual ~IPlatform() = default;
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_PLATFORM_HEADER_

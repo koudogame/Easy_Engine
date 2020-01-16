@@ -6,11 +6,10 @@
 ///
 #ifndef INCLUDED_EGEG_TEXTURE_LOADER_HEADER_
 #define INCLUDED_EGEG_TEXTURE_LOADER_HEADER_
-#include "shared_object.hpp"
+#include <string>
 #include "texture.hpp"
 BEGIN_EGEG
-class ITextureLoader :
-    public SharedObject
+class ITextureLoader
 {
 public :
     ///
@@ -21,10 +20,9 @@ public :
     ///
     /// @return ì«Ç›çûÇ›ê¨å˜[ true ] ì«Ç›çûÇ›é∏îs[ false ]
     ///
-    virtual bool load( const wchar_t* FilePath, ITexture** ppTexture ) = 0;
+    virtual bool load( const std::wstring& FilePath, ITexture** ppTexture ) = 0;
 
-protected :
-    virtual ~ITextureLoader() override = 0 {}
+    virtual ~ITextureLoader() = default;
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_TEXTURE_LOADER_HEADER_

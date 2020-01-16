@@ -10,7 +10,6 @@ ShaderManager* ShaderManager::instance_;
 ShaderManager::ShaderManager( IShaderLoader *pLoader ) :
     p_loader_( pLoader )
 {
-    p_loader_->addRef();
 }
 // デストラクタ
 ShaderManager::~ShaderManager()
@@ -36,11 +35,11 @@ ShaderManager::~ShaderManager()
         forcedRelease( ps );
     }
 
-    p_loader_->release();
+    delete p_loader_;
 }
 
 // 頂点シェーダの読み込み
-bool ShaderManager::loadVertexShader( const char* Path, IVertexShader** ppShader )
+bool ShaderManager::loadVertexShader( const std::string& Path, IVertexShader** ppShader )
 {
     // 読み込み
     if( p_loader_->loadVertexShader(Path, ppShader) == false )
@@ -70,7 +69,7 @@ void ShaderManager::releaseVertexShader( IVertexShader** ppShader )
 }
 
 // ジオメトリシェーダ―の読み込み
-bool ShaderManager::loadGeometryShader( const char* Path, IGeometryShader** ppShader )
+bool ShaderManager::loadGeometryShader( const std::string& Path, IGeometryShader** ppShader )
 {
     // 読み込み
     if( p_loader_->loadGeometryShader(Path, ppShader) == false )
@@ -100,7 +99,7 @@ void ShaderManager::releaseGeometryShader( IGeometryShader** ppShader )
 }
 
 // ピクセルシェーダ―の読み込み
-bool ShaderManager::loadPixelShader( const char* Path, IPixelShader** ppShader )
+bool ShaderManager::loadPixelShader( const std::string& Path, IPixelShader** ppShader )
 {
     // 読み込み
     if( p_loader_->loadPixelShader(Path, ppShader) == false )
@@ -130,17 +129,15 @@ void ShaderManager::releasePixelShader( IPixelShader** ppShader )
 }
 
 // 生成処理
-void ShaderManager::create( const EasyEngine* pCreator, IShaderLoader* pLoader )
+void ShaderManager::create( const EasyEngine& Creator, IShaderLoader* pLoader )
 {
-    pCreator->proof();
-
-    destroy( pCreator );
+    destroy( Creator );
     instance_ = new ShaderManager( pLoader );
 }
 // 破棄処理
-void ShaderManager::destroy( const EasyEngine* pDeleter )
+void ShaderManager::destroy( const EasyEngine& Deleter )
 {
-    pDeleter->proof();
+    Deleter.proof();
 
     if( instance_ )
     {

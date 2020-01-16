@@ -10,12 +10,11 @@ RenderingManager* RenderingManager::instance_;
 RenderingManager::RenderingManager( IRenderer* pRenderer ) :
     p_renderer_( pRenderer )
 {
-    p_renderer_->addRef();
 }
 // デストラクタ
 RenderingManager::~RenderingManager()
 {
-    p_renderer_->release();
+    delete p_renderer_;
 }
 
 // 描画開始
@@ -49,17 +48,15 @@ void RenderingManager::endRender()
 }
 
 // インスタンスの生成
-void RenderingManager::create( const EasyEngine* pCreator, IRenderer* pRenderer )
+void RenderingManager::create( const EasyEngine& Creator, IRenderer* pRenderer )
 {
-    pCreator->proof();
-
-    destroy( pCreator );
+    destroy( Creator );
     instance_ = new RenderingManager( pRenderer );
 }
 // インスタンスの破棄
-void RenderingManager::destroy( const EasyEngine* pDeleter )
+void RenderingManager::destroy( const EasyEngine& Deleter )
 {
-    pDeleter->proof();
+    Deleter.proof();
 
     if( instance_ )
     {

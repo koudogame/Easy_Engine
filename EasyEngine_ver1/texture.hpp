@@ -2,7 +2,7 @@
 /// @file   texture.hpp
 /// @author 板場
 ///
-/// @brief  テクスチャリソース
+/// @brief  テクスチャデータ
 ///
 #ifndef INCLUDED_EGEG_TEXTURE_HEADER_
 #define INCLUDED_EGEG_TEXTURE_HEADER_

@@ -9,6 +9,7 @@
 ///
 #ifndef INCLUDED_EGEG_SHADER_MANAGER_HEADER_
 #define INCLUDED_EGEG_SHADER_MANAGER_HEADER_
+#include <string>
 #include <unordered_set>
 #include "easy_engine.hpp"
 #include "shader_loader.hpp"
@@ -31,7 +32,7 @@ public :
     ///
     /// @return 読み込みに成功[ true ] 読み込みに失敗[ false ]
     ///
-    bool loadVertexShader( const char* FilePath, IVertexShader** ppVertexShader );
+    bool loadVertexShader( const std::string& FilePath, IVertexShader** ppVertexShader );
     ///
     /// @brief   頂点シェーダ―の開放
     /// @details 引数で受け取ったインターフェイスには、nullptrが代入されます。
@@ -48,7 +49,7 @@ public :
     ///
     /// @return 読み込みに成功[ true ] 読み込みに失敗[ false ]
     ///
-    bool loadGeometryShader( const char* FilePath, IGeometryShader** ppGeometryShader );
+    bool loadGeometryShader( const std::string& FilePath, IGeometryShader** ppGeometryShader );
     ///
     /// @brief   ジオメトリシェーダーの開放
     /// @details 引数で受け取ったインターフェイスには、nullptrが代入されます。
@@ -65,7 +66,7 @@ public :
     ///
     /// @return 読み込みに成功[ true ] 読み込みに失敗[ false ]
     ///
-    bool loadPixelShader( const char* FilePath, IPixelShader** ppPixelShader );
+    bool loadPixelShader( const std::string& FilePath, IPixelShader** ppPixelShader );
     ///
     /// @brief   ピクセルシェーダ―の開放
     /// @details 引数で受け取ったインターフェイスには、nullptrが代入されます。
@@ -77,16 +78,16 @@ public :
     ///
     /// @brief  インスタンスの生成
     ///
-    /// @param[in] pCreator : 生成者
+    /// @param[in] Creator : 生成者
     /// @param[in] pShaderLoader : 使用するシェーダーローダー
     ///
-    static void create( const EasyEngine* pCreator, IShaderLoader* pShaderLoader );
+    static void create( const EasyEngine& Creator, IShaderLoader* pShaderLoader );
     ///
     /// @brief  インスタンスの破棄
     ///
-    /// @param[in] pDeleter : 破棄者
+    /// @param[in] Deleter : 破棄者
     ///
-    static void destroy( const EasyEngine* pDeleter );
+    static void destroy( const EasyEngine& Deleter );
     ~ShaderManager();
 
     ShaderManager( const ShaderManager& ) = delete;

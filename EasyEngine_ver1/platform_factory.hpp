@@ -25,7 +25,7 @@ public :
     ///
     /// @return 生成に成功[ true ] 生成に失敗[ false ]
     ///
-    bool create( const char* Platform, IPlatform** ppPlatform );
+    bool create( const std::string& Platform, IPlatform** ppPlatform );
 
     ///
     /// @brief   プラットフォームの登録
@@ -34,20 +34,20 @@ public :
     /// @param[in] PlatformName : 関数が生成するプラットフォームの名前
     /// @param[in] pCreateFunction : プラットフォームを生成する関数のアドレス
     ///
-    void registerPlatform( const char* PlatformName, IPlatform*(*pCreateFunction)() );
+    void registerPlatform( const std::string& PlatformName, IPlatform*(*pCreateFunction)() );
 
     PlatformFactory( const PlatformFactory& ) = delete;
     PlatformFactory& operator=( const PlatformFactory& ) = delete;
 private :
     PlatformFactory() = default;
-    std::unordered_map<const char*, IPlatform*(*)()> create_funcs_; /// 生成処理リスト
+    std::unordered_map<std::string, IPlatform*(*)()> create_funcs_; /// 生成処理リスト
 };
 
 
 class REGISTER_PLATFORM
 {
 public :
-    REGISTER_PLATFORM( const char* Name, IPlatform*(*pFunc)() )
+    REGISTER_PLATFORM( const std::string& Name, IPlatform*(*pFunc)() )
     {
         PlatformFactory::instance()->registerPlatform( Name, pFunc );
     }

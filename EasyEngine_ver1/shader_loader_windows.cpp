@@ -7,7 +7,7 @@
 
 namespace
 {
-    size_t loadBinary( const char*, char* );
+    size_t loadBinary( const std::string&, char* );
 } // !unnamed namespace 
 
 BEGIN_EGEG
@@ -26,7 +26,7 @@ ShaderLoaderWindows::~ShaderLoaderWindows()
 }
 
 // 頂点シェーダ―の読み込み
-bool ShaderLoaderWindows::loadVertexShader( const char* Path, IVertexShader** ppShader )
+bool ShaderLoaderWindows::loadVertexShader( const std::string& Path, IVertexShader** ppShader )
 {
     ID3D11VertexShader* created_vs;
     char* blob = nullptr;
@@ -45,7 +45,7 @@ bool ShaderLoaderWindows::loadVertexShader( const char* Path, IVertexShader** pp
 }
 
 // ジオメトリシェーダーの読み込み
-bool ShaderLoaderWindows::loadGeometryShader( const char* Path, IGeometryShader** ppShader )
+bool ShaderLoaderWindows::loadGeometryShader( const std::string& Path, IGeometryShader** ppShader )
 {
     ID3D11GeometryShader* created_gs;
     char* blob = nullptr;
@@ -64,7 +64,7 @@ bool ShaderLoaderWindows::loadGeometryShader( const char* Path, IGeometryShader*
 }
 
 // ピクセルシェーダーの読み込み
-bool ShaderLoaderWindows::loadPixelShader( const char* Path, IPixelShader** ppShader )
+bool ShaderLoaderWindows::loadPixelShader( const std::string& Path, IPixelShader** ppShader )
 {
     ID3D11PixelShader* created_ps;
     char* blob = nullptr;
@@ -92,7 +92,7 @@ namespace
     // out Buffer : 読み込んだデータを格納するバッファ(確保前)
     //
     // return 読み込んだファイルのサイズ
-    size_t loadBinary( const char* FilePath, char* Buffer )
+    size_t loadBinary( const std::string& FilePath, char* Buffer )
     {
         // ファイルオープン
         std::fstream stream( FilePath, std::ios::binary | std::ios::in );

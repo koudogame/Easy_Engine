@@ -1,6 +1,7 @@
 // 作成者 : 板場
 #include "easy_engine.hpp"
 #include "platform_factory.hpp"
+#include "system_manager.hpp"
 #include "rendering_manager.hpp"
 #include "shader_manager.hpp"
 #include "texture_manager.hpp"
@@ -13,31 +14,32 @@ int EasyEngine::create_cnt_;
 // EasyEngine : 関数の実装
 /*===========================================================================*/
 // 実行
-void EasyEngine::run( const char* Platform )
+void EasyEngine::run( const std::string& Platform )
 {
-    // エンジンの初期化
+    // 各種インターフェイスの生成
     IPlatform* p_platform;
     if( PlatformFactory::instance()->create(Platform, &p_platform) == false )
         return;
-    IRenderer* p_renderer = p_platform->getRenderer();
-    IShaderLoader* p_shader_loader = p_platform->getShaderLoader();
-    ITextureLoader* p_texture_loader = p_platform->getTextureLoader();
+    IRenderer* p_renderer;
+    if( p_platform->createRenderer(&p_renderer) == false ) return;
+    IShaderLoader* p_shader_loader;
+    if( p_platform->createShaderLoader(&p_shader_loader) == false ) return;
+    ITextureLoader* p_texture_loader;
+    if( p_platform->createTextureLoader(&p_texture_loader) == false ) return;
 
-    RenderingManager::create( this, p_renderer );
-    p_renderer->release();
-    ShaderManager::create( this, p_shader_loader );
-    p_shader_loader->release();
-    TextureManager::create( this, p_texture_loader );
-    p_texture_loader->release();
+    // インターフェイスの管理をマネージャーに委託
+    SystemManager::create( *this, p_platform );
+    RenderingManager::create( *this, p_renderer );
+    ShaderManager::create( *this, p_shader_loader );
+    TextureManager::create( *this, p_texture_loader );
 
     // ゲーム実行
 
-    // エンジン終了
-    TextureManager::destroy( this );
-    ShaderManager::destroy( this );
-    RenderingManager::destroy( this );
-
-    p_platform->release();
+    // マネージャーを破棄
+    TextureManager::destroy( *this );
+    ShaderManager::destroy( *this );
+    RenderingManager::destroy( *this );
+    SystemManager::destroy( *this );
 }
 END_EGEG
 // EOF

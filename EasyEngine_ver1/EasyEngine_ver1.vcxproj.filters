@@ -21,14 +21,14 @@
     <Filter Include="EasyEngine\99_System\Windows">
       <UniqueIdentifier>{020c3a86-e112-43b7-b8dc-8e556c3ee71a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EasyEngine\0_Tools\Manager">
+      <UniqueIdentifier>{b1178e1a-103c-4fa8-ac3a-002a65bf44b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\0_Tools\Component">
+      <UniqueIdentifier>{1f3f77b6-1162-43da-9e81-49e60ef386d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="shader_manager.hpp">
-      <Filter>EasyEngine\0_Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="texture_manager.hpp">
-      <Filter>EasyEngine\0_Tools</Filter>
-    </ClInclude>
     <ClInclude Include="easy_engine.hpp">
       <Filter>EasyEngine\1_Core</Filter>
     </ClInclude>
@@ -74,9 +74,6 @@
     <ClInclude Include="platform_factory.hpp">
       <Filter>EasyEngine\1_Core</Filter>
     </ClInclude>
-    <ClInclude Include="rendering_manager.hpp">
-      <Filter>EasyEngine\0_Tools</Filter>
-    </ClInclude>
     <ClInclude Include="vertex_index.hpp">
       <Filter>EasyEngine\1_Core</Filter>
     </ClInclude>
@@ -110,22 +107,40 @@
     <ClInclude Include="game.hpp">
       <Filter>EasyEngine\0_Tools</Filter>
     </ClInclude>
+    <ClInclude Include="texture_manager.hpp">
+      <Filter>EasyEngine\0_Tools\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="system_manager.hpp">
+      <Filter>EasyEngine\0_Tools\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_manager.hpp">
+      <Filter>EasyEngine\0_Tools\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering_manager.hpp">
+      <Filter>EasyEngine\0_Tools\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="sound_loader.hpp">
+      <Filter>EasyEngine\1_Core</Filter>
+    </ClInclude>
+    <ClInclude Include="sound.hpp">
+      <Filter>EasyEngine\1_Core</Filter>
+    </ClInclude>
+    <ClInclude Include="sound_manager.hpp">
+      <Filter>EasyEngine\0_Tools\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="game_object.hpp">
+      <Filter>EasyEngine\0_Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="component.hpp">
+      <Filter>EasyEngine\0_Tools\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="shader_manager.cpp">
-      <Filter>EasyEngine\0_Tools</Filter>
-    </ClCompile>
-    <ClCompile Include="texture_manager.cpp">
-      <Filter>EasyEngine\0_Tools</Filter>
-    </ClCompile>
     <ClCompile Include="easy_engine.cpp">
       <Filter>EasyEngine\1_Core</Filter>
     </ClCompile>
     <ClCompile Include="platform_factory.cpp">
       <Filter>EasyEngine\1_Core</Filter>
-    </ClCompile>
-    <ClCompile Include="rendering_manager.cpp">
-      <Filter>EasyEngine\0_Tools</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>EasyEngine\99_System</Filter>
@@ -141,6 +156,21 @@
     </ClCompile>
     <ClCompile Include="texture_loader_windows.cpp">
       <Filter>EasyEngine\99_System\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="texture_manager.cpp">
+      <Filter>EasyEngine\0_Tools\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_manager.cpp">
+      <Filter>EasyEngine\0_Tools\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="rendering_manager.cpp">
+      <Filter>EasyEngine\0_Tools\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="system_manager.cpp">
+      <Filter>EasyEngine\0_Tools\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="sound_manager.cpp">
+      <Filter>EasyEngine\0_Tools\Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

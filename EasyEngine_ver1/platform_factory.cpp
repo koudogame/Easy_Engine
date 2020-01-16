@@ -8,7 +8,7 @@ BEGIN_EGEG
 // PlatformFactory : 関数の実装
 /*===========================================================================*/
 // プラットフォームの生成
-bool PlatformFactory::create( const char* Name, IPlatform** ppPlatform )
+bool PlatformFactory::create( const std::string& Name, IPlatform** ppPlatform )
 {
     auto find = create_funcs_.find( Name );
 #ifdef _DEBUG
@@ -23,7 +23,7 @@ bool PlatformFactory::create( const char* Name, IPlatform** ppPlatform )
 }
 
 // プラットフォームの登録
-void PlatformFactory::registerPlatform( const char* Name, IPlatform*(*pFunc)() )
+void PlatformFactory::registerPlatform( const std::string& Name, IPlatform*(*pFunc)() )
 {
 #ifdef _DEBUG
     auto find = create_funcs_.find( Name );

@@ -6,11 +6,9 @@
 ///
 #ifndef INCLUDED_EGEG_RENDERER_HEADER_
 #define INCLUDED_EGEG_RENDERER_HEADER_
-#include "shared_object.hpp"
 #include "model.hpp"
 BEGIN_EGEG
-class IRenderer :
-    public SharedObject
+class IRenderer
 {
 public :
     ///
@@ -34,8 +32,7 @@ public :
     ///
     virtual void endRender() = 0;
 
-protected :
-    virtual ~IRenderer() = 0 {}
+    virtual ~IRenderer() = default;
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_RENDERER_HEADER_

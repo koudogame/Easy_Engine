@@ -8,6 +8,7 @@
 ///
 #ifndef INCLUDED_EGEG_EASY_ENGINE_HEADER_
 #define INCLUDED_EGEG_EASY_ENGINE_HEADER_
+#include <string>
 #ifdef _DEBUG
 #include <cassert>
 #endif /// !_DEBUG
@@ -28,7 +29,7 @@ public :
     ///
     /// @param[in] Platform : ゲームのプラットフォーム
     ///
-    void run( const char* Platform );
+    void run( const std::string& Platform );
 
     ///
     /// @brief   EasyEngine本体である証明

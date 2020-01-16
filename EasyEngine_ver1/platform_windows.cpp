@@ -45,9 +45,13 @@ BEGIN_EGEG
 // デストラクタ
 PlatformWindows::~PlatformWindows()
 {
-    if( texture_loader_ )   texture_loader_->release();
-    if( shader_loader_ )    shader_loader_->release();
-    if( renderer_)          renderer_->release();
+    // D3Dインターフェイス
+    p_swap_chain_->Release();
+    p_immediate_context_->Release();
+    p_device_->Release();
+
+    // COM
+    CoUninitialize();
 }
 
 // PlatformWindows生成
@@ -56,7 +60,7 @@ IPlatform* PlatformWindows::create()
     PlatformWindows* created = new PlatformWindows();
     if( created->initialize() == false )
     {
-        created->release();
+        delete created;
         return nullptr;
     }
 
@@ -98,13 +102,43 @@ void PlatformWindows::MainLoop( std::function<bool(long long)> pUpdateFunc )
 }
 
 // ダイアログボックスの表示
-void PlatformWindows::showDialogBox( const wchar_t* Message )
+void PlatformWindows::showDialogBox( const std::string& Message )
 {
     MessageBox(
         h_window_,
-        Message,
-        L"Error",
+        Message.c_str(),
+        "Error",
         MB_OK | MB_ICONERROR );
+}
+
+// レンダラーの生成
+bool PlatformWindows::createRenderer( IRenderer** ppRenderer )
+{
+    *ppRenderer = new RendererWindows( p_device_, p_immediate_context_, p_swap_chain_ );
+    if( static_cast<RendererWindows*>(*ppRenderer)->initialize() == false )
+    {
+        delete *ppRenderer;
+        *ppRenderer = nullptr;
+        return false;
+    }
+
+    return true;
+}
+
+// シェーダーローダーの生成
+bool PlatformWindows::createShaderLoader( IShaderLoader** ppShaderLoader )
+{
+    *ppShaderLoader = new ShaderLoaderWindows( p_device_ );
+
+    return true;
+}
+
+// テクスチャローダーの生成
+bool PlatformWindows::createTextureLoader( ITextureLoader** ppTextureLoader )
+{
+    *ppTextureLoader = new TextureLoaderWindows( p_device_ );
+
+    return true;
 }
 
 // 初期化
@@ -113,7 +147,10 @@ void PlatformWindows::showDialogBox( const wchar_t* Message )
 // return : 成功[ true ] 失敗[ false ]
 bool PlatformWindows::initialize()
 {
-    // プラットフォームの初期化
+    // COM
+    if( FAILED(CoInitializeEx(nullptr, COINIT_MULTITHREADED)) ) return false;
+
+    // Windowsの初期化
     RECT region = ::kWindowRegionRect;
     AdjustWindowRectEx( &region, ::kWindowStyle, false, ::kWindowStyleEx );
     long window_width = region.right - region.left;
@@ -122,36 +159,11 @@ bool PlatformWindows::initialize()
         return false;
     ShowWindow( h_window_, SW_NORMAL );
 
+    // Direct3Dの初期化
     DXGI_SWAP_CHAIN_DESC sc_desc = {};
-    ::setSwapChainDesc( &sc_desc, h_window_, (UINT)window_width, (UINT)window_height );
-    ID3D11Device* p_device;
-    ID3D11DeviceContext* p_immediate_context;
-    IDXGISwapChain* p_swap_chain;
-    if( FAILED(::createD3DDevice( &sc_desc, &p_device, &p_immediate_context, &p_swap_chain, &feature_level_)) )
+    ::setSwapChainDesc( &sc_desc, h_window_, (UINT)::kWindowRegionWidth, (UINT)::kWindowRegionHeight );
+    if( FAILED(::createD3DDevice( &sc_desc, &p_device_, &p_immediate_context_, &p_swap_chain_, &feature_level_)) )
         return false;
-
-    // レンダラーの生成
-    renderer_ = new RendererWindows( p_device, p_immediate_context, p_swap_chain );
-    if( static_cast<RendererWindows*>(renderer_)->initialize() == false )
-    {
-        p_swap_chain->Release();
-        p_immediate_context->Release();
-        p_device->Release();
-        renderer_->release();
-        return false;
-    }
-
-    // シェーダーローダーの生成
-    shader_loader_ = new ShaderLoaderWindows( p_device );
-
-    // テクスチャローダーの生成
-    texture_loader_ = new TextureLoaderWindows( p_device );
-
-
-    // 不要になったインターフェイスを開放
-    p_swap_chain->Release();
-    p_immediate_context->Release();
-    p_device->Release();
 
     return true;
 }
@@ -165,7 +177,7 @@ namespace
     // in Height : ウィンドウの高さ
     // out pHWnd : 生成したウィンドウのハンドルを格納する変数のアドレス
     //
-    // return true  : 生成志向
+    // return true  : 生成成功
     // return false : 生成失敗
     bool createWindow( int Width, int Height, HWND* pHWnd )
     {
@@ -174,7 +186,7 @@ namespace
         wnd.cbSize = sizeof(WNDCLASSEX);
         wnd.style = CS_VREDRAW;
         wnd.hInstance = GetModuleHandle(nullptr);
-        wnd.lpszClassName = L"Game_Abyabyabyabyabya";
+        wnd.lpszClassName = "Game_Abyabyabyabyabya";
         wnd.hCursor = LoadCursor(nullptr, IDC_ARROW);
         wnd.hbrBackground = reinterpret_cast<HBRUSH>(COLOR_WINDOW + 1);
         wnd.lpfnWndProc = WinProc;
@@ -184,7 +196,7 @@ namespace
         *pHWnd = CreateWindowEx(
             ::kWindowStyleEx,
             wnd.lpszClassName,
-            L"EasyEngine",
+            "EasyEngine",
             ::kWindowStyle,
             CW_USEDEFAULT,
             CW_USEDEFAULT,

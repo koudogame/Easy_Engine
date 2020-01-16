@@ -30,14 +30,14 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -143,10 +143,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="component.hpp" />
     <ClInclude Include="easy_engine.hpp" />
     <ClInclude Include="egeg_common.hpp" />
     <ClInclude Include="egeg_math.hpp" />
     <ClInclude Include="game.hpp" />
+    <ClInclude Include="game_object.hpp" />
     <ClInclude Include="geometry_shader.hpp" />
     <ClInclude Include="geometry_shader_windows.hpp" />
     <ClInclude Include="pixel_shader_windows.hpp" />
@@ -163,6 +165,10 @@
     <ClInclude Include="rendering_manager.hpp" />
     <ClInclude Include="shader_loader.hpp" />
     <ClInclude Include="shader_manager.hpp" />
+    <ClInclude Include="sound.hpp" />
+    <ClInclude Include="sound_loader.hpp" />
+    <ClInclude Include="sound_manager.hpp" />
+    <ClInclude Include="system_manager.hpp" />
     <ClInclude Include="texture.hpp" />
     <ClInclude Include="texture_loader.hpp" />
     <ClInclude Include="texture_loader_windows.hpp" />
@@ -182,6 +188,8 @@
     <ClCompile Include="rendering_manager.cpp" />
     <ClCompile Include="shader_loader_windows.cpp" />
     <ClCompile Include="shader_manager.cpp" />
+    <ClCompile Include="sound_manager.cpp" />
+    <ClCompile Include="system_manager.cpp" />
     <ClCompile Include="texture_loader_windows.cpp" />
     <ClCompile Include="texture_manager.cpp" />
   </ItemGroup>

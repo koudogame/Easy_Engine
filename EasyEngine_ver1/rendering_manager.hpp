@@ -3,7 +3,7 @@
 /// @author  板場
 ///          
 /// @brief   レンダリングマネージャ－
-/// @details シングルトンクラスです。アクセスにはinstance関数を使用して下さい。<br>
+/// @details シングルトンクラスです。アクセスにはinstance関数を使用して下さい。
 ///
 #ifndef INCLUDED_EGEG_RENDERING_MANAGER_HEADER_
 #define INCLUDED_EGEG_RENDERING_MANAGER_HEADER_
@@ -56,22 +56,22 @@ public :
     ///
     /// @brief  インスタンスの生成
     ///
-    /// @param[in] pCreator : 生成者
+    /// @param[in] Creator : 生成者
     /// @param[in] pRenderer : 使用するレンダラー
     ///
-    static void create( const EasyEngine* pCreator, IRenderer* pRenderer );
+    static void create( const EasyEngine& Creator, IRenderer* pRenderer );
     ///
     /// @brief  インスタンスの破棄
     ///
-    /// @param[in] pDeleter : 破棄者
+    /// @param[in] Deleter : 破棄者
     ///
-    static void destroy( const EasyEngine* pDeleter );
-    ~RenderingManager();
+    static void destroy( const EasyEngine& Deleter );
 
     RenderingManager( const RenderingManager& ) = delete;
     RenderingManager& operator=( const RenderingManager& ) = delete;
 private :
     RenderingManager( IRenderer* );
+    ~RenderingManager();
     static RenderingManager* instance_;
     IRenderer* p_renderer_;
 };

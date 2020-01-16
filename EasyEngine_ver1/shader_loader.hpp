@@ -6,13 +6,12 @@
 ///
 #ifndef INCLUDED_EGEG_SHADER_LOADER_
 #define INCLUDED_EGEG_SHADER_LOADER_
-#include "shared_object.hpp"
+#include <string>
 #include "vertex_shader.hpp"
 #include "geometry_shader.hpp"
 #include "pixel_shader.hpp"
 BEGIN_EGEG
-class IShaderLoader :
-    public SharedObject
+class IShaderLoader
 {
 public :
     ///
@@ -23,7 +22,7 @@ public :
     ///
     /// @return 読み込みに成功[ true ] 読み込みに失敗[ false ]
     ///
-    virtual bool loadVertexShader( const char* FilePath, IVertexShader** ppVertexShader ) = 0;
+    virtual bool loadVertexShader( const std::string& FilePath, IVertexShader** ppVertexShader ) = 0;
 
     ///
     /// @brief  ジオメトリシェーダ―の読み込み
@@ -33,7 +32,7 @@ public :
     ///
     /// @return 読み込みに成功[ true ] 読み込みに失敗[ false ]
     ///
-    virtual bool loadGeometryShader( const char* FilePath, IGeometryShader** ppGeometryShader ) = 0;
+    virtual bool loadGeometryShader( const std::string& FilePath, IGeometryShader** ppGeometryShader ) = 0;
 
     ///
     /// @brief  ピクセルシェーダ―の読み込み
@@ -43,10 +42,9 @@ public :
     ///
     /// @return 読み込みに成功[ true ] 読み込みに失敗[ false ]
     ///
-    virtual bool loadPixelShader( const char* FilePath, IPixelShader** ppPixelShader ) = 0;
+    virtual bool loadPixelShader( const std::string& FilePath, IPixelShader** ppPixelShader ) = 0;
 
-protected :
-    virtual ~IShaderLoader() = 0 {}
+    virtual ~IShaderLoader() = default;
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_SHADER_LOADER_

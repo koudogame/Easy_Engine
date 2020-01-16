@@ -25,10 +25,10 @@ public :
 // IPlatform
 /*-----------------------------------------------------------------*/
     void MainLoop( std::function<bool(long long)> ) override;
-    void showDialogBox( const wchar_t* ) override;
-    IRenderer* getRenderer() const override { return renderer_; }
-    IShaderLoader* getShaderLoader() const override { return shader_loader_; }
-    ITextureLoader* getTextureLoader() const override { return texture_loader_; }
+    void showDialogBox( const std::string& ) override;
+    bool createRenderer( IRenderer** ) override;
+    bool createShaderLoader( IShaderLoader** ) override;
+    bool createTextureLoader( ITextureLoader** ) override;
 
 private :
     ~PlatformWindows();
@@ -36,9 +36,9 @@ private :
 
     HWND h_window_;                             /// ウィンドウハンドル
     D3D_FEATURE_LEVEL feature_level_;           /// 採用されたDirectX機能レベル
-    IRenderer* renderer_ = nullptr;             /// レンダラー
-    IShaderLoader* shader_loader_ = nullptr;    /// シェーダーローダー
-    ITextureLoader* texture_loader_ = nullptr;  /// テクスチャローダー
+    ID3D11Device* p_device_;                    /// D3Dデバイス
+    ID3D11DeviceContext* p_immediate_context_;  /// D3Dデバイスコンテキスト
+    IDXGISwapChain* p_swap_chain_;              /// DXGIスワップチェイン
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_PLATFORM_WINDOWS_HEADER_

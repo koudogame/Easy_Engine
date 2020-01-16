@@ -11,7 +11,6 @@ TextureManager* TextureManager::instance_;
 TextureManager::TextureManager( ITextureLoader* pLoader ) :
     p_loader_( pLoader )
 {
-    p_loader_->addRef();
 }
 // デストラクタ
 TextureManager::~TextureManager()
@@ -25,11 +24,11 @@ TextureManager::~TextureManager()
         }
     }
 
-    p_loader_->release();
+    delete p_loader_;
 }
 
 // 読み込み
-bool TextureManager::load( const wchar_t* Path, ITexture** ppTexture )
+bool TextureManager::load( const std::wstring& Path, ITexture** ppTexture )
 {
     auto find = cache_.find( Path );
     
@@ -76,17 +75,15 @@ void TextureManager::release( ITexture** ppTexture )
 }
 
 // 生成処理
-void TextureManager::create( const EasyEngine* pCreator, ITextureLoader* pLoader )
+void TextureManager::create( const EasyEngine& Creator, ITextureLoader* pLoader )
 {
-    pCreator->proof();
-
-    destroy( pCreator );
+    destroy( Creator );
     instance_ = new TextureManager( pLoader );
 }
 // 破棄処理
-void TextureManager::destroy( const EasyEngine* pDeleter )
+void TextureManager::destroy( const EasyEngine& Deleter )
 {
-    pDeleter->proof();
+    Deleter.proof();
 
     if( instance_ )
     {
