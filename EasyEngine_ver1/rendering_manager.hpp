@@ -67,13 +67,14 @@ public :
     ///
     static void destroy( const EasyEngine& Deleter );
 
-    RenderingManager( const RenderingManager& ) = delete;
-    RenderingManager& operator=( const RenderingManager& ) = delete;
 private :
     RenderingManager( IRenderer* );
     ~RenderingManager();
+    RenderingManager( const RenderingManager& ) = delete;
+    RenderingManager& operator=( const RenderingManager& ) = delete;
+
     static RenderingManager* instance_;
-    IRenderer* p_renderer_;
+    IRenderer* p_renderer_;     /// 使用するレンダラー
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_RENDERING_MANAGER_HEADER_

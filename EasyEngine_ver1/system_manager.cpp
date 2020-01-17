@@ -4,7 +4,7 @@
 BEGIN_EGEG
 SystemManager* SystemManager::instance_;
 
-// SystemManager : 関数の実装
+// SystemManager
 /*===========================================================================*/
 // コンストラクタ
 SystemManager::SystemManager( IPlatform* pPlatform ) :

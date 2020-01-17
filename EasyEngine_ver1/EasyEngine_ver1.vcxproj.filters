@@ -21,11 +21,14 @@
     <Filter Include="EasyEngine\99_System\Windows">
       <UniqueIdentifier>{020c3a86-e112-43b7-b8dc-8e556c3ee71a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EasyEngine\0_Tools\Manager">
-      <UniqueIdentifier>{b1178e1a-103c-4fa8-ac3a-002a65bf44b6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="EasyEngine\0_Tools\Component">
       <UniqueIdentifier>{1f3f77b6-1162-43da-9e81-49e60ef386d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\1_Core\CoreManager">
+      <UniqueIdentifier>{b1178e1a-103c-4fa8-ac3a-002a65bf44b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\0_Tools\TaskSystem">
+      <UniqueIdentifier>{be12d235-976b-4ac5-b292-a7f56e27c521}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -108,16 +111,16 @@
       <Filter>EasyEngine\0_Tools</Filter>
     </ClInclude>
     <ClInclude Include="texture_manager.hpp">
-      <Filter>EasyEngine\0_Tools\Manager</Filter>
+      <Filter>EasyEngine\1_Core\CoreManager</Filter>
     </ClInclude>
     <ClInclude Include="system_manager.hpp">
-      <Filter>EasyEngine\0_Tools\Manager</Filter>
+      <Filter>EasyEngine\1_Core\CoreManager</Filter>
     </ClInclude>
     <ClInclude Include="shader_manager.hpp">
-      <Filter>EasyEngine\0_Tools\Manager</Filter>
+      <Filter>EasyEngine\1_Core\CoreManager</Filter>
     </ClInclude>
     <ClInclude Include="rendering_manager.hpp">
-      <Filter>EasyEngine\0_Tools\Manager</Filter>
+      <Filter>EasyEngine\1_Core\CoreManager</Filter>
     </ClInclude>
     <ClInclude Include="sound_loader.hpp">
       <Filter>EasyEngine\1_Core</Filter>
@@ -126,12 +129,27 @@
       <Filter>EasyEngine\1_Core</Filter>
     </ClInclude>
     <ClInclude Include="sound_manager.hpp">
-      <Filter>EasyEngine\0_Tools\Manager</Filter>
+      <Filter>EasyEngine\1_Core\CoreManager</Filter>
     </ClInclude>
     <ClInclude Include="game_object.hpp">
       <Filter>EasyEngine\0_Tools</Filter>
     </ClInclude>
     <ClInclude Include="component.hpp">
+      <Filter>EasyEngine\0_Tools\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="task.hpp">
+      <Filter>EasyEngine\0_Tools\TaskSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="task_manager.hpp">
+      <Filter>EasyEngine\0_Tools\TaskSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="task_priority.hpp">
+      <Filter>EasyEngine\0_Tools\TaskSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="task_container.hpp">
+      <Filter>EasyEngine\0_Tools\TaskSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="move2d_component.hpp">
       <Filter>EasyEngine\0_Tools\Component</Filter>
     </ClInclude>
   </ItemGroup>
@@ -158,19 +176,28 @@
       <Filter>EasyEngine\99_System\Windows</Filter>
     </ClCompile>
     <ClCompile Include="texture_manager.cpp">
-      <Filter>EasyEngine\0_Tools\Manager</Filter>
+      <Filter>EasyEngine\1_Core\CoreManager</Filter>
     </ClCompile>
     <ClCompile Include="shader_manager.cpp">
-      <Filter>EasyEngine\0_Tools\Manager</Filter>
+      <Filter>EasyEngine\1_Core\CoreManager</Filter>
     </ClCompile>
     <ClCompile Include="rendering_manager.cpp">
-      <Filter>EasyEngine\0_Tools\Manager</Filter>
+      <Filter>EasyEngine\1_Core\CoreManager</Filter>
     </ClCompile>
     <ClCompile Include="system_manager.cpp">
-      <Filter>EasyEngine\0_Tools\Manager</Filter>
+      <Filter>EasyEngine\1_Core\CoreManager</Filter>
     </ClCompile>
     <ClCompile Include="sound_manager.cpp">
-      <Filter>EasyEngine\0_Tools\Manager</Filter>
+      <Filter>EasyEngine\1_Core\CoreManager</Filter>
+    </ClCompile>
+    <ClCompile Include="task_manager.cpp">
+      <Filter>EasyEngine\0_Tools\TaskSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="task_container.cpp">
+      <Filter>EasyEngine\0_Tools\TaskSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="move2d_component.cpp">
+      <Filter>EasyEngine\0_Tools\Component</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

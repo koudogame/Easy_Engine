@@ -40,7 +40,7 @@ namespace
 } // !unnamed namespace
 
 BEGIN_EGEG
-// PlatformWindows : 関数の実装
+// PlatformWindows
 /*===========================================================================*/
 // デストラクタ
 PlatformWindows::~PlatformWindows()

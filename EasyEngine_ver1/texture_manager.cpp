@@ -5,7 +5,7 @@
 BEGIN_EGEG
 TextureManager* TextureManager::instance_;
 
-// TextureManager : 関数の実装
+// TextureManager
 /*===========================================================================*/
 // コンストラクタ
 TextureManager::TextureManager( ITextureLoader* pLoader ) :

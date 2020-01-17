@@ -151,6 +151,7 @@
     <ClInclude Include="game_object.hpp" />
     <ClInclude Include="geometry_shader.hpp" />
     <ClInclude Include="geometry_shader_windows.hpp" />
+    <ClInclude Include="move2d_component.hpp" />
     <ClInclude Include="pixel_shader_windows.hpp" />
     <ClInclude Include="shader_loader_windows.hpp" />
     <ClInclude Include="shared_object.hpp" />
@@ -169,6 +170,10 @@
     <ClInclude Include="sound_loader.hpp" />
     <ClInclude Include="sound_manager.hpp" />
     <ClInclude Include="system_manager.hpp" />
+    <ClInclude Include="task.hpp" />
+    <ClInclude Include="task_container.hpp" />
+    <ClInclude Include="task_manager.hpp" />
+    <ClInclude Include="task_priority.hpp" />
     <ClInclude Include="texture.hpp" />
     <ClInclude Include="texture_loader.hpp" />
     <ClInclude Include="texture_loader_windows.hpp" />
@@ -182,6 +187,7 @@
   <ItemGroup>
     <ClCompile Include="easy_engine.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="move2d_component.cpp" />
     <ClCompile Include="platform_factory.cpp" />
     <ClCompile Include="platform_windows.cpp" />
     <ClCompile Include="renderer_windows.cpp" />
@@ -190,6 +196,8 @@
     <ClCompile Include="shader_manager.cpp" />
     <ClCompile Include="sound_manager.cpp" />
     <ClCompile Include="system_manager.cpp" />
+    <ClCompile Include="task_container.cpp" />
+    <ClCompile Include="task_manager.cpp" />
     <ClCompile Include="texture_loader_windows.cpp" />
     <ClCompile Include="texture_manager.cpp" />
   </ItemGroup>

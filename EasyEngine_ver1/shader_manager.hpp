@@ -88,14 +88,15 @@ public :
     /// @param[in] Deleter : 破棄者
     ///
     static void destroy( const EasyEngine& Deleter );
-    ~ShaderManager();
 
-    ShaderManager( const ShaderManager& ) = delete;
-    ShaderManager& operator=( const ShaderManager& ) = delete;
 private :
     ShaderManager( IShaderLoader* );
+    ~ShaderManager();
+    ShaderManager( const ShaderManager& ) = delete;
+    ShaderManager& operator=( const ShaderManager& ) = delete;
+
     static ShaderManager* instance_;
-    IShaderLoader* p_loader_;
+    IShaderLoader* p_loader_;                       /// 使用するシェーダーローダー
     std::unordered_set<IVertexShader*> vs_list_;    /// このクラスを使用して生成された、頂点シェーダ―リスト
     std::unordered_set<IGeometryShader*> gs_list_;  /// このクラスを使用して生成された、ジオメトリシェーダリスト
     std::unordered_set<IPixelShader*> ps_list_;     /// このクラスを使用して生成された、ピクセルシェーダ―リスト

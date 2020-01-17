@@ -11,7 +11,7 @@ namespace
 } // !unnamed namespace 
 
 BEGIN_EGEG
-// ShaderLoaderWindows : 関数の実装
+// ShaderLoaderWindows
 /*===========================================================================*/
 // コンストラクタ
 ShaderLoaderWindows::ShaderLoaderWindows( ID3D11Device* pDevice ) :

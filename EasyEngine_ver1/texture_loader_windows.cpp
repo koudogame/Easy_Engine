@@ -10,7 +10,7 @@
 #endif // !_DEBUG
 
 BEGIN_EGEG
-// TextureLoaderWindows : 関数の実装
+// TextureLoaderWindows
 /*===========================================================================*/
 // コンストラクタ
 TextureLoaderWindows::TextureLoaderWindows( ID3D11Device* pDevice ) :

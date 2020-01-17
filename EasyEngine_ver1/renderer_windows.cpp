@@ -2,7 +2,7 @@
 #include "renderer_windows.hpp"
 
 BEGIN_EGEG
-// RendererWindows : 関数の実装
+// RendererWindows
 /*===========================================================================*/
 // コンストラクタ
 RendererWindows::RendererWindows( ID3D11Device* pDevice, ID3D11DeviceContext* pImmediateContext, IDXGISwapChain* pSwapChain ) :

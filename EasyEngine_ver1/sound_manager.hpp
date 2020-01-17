@@ -35,13 +35,14 @@ public :
     ///
     static void destroy( const EasyEngine& Deleter );
 
-    SoundManager( const SoundManager& ) = delete;
-    SoundManager& operator=( const SoundManager& ) = delete;
 private :
     SoundManager( ISoundLoader* );
     ~SoundManager();
+    SoundManager( const SoundManager& ) = delete;
+    SoundManager& operator=( const SoundManager& ) = delete;
     static SoundManager* instance_;
-    ISoundLoader* p_loader_;
+
+    ISoundLoader* p_loader_;    /// 使用するサウンドローダー
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_SOUND_MANAGER_HEADER_

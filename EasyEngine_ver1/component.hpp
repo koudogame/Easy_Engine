@@ -29,18 +29,11 @@ public :
     ///
     /// @return 初期化成功[ true ] 初期化失敗[ false ]
     ///
-    virtual bool initializ() = 0;
+    virtual bool initialize() = 0;
     ///
     /// @brief  終了
     ///
     virtual void finalize() = 0;
-
-    ///
-    /// @brief  更新
-    ///
-    /// @param[in] DeltaTimeMS : 前回呼び出し時との時間の差(: ミリ秒)
-    ///
-    virtual void update( long long DeltaTimeMS ) = 0;
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_COMPONENT_HEADER_

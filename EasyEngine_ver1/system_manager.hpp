@@ -41,13 +41,14 @@ public :
     ///
     static void destroy( const EasyEngine& Deleter );
 
-    SystemManager( const SystemManager& ) = delete;
-    SystemManager& operator=( const SystemManager& ) = delete;
 private :
     SystemManager( IPlatform* );
     ~SystemManager();
+    SystemManager( const SystemManager& ) = delete;
+    SystemManager& operator=( const SystemManager& ) = delete;
+
     static SystemManager* instance_;
-    IPlatform* p_platform_;
+    IPlatform* p_platform_;     /// 使用するプラットフォーム
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_SYSTEM_MANAGER_HEADER_

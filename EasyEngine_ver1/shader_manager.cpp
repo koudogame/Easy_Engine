@@ -4,7 +4,7 @@
 BEGIN_EGEG
 ShaderManager* ShaderManager::instance_;
 
-// ShaderManager : 関数の実装
+// ShaderManager
 /*===========================================================================*/
 // コンストラクタ
 ShaderManager::ShaderManager( IShaderLoader *pLoader ) :

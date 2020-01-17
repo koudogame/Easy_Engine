@@ -11,7 +11,7 @@ BEGIN_EGEG
 int EasyEngine::create_cnt_;
 #endif // !_DEBUG
 
-// EasyEngine : ŠÖ”‚ÌÀ‘•
+// EasyEngine
 /*===========================================================================*/
 // Às
 void EasyEngine::run( const std::string& Platform )

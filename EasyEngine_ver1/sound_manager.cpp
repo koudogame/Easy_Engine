@@ -4,7 +4,7 @@
 BEGIN_EGEG
 SoundManager* SoundManager::instance_;
 
-// SoundManager : 関数の実装
+// SoundManager
 /*===========================================================================*/
 // コンストラクタ
 SoundManager::SoundManager( ISoundLoader* pLoader ) :

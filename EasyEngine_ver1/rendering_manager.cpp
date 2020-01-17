@@ -4,7 +4,7 @@
 BEGIN_EGEG
 RenderingManager* RenderingManager::instance_;
 
-// RenderingManager : 関数の実装
+// RenderingManager
 /*===========================================================================*/
 // コンストラクタ
 RenderingManager::RenderingManager( IRenderer* pRenderer ) :

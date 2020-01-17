@@ -55,15 +55,16 @@ public :
     /// @param[in] Deleter : 破棄者
     ///
     static void destroy( const EasyEngine& Deleter );
-    ~TextureManager();
 
-    TextureManager( const TextureManager& ) = delete;
-    TextureManager& operator=( const TextureManager& ) = delete;
 private :
     TextureManager( ITextureLoader* );
+    ~TextureManager();
+    TextureManager( const TextureManager& ) = delete;
+    TextureManager& operator=( const TextureManager& ) = delete;
+
     static TextureManager* instance_;
-    ITextureLoader* p_loader_;
-    std::unordered_map<std::wstring, ITexture*> cache_;   /// テクスチャリソースのキャッシュ
+    ITextureLoader* p_loader_;                          /// 使用するテクスチャローダー
+    std::unordered_map<std::wstring, ITexture*> cache_; /// テクスチャのキャッシュ
 };
 END_EGEG
 #endif /// !INCLUDED_TEXTURE_MANAGER_HEADER_
