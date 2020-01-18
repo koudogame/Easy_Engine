@@ -25,7 +25,7 @@ public :
     /// @brief   変位の取得
     /// @details この関数を前回呼び出した時からの変位ベクトルを返却します。
     ///
-    /// @return 変位
+    /// @return  変位
     ///
     Vector2D getDisplacement();
 
@@ -66,7 +66,7 @@ private :
     float    angle_ = 0.0F;                 /// 角度( getAngle呼び出し時、毎回計算するのを防ぐ )
     Vector2D direction_ = { 0.0F, 0.0F };   /// 方向ベクトル( 正規化ベクトル )
     uint64_t erapsed_ = 0U;                 /// 経過時間( ms )
-    Task     task_;                         /// タスクマネージャー登録用タスク
+    Task     task_;                         /// タスクマネージャー登録用
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_MOVE2D_COMPONENT_HEADER_
