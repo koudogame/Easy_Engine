@@ -2,7 +2,7 @@
 /// @file   egeg_math.hpp
 /// @author 板場
 ///
-/// @brief  数学ライブラリ
+/// @brief  数学関係
 ///
 #ifndef INCLUDED_EGEG_MATH_HEADER_
 #define INCLUDED_EGEG_MATH_HEADER_

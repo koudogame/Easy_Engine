@@ -33,6 +33,12 @@
     <Filter Include="EasyEngine\0_Tools\Objects">
       <UniqueIdentifier>{37659fa4-9c74-45be-b365-d4e2d91c5748}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EasyEngine\0_Tools\Collision">
+      <UniqueIdentifier>{9fa345fd-8c90-4228-a3d0-38eb6b581081}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\0_Tools\Collision\Shape">
+      <UniqueIdentifier>{cd194608-16d3-4806-92fe-d7775a3a671a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="easy_engine.hpp">
@@ -154,6 +160,18 @@
     </ClInclude>
     <ClInclude Include="game_object.hpp">
       <Filter>EasyEngine\0_Tools\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="body_2d.hpp">
+      <Filter>EasyEngine\0_Tools\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="point_2d.hpp">
+      <Filter>EasyEngine\0_Tools\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="circle_2d.hpp">
+      <Filter>EasyEngine\0_Tools\Collision\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="line_2d.hpp">
+      <Filter>EasyEngine\0_Tools\Collision\Shape</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

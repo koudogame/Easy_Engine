@@ -143,6 +143,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="body_2d.hpp" />
+    <ClInclude Include="circle_2d.hpp" />
     <ClInclude Include="component.hpp" />
     <ClInclude Include="easy_engine.hpp" />
     <ClInclude Include="egeg_common.hpp" />
@@ -151,8 +153,10 @@
     <ClInclude Include="game_object.hpp" />
     <ClInclude Include="geometry_shader.hpp" />
     <ClInclude Include="geometry_shader_windows.hpp" />
+    <ClInclude Include="line_2d.hpp" />
     <ClInclude Include="move2d_component.hpp" />
     <ClInclude Include="pixel_shader_windows.hpp" />
+    <ClInclude Include="point_2d.hpp" />
     <ClInclude Include="shader_loader_windows.hpp" />
     <ClInclude Include="shared_object.hpp" />
     <ClInclude Include="mesh.hpp" />
