@@ -30,9 +30,9 @@ public :
     ///
     /// @brief  更新処理
     ///
-    /// @param[in] DeltaTime : 前回呼び出しからの経過時間(: ミリ秒)
+    /// @param[in] DeltaTimeMS : 前回呼び出しからの経過時間(: ミリ秒)
     ///
-    virtual void update( uint64_t DeltaTime ) = 0;
+    virtual void update( uint64_t DeltaTimeMS ) = 0;
 
     ///
     /// @brief   コンポーネントの追加
