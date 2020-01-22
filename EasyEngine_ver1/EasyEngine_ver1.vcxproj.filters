@@ -173,9 +173,6 @@
     <ClInclude Include="line_2d.hpp">
       <Filter>EasyEngine\0_Tools\Collision\Shape</Filter>
     </ClInclude>
-    <ClInclude Include="sprite.hpp">
-      <Filter>EasyEngine\0_Tools\Objects</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="easy_engine.cpp">

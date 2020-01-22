@@ -173,7 +173,6 @@
     <ClInclude Include="sound.hpp" />
     <ClInclude Include="sound_loader.hpp" />
     <ClInclude Include="sound_manager.hpp" />
-    <ClInclude Include="sprite.hpp" />
     <ClInclude Include="system_manager.hpp" />
     <ClInclude Include="task.hpp" />
     <ClInclude Include="task_container.hpp" />
