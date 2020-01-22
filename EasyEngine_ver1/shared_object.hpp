@@ -13,6 +13,9 @@ BEGIN_EGEG
 class SharedObject
 {
 public :
+    SharedObject( const SharedObject& ) { addRef(); }
+    SharedObject& operator=( const SharedObject& ) { addRef(); }
+
     void addRef() { ++ref_cnt_; }
     unsigned release()
     {

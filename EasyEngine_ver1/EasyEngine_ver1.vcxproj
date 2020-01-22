@@ -151,6 +151,7 @@
     <ClInclude Include="egeg_math.hpp" />
     <ClInclude Include="game.hpp" />
     <ClInclude Include="game_object.hpp" />
+    <ClInclude Include="game_object_2d.hpp" />
     <ClInclude Include="geometry_shader.hpp" />
     <ClInclude Include="geometry_shader_windows.hpp" />
     <ClInclude Include="line_2d.hpp" />

@@ -15,7 +15,7 @@ BEGIN_EGEG
 class GameObject
 {
 public :
-    virtual ~GameObject() = default;
+    virtual ~GameObject();
 
     ///
     /// @brief  初期化処理
@@ -45,6 +45,13 @@ public :
     template <typename Component>
     Component* addComponent();
     ///
+    /// @brief   コンポーネントの削除
+    ///
+    /// @tparam Component : 削除の対象となるコンポーネントの型
+    ///
+    template <typename Component>
+    void removeComponent();
+    ///
     /// @brief   コンポーネントの取得
     /// @details 対応するコンポーネントが無かった場合、nullptrを返却します。
     ///
@@ -59,6 +66,15 @@ protected :
     std::unordered_map<uint16_t, IComponent*> components_;  ///< 登録されているコンポーネント群
 };
 
+///< GameObject : デストラクタ
+GameObject::~GameObject()
+{
+    /// 解放されていないコンポーネントの解放
+    for( auto& component : components_ )
+    {
+        component.second->finalize();
+    }
+}
 
 ///< GameObject : コンポーネントの追加
 template <typename Component>
@@ -78,6 +94,19 @@ Component* GameObject::addComponent()
     components_.emplace( Component::getComponentID(), add );
 }
 
+///< GameObject : コンポーネントの削除
+template <typename Component>
+void GameObject::removeComponent()
+{
+    auto find = components_.find( Component::getComponentID() );
+    if( find != components_.end() )
+    {
+        find.second->finalize();
+        delete find->second;
+        components_.erase( find );
+    }
+}
+
 ///< GameObject : コンポーネントの取得
 template <typename Component>
 Component* GameObject::getComponent()
@@ -87,7 +116,7 @@ Component* GameObject::getComponent()
     ///< コンポーネントが登録されている
     if( find != components_.end() )
     {
-        return find->second;
+        return find.second;
     }
     ///< コンポーネントが登録されていない
     else
