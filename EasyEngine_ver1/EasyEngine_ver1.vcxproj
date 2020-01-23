@@ -146,6 +146,7 @@
     <ClInclude Include="body_2d.hpp" />
     <ClInclude Include="circle_2d.hpp" />
     <ClInclude Include="component.hpp" />
+    <ClInclude Include="component_id.hpp" />
     <ClInclude Include="easy_engine.hpp" />
     <ClInclude Include="egeg_common.hpp" />
     <ClInclude Include="egeg_math.hpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="move2d_component.hpp" />
     <ClInclude Include="pixel_shader_windows.hpp" />
     <ClInclude Include="point_2d.hpp" />
+    <ClInclude Include="render_component.hpp" />
     <ClInclude Include="shader_loader_windows.hpp" />
     <ClInclude Include="shared_object.hpp" />
     <ClInclude Include="mesh.hpp" />
@@ -174,6 +176,7 @@
     <ClInclude Include="sound.hpp" />
     <ClInclude Include="sound_loader.hpp" />
     <ClInclude Include="sound_manager.hpp" />
+    <ClInclude Include="sprite.hpp" />
     <ClInclude Include="system_manager.hpp" />
     <ClInclude Include="task.hpp" />
     <ClInclude Include="task_container.hpp" />

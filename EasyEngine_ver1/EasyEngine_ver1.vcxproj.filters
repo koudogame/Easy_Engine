@@ -176,6 +176,15 @@
     <ClInclude Include="game_object_2d.hpp">
       <Filter>EasyEngine\0_Tools\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="render_component.hpp">
+      <Filter>EasyEngine\0_Tools\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="component_id.hpp">
+      <Filter>EasyEngine\0_Tools\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite.hpp">
+      <Filter>EasyEngine\0_Tools\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="easy_engine.cpp">

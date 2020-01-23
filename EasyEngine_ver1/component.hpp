@@ -4,19 +4,17 @@
 ///          
 /// @brief   コンポーネント
 /// @details 各派生クラスは static uint16_t getComponentID() を実装してください。<br>
-///          GETCOMPONENTIDマクロを使用すると楽です。
+///          DECL_GETCOMPONENTIDマクロを使用すると楽です。
 ///
 #ifndef INCLUDED_EGEG_COMPONENT_HEADER_
 #define INCLUDED_EGEG_COMPONENT_HEADER_
 #include <cstdint>
 #include "egeg_common.hpp"
 ///
-/// @def    GETCOMPONENTID
+/// @def    DECL_GETCOMPONENTID
 /// @brief  IDの取得関数をinlineで定義します。
 ///
-/// @param[in] ID : 設定するID
-///
-#define GETCOMPONENTID( ID ) inline static uint16_t getComponentID() { return ID; }
+#define DECL_GETCOMPONENTID inline static uint16_t getComponentID()
 
 BEGIN_EGEG
 class IComponent
