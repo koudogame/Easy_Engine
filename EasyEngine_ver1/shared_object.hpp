@@ -13,6 +13,7 @@ BEGIN_EGEG
 class SharedObject
 {
 public :
+    SharedObject() = default;
     SharedObject( const SharedObject& ) { addRef(); }
     SharedObject& operator=( const SharedObject& ) { addRef(); }
 

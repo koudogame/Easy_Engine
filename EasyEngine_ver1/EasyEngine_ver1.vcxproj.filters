@@ -24,9 +24,6 @@
     <Filter Include="EasyEngine\1_Core\CoreManager">
       <UniqueIdentifier>{b1178e1a-103c-4fa8-ac3a-002a65bf44b6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EasyEngine\0_Tools\TaskSystem">
-      <UniqueIdentifier>{be12d235-976b-4ac5-b292-a7f56e27c521}</UniqueIdentifier>
-    </Filter>
     <Filter Include="EasyEngine\0_Tools\Components">
       <UniqueIdentifier>{1f3f77b6-1162-43da-9e81-49e60ef386d9}</UniqueIdentifier>
     </Filter>
@@ -38,6 +35,15 @@
     </Filter>
     <Filter Include="EasyEngine\0_Tools\Collision\Shape">
       <UniqueIdentifier>{cd194608-16d3-4806-92fe-d7775a3a671a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\0_Tools\RenderBatch">
+      <UniqueIdentifier>{bb4b4cd0-3386-4936-b132-2ee95935c297}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\0_Tools\JobScheduler">
+      <UniqueIdentifier>{be12d235-976b-4ac5-b292-a7f56e27c521}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\0_Tools\Components\RenderComponents">
+      <UniqueIdentifier>{6f76f598-1a6a-4f29-8e9c-a61275ccc3c9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -143,18 +149,6 @@
     <ClInclude Include="component.hpp">
       <Filter>EasyEngine\0_Tools\Components</Filter>
     </ClInclude>
-    <ClInclude Include="task.hpp">
-      <Filter>EasyEngine\0_Tools\TaskSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="task_manager.hpp">
-      <Filter>EasyEngine\0_Tools\TaskSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="task_priority.hpp">
-      <Filter>EasyEngine\0_Tools\TaskSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="task_container.hpp">
-      <Filter>EasyEngine\0_Tools\TaskSystem</Filter>
-    </ClInclude>
     <ClInclude Include="move2d_component.hpp">
       <Filter>EasyEngine\0_Tools\Components</Filter>
     </ClInclude>
@@ -176,14 +170,29 @@
     <ClInclude Include="game_object_2d.hpp">
       <Filter>EasyEngine\0_Tools\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="render_component.hpp">
-      <Filter>EasyEngine\0_Tools\Components</Filter>
-    </ClInclude>
     <ClInclude Include="component_id.hpp">
       <Filter>EasyEngine\0_Tools\Components</Filter>
     </ClInclude>
-    <ClInclude Include="sprite.hpp">
-      <Filter>EasyEngine\0_Tools\Components</Filter>
+    <ClInclude Include="render_batch.hpp">
+      <Filter>EasyEngine\0_Tools\RenderBatch</Filter>
+    </ClInclude>
+    <ClInclude Include="job.hpp">
+      <Filter>EasyEngine\0_Tools\JobScheduler</Filter>
+    </ClInclude>
+    <ClInclude Include="job_container.hpp">
+      <Filter>EasyEngine\0_Tools\JobScheduler</Filter>
+    </ClInclude>
+    <ClInclude Include="job_scheduler.hpp">
+      <Filter>EasyEngine\0_Tools\JobScheduler</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite_component.hpp">
+      <Filter>EasyEngine\0_Tools\Components\RenderComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="render_component.hpp">
+      <Filter>EasyEngine\0_Tools\Components\RenderComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="job_priority.hpp">
+      <Filter>EasyEngine\0_Tools\JobScheduler</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -223,14 +232,20 @@
     <ClCompile Include="sound_manager.cpp">
       <Filter>EasyEngine\1_Core\CoreManager</Filter>
     </ClCompile>
-    <ClCompile Include="task_manager.cpp">
-      <Filter>EasyEngine\0_Tools\TaskSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="task_container.cpp">
-      <Filter>EasyEngine\0_Tools\TaskSystem</Filter>
-    </ClCompile>
     <ClCompile Include="move2d_component.cpp">
       <Filter>EasyEngine\0_Tools\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="job_container.cpp">
+      <Filter>EasyEngine\0_Tools\JobScheduler</Filter>
+    </ClCompile>
+    <ClCompile Include="job_scheduler.cpp">
+      <Filter>EasyEngine\0_Tools\JobScheduler</Filter>
+    </ClCompile>
+    <ClCompile Include="render_batch.cpp">
+      <Filter>EasyEngine\0_Tools\RenderBatch</Filter>
+    </ClCompile>
+    <ClCompile Include="sprite_component.cpp">
+      <Filter>EasyEngine\0_Tools\Components\RenderComponents</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

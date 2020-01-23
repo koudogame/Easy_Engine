@@ -1,7 +1,7 @@
 // 作成者 : 板場
 #include "move2d_component.hpp"
-#include "task_manager.hpp"
-#include "task_priority.hpp"
+#include "job_scheduler.hpp"
+#include "job_priority.hpp"
 
 BEGIN_EGEG
 // Move2DComponent
@@ -9,9 +9,9 @@ BEGIN_EGEG
 // 初期化処理
 bool Move2DComponent::initialize()
 {
-    // タスクの登録
-    task_.setFunction( this, &Move2DComponent::update );
-    TaskManager::instance()->registerTask( TaskPriority::kMoveComponent, &task_ );
+    // ジョブの登録
+    job_.setFunction( this, &Move2DComponent::update );
+    JobScheduler::instance()->registerJob( JobPriority::kMoveComponent, &job_ );
 
     return true;
 }
@@ -19,8 +19,8 @@ bool Move2DComponent::initialize()
 // 終了処理
 void Move2DComponent::finalize()
 {
-    // タスクの登録を解除
-    TaskManager::instance()->unregisterTask( &task_ );
+    // ジョブの登録を解除
+    JobScheduler::instance()->unregisterJob( &job_ );
 }
 
 // 更新処理

@@ -8,7 +8,7 @@
 #define INCLUDED_EGEG_MOVE2D_COMPONENT_HEADER_
 #include "component.hpp"
 #include "egeg_math.hpp"
-#include "task.hpp"
+#include "job.hpp"
 BEGIN_EGEG
 class Move2DComponent :
     public IComponent
@@ -66,7 +66,7 @@ private :
     float    angle_ = 0.0F;                 /// 角度( getAngle呼び出し時、毎回計算するのを防ぐ )
     Vector2D direction_ = { 0.0F, 0.0F };   /// 方向ベクトル( 正規化ベクトル )
     uint64_t erapsed_ = 0U;                 /// 経過時間( ms )
-    Task     task_;                         /// タスクマネージャー登録用
+    Job      job_;                          /// ジョブ登録用
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_MOVE2D_COMPONENT_HEADER_
