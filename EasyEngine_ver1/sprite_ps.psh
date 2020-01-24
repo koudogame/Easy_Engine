@@ -1,0 +1,17 @@
+Texture2D cb_Texture : register(t0);
+SamplerState cb_SamplerState : register(s0);
+
+struct VS_OUTPUT
+{
+    float4 position : SV_POSITION;
+    float2 uv       : TEXCOORD;
+    float4 color    : COLOR;
+};
+
+float4 ps_main( VS_OUTPUT input ) : SV_TARGET
+{
+    float4 output = cb_Texture.Sample( cb_SamplerState, input.uv );
+    output += input.color;
+
+    return output;
+}

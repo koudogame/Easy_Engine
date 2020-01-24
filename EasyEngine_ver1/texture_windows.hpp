@@ -22,6 +22,17 @@ public :
         p_texture_( pTexture )
     {
         p_texture_->AddRef();
+
+        /// テクスチャサイズの取得
+        ID3D11Resource* resource;
+        p_texture_->GetResource( &resource );
+
+        D3D11_TEXTURE2D_DESC tex_desc;
+        static_cast<ID3D11Texture2D*>(resource)->GetDesc( &tex_desc );
+        width_ = tex_desc.Width;
+        height_ = tex_desc.Height;
+
+        resource->Release();
     }
 
     ///
@@ -31,12 +42,19 @@ public :
     ///
     ID3D11ShaderResourceView* getShaderResourceView() const { p_texture_->AddRef(); return p_texture_; }
 
+// ITexture
+/*-----------------------------------------------------------------*/
+    long getWidth()  const override { return width_; }
+    long getHeight() const override { return height_; }
+
 private :
     ~TextureWindows()
     {
         p_texture_->Release();
     }
     ID3D11ShaderResourceView* p_texture_;   /// シェーダーリソースビュー
+    long width_;
+    long height_;
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_TEXTURE_WINDOWS_HEADER_

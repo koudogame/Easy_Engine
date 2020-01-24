@@ -53,7 +53,7 @@ bool TextureManager::load( const std::wstring& Path, ITexture** ppTexture )
 }
 
 // ŠJ•ú
-void TextureManager::release( ITexture** ppTexture )
+void TextureManager::unload( ITexture** ppTexture )
 {
     // ‚±‚ÌŠJ•ú‚ÅŽQÆŽÒ‚ª‚¢‚È‚­‚È‚éê‡
     if( (*ppTexture)->getRefCount() == 1U )

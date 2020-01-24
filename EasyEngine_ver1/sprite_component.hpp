@@ -15,6 +15,8 @@ class SpriteComponent :
     public RenderComponent
 {
 public :
+    SpriteComponent();
+
     ///
     /// @brief  スプライト情報のセット
     ///
@@ -38,6 +40,13 @@ public :
                     float Alpha = 1.0F,
                     float Depth = 0.0F );
 
+    ///
+    /// @brief  描画を行うかどうかの設定
+    ///
+    /// @param[in] Visible : 描画する[ true ] 描画しない[ false ]
+    ///
+    void setVisible( bool Visible ) { visible_ = Visible; }
+
 // RenderComponent
 /*-----------------------------------------------------------------*/
     void render() override;
@@ -48,8 +57,9 @@ public :
     void finalize() override;
 
 private :
-    bool  visible_ = false;
-    Model sprite_;
+    bool  validity_ = false;    /// 有効状態か
+    bool  visible_ = false;     /// 可視状態か
+    Model sprite_;              /// モデル情報
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_SPRITE_HEADER_

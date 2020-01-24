@@ -39,7 +39,7 @@ public :
     ///
     /// @param[inout] ppVertexShader : 開放する頂点シェーダ―
     ///
-    void releaseVertexShader( IVertexShader** ppVertexShader );
+    void unloadVertexShader( IVertexShader** ppVertexShader );
 
     ///
     /// @brief  ジオメトリシェーダ―の読み込み
@@ -56,7 +56,7 @@ public :
     ///
     /// @param[inout] ppGeometryShader : 開放するジオメトリシェーダー
     ///
-    void releaseGeometryShader( IGeometryShader** ppGeometryShader );
+    void unloadGeometryShader( IGeometryShader** ppGeometryShader );
 
     ///
     /// @brief  ピクセルシェーダ―の読み込み
@@ -73,7 +73,7 @@ public :
     ///
     /// @param[inout] ppPixelShader : 開放するピクセルシェーダ―
     ///
-    void releasePixelShader( IPixelShader** ppPixelShader );
+    void unloadPixelShader( IPixelShader** ppPixelShader );
 
     ///
     /// @brief  インスタンスの生成

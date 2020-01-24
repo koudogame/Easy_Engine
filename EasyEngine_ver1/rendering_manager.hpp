@@ -21,6 +21,13 @@ public :
     static RenderingManager* instance() { return instance_; }
 
     ///
+    /// @brief  描画対象画面のサイズを取得
+    ///
+    /// @return サイズ
+    ///
+    Vector2D getScreenSize() const { return p_renderer_->getScreenSize(); }
+
+    ///
     /// @brief   描画開始
     /// @details 引数のカラー情報は、各色0.0F ~ 1.0Fで設定してください。
     ///

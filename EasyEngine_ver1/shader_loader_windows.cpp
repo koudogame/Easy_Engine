@@ -38,6 +38,8 @@ bool ShaderLoaderWindows::loadVertexShader( const std::string& Path, IVertexShad
         return false;
     }
 
+    // 頂点入力レイアウト
+
     *ppShader = new VertexShaderWindows( created_vs );
     created_vs->Release();
 

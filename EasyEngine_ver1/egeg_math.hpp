@@ -847,6 +847,28 @@ inline Matrix4x4 operator/( const Matrix4x4& M, float S )
     }
     return matrix;
 }
+
+// ˆÙ‚È‚éŒ^“¯Žm‚ÌŒvŽZ
+/*===========================================================================*/
+inline Vector3D operator*( const Matrix3x3& M, const Vector3D& V )
+{
+    Vector3D r;
+    r.x = M.row(0).dot(V);
+    r.y = M.row(1).dot(V);
+    r.z = M.row(2).dot(V);
+
+    return r;
+}
+inline Vector4D operator*( const Matrix4x4& M, const Vector4D& V )
+{
+    Vector4D r;
+    r.x = M.row(0).dot(V);
+    r.y = M.row(1).dot(V);
+    r.z = M.row(2).dot(V);
+    r.w = M.row(3).dot(V);
+
+    return r;
+}
 END_EGEG
 #endif /// !INCLUDED_EGEG_MATH_HEADER_
 /// EOF

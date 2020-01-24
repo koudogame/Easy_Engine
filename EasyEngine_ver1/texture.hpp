@@ -11,8 +11,23 @@ BEGIN_EGEG
 class ITexture :
     public SharedObject
 {
+public :
+    ///
+    /// @brief  テクスチャの横幅を取得
+    ///
+    /// @return テクスチャの横幅
+    ///
+    virtual long getWidth() const = 0;
+    ///
+    /// @brief  テクスチャの縦幅を取得
+    ///
+    /// @return テクスチャの縦幅
+    ///
+    virtual long getHeight() const = 0;
+
 protected :
     virtual ~ITexture() = 0 {}
+
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_TEXTURE_HEADER_

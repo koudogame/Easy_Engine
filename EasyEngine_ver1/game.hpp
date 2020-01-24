@@ -16,9 +16,20 @@ public :
     ///
     /// @brief  初期化処理
     ///
+    /// @return 初期化成功[ true ] 初期化失敗[ false ]
+    ///
+    bool initialize();
+    ///
+    /// @brief  終了処理
+    ///
+    void finalize();
 
-private :
-
+    ///
+    /// @brief  更新処理
+    ///
+    /// @param[in] DeltaTimeMS : 経過時間(: ミリ秒)
+    ///
+    void update( uint64_t DeltaTimeMS );
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_GAME_HEADER_

@@ -40,7 +40,7 @@ public :
     ///
     /// @param[inout] ppTexture : 開放するテクスチャ
     ///
-    void release( ITexture** ppTexture );
+    void unload( ITexture** ppTexture );
 
     ///
     /// @brief   インスタンスの生成

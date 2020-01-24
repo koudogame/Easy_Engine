@@ -6,6 +6,7 @@
 ///
 #ifndef INCLUDED_EGEG_RENDERER_WINDOWS_HEADER_
 #define INCLUDED_EGEG_RENDERER_WINDOWS_HEADER_
+#include <deque>
 #include <d3d11.h>
 #include "renderer.hpp"
 BEGIN_EGEG
@@ -33,9 +34,9 @@ public :
 
 // IRenderer
 /*-----------------------------------------------------------------*/
-    void beginRender( const Vector4D& ) override;
-    void entryRender( const Model& ) override;
-    void endRender() override;
+    Vector2D getScreenSize() const override { return {view_port_.Width, view_port_.Height}; }
+    void clear( const Vector4D& ) override;
+    void renderModel( const Model& ) override;
 
 private :
     ~RendererWindows();
@@ -45,6 +46,9 @@ private :
     IDXGISwapChain*         p_swap_chain_;          /// DXGIスワップチェイン
     ID3D11RenderTargetView* p_render_target_view_;  /// D3D11レンダーターゲットビュー
     D3D_FEATURE_LEVEL       feature_level_;         /// 採用された機能レベル
+    D3D11_VIEWPORT          view_port_;             /// ビューポート
+
+    std::deque<Model> entry_list_;                  /// 描画バッチ
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_RENDERER_WINDOWS_HEADER_

@@ -12,25 +12,27 @@ class IRenderer
 {
 public :
     ///
-    /// @brief   描画開始
+    /// @brief  描画対象画面のサイズ取得
+    ///
+    /// @return 描画対象画面サイズ
+    ///
+    virtual Vector2D getScreenSize() const = 0;
+
+    ///
+    /// @brief  画面クリア
     /// @details 引数のカラー情報は、各色0.0F ~ 1.0Fで設定してください。
     ///
-    /// @param[in] ColorRGBA : 画面のクリア色 { R, G, B, A }
+    /// @param[in] ColorRGBA : クリア色 { R, G, B, A }
     ///
-    virtual void beginRender( const Vector4D& ColorRGBA ) = 0;
+    virtual void clear( const Vector4D& ColorRGBA ) = 0;
+
     ///
-    /// @brief   描画のエントリー
-    /// @details 実際に描画は行いません。
+    /// @brief  モデルの描画
     ///
     /// @param[in] Model : 描画するモデル
     ///
-    virtual void entryRender( const Model& Model ) = 0;
-    ///
-    /// @brief   描画終了
-    /// @details beginRenderの呼び出しから、<br>
-    ///          この関数が呼び出されるまでにエントリーされたモデルを描画します。
-    ///
-    virtual void endRender() = 0;
+    virtual void renderModel( const Model& Model ) = 0;
+
 
     virtual ~IRenderer() = default;
 };
