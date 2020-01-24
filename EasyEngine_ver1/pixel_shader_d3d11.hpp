@@ -1,15 +1,15 @@
 ///
-/// @file   pixel_shader_windows.hpp
+/// @file   pixel_shader_d3d11.hpp
 /// @author 板場
 ///
-/// @brief  Windows用ピクセルシェーダー
+/// @brief  DirectX11用ピクセルシェーダー
 ///
-#ifndef INCLUDED_EGEG_PIXEL_SHADER_WINDOWS_HEADER_
-#define INCLUDED_EGEG_PIXEL_SHADER_WINDOWS_HEADER_
+#ifndef INCLUDED_EGEG_PIXEL_SHADER_D3D11_HEADER_
+#define INCLUDED_EGEG_PIXEL_SHADER_D3D11_HEADER_
 #include <d3d11.h>
 #include "pixel_shader.hpp"
 BEGIN_EGEG
-class PixelShaderWindows :
+class PixelShaderD3D11 :
     public IPixelShader
 {
 public :
@@ -18,7 +18,7 @@ public :
     ///
     /// @param[in] pPixelShader : 保持するシェーダーオブジェクト
     ///
-    PixelShaderWindows( ID3D11PixelShader* pPixelShader ) :
+    PixelShaderD3D11( ID3D11PixelShader* pPixelShader ) :
         p_shader_( pPixelShader )
     {
         p_shader_->AddRef();
@@ -32,12 +32,12 @@ public :
     ID3D11PixelShader* getShader() const { p_shader_->AddRef(); return p_shader_; }
 
 private :
-    ~PixelShaderWindows()
+    ~PixelShaderD3D11()
     {
         p_shader_->Release();
     }
     ID3D11PixelShader* p_shader_;   /// シェーダーオブジェクト
 };
 END_EGEG
-#endif /// !INCLUDED_EGEG_PIXEL_SHADER_WINDOWS_HEADER_
+#endif /// !INCLUDED_EGEG_PIXEL_SHADER_D3D11_HEADER_
 /// EOF

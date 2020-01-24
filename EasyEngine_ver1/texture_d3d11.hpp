@@ -9,7 +9,7 @@
 #include <d3d11.h>
 #include "texture.hpp"
 BEGIN_EGEG
-class TextureWindows :
+class TextureD3D11 :
     public ITexture
 {
 public :
@@ -18,7 +18,7 @@ public :
     ///
     /// @param[in] pTexture : 保持するシェーダーリソースビュー
     ///
-    TextureWindows( ID3D11ShaderResourceView* pTexture ) :
+    TextureD3D11( ID3D11ShaderResourceView* pTexture ) :
         p_texture_( pTexture )
     {
         p_texture_->AddRef();
@@ -48,7 +48,7 @@ public :
     long getHeight() const override { return height_; }
 
 private :
-    ~TextureWindows()
+    ~TextureD3D11()
     {
         p_texture_->Release();
     }

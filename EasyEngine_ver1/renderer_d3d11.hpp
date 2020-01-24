@@ -1,16 +1,16 @@
 ///
-/// @file   renderer_windows.hpp
+/// @file   renderer_d3d11.hpp
 /// @author 板場
 ///
-/// @brief  Windows用レンダラー
+/// @brief  DirectX11用レンダラー
 ///
-#ifndef INCLUDED_EGEG_RENDERER_WINDOWS_HEADER_
-#define INCLUDED_EGEG_RENDERER_WINDOWS_HEADER_
+#ifndef INCLUDED_EGEG_RENDERER_D3D11_HEADER_
+#define INCLUDED_EGEG_RENDERER_D3D11_HEADER_
 #include <deque>
 #include <d3d11.h>
 #include "renderer.hpp"
 BEGIN_EGEG
-class RendererWindows :
+class RendererD3D11 :
     public IRenderer
 {
 public :
@@ -21,7 +21,7 @@ public :
     /// @param[in] pImmediateContext : D3Dデバイスコンテキスト
     /// @param[in] pSwapChain : DXGIスワップチェイン
     ///
-    RendererWindows( ID3D11Device* pDevice, 
+    RendererD3D11( ID3D11Device* pDevice, 
                      ID3D11DeviceContext* pImmediateContext,
                      IDXGISwapChain* pSwapChain );
     ///
@@ -39,7 +39,7 @@ public :
     void renderModel( const Model& ) override;
 
 private :
-    ~RendererWindows();
+    ~RendererD3D11();
 
     ID3D11Device*           p_device_;              /// D3D11デバイス
     ID3D11DeviceContext*    p_immediate_context_;   /// D3D11デバイスコンテキスト
@@ -51,5 +51,5 @@ private :
     std::deque<Model> entry_list_;                  /// 描画バッチ
 };
 END_EGEG
-#endif /// !INCLUDED_EGEG_RENDERER_WINDOWS_HEADER_
+#endif /// !INCLUDED_EGEG_RENDERER_D3D11_HEADER_
 /// EOF

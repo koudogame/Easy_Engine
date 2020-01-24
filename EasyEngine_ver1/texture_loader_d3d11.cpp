@@ -1,7 +1,7 @@
 // 作成者 : 板場
-#include "texture_loader_windows.hpp"
+#include "texture_loader_d3d11.hpp"
 #include "DirectXTex/DirectXTex.h"
-#include "texture_windows.hpp"
+#include "texture_d3d11.hpp"
 
 #ifdef _DEBUG
 #pragma comment( lib, "DirectXTex/Debug/DirectXTex.lib" )
@@ -10,23 +10,23 @@
 #endif // !_DEBUG
 
 BEGIN_EGEG
-// TextureLoaderWindows
+// TextureLoaderD3D11
 /*===========================================================================*/
 // コンストラクタ
-TextureLoaderWindows::TextureLoaderWindows( ID3D11Device* pDevice ) :
+TextureLoaderD3D11::TextureLoaderD3D11( ID3D11Device* pDevice ) :
     p_device_( pDevice )
 {
     p_device_->AddRef();
 }
 
 // デストラクタ
-TextureLoaderWindows::~TextureLoaderWindows()
+TextureLoaderD3D11::~TextureLoaderD3D11()
 {
     p_device_->Release();
 }
 
 // テクスチャリソースの読み込み
-bool TextureLoaderWindows::load( const std::wstring& Path, ITexture** ppTexture )
+bool TextureLoaderD3D11::load( const std::wstring& Path, ITexture** ppTexture )
 {
     using namespace DirectX;
 
@@ -51,7 +51,7 @@ bool TextureLoaderWindows::load( const std::wstring& Path, ITexture** ppTexture 
         &view)) )
         return false;
 
-    *ppTexture = new TextureWindows( view );
+    *ppTexture = new TextureD3D11( view );
     view->Release();
 
     return true;

@@ -48,6 +48,9 @@
     <Filter Include="リソース ファイル\Shader">
       <UniqueIdentifier>{4d6b9e66-fdd6-4b53-aed1-5ccc8caa0228}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EasyEngine\99_System\Windows\DirectX11">
+      <UniqueIdentifier>{ac4cb9df-fa96-4bcb-9a16-1250e921bedc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="easy_engine.hpp">
@@ -98,29 +101,8 @@
     <ClInclude Include="platform_windows.hpp">
       <Filter>EasyEngine\99_System\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="renderer_windows.hpp">
-      <Filter>EasyEngine\99_System\Windows</Filter>
-    </ClInclude>
     <ClInclude Include="shared_object.hpp">
       <Filter>EasyEngine\1_Core</Filter>
-    </ClInclude>
-    <ClInclude Include="shader_loader_windows.hpp">
-      <Filter>EasyEngine\99_System\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="vertex_shader_windows.hpp">
-      <Filter>EasyEngine\99_System\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="geometry_shader_windows.hpp">
-      <Filter>EasyEngine\99_System\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="pixel_shader_windows.hpp">
-      <Filter>EasyEngine\99_System\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="texture_windows.hpp">
-      <Filter>EasyEngine\99_System\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="texture_loader_windows.hpp">
-      <Filter>EasyEngine\99_System\Windows</Filter>
     </ClInclude>
     <ClInclude Include="texture_manager.hpp">
       <Filter>EasyEngine\1_Core\CoreManager</Filter>
@@ -197,6 +179,27 @@
     <ClInclude Include="game.hpp">
       <Filter>EasyEngine\1_Core</Filter>
     </ClInclude>
+    <ClInclude Include="geometry_shader_d3d11.hpp">
+      <Filter>EasyEngine\99_System\Windows\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="pixel_shader_d3d11.hpp">
+      <Filter>EasyEngine\99_System\Windows\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer_d3d11.hpp">
+      <Filter>EasyEngine\99_System\Windows\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_loader_d3d11.hpp">
+      <Filter>EasyEngine\99_System\Windows\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="texture_loader_d3d11.hpp">
+      <Filter>EasyEngine\99_System\Windows\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="texture_d3d11.hpp">
+      <Filter>EasyEngine\99_System\Windows\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="vertex_shader_d3d11.hpp">
+      <Filter>EasyEngine\99_System\Windows\DirectX11</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="easy_engine.cpp">
@@ -209,15 +212,6 @@
       <Filter>EasyEngine\99_System</Filter>
     </ClCompile>
     <ClCompile Include="platform_windows.cpp">
-      <Filter>EasyEngine\99_System\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="renderer_windows.cpp">
-      <Filter>EasyEngine\99_System\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="shader_loader_windows.cpp">
-      <Filter>EasyEngine\99_System\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="texture_loader_windows.cpp">
       <Filter>EasyEngine\99_System\Windows</Filter>
     </ClCompile>
     <ClCompile Include="texture_manager.cpp">
@@ -252,6 +246,15 @@
     </ClCompile>
     <ClCompile Include="game.cpp">
       <Filter>EasyEngine\1_Core</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer_d3d11.cpp">
+      <Filter>EasyEngine\99_System\Windows\DirectX11</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_loader_d3d11.cpp">
+      <Filter>EasyEngine\99_System\Windows\DirectX11</Filter>
+    </ClCompile>
+    <ClCompile Include="texture_loader_d3d11.cpp">
+      <Filter>EasyEngine\99_System\Windows\DirectX11</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

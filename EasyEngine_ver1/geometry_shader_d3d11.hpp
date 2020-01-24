@@ -1,15 +1,15 @@
 ///
-/// @file   geometry_shader_windows.hpp
+/// @file   geometry_shader_d3d11.hpp
 /// @author 板場
 ///
-/// @brief  Windows用ジオメトリシェーダー
+/// @brief  DirectX11用ジオメトリシェーダー
 ///
-#ifndef INCLUDED_EGEG_GEOMETRY_SHADER_WINDOWS_HEADER_
-#define INCLUDED_EGEG_GEOMETRY_SHADER_WINDOWS_HEADER_
+#ifndef INCLUDED_EGEG_GEOMETRY_SHADER_D3D11_HEADER_
+#define INCLUDED_EGEG_GEOMETRY_SHADER_D3D11_HEADER_
 #include <d3d11.h>
 #include "geometry_shader.hpp"
 BEGIN_EGEG
-class GeometryShaderWindows :
+class GeometryShaderD3D11 :
     public IGeometryShader
 {
 public :
@@ -18,7 +18,7 @@ public :
     ///
     /// @param[in] pGeometryShader : 保持するシェーダーオブジェクト
     ///
-    GeometryShaderWindows( ID3D11GeometryShader* pGeometryShader) :
+    GeometryShaderD3D11( ID3D11GeometryShader* pGeometryShader) :
         p_shader_( pGeometryShader )
     {
         p_shader_->AddRef();
@@ -32,12 +32,12 @@ public :
     ID3D11GeometryShader* getShader() const { p_shader_->AddRef(); return p_shader_; }
 
 private :
-    ~GeometryShaderWindows()
+    ~GeometryShaderD3D11()
     {
         p_shader_->Release();
     }
     ID3D11GeometryShader* p_shader_;    /// シェーダーオブジェクト
 };
 END_EGEG
-#endif /// !INCLUDED_EGEG_GEOMETRY_SHADER_WINDOWS_HEADER_
+#endif /// !INCLUDED_EGEG_GEOMETRY_SHADER_D3D11_HEADER_
 /// EOF

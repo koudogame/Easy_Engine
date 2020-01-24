@@ -154,14 +154,14 @@
     <ClInclude Include="game_object.hpp" />
     <ClInclude Include="game_object_2d.hpp" />
     <ClInclude Include="geometry_shader.hpp" />
-    <ClInclude Include="geometry_shader_windows.hpp" />
+    <ClInclude Include="geometry_shader_d3d11.hpp" />
     <ClInclude Include="line_2d.hpp" />
     <ClInclude Include="move2d_component.hpp" />
-    <ClInclude Include="pixel_shader_windows.hpp" />
+    <ClInclude Include="pixel_shader_d3d11.hpp" />
     <ClInclude Include="point_2d.hpp" />
     <ClInclude Include="render_batch.hpp" />
     <ClInclude Include="render_component.hpp" />
-    <ClInclude Include="shader_loader_windows.hpp" />
+    <ClInclude Include="shader_loader_d3d11.hpp" />
     <ClInclude Include="shared_object.hpp" />
     <ClInclude Include="mesh.hpp" />
     <ClInclude Include="model.hpp" />
@@ -170,7 +170,7 @@
     <ClInclude Include="platform_factory.hpp" />
     <ClInclude Include="platform_windows.hpp" />
     <ClInclude Include="renderer.hpp" />
-    <ClInclude Include="renderer_windows.hpp" />
+    <ClInclude Include="renderer_d3d11.hpp" />
     <ClInclude Include="rendering_manager.hpp" />
     <ClInclude Include="shader_loader.hpp" />
     <ClInclude Include="shader_manager.hpp" />
@@ -185,13 +185,13 @@
     <ClInclude Include="job_priority.hpp" />
     <ClInclude Include="texture.hpp" />
     <ClInclude Include="texture_loader.hpp" />
-    <ClInclude Include="texture_loader_windows.hpp" />
+    <ClInclude Include="texture_loader_d3d11.hpp" />
     <ClInclude Include="texture_manager.hpp" />
-    <ClInclude Include="texture_windows.hpp" />
+    <ClInclude Include="texture_d3d11.hpp" />
     <ClInclude Include="vertex_data.hpp" />
     <ClInclude Include="vertex_index.hpp" />
     <ClInclude Include="vertex_shader.hpp" />
-    <ClInclude Include="vertex_shader_windows.hpp" />
+    <ClInclude Include="vertex_shader_d3d11.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="easy_engine.cpp" />
@@ -200,17 +200,17 @@
     <ClCompile Include="move2d_component.cpp" />
     <ClCompile Include="platform_factory.cpp" />
     <ClCompile Include="platform_windows.cpp" />
-    <ClCompile Include="renderer_windows.cpp" />
+    <ClCompile Include="renderer_d3d11.cpp" />
     <ClCompile Include="rendering_manager.cpp" />
     <ClCompile Include="render_batch.cpp" />
-    <ClCompile Include="shader_loader_windows.cpp" />
+    <ClCompile Include="shader_loader_d3d11.cpp" />
     <ClCompile Include="shader_manager.cpp" />
     <ClCompile Include="sound_manager.cpp" />
     <ClCompile Include="sprite_component.cpp" />
     <ClCompile Include="system_manager.cpp" />
     <ClCompile Include="job_container.cpp" />
     <ClCompile Include="job_scheduler.cpp" />
-    <ClCompile Include="texture_loader_windows.cpp" />
+    <ClCompile Include="texture_loader_d3d11.cpp" />
     <ClCompile Include="texture_manager.cpp" />
   </ItemGroup>
   <ItemGroup>

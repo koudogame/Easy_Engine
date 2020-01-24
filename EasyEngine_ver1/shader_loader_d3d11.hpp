@@ -1,15 +1,15 @@
 ///
-/// @file   shader_loader_windows.hpp
+/// @file   shader_loader_d3d11.hpp
 /// @author 板場
 ///
-/// @brief  Windows用シェーダーローダー
+/// @brief  DirectX11用シェーダーローダー
 ///
-#ifndef INCLUDED_EGEG_SHADER_LOADER_WINDOWS_HEADER_
-#define INCLUDED_EGEG_SHADER_LOADER_WINDOWS_HEADER_
+#ifndef INCLUDED_EGEG_SHADER_LOADER_D3D11_HEADER_
+#define INCLUDED_EGEG_SHADER_LOADER_D3D11_HEADER_
 #include <d3d11.h>
 #include "shader_loader.hpp"
 BEGIN_EGEG
-class ShaderLoaderWindows :
+class ShaderLoaderD3D11 :
     public IShaderLoader
 {
 public :
@@ -18,7 +18,7 @@ public :
     ///
     /// @param[in] pDevice : D3Dデバイス
     ///
-    ShaderLoaderWindows( ID3D11Device* pDevice );
+    ShaderLoaderD3D11( ID3D11Device* pDevice );
 
 // IShaderLoader
 /*-----------------------------------------------------------------*/
@@ -27,9 +27,9 @@ public :
     bool loadPixelShader( const std::string&, IPixelShader** ) override;
 
 private :
-    ~ShaderLoaderWindows();
+    ~ShaderLoaderD3D11();
     ID3D11Device* p_device_;    /// D3Dデバイス
 };
 END_EGEG
-#endif /// !INCLUDED_EGEG_SHADER_LOADER_WINDOWS_HEADER_
+#endif /// !INCLUDED_EGEG_SHADER_LOADER_D3D11_HEADER_
 /// EOF

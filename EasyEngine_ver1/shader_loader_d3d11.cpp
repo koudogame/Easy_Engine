@@ -1,9 +1,9 @@
 // 作成者 : 板場
-#include "shader_loader_windows.hpp"
+#include "shader_loader_d3d11.hpp"
 #include <fstream>
-#include "vertex_shader_windows.hpp"
-#include "geometry_shader_windows.hpp"
-#include "pixel_shader_windows.hpp"
+#include "vertex_shader_d3d11.hpp"
+#include "geometry_shader_d3d11.hpp"
+#include "pixel_shader_d3d11.hpp"
 
 namespace
 {
@@ -11,22 +11,22 @@ namespace
 } // !unnamed namespace 
 
 BEGIN_EGEG
-// ShaderLoaderWindows
+// ShaderLoaderD3D11
 /*===========================================================================*/
 // コンストラクタ
-ShaderLoaderWindows::ShaderLoaderWindows( ID3D11Device* pDevice ) :
+ShaderLoaderD3D11::ShaderLoaderD3D11( ID3D11Device* pDevice ) :
     p_device_( pDevice )
 {
     p_device_->AddRef();
 }
 // デストラクタ
-ShaderLoaderWindows::~ShaderLoaderWindows()
+ShaderLoaderD3D11::~ShaderLoaderD3D11()
 {
     p_device_->Release();
 }
 
 // 頂点シェーダ―の読み込み
-bool ShaderLoaderWindows::loadVertexShader( const std::string& Path, IVertexShader** ppShader )
+bool ShaderLoaderD3D11::loadVertexShader( const std::string& Path, IVertexShader** ppShader )
 {
     ID3D11VertexShader* created_vs;
     char* blob = nullptr;
@@ -40,14 +40,14 @@ bool ShaderLoaderWindows::loadVertexShader( const std::string& Path, IVertexShad
 
     // 頂点入力レイアウト
 
-    *ppShader = new VertexShaderWindows( created_vs );
+    *ppShader = new VertexShaderD3D11( created_vs );
     created_vs->Release();
 
     return true;
 }
 
 // ジオメトリシェーダーの読み込み
-bool ShaderLoaderWindows::loadGeometryShader( const std::string& Path, IGeometryShader** ppShader )
+bool ShaderLoaderD3D11::loadGeometryShader( const std::string& Path, IGeometryShader** ppShader )
 {
     ID3D11GeometryShader* created_gs;
     char* blob = nullptr;
@@ -59,14 +59,14 @@ bool ShaderLoaderWindows::loadGeometryShader( const std::string& Path, IGeometry
         return false;
     }
 
-    *ppShader = new GeometryShaderWindows( created_gs );
+    *ppShader = new GeometryShaderD3D11( created_gs );
     created_gs->Release();
 
     return true;
 }
 
 // ピクセルシェーダーの読み込み
-bool ShaderLoaderWindows::loadPixelShader( const std::string& Path, IPixelShader** ppShader )
+bool ShaderLoaderD3D11::loadPixelShader( const std::string& Path, IPixelShader** ppShader )
 {
     ID3D11PixelShader* created_ps;
     char* blob = nullptr;
@@ -78,7 +78,7 @@ bool ShaderLoaderWindows::loadPixelShader( const std::string& Path, IPixelShader
         return false;
     }
 
-    *ppShader = new PixelShaderWindows( created_ps );
+    *ppShader = new PixelShaderD3D11( created_ps );
     created_ps->Release();
 
     return true;

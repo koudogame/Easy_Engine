@@ -1,15 +1,15 @@
 ///
-/// @file   texture_loader_windows.hpp
+/// @file   texture_loader_d3d11.hpp
 /// @author 板場
 ///
-/// @brief  Windows用テクスチャローダー
+/// @brief  DirectX11用テクスチャローダー
 ///
-#ifndef INCLUDED_EGEG_TEXTURE_LOADER_WINDOWS_HEADER_
-#define INCLUDED_EGEG_TEXTURE_LOADER_WINDOWS_HEADER_
+#ifndef INCLUDED_EGEG_TEXTURE_LOADER_D3D11_HEADER_
+#define INCLUDED_EGEG_TEXTURE_LOADER_D3D11_HEADER_
 #include <d3d11.h>
 #include "texture_loader.hpp"
 BEGIN_EGEG
-class TextureLoaderWindows :
+class TextureLoaderD3D11 :
     public ITextureLoader
 {
 public :
@@ -18,16 +18,16 @@ public :
     ///
     /// @param[in] pDevice : D3Dデバイス
     ///
-    TextureLoaderWindows( ID3D11Device* pDevice );
+    TextureLoaderD3D11( ID3D11Device* pDevice );
         
 // ITextureLoader
 /*-----------------------------------------------------------------*/
     bool load( const std::wstring&, ITexture** ) override;
 
 private :
-    ~TextureLoaderWindows();
+    ~TextureLoaderD3D11();
     ID3D11Device* p_device_;    /// D3Dデバイス
 };
 END_EGEG
-#endif /// !INCLUDED_EGEG_TEXTURE_LOADER_WINDOWS_HEADER_
+#endif /// !INCLUDED_EGEG_TEXTURE_LOADER_D3D11_HEADER_
 /// EOF

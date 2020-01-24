@@ -2,9 +2,9 @@
 #include "platform_windows.hpp"
 #include <chrono>
 #include "platform_factory.hpp"
-#include "renderer_windows.hpp"
-#include "shader_loader_windows.hpp"
-#include "texture_loader_windows.hpp"
+#include "renderer_d3d11.hpp"
+#include "shader_loader_d3d11.hpp"
+#include "texture_loader_d3d11.hpp"
 
 #pragma comment( lib, "d3d11.lib" )
 
@@ -114,8 +114,8 @@ void PlatformWindows::showDialogBox( const std::string& Message )
 // レンダラーの生成
 bool PlatformWindows::createRenderer( IRenderer** ppRenderer )
 {
-    *ppRenderer = new RendererWindows( p_device_, p_immediate_context_, p_swap_chain_ );
-    if( static_cast<RendererWindows*>(*ppRenderer)->initialize() == false )
+    *ppRenderer = new RendererD3D11( p_device_, p_immediate_context_, p_swap_chain_ );
+    if( static_cast<RendererD3D11*>(*ppRenderer)->initialize() == false )
     {
         delete *ppRenderer;
         *ppRenderer = nullptr;
@@ -128,7 +128,7 @@ bool PlatformWindows::createRenderer( IRenderer** ppRenderer )
 // シェーダーローダーの生成
 bool PlatformWindows::createShaderLoader( IShaderLoader** ppShaderLoader )
 {
-    *ppShaderLoader = new ShaderLoaderWindows( p_device_ );
+    *ppShaderLoader = new ShaderLoaderD3D11( p_device_ );
 
     return true;
 }
@@ -136,7 +136,7 @@ bool PlatformWindows::createShaderLoader( IShaderLoader** ppShaderLoader )
 // テクスチャローダーの生成
 bool PlatformWindows::createTextureLoader( ITextureLoader** ppTextureLoader )
 {
-    *ppTextureLoader = new TextureLoaderWindows( p_device_ );
+    *ppTextureLoader = new TextureLoaderD3D11( p_device_ );
 
     return true;
 }

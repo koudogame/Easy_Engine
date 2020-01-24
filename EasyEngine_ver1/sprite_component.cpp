@@ -95,7 +95,7 @@ void SpriteComponent::render()
 {
     if( validity_ && visible_ )
     {
-        RenderingManager::instance()->entryRender( sprite_ );
+        RenderingManager::instance()->render( sprite_ );
     }
 }
 

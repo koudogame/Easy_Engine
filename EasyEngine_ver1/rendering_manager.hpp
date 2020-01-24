@@ -7,6 +7,7 @@
 ///
 #ifndef INCLUDED_EGEG_RENDERING_MANAGER_HEADER_
 #define INCLUDED_EGEG_RENDERING_MANAGER_HEADER_
+#include <deque>
 #include "easy_engine.hpp"
 #include "renderer.hpp"
 BEGIN_EGEG
@@ -35,14 +36,14 @@ public :
     ///
     void beginRender( const Vector4D& ColorRGBA );
     ///
-    /// @brief   描画のエントリー
+    /// @brief   モデルの描画
     /// @details 実際に描画は行いません。
     ///
     /// @param[in] Model : 描画するモデル
     ///
-    void entryRender( const Model& Model );
+    void render( const Model& Model );
     ///
-    /// @brief   描画のエントリー
+    /// @brief   モデルの描画
     /// @details 実際に描画は行いません。
     ///
     /// @param[in] Mesh : メッシュ
@@ -51,7 +52,7 @@ public :
     /// @param[in] pGeometryShader : ジオメトリシェーダー
     /// @param[in] pPixelShader : ピクセルシェーダー
     ///
-    void entryRender( const Mesh& Mesh, ITexture* pTexture, IVertexShader* pVertexShader, IGeometryShader* pGeometryShader, IPixelShader* pPixelShader );
+    void render( const Mesh& Mesh, ITexture* pTexture, IVertexShader* pVertexShader, IGeometryShader* pGeometryShader, IPixelShader* pPixelShader );
     ///
     /// @brief   描画終了
     /// @details beginRenderの呼び出しから、<br>
@@ -81,7 +82,8 @@ private :
     RenderingManager& operator=( const RenderingManager& ) = delete;
 
     static RenderingManager* instance_;
-    IRenderer* p_renderer_;     /// 使用するレンダラー
+    IRenderer* p_renderer_;         /// 使用するレンダラー
+    std::deque<Model> batch_list_;  /// 描画待機オブジェクト
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_RENDERING_MANAGER_HEADER_

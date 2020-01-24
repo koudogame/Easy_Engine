@@ -1,5 +1,5 @@
 // 作成者 : 板場
-#include "renderer_windows.hpp"
+#include "renderer_d3d11.hpp"
 
 namespace
 {
@@ -72,10 +72,10 @@ namespace
 } // !unnamed namespace
 
 BEGIN_EGEG
-// RendererWindows
+// RendererD3D11
 /*===========================================================================*/
 // コンストラクタ
-RendererWindows::RendererWindows( ID3D11Device* pDevice, ID3D11DeviceContext* pImmediateContext, IDXGISwapChain* pSwapChain ) :
+RendererD3D11::RendererD3D11( ID3D11Device* pDevice, ID3D11DeviceContext* pImmediateContext, IDXGISwapChain* pSwapChain ) :
     p_device_( pDevice ),
     p_immediate_context_( pImmediateContext ),
     p_swap_chain_( pSwapChain )
@@ -86,7 +86,7 @@ RendererWindows::RendererWindows( ID3D11Device* pDevice, ID3D11DeviceContext* pI
 }
 
 // デストラクタ
-RendererWindows::~RendererWindows()
+RendererD3D11::~RendererD3D11()
 {
     p_render_target_view_->Release();
     p_swap_chain_->Release();
@@ -95,7 +95,7 @@ RendererWindows::~RendererWindows()
 }
 
 // 初期化
-bool RendererWindows::initialize()
+bool RendererD3D11::initialize()
 {
     // パイプラインにレンダーターゲットビューを設定
     ID3D11Texture2D* backbuffer;
@@ -127,7 +127,7 @@ bool RendererWindows::initialize()
 }
 
 // 画面クリア
-void RendererWindows::clear( const Vector4D& Color )
+void RendererD3D11::clear( const Vector4D& Color )
 {
     float color[] = { Color.x, Color.y, Color.z, Color.w };
 
@@ -138,7 +138,7 @@ void RendererWindows::clear( const Vector4D& Color )
 }
 
 // モデル描画
-void RendererWindows::renderModel( const Model& Model )
+void RendererD3D11::renderModel( const Model& Model )
 {
     // 頂点バッファ定義
     const D3D11_BUFFER_DESC kBufferDesc =
@@ -152,7 +152,6 @@ void RendererWindows::renderModel( const Model& Model )
     };
 
     // パイプラインのステート設定
-    p_immediate_context_->IASetInputLayout( 
 }
 END_EGEG
 // EOF
