@@ -17,6 +17,12 @@ SystemManager::~SystemManager()
     delete p_platform_;
 }
 
+// メインループ
+void SystemManager::mainLoop( std::function<bool(uint64_t)> pFunc )
+{
+    p_platform_->mainLoop( pFunc );
+}
+
 // ダイアログボックスの表示
 void SystemManager::showDialogBox( const std::string& Message )
 {

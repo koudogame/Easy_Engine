@@ -24,7 +24,7 @@ public :
 
 // IPlatform
 /*-----------------------------------------------------------------*/
-    void MainLoop( std::function<bool(long long)> ) override;
+    void mainLoop( std::function<bool(uint64_t)> ) override;
     void showDialogBox( const std::string& ) override;
     bool createRenderer( IRenderer** ) override;
     bool createShaderLoader( IShaderLoader** ) override;

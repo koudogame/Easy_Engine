@@ -12,6 +12,17 @@ class IRenderer
 {
 public :
     ///
+    /// @enum   BlendMode
+    /// @brief  çáê¨ÉÇÅ[Éh
+    ///
+    enum BlendMode
+    {
+        kNormal,        ///< í èÌÉÇÅ[Éh *ï`âÊêFÇÇªÇÃÇ‹Ç‹ï`âÊ
+        kAdditive,      ///< â¡éZÉÇÅ[Éh *å≥ÇÃêFÇ∆ï`âÊêFÇâ¡éZÇµÇΩêFÇï`âÊ
+        kSubtraction,   ///< å∏éZÉÇÅ[Éh *å≥ÇÃêFÇ©ÇÁï`âÊêFÇå∏éZÇµÇΩêFÇï`âÊ
+    };
+
+    ///
     /// @brief  ï`âÊëŒè€âÊñ ÇÃÉTÉCÉYéÊìæ
     ///
     /// @return ï`âÊëŒè€âÊñ ÉTÉCÉY
@@ -30,8 +41,9 @@ public :
     /// @brief  ÉÇÉfÉãÇÃï`âÊ
     ///
     /// @param[in] Model : ï`âÊÇ∑ÇÈÉÇÉfÉã
+    /// @param[in] Mode  : ï`âÊÉÇÅ[Éh
     ///
-    virtual void renderModel( const Model& Model ) = 0;
+    virtual void renderModel( const Model& Model, BlendMode Mode = BlendMode::kNormal ) = 0;
 
 
     virtual ~IRenderer() = default;

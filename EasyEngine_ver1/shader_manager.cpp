@@ -53,6 +53,8 @@ bool ShaderManager::loadVertexShader( const std::string& Path, IVertexShader** p
 // 頂点シェーダの解放
 void ShaderManager::unloadVertexShader( IVertexShader** ppShader )
 {
+    if( *ppShader == nullptr ) return;
+
     // リストに存在するシェーダーのみ解放の対象とする
     auto find = vs_list_.find( *ppShader );
     if( find != vs_list_.end() )
@@ -83,6 +85,8 @@ bool ShaderManager::loadGeometryShader( const std::string& Path, IGeometryShader
 // ジオメトリシェーダーの解放
 void ShaderManager::unloadGeometryShader( IGeometryShader** ppShader )
 {
+    if( *ppShader == nullptr ) return;
+
     // リストに存在するシェーダーのみ対象とする
     auto find = gs_list_.find( *ppShader );
     if( find != gs_list_.end() )
@@ -113,6 +117,8 @@ bool ShaderManager::loadPixelShader( const std::string& Path, IPixelShader** ppS
 // ピクセルシェーダ―の解放
 void ShaderManager::unloadPixelShader( IPixelShader** ppShader )
 {
+    if( *ppShader == nullptr ) return;
+
     // リストの存在するシェーダーのみ対象とする
     auto find = ps_list_.find( *ppShader );
     if( find != ps_list_.end() )

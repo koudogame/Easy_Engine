@@ -9,7 +9,9 @@
 #ifndef INCLUDED_EGEG_GAME_HEADER_
 #define INCLUDED_EGEG_GAME_HEADER_
 #include "easy_engine.hpp"
+#include "sprite_component.hpp"
 BEGIN_EGEG
+class ITexture;
 class Game
 {
 public :
@@ -29,7 +31,13 @@ public :
     ///
     /// @param[in] DeltaTimeMS : 経過時間(: ミリ秒)
     ///
-    void update( uint64_t DeltaTimeMS );
+    /// @return 更新継続[ true ]　更新終了[ false ]
+    ///
+    bool update( uint64_t DeltaTimeMS );
+
+private :
+    SpriteComponent sprite;
+    ITexture *texture_;
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_GAME_HEADER_

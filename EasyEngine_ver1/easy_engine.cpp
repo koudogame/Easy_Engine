@@ -6,6 +6,8 @@
 #include "shader_manager.hpp"
 #include "texture_manager.hpp"
 
+#include "game.hpp"
+
 BEGIN_EGEG
 #ifdef _DEBUG
 int EasyEngine::create_cnt_;
@@ -34,6 +36,10 @@ void EasyEngine::run( const std::string& Platform )
     TextureManager::create( *this, p_texture_loader );
 
     // ゲーム実行
+    Game game;
+    if( game.initialize() == false ) return;
+    SystemManager::instance()->mainLoop( std::bind(&Game::update, &game, std::placeholders::_1) );
+    game.finalize();
 
     // マネージャーを破棄
     TextureManager::destroy( *this );

@@ -21,6 +21,16 @@ public :
     static SystemManager* instance() { return instance_; }
 
     ///
+    /// @brief   メインループ関数
+    /// @details 引数の関数に関して<br>
+    ///          戻り値[ false ]でメインループを終了します。<br>
+    ///          引数には経過時間(:ミリ秒)を与えます。
+    ///
+    /// @param[in] pUpdateFunction : メインループ内で呼び出す関数のアドレス
+    ///
+    void mainLoop( std::function<bool(uint64_t)> pUpdateFunction );
+
+    ///
     /// @brief  ダイアログボックスの表示
     ///
     /// @param[in] Message : 表示するメッセージ

@@ -68,7 +68,7 @@ IPlatform* PlatformWindows::create()
 }
 
 // ƒƒCƒ“ƒ‹[ƒv
-void PlatformWindows::MainLoop( std::function<bool(long long)> pUpdateFunc )
+void PlatformWindows::mainLoop( std::function<bool(uint64_t)> pUpdateFunc )
 {
     using namespace std::chrono;
 

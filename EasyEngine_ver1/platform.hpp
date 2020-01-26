@@ -22,7 +22,7 @@ public :
     ///
     /// @param[in] pUpdateFunction : ループ中に実行するゲームの更新関数
     ///
-    virtual void MainLoop( std::function<bool(long long)> pUpdateFunction ) = 0;
+    virtual void mainLoop( std::function<bool(uint64_t)> pUpdateFunction ) = 0;
 
     ///
     /// @brief  ダイアログボックスの表示

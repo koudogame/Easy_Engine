@@ -11,7 +11,7 @@
 BEGIN_EGEG
 struct VertexIndex
 {
-    unsigned indices[3];
+    unsigned index[3];
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_VERTEX_INDEX_HEADER_

@@ -1,39 +1,13 @@
 // 作成者 : 板場
 #include "renderer_d3d11.hpp"
+#include "vertex_shader_d3d11.hpp"
+#include "geometry_shader_d3d11.hpp"
+#include "pixel_shader_d3d11.hpp"
+#include "texture_d3d11.hpp"
 
 namespace
 {
-    // 頂点データ入力レイアウト
-    constexpr D3D11_INPUT_ELEMENT_DESC kVertexInputLayout[] =
-    {
-        {
-            "POSITION",                     // SemanticName
-            0,                              // SemanticIndex
-            DXGI_FORMAT_R32G32B32_FLOAT,    // Format
-            0,                              // InputSlot
-            0,                              // AlignedByteOffset
-            D3D11_INPUT_PER_VERTEX_DATA,    // InputSlotClass
-            0                               // InstanceDataRate
-        },
-        {
-            "TEXCOORD",
-            0,
-            DXGI_FORMAT_R32G32_FLOAT,
-            0,
-            (UINT) sizeof( EGEG Float3 ),
-            D3D11_INPUT_PER_VERTEX_DATA,
-            0
-        },
-        {
-            "COLOR",
-            0,
-            DXGI_FORMAT_R32G32B32A32_FLOAT,
-            0,
-            (UINT)(sizeof(EGEG Float4) + sizeof(EGEG Float2)),
-            D3D11_INPUT_PER_VERTEX_DATA,
-            0
-        }
-    };
+    constexpr int kBlendModeNum = 3;
 
     // サンプラーステート
     constexpr D3D11_SAMPLER_DESC kSamplerDesc =
@@ -51,22 +25,38 @@ namespace
     };
 
     // ブレンドステート
-    constexpr D3D11_RENDER_TARGET_BLEND_DESC kRenderTargetBlendDesc =
+    constexpr D3D11_RENDER_TARGET_BLEND_DESC kRenderTargetBlendDesc[] =
     {
-        true,                           // BlendEnable
-        D3D11_BLEND_SRC_ALPHA,          // SrcBlend
-        D3D11_BLEND_INV_SRC_ALPHA,      // DestBlend
-        D3D11_BLEND_OP_ADD,             // BlendOp
-        D3D11_BLEND_ONE,                // SrcBlendAlpha
-        D3D11_BLEND_ZERO,               // DestBlendAlpha
-        D3D11_BLEND_OP_ADD,             // BlendOpAlpha
-        D3D11_COLOR_WRITE_ENABLE_ALL    // RenderTargetWriteMask
-    };
-    constexpr D3D11_BLEND_DESC kBlendDesc =
-    {
-        false,                  // AlphaToCoverageEnable
-        false,                  // IndependentBlendEnable
-        kRenderTargetBlendDesc  // RenderTarget
+        { // BlendMode 「Normal」
+            true,                           // BlendEnable
+            D3D11_BLEND_SRC_ALPHA,          // SrcBlend
+            D3D11_BLEND_INV_SRC_ALPHA,      // DestBlend
+            D3D11_BLEND_OP_ADD,             // BlendOp
+            D3D11_BLEND_ONE,                // SrcBlendAlpha
+            D3D11_BLEND_ZERO,               // DestBlendAlpha
+            D3D11_BLEND_OP_ADD,             // BlendOpAlpha
+            D3D11_COLOR_WRITE_ENABLE_ALL    // RenderTargetWriteMask
+        },
+        { // BlendMode 「Additive」
+            true,
+            D3D11_BLEND_ONE,
+            D3D11_BLEND_ONE,
+            D3D11_BLEND_OP_ADD,
+            D3D11_BLEND_ONE,
+            D3D11_BLEND_ZERO,
+            D3D11_BLEND_OP_ADD,
+            D3D11_COLOR_WRITE_ENABLE_ALL
+        },
+        { // BlendMode 「Subtraction」
+            true,
+            D3D11_BLEND_ONE,
+            D3D11_BLEND_ONE,
+            D3D11_BLEND_OP_SUBTRACT,
+            D3D11_BLEND_ONE,
+            D3D11_BLEND_ZERO,
+            D3D11_BLEND_OP_ADD,
+            D3D11_COLOR_WRITE_ENABLE_ALL
+        },
     };
 
 } // !unnamed namespace
@@ -88,6 +78,9 @@ RendererD3D11::RendererD3D11( ID3D11Device* pDevice, ID3D11DeviceContext* pImmed
 // デストラクタ
 RendererD3D11::~RendererD3D11()
 {
+    for( int i = 0; i < ::kBlendModeNum; ++i )
+        p_blend_states_[i]->Release();
+    p_sampler_state_->Release();
     p_render_target_view_->Release();
     p_swap_chain_->Release();
     p_immediate_context_->Release();
@@ -113,15 +106,32 @@ bool RendererD3D11::initialize()
     // パイプラインにビューポートを設定
     D3D11_TEXTURE2D_DESC desc;
     backbuffer->GetDesc(&desc);
-    view_port_.TopLeftX = view_port_.TopLeftY = 0.0F;
-    view_port_.Width = static_cast<float>(desc.Width);
-    view_port_.Height = static_cast<float>(desc.Height);
-    view_port_.MinDepth = 0.0F;
-    view_port_.MaxDepth = 1.0F;
-    p_immediate_context_->RSSetViewports(1U, &view_port_);
+    viewport_.TopLeftX = viewport_.TopLeftY = 0.0F;
+    viewport_.Width = static_cast<float>(desc.Width);
+    viewport_.Height = static_cast<float>(desc.Height);
+    viewport_.MinDepth = 0.0F;
+    viewport_.MaxDepth = 1.0F;
+    p_immediate_context_->RSSetViewports(1U, &viewport_);
 
     // 不要になったバッファを開放
     backbuffer->Release();
+
+    // サンプラーステートを生成
+    if( FAILED(p_device_->CreateSamplerState(&::kSamplerDesc, &p_sampler_state_)) )
+        return false;
+
+    // ブレンドステートを生成
+    for( int i = 0; i < 3; ++i )
+    {
+        D3D11_BLEND_DESC desc =
+        {
+            false,
+            false,
+            ::kRenderTargetBlendDesc[i]
+        };
+        if( FAILED(p_device_->CreateBlendState(&desc, &p_blend_states_[i])) )
+            return false;
+    }
 
     return true;
 }
@@ -130,18 +140,14 @@ bool RendererD3D11::initialize()
 void RendererD3D11::clear( const Vector4D& Color )
 {
     float color[] = { Color.x, Color.y, Color.z, Color.w };
-
-    p_immediate_context_->ClearRenderTargetView(
-        p_render_target_view_,
-        color
-    );
+    p_immediate_context_->ClearRenderTargetView( p_render_target_view_, color );
 }
 
 // モデル描画
-void RendererD3D11::renderModel( const Model& Model )
+void RendererD3D11::renderModel( const Model& Model, BlendMode Mode )
 {
-    // 頂点バッファ定義
-    const D3D11_BUFFER_DESC kBufferDesc =
+    // 頂点バッファ作成
+    /*const D3D11_BUFFER_DESC kVertexBufferDesc =
     {
         sizeof(VertexData)* Model.mesh.vertices.size(),
         D3D11_USAGE_DEFAULT,
@@ -150,8 +156,106 @@ void RendererD3D11::renderModel( const Model& Model )
         0,
         0
     };
+    const D3D11_SUBRESOURCE_DATA kVertexSubResourceData =
+    {
+        Model.mesh.vertices.data(),
+        0U,
+        0U
+    };
+    ID3D11Buffer* p_vertexbuffer;
+    if( FAILED(p_device_->CreateBuffer(&kVertexBufferDesc, &kVertexSubResourceData, &p_vertexbuffer)) )
+    {
+        p_blendstate->Release();   
+        return;
+    }*/
 
-    // パイプラインのステート設定
+    // インデックスバッファ作成
+    //std::vector<UINT> indices;
+    //indices.reserve( Model.mesh.indices.size() * 3U );  // 頂点インデックス * 3頂点
+    //// 頂点インデックスを一つの配列にまとめる
+    //for( const auto& polygon : Model.mesh.indices )
+    //{
+    //    for( int i = 0; i < 3; ++i )
+    //        indices.push_back( polygon.index[i] );
+    //}
+
+    //const D3D11_BUFFER_DESC kIndexBufferDesc =
+    //{
+    //    sizeof(UINT) * indices.size(),
+    //    D3D11_USAGE_DEFAULT,
+    //    D3D11_BIND_INDEX_BUFFER,
+    //    0,
+    //    0,
+    //    0
+    //};
+    //const D3D11_SUBRESOURCE_DATA kIndexSubResourceData =
+    //{
+    //    indices.data(),
+    //    0U,
+    //    0U,
+    //};
+    //ID3D11Buffer* p_indexbuffer;
+    //if( FAILED(p_device_->CreateBuffer(&kIndexBufferDesc, &kIndexSubResourceData, &p_indexbuffer)) )
+    //{
+    //    p_blendstate->Release();
+    //    p_vertexbuffer->Release();
+    //    return;
+    //}
+
+    // モデルからステート情報を取得
+    ID3D11InputLayout *p_inputlayout = nullptr;
+    ID3D11VertexShader* p_vertexshader = nullptr;
+    ID3D11GeometryShader* p_geometryshader = nullptr;
+    ID3D11PixelShader* p_pixelshader = nullptr;
+    ID3D11ShaderResourceView* p_shaderresourceview = nullptr;
+    if( Model.vertex_shader )
+    {
+        p_inputlayout = static_cast<VertexShaderD3D11*>(Model.vertex_shader)->getLayout();
+        p_vertexshader = static_cast<VertexShaderD3D11*>(Model.vertex_shader)->getShader();
+    }
+    if( Model.geometry_shader )
+    {
+        p_geometryshader = static_cast<GeometryShaderD3D11*>(Model.geometry_shader)->getShader();
+    }
+    if( Model.pixel_shader )
+    {
+        p_pixelshader = static_cast<PixelShaderD3D11*>(Model.pixel_shader)->getShader();
+
+        if( Model.texture )
+        {
+            p_shaderresourceview = static_cast<TextureD3D11*>(Model.texture)->getShaderResourceView();
+        }
+    }
+
+    // パイプラインステートを設定
+    //p_immediate_context_->IASetInputLayout( p_inputlayout );
+    //size_t size = sizeof VertexData;
+    //unsigned offset = 0U;
+    //p_immediate_context_->IASetVertexBuffers( 0, 1, &p_vertexbuffer, &size, &offset );
+    //p_immediate_context_->IASetIndexBuffer( p_indexbuffer, DXGI_FORMAT_R32_UINT, 0 );
+    //p_immediate_context_->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP );
+    //if( p_vertexshader ) p_immediate_context_->VSSetShader( p_vertexshader, nullptr, 0U );
+    //if( p_geometryshader ) p_immediate_context_->GSSetShader( p_geometryshader, nullptr, 0U );
+    //if( p_pixelshader )
+    //{
+    //    p_immediate_context_->PSSetShader( p_pixelshader, nullptr, 0U );
+    //    p_immediate_context_->PSSetSamplers( 0, 1, &p_sampler_state_ );
+    //    p_immediate_context_->PSSetShaderResources( 0, 1, &p_shaderresourceview );
+    //}
+    p_immediate_context_->OMSetBlendState( p_blend_states_[Mode], nullptr, 0xFFFFFFFF );
+
+    //// 描画
+    //p_immediate_context_->DrawIndexed( indices.size(), 0, 0 );
+
+    // 不要になったインターフェイスの解放
+    if( p_shaderresourceview )  p_shaderresourceview->Release();
+    if( p_pixelshader )         p_pixelshader->Release();
+    if( p_geometryshader )      p_geometryshader->Release();
+    if( p_vertexshader )        p_vertexshader->Release();
+    if( p_inputlayout )         p_inputlayout->Release();
+    //p_indexbuffer->Release();
+    //p_vertexbuffer->Release();
+    //p_blendstate->Release();
 }
 END_EGEG
 // EOF

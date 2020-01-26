@@ -7,7 +7,7 @@
 
 namespace
 {
-    size_t loadBinary( const std::string&, char* );
+    size_t getBinaryLength( std::fstream& FileStream );
 } // !unnamed namespace 
 
 BEGIN_EGEG
@@ -28,19 +28,39 @@ ShaderLoaderD3D11::~ShaderLoaderD3D11()
 // 頂点シェーダ―の読み込み
 bool ShaderLoaderD3D11::loadVertexShader( const std::string& Path, IVertexShader** ppShader )
 {
+    // シェーダーファイル読み込み
+    std::fstream stream( Path, std::ios::binary | std::ios::in );
+    if( !stream ) return false;
+    size_t file_size = ::getBinaryLength(stream);
+    char* blob = new char[ file_size ];
+    stream.read( blob, file_size );
+    stream.close();
+
+    // シェーダーオブジェクトの生成
     ID3D11VertexShader* created_vs;
-    char* blob = nullptr;
-    size_t size = ::loadBinary( Path, blob );
-    if( size == 0U ||
-        FAILED(p_device_->CreateVertexShader(blob, size, nullptr, &created_vs)) )
+    if( FAILED(p_device_->CreateVertexShader(blob, file_size, nullptr, &created_vs)) )
     {
         delete[] blob;
         return false;
     }
 
     // 頂点入力レイアウト
+    ID3D11InputLayout* input_layout;
+    if( FAILED(p_device_->CreateInputLayout(
+        VertexShaderD3D11::kVertexInputLayout,
+        sizeof VertexShaderD3D11::kVertexInputLayout / sizeof VertexShaderD3D11::kVertexInputLayout[0],
+        blob,
+        file_size,
+        &input_layout)) )
+    {
+        created_vs->Release();
+        delete[] blob;
+        return false;
+    }
+    delete[] blob;
 
-    *ppShader = new VertexShaderD3D11( created_vs );
+    *ppShader = new VertexShaderD3D11( created_vs , input_layout );
+    input_layout->Release();
     created_vs->Release();
 
     return true;
@@ -49,15 +69,22 @@ bool ShaderLoaderD3D11::loadVertexShader( const std::string& Path, IVertexShader
 // ジオメトリシェーダーの読み込み
 bool ShaderLoaderD3D11::loadGeometryShader( const std::string& Path, IGeometryShader** ppShader )
 {
+    // シェーダーファイルの読み込み
+    std::fstream stream( Path, std::ios::binary | std::ios::in );
+    if( !stream ) return false;
+    size_t file_size = ::getBinaryLength( stream );
+    char* blob = new char[ file_size ];
+    stream.read( blob, file_size );
+    stream.close();
+
+    // シェーダーオブジェクトの生成
     ID3D11GeometryShader* created_gs;
-    char* blob = nullptr;
-    size_t size = ::loadBinary( Path, blob );
-    if( size == 0U ||
-        FAILED(p_device_->CreateGeometryShader(blob, size, nullptr, &created_gs)) )
+    if( FAILED(p_device_->CreateGeometryShader(blob, file_size, nullptr, &created_gs)) )
     {
         delete[] blob;
         return false;
     }
+    delete[] blob;
 
     *ppShader = new GeometryShaderD3D11( created_gs );
     created_gs->Release();
@@ -68,15 +95,22 @@ bool ShaderLoaderD3D11::loadGeometryShader( const std::string& Path, IGeometrySh
 // ピクセルシェーダーの読み込み
 bool ShaderLoaderD3D11::loadPixelShader( const std::string& Path, IPixelShader** ppShader )
 {
+    // シェーダーファイルの読み込み
+    std::fstream stream( Path, std::ios::binary | std::ios::in );
+    if( !stream ) return false;
+    size_t file_size = ::getBinaryLength( stream );
+    char* blob = new char[ file_size ];
+    stream.read( blob, file_size );
+    stream.close();
+
+    // シェーダーオブジェクトの生成
     ID3D11PixelShader* created_ps;
-    char* blob = nullptr;
-    size_t size = ::loadBinary( Path, blob );
-    if( size == 0U ||
-        FAILED(p_device_->CreatePixelShader(blob, size, nullptr, &created_ps)) )
+    if( FAILED(p_device_->CreatePixelShader(blob, file_size, nullptr, &created_ps)) )
     {
         delete[] blob;
         return false;
     }
+    delete[] blob;
 
     *ppShader = new PixelShaderD3D11( created_ps );
     created_ps->Release();
@@ -87,29 +121,20 @@ END_EGEG
 
 namespace
 {
-    // ファイルからバイナリデータを読み込む
-    // Bufferにはファイルの大きさに対応したメモリブロックを割り当てます。解放してください。
+    // ファイルのサイズを取得する
+    // この関数を抜けた後、ストリームはファイル始点を指す。
     //
-    // in FilePath : 読み込むファイルのパス
-    // out Buffer : 読み込んだデータを格納するバッファ(確保前)
+    // in Stream : ファイルストリーム
     //
-    // return 読み込んだファイルのサイズ
-    size_t loadBinary( const std::string& FilePath, char* Buffer )
+    // return ファイルのサイズ
+    size_t getBinaryLength( std::fstream& Stream )
     {
-        // ファイルオープン
-        std::fstream stream( FilePath, std::ios::binary | std::ios::in );
-        if( stream.is_open() == false ) return 0U;
-
-        // データ読み込み
-        stream.seekg( 0, std::ios::end );
-        auto end = stream.tellg();
-        stream.clear();
-        stream.seekg( 0, std::ios::beg );
-        auto beg = stream.tellg();
+        Stream.seekg( 0, std::ios::end );
+        auto end = Stream.tellg();
+        Stream.clear();
+        Stream.seekg( 0, std::ios::beg );
+        auto beg = Stream.tellg();
         size_t size = static_cast<size_t>( end - beg );
-        Buffer = new char[ size ];
-        stream.read( Buffer, size );
-        stream.close();
 
         return size;
     }
