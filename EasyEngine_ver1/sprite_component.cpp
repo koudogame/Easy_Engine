@@ -96,11 +96,6 @@ void SpriteComponent::setStatus(
         );
     }
 
-    sprite_.mesh.vertices[0].position = { -0.5F, 0.5F, 0.0F };
-    sprite_.mesh.vertices[1].position = { 0.5F, 0.5F, 0.0F };
-    sprite_.mesh.vertices[2].position = { -0.5F, -0.5F, 0.0F };
-    sprite_.mesh.vertices[3].position = { 0.5F, -0.5F, 0.0F };
-
     visible_ = true;
     validity_ = true;
 }

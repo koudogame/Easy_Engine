@@ -31,7 +31,7 @@ public :
             0,
             DXGI_FORMAT_R32G32_FLOAT,
             0,
-            sizeof Float4,
+            sizeof Float3,
             D3D11_INPUT_PER_VERTEX_DATA,
             0
         },
@@ -40,7 +40,7 @@ public :
             0,
             DXGI_FORMAT_R32G32B32A32_FLOAT,
             0,
-            sizeof Float4 + sizeof Float2,
+            sizeof Float3 + sizeof Float2,
             D3D11_INPUT_PER_VERTEX_DATA,
             0
         },
