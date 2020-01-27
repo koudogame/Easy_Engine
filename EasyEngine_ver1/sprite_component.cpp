@@ -72,7 +72,7 @@ void SpriteComponent::setStatus(
 
     // UVÀ•W‚ÌÝ’è
     Float2 uv[4];
-    const float kRecWidth  = 1.0 / pTexture->getWidth();
+    const float kRecWidth  = 1.0F / pTexture->getWidth();
     const float kRecHeight = 1.0F / pTexture->getHeight();
     const float kUVLeft   = Trimming.x * kRecWidth;
     const float kUVRight  = Trimming.z * kRecWidth;
