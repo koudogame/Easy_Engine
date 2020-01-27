@@ -15,7 +15,7 @@ bool Game::initialize()
 {
    if( sprite.initialize() == false ) return false;
 
-    if( TextureManager::instance()->load( L"tile.png", &texture_) == false )
+    if( TextureManager::instance()->load( L"kirby.png", &texture_) == false )
         return false;
 
     return true;
@@ -33,11 +33,11 @@ bool Game::update( uint64_t Delta )
 {
     sprite.setStatus(
         texture_,
-        {0.0F, 0.0F},
+        {10.0F, 100.0F},
         {0.0F, 0.0F, 64.0F, 64.0F});
 
     JobScheduler::instance()->execute( Delta );
-    RenderingManager::instance()->beginRender( { 0.0F, 0.0F, 0.0F, 1.0F} );
+    RenderingManager::instance()->beginRender( { 1.0F, 1.0F, 1.0F, 1.0F} );
     RenderBatch::instance()->render();
     RenderingManager::instance()->endRender();
 

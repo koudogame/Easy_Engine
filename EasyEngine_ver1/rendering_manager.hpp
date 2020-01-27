@@ -41,7 +41,7 @@ public :
     ///
     /// @param[in] Model : 描画するモデル
     ///
-    void render( const Model& Model );
+    void renderModel( const Model& Model );
     ///
     /// @brief   モデルの描画
     /// @details 実際に描画は行いません。
@@ -52,7 +52,7 @@ public :
     /// @param[in] pGeometryShader : ジオメトリシェーダー
     /// @param[in] pPixelShader : ピクセルシェーダー
     ///
-    void render( const Mesh& Mesh, ITexture* pTexture, IVertexShader* pVertexShader, IGeometryShader* pGeometryShader, IPixelShader* pPixelShader );
+    void renderModel( const Mesh& Mesh, ITexture* pTexture, IVertexShader* pVertexShader, IGeometryShader* pGeometryShader, IPixelShader* pPixelShader );
     ///
     /// @brief   描画終了
     /// @details beginRenderの呼び出しから、<br>
@@ -83,7 +83,6 @@ private :
 
     static RenderingManager* instance_;
     IRenderer* p_renderer_;         /// 使用するレンダラー
-    std::deque<Model> batch_list_;  /// 描画待機オブジェクト
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_RENDERING_MANAGER_HEADER_

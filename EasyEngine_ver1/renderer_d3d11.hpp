@@ -36,7 +36,9 @@ public :
 /*-----------------------------------------------------------------*/
     Vector2D getScreenSize() const override { return {viewport_.Width, viewport_.Height}; }
     void clear( const Vector4D& ) override;
+    void beginRender() override;
     void renderModel( const Model&, BlendMode ) override;
+    void endRender() override;
 
 private :
     ~RendererD3D11();
@@ -49,7 +51,7 @@ private :
     D3D11_VIEWPORT          viewport_;              /// ビューポート
     ID3D11SamplerState*     p_sampler_state_;       /// サンプラーステート
     ID3D11BlendState*       p_blend_states_[3];     /// ブレンドステート配列
-    std::deque<Model>       entry_list_;            /// 描画バッチ
+    std::deque<Model>       model_list_;            /// 描画バッチ
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_RENDERER_D3D11_HEADER_

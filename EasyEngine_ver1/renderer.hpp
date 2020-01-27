@@ -38,12 +38,22 @@ public :
     virtual void clear( const Vector4D& ColorRGBA ) = 0;
 
     ///
+    /// @brief  •`‰æŠJn
+    ///
+    virtual void beginRender() = 0;
+
+    ///
     /// @brief  ƒ‚ƒfƒ‹‚Ì•`‰æ
     ///
     /// @param[in] Model : •`‰æ‚·‚éƒ‚ƒfƒ‹
     /// @param[in] Mode  : •`‰æƒ‚[ƒh
     ///
     virtual void renderModel( const Model& Model, BlendMode Mode = BlendMode::kNormal ) = 0;
+
+    ///
+    /// @brief  •`‰æI—¹
+    ///
+    virtual void endRender() = 0;
 
 
     virtual ~IRenderer() = default;

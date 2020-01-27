@@ -78,6 +78,9 @@ RendererD3D11::RendererD3D11( ID3D11Device* pDevice, ID3D11DeviceContext* pImmed
 // デストラクタ
 RendererD3D11::~RendererD3D11()
 {
+    p_swap_chain_->SetFullscreenState( false, nullptr );
+    p_immediate_context_->ClearState();
+
     for( int i = 0; i < ::kBlendModeNum; ++i )
         p_blend_states_[i]->Release();
     p_sampler_state_->Release();
@@ -133,6 +136,7 @@ bool RendererD3D11::initialize()
             return false;
     }
 
+
     return true;
 }
 
@@ -143,11 +147,17 @@ void RendererD3D11::clear( const Vector4D& Color )
     p_immediate_context_->ClearRenderTargetView( p_render_target_view_, color );
 }
 
+// 描画開始
+void RendererD3D11::beginRender()
+{
+    model_list_.clear();
+}
+
 // モデル描画
 void RendererD3D11::renderModel( const Model& Model, BlendMode Mode )
 {
     // 頂点バッファ作成
-    /*const D3D11_BUFFER_DESC kVertexBufferDesc =
+    const D3D11_BUFFER_DESC kVertexBufferDesc =
     {
         sizeof(VertexData)* Model.mesh.vertices.size(),
         D3D11_USAGE_DEFAULT,
@@ -165,42 +175,40 @@ void RendererD3D11::renderModel( const Model& Model, BlendMode Mode )
     ID3D11Buffer* p_vertexbuffer;
     if( FAILED(p_device_->CreateBuffer(&kVertexBufferDesc, &kVertexSubResourceData, &p_vertexbuffer)) )
     {
-        p_blendstate->Release();   
         return;
-    }*/
+    }
 
     // インデックスバッファ作成
-    //std::vector<UINT> indices;
-    //indices.reserve( Model.mesh.indices.size() * 3U );  // 頂点インデックス * 3頂点
-    //// 頂点インデックスを一つの配列にまとめる
-    //for( const auto& polygon : Model.mesh.indices )
-    //{
-    //    for( int i = 0; i < 3; ++i )
-    //        indices.push_back( polygon.index[i] );
-    //}
+    std::vector<UINT> indices;
+    indices.reserve( Model.mesh.indices.size() * 3U );  // 頂点インデックス * 3頂点
+    // 頂点インデックスを一つの配列にまとめる
+    for( const auto& polygon : Model.mesh.indices )
+    {
+        for( int i = 0; i < 3; ++i )
+            indices.push_back( polygon.index[i] );
+    }
 
-    //const D3D11_BUFFER_DESC kIndexBufferDesc =
-    //{
-    //    sizeof(UINT) * indices.size(),
-    //    D3D11_USAGE_DEFAULT,
-    //    D3D11_BIND_INDEX_BUFFER,
-    //    0,
-    //    0,
-    //    0
-    //};
-    //const D3D11_SUBRESOURCE_DATA kIndexSubResourceData =
-    //{
-    //    indices.data(),
-    //    0U,
-    //    0U,
-    //};
-    //ID3D11Buffer* p_indexbuffer;
-    //if( FAILED(p_device_->CreateBuffer(&kIndexBufferDesc, &kIndexSubResourceData, &p_indexbuffer)) )
-    //{
-    //    p_blendstate->Release();
-    //    p_vertexbuffer->Release();
-    //    return;
-    //}
+    const D3D11_BUFFER_DESC kIndexBufferDesc =
+    {
+        sizeof(UINT) * indices.size(),
+        D3D11_USAGE_DEFAULT,
+        D3D11_BIND_INDEX_BUFFER,
+        0,
+        0,
+        0
+    };
+    const D3D11_SUBRESOURCE_DATA kIndexSubResourceData =
+    {
+        indices.data(),
+        0U,
+        0U,
+    };
+    ID3D11Buffer* p_indexbuffer;
+    if( FAILED(p_device_->CreateBuffer(&kIndexBufferDesc, &kIndexSubResourceData, &p_indexbuffer)) )
+    {
+        p_vertexbuffer->Release();
+        return;
+    }
 
     // モデルからステート情報を取得
     ID3D11InputLayout *p_inputlayout = nullptr;
@@ -228,24 +236,24 @@ void RendererD3D11::renderModel( const Model& Model, BlendMode Mode )
     }
 
     // パイプラインステートを設定
-    //p_immediate_context_->IASetInputLayout( p_inputlayout );
-    //size_t size = sizeof VertexData;
-    //unsigned offset = 0U;
-    //p_immediate_context_->IASetVertexBuffers( 0, 1, &p_vertexbuffer, &size, &offset );
-    //p_immediate_context_->IASetIndexBuffer( p_indexbuffer, DXGI_FORMAT_R32_UINT, 0 );
-    //p_immediate_context_->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP );
-    //if( p_vertexshader ) p_immediate_context_->VSSetShader( p_vertexshader, nullptr, 0U );
-    //if( p_geometryshader ) p_immediate_context_->GSSetShader( p_geometryshader, nullptr, 0U );
-    //if( p_pixelshader )
-    //{
-    //    p_immediate_context_->PSSetShader( p_pixelshader, nullptr, 0U );
-    //    p_immediate_context_->PSSetSamplers( 0, 1, &p_sampler_state_ );
-    //    p_immediate_context_->PSSetShaderResources( 0, 1, &p_shaderresourceview );
-    //}
+    p_immediate_context_->IASetInputLayout( p_inputlayout );
+    size_t size = sizeof VertexData;
+    unsigned offset = 0U;
+    p_immediate_context_->IASetVertexBuffers( 0, 1, &p_vertexbuffer, &size, &offset );
+    p_immediate_context_->IASetIndexBuffer( p_indexbuffer, DXGI_FORMAT_R32_UINT, 0 );
+    p_immediate_context_->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP );
+    if( p_vertexshader ) p_immediate_context_->VSSetShader( p_vertexshader, nullptr, 0U );
+    if( p_geometryshader ) p_immediate_context_->GSSetShader( p_geometryshader, nullptr, 0U );
+    if( p_pixelshader )
+    {
+        p_immediate_context_->PSSetShader( p_pixelshader, nullptr, 0U );
+        p_immediate_context_->PSSetSamplers( 0, 1, &p_sampler_state_ );
+        p_immediate_context_->PSSetShaderResources( 0, 1, &p_shaderresourceview );
+    }
     p_immediate_context_->OMSetBlendState( p_blend_states_[Mode], nullptr, 0xFFFFFFFF );
 
-    //// 描画
-    //p_immediate_context_->DrawIndexed( indices.size(), 0, 0 );
+    // 描画
+    p_immediate_context_->DrawIndexed( indices.size(), 0, 0 );
 
     // 不要になったインターフェイスの解放
     if( p_shaderresourceview )  p_shaderresourceview->Release();
@@ -253,9 +261,16 @@ void RendererD3D11::renderModel( const Model& Model, BlendMode Mode )
     if( p_geometryshader )      p_geometryshader->Release();
     if( p_vertexshader )        p_vertexshader->Release();
     if( p_inputlayout )         p_inputlayout->Release();
-    //p_indexbuffer->Release();
-    //p_vertexbuffer->Release();
-    //p_blendstate->Release();
+    p_indexbuffer->Release();
+    p_vertexbuffer->Release();
+}
+
+// 描画終了
+void RendererD3D11::endRender()
+{
+    if( p_swap_chain_->Present( 0U, DXGI_PRESENT_TEST ) == S_OK )
+        p_swap_chain_->Present( 0U, 0U );
+    model_list_.clear();
 }
 END_EGEG
 // EOF

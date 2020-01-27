@@ -20,16 +20,16 @@ RenderingManager::~RenderingManager()
 // 描画開始
 void RenderingManager::beginRender( const Vector4D& Color )
 {
-    batch_list_.clear();
+    p_renderer_->beginRender();
     p_renderer_->clear( Color );
 }
 
 // 描画のエントリー
-void RenderingManager::render( const Model& Model )
+void RenderingManager::renderModel( const Model& Model )
 {
-    batch_list_.push_back( Model );
+    p_renderer_->renderModel( Model );
 }
-void RenderingManager::render( const Mesh& Mesh, ITexture* pTexture, IVertexShader* pVertexShader, IGeometryShader* pGeometryShader, IPixelShader* pPixelShader )
+void RenderingManager::renderModel( const Mesh& Mesh, ITexture* pTexture, IVertexShader* pVertexShader, IGeometryShader* pGeometryShader, IPixelShader* pPixelShader )
 {
     Model model =
     {
@@ -39,17 +39,13 @@ void RenderingManager::render( const Mesh& Mesh, ITexture* pTexture, IVertexShad
         model.geometry_shader = pGeometryShader,
         model.pixel_shader = pPixelShader
     };
-    this->render( model );
+    this->renderModel( model );
 }
 
 // 描画終了
 void RenderingManager::endRender()
 {
-    for( auto& model : batch_list_ )
-    {
-        p_renderer_->renderModel( model );
-    }
-    batch_list_.clear();
+    p_renderer_->endRender();
 }
 
 // インスタンスの生成

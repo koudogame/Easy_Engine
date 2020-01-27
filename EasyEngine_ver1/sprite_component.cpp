@@ -37,17 +37,19 @@ void SpriteComponent::setStatus(
     if( sprite_.texture ) { sprite_.texture->release(); }
     sprite_.texture = pTexture;
 
-    VertexData vertices[4];
+    Vector3D vertices[4];
+    const float Width  = Trimming.z - Trimming.x;
+    const float Height = Trimming.w - Trimming.y;
 
     // 頂点座標の設定
     const float kLeft = 0.0F;
     const float kTop  = 0.0F;
-    const float kRight = static_cast<float>(pTexture->getWidth());
-    const float kBottom = static_cast<float>(pTexture->getHeight());
-    vertices[0].position = Vector3D{ kLeft, kTop, Depth };       // 左上
-    vertices[1].position = Vector3D{ kRight, kTop, Depth };      // 右上
-    vertices[2].position = Vector3D{ kLeft, kBottom, Depth };    // 左下
-    vertices[3].position = Vector3D{ kRight, kBottom, Depth };   // 右下
+    const float kRight = Width;
+    const float kBottom = Height;
+    vertices[0] = Vector3D{ kLeft, kTop, Depth };       // 左上
+    vertices[1] = Vector3D{ kRight, kTop, Depth };      // 右上
+    vertices[2] = Vector3D{ kLeft, kBottom, Depth };    // 左下
+    vertices[3] = Vector3D{ kRight, kBottom, Depth };   // 右下
     // 頂点座標の変換
     const Matrix3x3 kTranslation   = Matrix3x3::createTranslationMatrix( Position );
     const Matrix3x3 kRotarion      = Matrix3x3::createRotationMatrix( RotationDEG );
@@ -56,40 +58,43 @@ void SpriteComponent::setStatus(
     const Matrix3x3 kTransform     = kTranslation * kRotarion * kScaling * kRevOrigin;
     for( auto& vertex : vertices )
     {
-        vertex.position = kTransform * vertex.position;
+        vertex = kTransform * vertex;
     }
     // 頂点座標の正規化
     const Vector2D kScreenSize = RenderingManager::instance()->getScreenSize();
-    const float kXCoefficient = (0.5F / kScreenSize.x );
-    const float kYCoefficient = -(0.5F / kScreenSize.y );
+    const float kXCoefficient = (1.0F / kScreenSize.x ) * 2.0F;
+    const float kYCoefficient = -(1.0F / kScreenSize.y ) * 2.0F;
     for( auto& vertex : vertices )
     {
-        vertex.position.x = (vertex.position.x * kXCoefficient) - 1.0F;
-        vertex.position.y = (vertex.position.y * kYCoefficient) - 1.0F;
+        vertex.x = (vertex.x * kXCoefficient) - 1.0F;
+        vertex.y = (vertex.y * kYCoefficient) + 1.0F;
     }
 
     // UV座標の設定
+    Float2 uv[4];
     const float kRecWidth  = 1.0F / pTexture->getWidth();
     const float kRecHeight = 1.0F / pTexture->getHeight();
     const float kUVLeft   = Trimming.x * kRecWidth;
     const float kUVRight  = Trimming.z * kRecWidth;
     const float kUVTop    = Trimming.y * kRecHeight;
     const float kUVBottom = Trimming.w * kRecHeight;
-    vertices[0].uv = { kUVLeft, kUVTop };
-    vertices[1].uv = { kUVRight, kUVTop };
-    vertices[2].uv = { kUVLeft, kUVBottom };
-    vertices[3].uv = { kUVRight, kUVBottom };
-
-    // 頂点カラーのセット
-    for( auto& vertex : vertices )
-    {
-        vertex.color_rgba = Vector4D{ Color.x, Color.y, Color.z, Alpha };
-    }
+    uv[0] = { kUVLeft, kUVTop };
+    uv[1] = { kUVRight, kUVTop };
+    uv[2] = { kUVLeft, kUVBottom };
+    uv[3] = { kUVRight, kUVBottom };
 
     // 頂点セット
     sprite_.mesh.vertices.clear();
     for( int i = 0; i < 4; ++i )
-        sprite_.mesh.vertices.push_back( vertices[i] );
+    {
+        sprite_.mesh.vertices.push_back(
+            VertexData {
+                vertices[i],
+                uv[i],
+                { Color.x, Color.y, Color.z, Alpha }
+            }
+        );
+    }
 
     visible_ = true;
     validity_ = true;
@@ -100,7 +105,7 @@ void SpriteComponent::render()
 {
     if( validity_ && visible_ )
     {
-        RenderingManager::instance()->render( sprite_ );
+        RenderingManager::instance()->renderModel( sprite_ );
     }
 }
 

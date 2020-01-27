@@ -10,9 +10,9 @@
 BEGIN_EGEG
 struct VertexData
 {
-    Vector3D position;
-    Vector2D uv;
-    Vector4D color_rgba;
+    Float3 position;
+    Float2 uv;
+    Float4 color_rgba;
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_VERTEX_DATA_HEADER_
