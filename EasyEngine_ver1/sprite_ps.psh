@@ -11,7 +11,7 @@ struct VS_OUTPUT
 float4 ps_main( VS_OUTPUT input ) : SV_TARGET
 {
     float4 output = cb_Texture.Sample( cb_SamplerState, input.uv );
-    output.w = 2.F;
+
 
     return output;
 }
