@@ -2,12 +2,15 @@
 /// @file   sound.hpp
 /// @author 板場
 ///
-/// @brief  サウンドデータ
-///
 #ifndef INCLUDED_EGEG_SOUND_HEADER_
 #define INCLUDED_EGEG_SOUND_HEADER_
 #include "shared_object.hpp"
 BEGIN_EGEG
+///
+/// @class ISound
+///
+/// @brief  サウンドデータ
+///
 class ISound :
     public SharedObject
 {

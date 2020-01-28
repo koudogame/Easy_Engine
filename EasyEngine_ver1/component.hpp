@@ -2,13 +2,16 @@
 /// @file   component.hpp
 /// @author 板場
 ///
-/// @brief  コンポーネント
-///
 #ifndef INCLUDED_EGEG_COMPONENT_HEADER_
 #define INCLUDED_EGEG_COMPONENT_HEADER_
-#include "egeg_common.hpp"
+#include "actor.hpp"
 BEGIN_EGEG
-class GameObject;
+///
+/// @class   Component
+///          
+/// @brief   コンポーネント基底クラス
+/// @detaisl Actorクラスのオーナーに対して影響します。
+///
 class Component
 {
 public :
@@ -21,14 +24,14 @@ public :
     ///
     /// @return 初期化成功[ true ]　初期化失敗[ false ]
     ///
-    virtual bool initialize( GameObject* Owner ) = 0;
+    virtual bool initialize( Actor* Owner ) = 0;
     ///
     /// @brief  終了処理
     ///
     virtual void finalize() = 0;
 
 protected :
-    GameObject* owner_ = nullptr;
+    Actor* owner_ = nullptr;
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_COMPONENT_HEADER_

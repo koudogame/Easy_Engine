@@ -1,10 +1,6 @@
 ///
 /// @file    job_scheduler.hpp
 /// @author  板場
-///          
-/// @brief   ジョブスケジューラー
-/// @details シングルトンクラスです。アクセスにはinstance関数を使用してください。<br>
-///          登録された関数をexecute関数で一度に呼び出します。
 ///
 #ifndef INCLUDED_EGEG_JOB_SCHEDULER_HEADER_
 #define INCLUDED_EGEG_JOB_SCHEDULER_HEADER_
@@ -13,6 +9,13 @@
 #include "job.hpp"
 #include "job_container.hpp"
 BEGIN_EGEG
+///
+/// @class JobScheduler
+///          
+/// @brief   ジョブスケジューラー
+/// @details シングルトンクラスです。アクセスにはinstance関数を使用してください。<br>
+///          登録された関数をexecute関数で一度に呼び出します。
+///
 class JobScheduler
 {
 public :

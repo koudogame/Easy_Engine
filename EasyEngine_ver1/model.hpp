@@ -2,8 +2,6 @@
 /// @file   model.hpp
 /// @author 板場
 ///
-/// @brief  モデル
-///
 #ifndef INCLUDED_EGEG_MODEL_HEADER_
 #define INCLUDED_EGEG_MODEL_HEADER_
 #include "mesh.hpp"
@@ -12,6 +10,11 @@
 #include "geometry_shader.hpp"
 #include "pixel_shader.hpp"
 BEGIN_EGEG
+///
+/// @struct Model
+///
+/// @brief  モデル
+///
 struct Model
 {
     Mesh             mesh;              ///< メッシュ

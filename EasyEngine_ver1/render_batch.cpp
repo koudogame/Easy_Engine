@@ -7,10 +7,10 @@ BEGIN_EGEG
 // ƒoƒbƒ`ˆ—
 void RenderBatch::render()
 {
-    for( auto& component : components_ )
+    /*for( auto& component : components_ )
     {
         component->render();
-    }
+    }*/
 }
 END_EGEG
 // EOF

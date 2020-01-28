@@ -2,7 +2,6 @@
 #include "scene_manager.hpp"
 #include "system_manager.hpp"
 #include "uid.hpp"
-#include "game_object_factory.hpp"
 
 BEGIN_EGEG
 // SceneManager : 関数の実装
@@ -21,7 +20,7 @@ SceneManager::~SceneManager()
 // シーンの追加
 void SceneManager::push( uint32_t ID )
 {
-    Scene* next = 
+   /* Scene* next = 
         dynamic_cast<Scene*>(GameObjectFactory::instance()->create( ID ));
     if( next == nullptr )
     {
@@ -40,7 +39,7 @@ void SceneManager::push( uint32_t ID )
     next->setActive( true );
 
     scenes_.back()->setActive( false );
-    scenes_.push_back( next );
+    scenes_.push_back( next );*/
 }
 
 // シーンの削除
@@ -52,7 +51,7 @@ void SceneManager::pop()
     // シーンのポップ
     Scene* poped = scenes_.back();
     scenes_.pop_back();
-    poped->finalize();
+    //poped->finalize();
     delete poped;
 }
 

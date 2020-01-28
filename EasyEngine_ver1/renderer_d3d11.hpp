@@ -2,14 +2,17 @@
 /// @file   renderer_d3d11.hpp
 /// @author 板場
 ///
-/// @brief  DirectX11用レンダラー
-///
 #ifndef INCLUDED_EGEG_RENDERER_D3D11_HEADER_
 #define INCLUDED_EGEG_RENDERER_D3D11_HEADER_
 #include <deque>
 #include <d3d11.h>
 #include "renderer.hpp"
 BEGIN_EGEG
+///
+/// @class  RendererD3D11
+///
+/// @brief  DirectX11用レンダラー
+///
 class RendererD3D11 :
     public IRenderer
 {

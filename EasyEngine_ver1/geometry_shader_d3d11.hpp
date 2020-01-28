@@ -2,13 +2,16 @@
 /// @file   geometry_shader_d3d11.hpp
 /// @author 板場
 ///
-/// @brief  DirectX11用ジオメトリシェーダー
-///
 #ifndef INCLUDED_EGEG_GEOMETRY_SHADER_D3D11_HEADER_
 #define INCLUDED_EGEG_GEOMETRY_SHADER_D3D11_HEADER_
 #include <d3d11.h>
 #include "geometry_shader.hpp"
 BEGIN_EGEG
+///
+/// @class  GeometryShaderD3D11
+///
+/// @brief  DirectX11用ジオメトリシェーダー
+///
 class GeometryShaderD3D11 :
     public IGeometryShader
 {

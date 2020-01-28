@@ -2,12 +2,15 @@
 /// @file   renderer.hpp
 /// @author 板場
 ///
-/// @brief  レンダラー
-///
 #ifndef INCLUDED_EGEG_RENDERER_HEADER_
 #define INCLUDED_EGEG_RENDERER_HEADER_
 #include "model.hpp"
 BEGIN_EGEG
+///
+/// @class  IRenderer
+///
+/// @brief  レンダラー
+///
 class IRenderer
 {
 public :

@@ -1,11 +1,6 @@
 ///
 /// @file    shader_manager.hpp
 /// @author  板場
-///          
-/// @brief   シェーダーマネージャー
-/// @details シングルトンクラスです。アクセスにはinstance関数を使用してください。<br>
-///          このクラスを使用して読み込んだシェーダーは、必ずこのクラスで開放してください。<br>
-///          読み込んだシェーダーを保持し、このクラスの破棄時に開放されていないシェーダーを開放します。
 ///
 #ifndef INCLUDED_EGEG_SHADER_MANAGER_HEADER_
 #define INCLUDED_EGEG_SHADER_MANAGER_HEADER_
@@ -14,6 +9,14 @@
 #include "easy_engine.hpp"
 #include "shader_loader.hpp"
 BEGIN_EGEG
+///
+/// @class  ShaderManager
+///          
+/// @brief   シェーダーマネージャー
+/// @details シングルトンクラスです。アクセスにはinstance関数を使用してください。<br>
+///          このクラスを使用して読み込んだシェーダーは、必ずこのクラスで開放してください。<br>
+///          読み込んだシェーダーを保持し、このクラスの破棄時に開放されていないシェーダーを開放します。
+///
 class ShaderManager
 {
 public :

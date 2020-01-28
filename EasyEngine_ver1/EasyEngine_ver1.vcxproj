@@ -145,8 +145,6 @@
   <ItemGroup>
     <ClInclude Include="actor.hpp" />
     <ClInclude Include="actor_factory.hpp" />
-    <ClInclude Include="body_2d.hpp" />
-    <ClInclude Include="circle_2d.hpp" />
     <ClInclude Include="component.hpp" />
     <ClInclude Include="component_factory.hpp" />
     <ClInclude Include="easy_engine.hpp" />
@@ -154,15 +152,10 @@
     <ClInclude Include="egeg_math.hpp" />
     <ClInclude Include="entry_scene.hpp" />
     <ClInclude Include="game.hpp" />
-    <ClInclude Include="game_object.hpp" />
-    <ClInclude Include="actor2d.hpp" />
     <ClInclude Include="geometry_shader.hpp" />
     <ClInclude Include="geometry_shader_d3d11.hpp" />
-    <ClInclude Include="line_2d.hpp" />
     <ClInclude Include="pixel_shader_d3d11.hpp" />
-    <ClInclude Include="point_2d.hpp" />
     <ClInclude Include="render_batch.hpp" />
-    <ClInclude Include="render_component.hpp" />
     <ClInclude Include="scene.hpp" />
     <ClInclude Include="scene_factory.hpp" />
     <ClInclude Include="scene_manager.hpp" />
@@ -208,7 +201,6 @@
     <ClCompile Include="renderer_d3d11.cpp" />
     <ClCompile Include="rendering_manager.cpp" />
     <ClCompile Include="render_batch.cpp" />
-    <ClCompile Include="render_component.cpp" />
     <ClCompile Include="scene_manager.cpp" />
     <ClCompile Include="shader_loader_d3d11.cpp" />
     <ClCompile Include="shader_manager.cpp" />

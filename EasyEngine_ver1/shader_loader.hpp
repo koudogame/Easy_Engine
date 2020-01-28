@@ -2,8 +2,6 @@
 /// @file   shader_loader.hpp
 /// @author 板場
 ///
-/// @brief  シェーダーローダー
-///
 #ifndef INCLUDED_EGEG_SHADER_LOADER_
 #define INCLUDED_EGEG_SHADER_LOADER_
 #include <string>
@@ -11,6 +9,11 @@
 #include "geometry_shader.hpp"
 #include "pixel_shader.hpp"
 BEGIN_EGEG
+///
+/// @class IShaderLoader
+///
+/// @brief  シェーダーローダー
+///
 class IShaderLoader
 {
 public :

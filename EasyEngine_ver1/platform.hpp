@@ -2,8 +2,6 @@
 /// @file   platform.hpp
 /// @author 板場
 ///
-/// @brief  プラットフォーム
-///
 #ifndef INCLUDED_EGEG_PLATFORM_HEADER_
 #define INCLUDED_EGEG_PLATFORM_HEADER_
 #include <functional>
@@ -11,6 +9,11 @@
 #include "shader_loader.hpp"
 #include "texture_loader.hpp"
 BEGIN_EGEG
+///
+/// @class IPlatform
+///
+/// @brief  プラットフォーム
+///
 class IPlatform
 {
 public :

@@ -2,15 +2,17 @@
 /// @file   scene.hpp
 /// @author 板場
 ///
-/// @brief  シーン
-///
 #ifndef INCLUDED_EGEG_SCENE_HEADER_
 #define INCLUDED_EGEG_SCENE_HEADER_
 #include <cstdint>
-#include "game_object.hpp"
+#include "egeg_common.hpp"
 BEGIN_EGEG
-class Scene :
-    public GameObject
+///
+/// @class  Scene
+///
+/// @brief  シーン基底クラス
+///
+class Scene
 {
 public :
     virtual ~Scene() = default;

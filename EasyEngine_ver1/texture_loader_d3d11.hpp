@@ -2,13 +2,16 @@
 /// @file   texture_loader_d3d11.hpp
 /// @author 板場
 ///
-/// @brief  DirectX11用テクスチャローダー
-///
 #ifndef INCLUDED_EGEG_TEXTURE_LOADER_D3D11_HEADER_
 #define INCLUDED_EGEG_TEXTURE_LOADER_D3D11_HEADER_
 #include <d3d11.h>
 #include "texture_loader.hpp"
 BEGIN_EGEG
+///
+/// @class  TextureLoaderD3D11
+///
+/// @brief  DirectX11用テクスチャローダー
+///
 class TextureLoaderD3D11 :
     public ITextureLoader
 {

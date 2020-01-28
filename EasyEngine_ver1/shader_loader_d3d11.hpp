@@ -2,13 +2,16 @@
 /// @file   shader_loader_d3d11.hpp
 /// @author 板場
 ///
-/// @brief  DirectX11用シェーダーローダー
-///
 #ifndef INCLUDED_EGEG_SHADER_LOADER_D3D11_HEADER_
 #define INCLUDED_EGEG_SHADER_LOADER_D3D11_HEADER_
 #include <d3d11.h>
 #include "shader_loader.hpp"
 BEGIN_EGEG
+///
+/// @class ShaderLoaderD3D11
+///
+/// @brief  DirectX11用シェーダーローダー
+///
 class ShaderLoaderD3D11 :
     public IShaderLoader
 {

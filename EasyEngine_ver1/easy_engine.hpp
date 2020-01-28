@@ -1,10 +1,6 @@
 ///
 /// @file    easy_engine.hpp
 /// @author  板場
-///          
-/// @brief   EasyEngine本体
-/// @details アプリケーションのエントリークラスです。<br>
-///          シングルトンクラスです。グローバルアクセスは提供しません。
 ///
 #ifndef INCLUDED_EGEG_EASY_ENGINE_HEADER_
 #define INCLUDED_EGEG_EASY_ENGINE_HEADER_
@@ -14,6 +10,13 @@
 #endif /// !_DEBUG
 #include "egeg_common.hpp"
 BEGIN_EGEG
+///
+/// @class  EasyEngine
+///          
+/// @brief   EasyEngine本体
+/// @details アプリケーションのエントリークラスです。<br>
+///          シングルトンクラスです。グローバルアクセスは提供しません。
+///
 class EasyEngine final
 {
 public :

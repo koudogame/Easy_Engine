@@ -2,15 +2,18 @@
 /// @file   uid.hpp
 /// @author 板場
 ///
-/// @brief  クラス毎に固有のIDを取得する
-///
-/// @tparam Object : IDを取得するクラス型
-///
 #ifndef INCLUDED_EGEG_UID_HEADER_
 #define INCLUDED_EGEG_UID_HEADER_
 #include <cstdint>
 #include "egeg_common.hpp"
 BEGIN_EGEG
+///
+/// @class  UID
+///
+/// @brief  クラス毎に固有のIDを生成
+///
+/// @tparam Object : IDを生成するクラス型
+///
 template <class Object>
 class UID
 {

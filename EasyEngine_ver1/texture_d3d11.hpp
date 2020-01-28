@@ -2,13 +2,16 @@
 /// @file   texture_windows.hpp
 /// @author 板場
 ///
-/// @brief  Windows用テクスチャ
-///
 #ifndef INCLUDED_EGEG_TEXTURE_WINDOWS_HEADER_
 #define INCLUDED_EGEG_TEXTURE_WINDOWS_HEADER_
 #include <d3d11.h>
 #include "texture.hpp"
 BEGIN_EGEG
+///
+/// @class  TextureD3D11
+///
+/// @brief  DirectX11用テクスチャ
+///
 class TextureD3D11 :
     public ITexture
 {

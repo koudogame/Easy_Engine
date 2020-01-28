@@ -10,6 +10,8 @@
 #include "egeg_common.hpp"
 ///
 /// @enum    JobPriority
+///
+/// @brief   ジョブの実行優先度
 /// @details 値の小さい方が先に実行されます。
 ///
 enum JobPriority : uint32_t

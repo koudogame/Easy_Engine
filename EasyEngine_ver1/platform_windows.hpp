@@ -2,14 +2,17 @@
 /// @file   platform_windows.hpp
 /// @author 板場
 ///
-/// @brief  プラットフォーム「Windows」
-///
 #ifndef INCLUDED_EGEG_PLATFORM_WINDOWS_HEADER_
 #define INCLUDED_EGEG_PLATFORM_WINDOWS_HEADER_
 #include <Windows.h>
 #include <d3d11.h>
 #include "platform.hpp"
 BEGIN_EGEG
+///
+/// @class PlatformWindows
+///
+/// @brief  プラットフォーム「Windows」
+///
 class PlatformWindows :
     public IPlatform
 {

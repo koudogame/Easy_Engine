@@ -1,17 +1,20 @@
 ///
 /// @file    platform_factory.hpp
 /// @author  板場
-///          
-/// @brief   プラットフォームファクトリー
-/// @details シングルトンクラスです。アクセスにはinstance関数を使用して下さい。<br>
-///          新しいプラットフォームの登録はREGISTER_PLATFORMマクロを使用して下さい。<br>
-///          登録する生成関数は、生成に失敗した場合必ずnullptrを返却するようにして下さい。
 ///
 #ifndef INCLUDED_EGEG_PLATFORM_FACTORY_HEADER_
 #define INCLUDED_EGEG_PLATFORM_FACTORY_HEADER_
 #include <unordered_map>
 #include "platform.hpp"
 BEGIN_EGEG
+///
+/// @class  PlatformFactory
+///          
+/// @brief   プラットフォームファクトリー
+/// @details シングルトンクラスです。アクセスにはinstance関数を使用して下さい。<br>
+///          新しいプラットフォームの登録はREGISTER_PLATFORMマクロを使用して下さい。<br>
+///          登録する生成関数は、生成に失敗した場合必ずnullptrを返却するようにして下さい。
+///
 class PlatformFactory
 {
 public :

@@ -1,15 +1,18 @@
 ///
 /// @file    system_manager.hpp
 /// @author  板場
-///          
-/// @brief   システムマネージャー
-/// @details シングルトンクラスです。アクセスにはinstance関数を使用して下さい。
 ///
 #ifndef INCLUDED_EGEG_SYSTEM_MANAGER_HEADER_
 #define INCLUDED_EGEG_SYSTEM_MANAGER_HEADER_
 #include "easy_engine.hpp"
 #include "platform.hpp"
 BEGIN_EGEG
+///
+/// @class  SystemManager
+///          
+/// @brief   システムマネージャー
+/// @details シングルトンクラスです。アクセスにはinstance関数を使用して下さい。
+///
 class SystemManager
 {
 public :

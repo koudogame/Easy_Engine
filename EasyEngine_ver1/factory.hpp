@@ -2,24 +2,26 @@
 /// @file	factory.hpp
 /// @autohr 板場
 ///
-/// @brief	ファクトリ
-///
-/// @tparam Base    : 生成するオブジェクトに共通する基底クラス型
-///	@tparam Creator : 生成処理を担うクラス型
-///
 #ifndef	INCLUDED_EGEG_FACTORY_HEADER_
 #define INCLUDED_EGEG_FACTORY_HEADER_
 #include <unordered_map>
 #include "egeg_common.hpp"
 BEGIN_EGEG
-template <class Base, class Creator>
+///
+/// @class  Factory
+///
+/// @brief	汎用ファクトリ
+///
+/// @tparam Base    : 生成するオブジェクトに共通する基底クラス型
+///	@tparam Creator : 生成処理を行うオブジェクト型
+///
+template <typename Base, typename Creator>
 class Factory
 {
 public :
 	///
 	/// @brief	 クリエイターの登録
-	///	@details 既にクリエイターが登録されている場合は新規に登録を行いません。<br>
-	///			 クリエイターを上書きしたい場合は、unregisterCreator関数を使用して下さい。
+	///	@details 既にクリエイターが登録されている場合は、新規に登録を行いません。
 	///
 	/// @param[in] ID      : 登録するオブジェクトの識別ID
 	/// @param[in] Creator : クリエイター
@@ -28,15 +30,6 @@ public :
     {
 		if( creators_.find( ID ) == creators_.end() )
 			creators_.emplace( ID, Creator );
-    }
-	///
-	/// @brief	クリエイターの登録解除
-	///
-	/// @param[in] ID : 登録を解除するオブジェクトの識別ID
-	///
-	void unregisterCreator( uint32_t ID )
-    {
-		creators_.erase( ID );
     }
 
 	///

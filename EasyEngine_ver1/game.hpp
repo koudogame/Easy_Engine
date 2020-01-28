@@ -1,10 +1,6 @@
 ///
 /// @file    game.hpp
 /// @author  板場
-///          
-/// @brief   ゲーム本体
-/// @details ゲームのエントリークラスです。<br>
-///          シングルトンクラスです。グローバルアクセスは提供しません。
 ///
 #ifndef INCLUDED_EGEG_GAME_HEADER_
 #define INCLUDED_EGEG_GAME_HEADER_
@@ -12,6 +8,13 @@
 #include "sprite_component.hpp"
 BEGIN_EGEG
 class ITexture;
+///
+/// @class  Game
+///          
+/// @brief   ゲーム本体
+/// @details ゲームのエントリークラスです。<br>
+///          シングルトンクラスです。グローバルアクセスは提供しません。
+///
 class Game
 {
 public :

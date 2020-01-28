@@ -1,9 +1,6 @@
 ///
 /// @file    rendering_manager.hpp
 /// @author  板場
-///          
-/// @brief   レンダリングマネージャ－
-/// @details シングルトンクラスです。アクセスにはinstance関数を使用して下さい。
 ///
 #ifndef INCLUDED_EGEG_RENDERING_MANAGER_HEADER_
 #define INCLUDED_EGEG_RENDERING_MANAGER_HEADER_
@@ -11,6 +8,12 @@
 #include "easy_engine.hpp"
 #include "renderer.hpp"
 BEGIN_EGEG
+///
+/// @class  RenderingManager
+///          
+/// @brief   レンダリングマネージャ－
+/// @details シングルトンクラスです。アクセスにはinstance関数を使用して下さい。
+///
 class RenderingManager
 {
 public :

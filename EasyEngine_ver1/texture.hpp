@@ -2,12 +2,15 @@
 /// @file   texture.hpp
 /// @author 板場
 ///
-/// @brief  テクスチャデータ
-///
 #ifndef INCLUDED_EGEG_TEXTURE_HEADER_
 #define INCLUDED_EGEG_TEXTURE_HEADER_
 #include "shared_object.hpp"
 BEGIN_EGEG
+///
+/// @class ITexture
+///
+/// @brief  テクスチャデータ
+///
 class ITexture :
     public SharedObject
 {

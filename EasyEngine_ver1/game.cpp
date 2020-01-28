@@ -13,19 +13,13 @@ BEGIN_EGEG
 // ‰Šú‰»ˆ—
 bool Game::initialize()
 {
-   if( sprite.initialize() == false ) return false;
-
-    if( TextureManager::instance()->load( L"tile.png", &texture_) == false )
-        return false;
-
     return true;
 }
 
 // I—¹ˆ—
 void Game::finalize()
 {
-    TextureManager::instance()->unload( &texture_ );
-   sprite.finalize();
+
 }
 
 // XVˆ—

@@ -2,13 +2,16 @@
 /// @file   sound_loader.hpp
 /// @author 板場
 ///
-/// @brief  サウンドローダー
-///
 #ifndef INCLUDED_EGEG_SOUND_LOADER_HEADER_
 #define INCLUDED_EGEG_SOUND_LOADER_HEADER_
 #include <string>
 #include "sound.hpp"
 BEGIN_EGEG
+///
+/// @class ISoundLoader
+///
+/// @brief  サウンドローダー
+///
 class ISoundLoader
 {
 public :

@@ -2,13 +2,16 @@
 /// @file   texture_loader.hpp
 /// @author 板場
 ///
-/// @brief  テクスチャローダー
-///
 #ifndef INCLUDED_EGEG_TEXTURE_LOADER_HEADER_
 #define INCLUDED_EGEG_TEXTURE_LOADER_HEADER_
 #include <string>
 #include "texture.hpp"
 BEGIN_EGEG
+///
+/// @class ITextureLoader
+///
+/// @brief  テクスチャローダー
+///
 class ITextureLoader
 {
 public :

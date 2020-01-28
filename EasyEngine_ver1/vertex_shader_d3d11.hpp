@@ -2,14 +2,17 @@
 /// @file   vertex_shader_d3d11.hpp
 /// @author 板場
 ///
-/// @brief  DirectX11用頂点シェーダー
-///
 #ifndef INCLUDED_EGEG_VERTEX_SHADER_D3D11_HEADER_
 #define INCLUDED_EGEG_VERTEX_SHADER_D3D11_HEADER_
 #include <d3d11.h>
 #include "vertex_shader.hpp"
 #include "egeg_math.hpp"
 BEGIN_EGEG
+///
+/// @class  VertexShaderD3D11
+///
+/// @brief  DirectX11用頂点シェーダー
+///
 class VertexShaderD3D11 :
     public IVertexShader
 {

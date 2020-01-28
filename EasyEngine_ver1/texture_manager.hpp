@@ -1,10 +1,6 @@
 ///
 /// @file    texture_manager.hpp
 /// @author  板場
-///          
-/// @brief   テクスチャマネージャー
-/// @details シングルトンクラスです。アクセスにはinstance関数を使用してください。<br>
-///          このクラスを使用して読み込んだテクスチャは、必ずこのクラスで開放してください。
 ///
 #ifndef INCLUDED_TEXTURE_MANAGER_HEADER_
 #define INCLUDED_TEXTURE_MANAGER_HEADER_
@@ -13,6 +9,13 @@
 #include "easy_engine.hpp"
 #include "texture_loader.hpp"
 BEGIN_EGEG
+///
+/// @class  TextureManager
+///          
+/// @brief   テクスチャマネージャー
+/// @details シングルトンクラスです。アクセスにはinstance関数を使用してください。<br>
+///          このクラスを使用して読み込んだテクスチャは、必ずこのクラスで開放してください。
+///
 class TextureManager
 {
 public :

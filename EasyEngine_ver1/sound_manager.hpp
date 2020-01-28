@@ -1,16 +1,19 @@
 ///
 /// @file    sound_manager.hpp
 /// @author  板場
-///          
-/// @brief   サウンドマネージャー
-/// @details シングルトンクラスです。アクセスにはinstance関数を使用してください。<br>
-///          このクラスを使用して読み込んだサウンドは、必ずこのクラスで開放してください。
 ///
 #ifndef INCLUDED_EGEG_SOUND_MANAGER_HEADER_
 #define INCLUDED_EGEG_SOUND_MANAGER_HEADER_
 #include "easy_engine.hpp"
 #include "sound_loader.hpp"
 BEGIN_EGEG
+///
+/// @class  SoundManager
+///          
+/// @brief   サウンドマネージャー
+/// @details シングルトンクラスです。アクセスにはinstance関数を使用してください。<br>
+///          このクラスを使用して読み込んだサウンドは、必ずこのクラスで開放してください。
+///
 class SoundManager
 {
 public :

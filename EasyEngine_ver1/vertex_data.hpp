@@ -2,12 +2,15 @@
 /// @file   vertex_data.hpp
 /// @author 板場
 ///
-/// @brief  頂点データ
-///
 #ifndef INCLUDED_EGEG_VERTEX_DATA_HEADER_
 #define INCLUDED_EGEG_VERTEX_DATA_HEADER_
 #include "egeg_math.hpp"
 BEGIN_EGEG
+///
+/// @struct VertexData
+///
+/// @brief  頂点データ
+///
 struct VertexData
 {
     Float3 position;

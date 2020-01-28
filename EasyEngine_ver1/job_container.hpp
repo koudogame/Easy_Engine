@@ -2,13 +2,16 @@
 /// @file   job_container.hpp
 /// @author 板場
 ///
-/// @brief  ジョブコンテナ
-///
 #ifndef INCLUDED_EGEG_JOB_CONTAINER_HEADER_
 #define INCLUDED_EGEG_JOB_CONTAINER_HEADER_
 #include <vector>
 #include "job.hpp"
 BEGIN_EGEG
+///
+/// @class  JobContainer
+///
+/// @brief  ジョブコンテナ
+///
 class JobContainer
 {
 public :

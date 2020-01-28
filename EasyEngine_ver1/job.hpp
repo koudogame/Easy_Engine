@@ -1,10 +1,6 @@
 ///
 /// @file    job.hpp
 /// @author  板場
-///          
-/// @brief   ジョブ
-/// @details JobSchedulerに登録される最小単位です。<br>
-///          JobContainerにより保持されます。
 ///
 #ifndef INCLUDED_EGEG_JOB_HEADER_
 #define INCLUDED_EGEG_JOB_HEADER_
@@ -13,6 +9,13 @@
 #include "egeg_common.hpp"
 BEGIN_EGEG
 class JobContainer;
+///
+/// @class  Job
+///          
+/// @brief   ジョブ最小単位
+/// @details JobSchedulerに登録される最小単位です。<br>
+///          JobContainerにより保持されます。
+///
 class Job
 {
 public :
