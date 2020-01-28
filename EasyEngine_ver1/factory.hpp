@@ -45,7 +45,7 @@ public :
 		auto find = creators_.find( ID );
 		if( find != creators_.end() )
         {
-			return find.second();
+			return find->second();
         }
 
 		return nullptr;

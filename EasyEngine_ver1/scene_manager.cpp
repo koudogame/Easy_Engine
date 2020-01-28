@@ -1,6 +1,7 @@
 // 作成者 : 板場
 #include "scene_manager.hpp"
 #include "system_manager.hpp"
+#include "scene_factory.hpp"
 #include "uid.hpp"
 
 BEGIN_EGEG
@@ -20,26 +21,30 @@ SceneManager::~SceneManager()
 // シーンの追加
 void SceneManager::push( uint32_t ID )
 {
-   /* Scene* next = 
-        dynamic_cast<Scene*>(GameObjectFactory::instance()->create( ID ));
+    // シーンの生成＆初期化
+    Scene* next = SceneFactory::instance()->create( ID );
     if( next == nullptr )
     {
         SystemManager::instance()->showDialogBox( 
             "シーンの生成に失敗しました。\n"
-            "IDがシーンのものでないか、シーンがファクトリに登録されていません。"
+            "IDに対応するクリエイターがファクトリに登録されていません。\n"
+            "\n場所 : SceneManager::push"
         );
         return;
     }
 
     if( next->initialize() == false )
     {
-        SystemManager::instance()->showDialogBox( "シーンの初期化に失敗しました。" );
+        SystemManager::instance()->showDialogBox( 
+            "シーンの初期化に失敗しました。\n"
+            "\n場所 : SceneManager::push"
+        );
         return;
     }
-    next->setActive( true );
+    next->setActiveState( true );
 
-    scenes_.back()->setActive( false );
-    scenes_.push_back( next );*/
+    scenes_.back()->setActiveState( false );
+    scenes_.push_back( next );
 }
 
 // シーンの削除
@@ -51,15 +56,42 @@ void SceneManager::pop()
     // シーンのポップ
     Scene* poped = scenes_.back();
     scenes_.pop_back();
-    //poped->finalize();
+    poped->finalize();
     delete poped;
 }
 
 // シーンの入れ替え
 void SceneManager::swap( uint32_t ID )
 {
-    pop();
-    push( ID );
+    // シーンの生成＆初期化
+    Scene* next = SceneFactory::instance()->create( ID );
+    if( next == nullptr )
+    {
+        SystemManager::instance()->showDialogBox(
+            "シーンの生成に失敗しました。\n"
+            "IDに対応するクリエイターがファクトリに登録されていません。\n"
+            "\n場所 : SceneManager::swap" 
+        );
+        return;
+    }
+    
+    if( next->initialize() == false )
+    {
+        SystemManager::instance()->showDialogBox(
+            "シーンの初期化に失敗しました。\n"
+            "\n場所 : SceneManager::swap"
+        );
+        return;
+    }
+
+    // 現在アクティブなシーンを解放
+    scenes_.back()->finalize();
+    delete scenes_.back();
+
+    // アクティブなシーンの入れ替え
+    scenes_.pop_back();
+    scenes_.push_back( next );
+    scenes_.back()->setActiveState( true );
 }
 END_EGEG
 // EOF

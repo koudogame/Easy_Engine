@@ -20,18 +20,18 @@ public :
     ///
     /// @brief  初期化処理
     ///
-    /// @param[in] Owner : オーナーのアドレス
+    /// @param[in] pOwner : オーナーのアドレス
     ///
     /// @return 初期化成功[ true ]　初期化失敗[ false ]
     ///
-    virtual bool initialize( Actor* Owner ) = 0;
+    virtual bool initialize( Actor* pOwner ) = 0;
     ///
     /// @brief  終了処理
     ///
     virtual void finalize() = 0;
 
 protected :
-    Actor* owner_ = nullptr;
+    Actor* owner_ = nullptr;    ///< オーナー
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_COMPONENT_HEADER_

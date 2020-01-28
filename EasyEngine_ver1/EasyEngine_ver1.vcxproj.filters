@@ -54,6 +54,9 @@
     <Filter Include="EasyEngine\0_Tools\Actor\Factory">
       <UniqueIdentifier>{d94d57e2-86c9-4e81-820e-d5f548bfe232}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EasyEngine\0_Tools\Scene\Factory">
+      <UniqueIdentifier>{00cc52a8-3816-424c-8374-45914af7c6d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="easy_engine.hpp">
@@ -194,11 +197,11 @@
     <ClInclude Include="component_factory.hpp">
       <Filter>EasyEngine\0_Tools\Components\Factory</Filter>
     </ClInclude>
-    <ClInclude Include="scene_factory.hpp">
-      <Filter>EasyEngine\0_Tools\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="actor_factory.hpp">
       <Filter>EasyEngine\0_Tools\Actor\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="scene_factory.hpp">
+      <Filter>EasyEngine\0_Tools\Scene\Factory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -255,6 +258,9 @@
     </ClCompile>
     <ClCompile Include="scene_manager.cpp">
       <Filter>EasyEngine\0_Tools\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="actor.cpp">
+      <Filter>EasyEngine\0_Tools\Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

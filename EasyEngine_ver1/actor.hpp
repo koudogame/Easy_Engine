@@ -16,7 +16,7 @@ class Component;
 class Actor
 {
 public :
-    virtual ~Actor() = default;
+    virtual ~Actor();
 
     ///
     /// @brief  ‰Šú‰»ˆ—

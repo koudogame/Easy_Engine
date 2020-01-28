@@ -17,6 +17,11 @@ class ComponentFactory :
     public Factory<Component, Component*(*)()>
 {
 public :
+    ///
+    /// @brief  インスタンスの取得
+    ///
+    /// @return インスタンス
+    ///
     static ComponentFactory* instance() { static ComponentFactory i; return &i; }
 
 private :

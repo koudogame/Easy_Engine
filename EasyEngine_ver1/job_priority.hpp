@@ -16,8 +16,7 @@
 ///
 enum JobPriority : uint32_t
 {
-    kMoveComponent,
-    kSceneManager,
+
 };
 #endif /// !INCLUDED_EGEG_JOB_PRIORITY_HEADER_
 /// EOF

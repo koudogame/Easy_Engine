@@ -193,6 +193,7 @@
     <ClInclude Include="vertex_shader_d3d11.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="actor.cpp" />
     <ClCompile Include="easy_engine.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
