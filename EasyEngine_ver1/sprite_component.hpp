@@ -36,7 +36,7 @@ public :
                     float RotationDEG = 0.0F,
                     const Vector2D& Scale = Vector2D{ 1.0F, 1.0F },
                     const Vector2D& Origin = Vector2D{ 0.0F, 0.0F },
-                    const Vector3D& Color = Vector3D{ 1.0F, 1.0F, 1.0F },
+                    const Vector3D& Color = Vector3D{ 0.0F, 0.0F, 0.0F },
                     float Alpha = 1.0F,
                     float Depth = 0.0F );
 

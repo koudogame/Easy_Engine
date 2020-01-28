@@ -1,19 +1,19 @@
 ///
-/// @file   game_object_2d.hpp
+/// @file   actor2d.hpp
 /// @author 板場
 ///
-/// @brief  2Dゲームオブジェクト
+/// @brief  アクター2D
 ///
 #ifndef INCLUDED_EGEG_GAME_OBJECT_2D_HEADER_
 #define INCLUDED_EGEG_GAME_OBJECT_2D_HEADER_
-#include "game_object.hpp"
+#include "actor.hpp"
 #include "egeg_math.hpp"
 BEGIN_EGEG
-class GameObject2D :
-    public GameObject
+class Actor2D :
+    public Actor
 {
 public :
-    virtual ~GameObject2D() = default;
+    virtual ~Actor2D() = default;
 
     ///
     /// @brief  座標のセット

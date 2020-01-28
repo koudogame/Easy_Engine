@@ -27,9 +27,6 @@
     <Filter Include="EasyEngine\0_Tools\Components">
       <UniqueIdentifier>{1f3f77b6-1162-43da-9e81-49e60ef386d9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EasyEngine\0_Tools\Objects">
-      <UniqueIdentifier>{37659fa4-9c74-45be-b365-d4e2d91c5748}</UniqueIdentifier>
-    </Filter>
     <Filter Include="EasyEngine\0_Tools\Collision">
       <UniqueIdentifier>{9fa345fd-8c90-4228-a3d0-38eb6b581081}</UniqueIdentifier>
     </Filter>
@@ -42,14 +39,29 @@
     <Filter Include="EasyEngine\0_Tools\JobScheduler">
       <UniqueIdentifier>{be12d235-976b-4ac5-b292-a7f56e27c521}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EasyEngine\0_Tools\Components\RenderComponents">
-      <UniqueIdentifier>{6f76f598-1a6a-4f29-8e9c-a61275ccc3c9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="リソース ファイル\Shader">
       <UniqueIdentifier>{4d6b9e66-fdd6-4b53-aed1-5ccc8caa0228}</UniqueIdentifier>
     </Filter>
     <Filter Include="EasyEngine\99_System\Windows\DirectX11">
       <UniqueIdentifier>{ac4cb9df-fa96-4bcb-9a16-1250e921bedc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\0_Tools\Objects">
+      <UniqueIdentifier>{37659fa4-9c74-45be-b365-d4e2d91c5748}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\0_Tools\Objects\Scene">
+      <UniqueIdentifier>{956c9bc2-989c-4df3-b891-0bc1cc9f064c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\0_Tools\Objects\Actor">
+      <UniqueIdentifier>{37f54cf2-380a-4491-9a3d-74b86fb6fa96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\0_Tools\Interface">
+      <UniqueIdentifier>{0333fb84-9230-44e3-b3e6-a18b5b650f94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\0_Tools\Components\RenderComponent">
+      <UniqueIdentifier>{6f76f598-1a6a-4f29-8e9c-a61275ccc3c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\0_Tools\Components\Factory">
+      <UniqueIdentifier>{9e5a461b-229f-423c-b549-004a2623d535}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -125,12 +137,6 @@
     <ClInclude Include="sound_manager.hpp">
       <Filter>EasyEngine\1_Core\CoreManager</Filter>
     </ClInclude>
-    <ClInclude Include="component.hpp">
-      <Filter>EasyEngine\0_Tools\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="move2d_component.hpp">
-      <Filter>EasyEngine\0_Tools\Components</Filter>
-    </ClInclude>
     <ClInclude Include="game_object.hpp">
       <Filter>EasyEngine\0_Tools\Objects</Filter>
     </ClInclude>
@@ -146,12 +152,6 @@
     <ClInclude Include="line_2d.hpp">
       <Filter>EasyEngine\0_Tools\Collision\Shape</Filter>
     </ClInclude>
-    <ClInclude Include="game_object_2d.hpp">
-      <Filter>EasyEngine\0_Tools\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="component_id.hpp">
-      <Filter>EasyEngine\0_Tools\Components</Filter>
-    </ClInclude>
     <ClInclude Include="render_batch.hpp">
       <Filter>EasyEngine\0_Tools\RenderBatch</Filter>
     </ClInclude>
@@ -165,10 +165,7 @@
       <Filter>EasyEngine\0_Tools\JobScheduler</Filter>
     </ClInclude>
     <ClInclude Include="sprite_component.hpp">
-      <Filter>EasyEngine\0_Tools\Components\RenderComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="render_component.hpp">
-      <Filter>EasyEngine\0_Tools\Components\RenderComponents</Filter>
+      <Filter>EasyEngine\0_Tools\Components\RenderComponent</Filter>
     </ClInclude>
     <ClInclude Include="job_priority.hpp">
       <Filter>EasyEngine\0_Tools\JobScheduler</Filter>
@@ -203,6 +200,36 @@
     <ClInclude Include="uid.hpp">
       <Filter>EasyEngine\1_Core</Filter>
     </ClInclude>
+    <ClInclude Include="scene.hpp">
+      <Filter>EasyEngine\0_Tools\Objects\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="actor.hpp">
+      <Filter>EasyEngine\0_Tools\Objects\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="actor2d.hpp">
+      <Filter>EasyEngine\0_Tools\Objects\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="scene_manager.hpp">
+      <Filter>EasyEngine\0_Tools\Objects\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="entry_scene.hpp">
+      <Filter>EasyEngine\1_Core</Filter>
+    </ClInclude>
+    <ClInclude Include="render_component.hpp">
+      <Filter>EasyEngine\0_Tools\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="component.hpp">
+      <Filter>EasyEngine\0_Tools\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="component_factory.hpp">
+      <Filter>EasyEngine\0_Tools\Components\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="actor_factory.hpp">
+      <Filter>EasyEngine\0_Tools\Objects\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="scene_factory.hpp">
+      <Filter>EasyEngine\0_Tools\Objects\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="easy_engine.cpp">
@@ -232,9 +259,6 @@
     <ClCompile Include="sound_manager.cpp">
       <Filter>EasyEngine\1_Core\CoreManager</Filter>
     </ClCompile>
-    <ClCompile Include="move2d_component.cpp">
-      <Filter>EasyEngine\0_Tools\Components</Filter>
-    </ClCompile>
     <ClCompile Include="job_container.cpp">
       <Filter>EasyEngine\0_Tools\JobScheduler</Filter>
     </ClCompile>
@@ -245,7 +269,7 @@
       <Filter>EasyEngine\0_Tools\RenderBatch</Filter>
     </ClCompile>
     <ClCompile Include="sprite_component.cpp">
-      <Filter>EasyEngine\0_Tools\Components\RenderComponents</Filter>
+      <Filter>EasyEngine\0_Tools\Components\RenderComponent</Filter>
     </ClCompile>
     <ClCompile Include="game.cpp">
       <Filter>EasyEngine\1_Core</Filter>
@@ -259,6 +283,12 @@
     <ClCompile Include="texture_loader_d3d11.cpp">
       <Filter>EasyEngine\99_System\Windows\DirectX11</Filter>
     </ClCompile>
+    <ClCompile Include="scene_manager.cpp">
+      <Filter>EasyEngine\0_Tools\Objects\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="render_component.cpp">
+      <Filter>EasyEngine\0_Tools\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="sprite_vs.vsh">
@@ -267,5 +297,10 @@
     <FxCompile Include="sprite_ps.psh">
       <Filter>リソース ファイル\Shader</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="factory.hpp">
+      <Filter>EasyEngine\1_Core</Filter>
+    </None>
   </ItemGroup>
 </Project>

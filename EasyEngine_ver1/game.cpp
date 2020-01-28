@@ -31,10 +31,20 @@ void Game::finalize()
 // XVˆ—
 bool Game::update( uint64_t Delta )
 {
+    static float angle = 0.0F;
+
     sprite.setStatus(
         texture_,
-        {10.0F, 100.0F},
-        {0.0F, 0.0F, 32.0F, 32.0F});
+        {640.0F, 350.0F},
+        {0.0F, 0.0F, 32.0F, 32.0F},
+        angle,
+        {2.0F, 2.0F},
+        { 16.0F, 16.0F },
+        { 0.0F, 0.0F, 0.0F },
+        1.0F,
+        0.0F);
+
+    angle += 1.0F;
 
     JobScheduler::instance()->execute( Delta );
     RenderingManager::instance()->beginRender( { 1.0F, 1.0F, 1.0F, 1.0F} );

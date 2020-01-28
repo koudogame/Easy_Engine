@@ -1,37 +1,34 @@
 ///
-/// @file    component.hpp
-/// @author  板場
-///          
-/// @brief   コンポーネント
-/// @details 各派生クラスは static uint16_t getComponentID() を実装してください。<br>
-///          DECL_GETCOMPONENTIDマクロを使用すると楽です。
+/// @file   component.hpp
+/// @author 板場
+///
+/// @brief  コンポーネント
 ///
 #ifndef INCLUDED_EGEG_COMPONENT_HEADER_
 #define INCLUDED_EGEG_COMPONENT_HEADER_
-#include <cstdint>
 #include "egeg_common.hpp"
-///
-/// @def    DECL_GETCOMPONENTID
-/// @brief  IDの取得関数をinlineで定義します。
-///
-#define DECL_GETCOMPONENTID inline static uint16_t getComponentID()
-
 BEGIN_EGEG
-class IComponent
+class GameObject;
+class Component
 {
 public :
-    virtual ~IComponent() = default;
+    virtual ~Component() = default;
 
     ///
-    /// @brief  初期化
+    /// @brief  初期化処理
     ///
-    /// @return 初期化成功[ true ] 初期化失敗[ false ]
+    /// @param[in] Owner : オーナーのアドレス
     ///
-    virtual bool initialize() = 0;
+    /// @return 初期化成功[ true ]　初期化失敗[ false ]
     ///
-    /// @brief  終了
+    virtual bool initialize( GameObject* Owner ) = 0;
+    ///
+    /// @brief  終了処理
     ///
     virtual void finalize() = 0;
+
+protected :
+    GameObject* owner_ = nullptr;
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_COMPONENT_HEADER_

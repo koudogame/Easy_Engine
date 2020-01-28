@@ -6,16 +6,13 @@
 ///
 #ifndef INCLUDED_EGEG_GAME_OBJECT_HEADER_
 #define INCLUDED_EGEG_GAME_OBJECT_HEADER_
-#ifdef _DEBUG
-#include <cassert>
-#endif /// !_DEBUG
-#include <unordered_map>
+#include <cstdint>
 #include "component.hpp"
 BEGIN_EGEG
 class GameObject
 {
 public :
-    virtual ~GameObject();
+    virtual ~GameObject() = default;
 
     ///
     /// @brief  初期化処理
@@ -34,96 +31,9 @@ public :
     ///
     virtual void update( uint64_t DeltaTimeMS ) = 0;
 
-    ///
-    /// @brief   コンポーネントの追加
-    /// @details 追加に失敗した場合、nullptrを返却します。
-    ///
-    /// @tparam Component : 追加するコンポーネントの型
-    ///
-    /// @return 追加したコンポーネントのアドレス
-    ///
-    template <typename Component>
-    Component* addComponent();
-    ///
-    /// @brief   コンポーネントの削除
-    ///
-    /// @tparam Component : 削除の対象となるコンポーネントの型
-    ///
-    template <typename Component>
-    void removeComponent();
-    ///
-    /// @brief   コンポーネントの取得
-    /// @details 対応するコンポーネントが無かった場合、nullptrを返却します。
-    ///
-    /// @tparam Component : 取得するコンポーネントの型
-    ///
-    /// @return 取得されたコンポーネントのアドレス
-    ///
-    template <typename Component>
-    Component* getComponent();
-
 protected :
-    std::unordered_map<uint16_t, IComponent*> components_;  ///< 登録されているコンポーネント群
+    Component
 };
-
-///< GameObject : デストラクタ
-GameObject::~GameObject()
-{
-    /// 解放されていないコンポーネントの解放
-    for( auto& component : components_ )
-    {
-        component.second->finalize();
-    }
-}
-
-///< GameObject : コンポーネントの追加
-template <typename Component>
-Component* GameObject::addComponent()
-{
-#ifdef _DEBUG
-    assert( components_.find(Component::getComponentID()) == components_.end() &&
-            "コンポーネントの多重登録を検出しました。" );
-#endif /// !_DEBUG
-    Component* add = new Component();
-    if( add->initialize() == false )
-    {
-        delete add;
-        return nullptr;
-    }
-
-    components_.emplace( Component::getComponentID(), add );
-}
-
-///< GameObject : コンポーネントの削除
-template <typename Component>
-void GameObject::removeComponent()
-{
-    auto find = components_.find( Component::getComponentID() );
-    if( find != components_.end() )
-    {
-        find.second->finalize();
-        delete find->second;
-        components_.erase( find );
-    }
-}
-
-///< GameObject : コンポーネントの取得
-template <typename Component>
-Component* GameObject::getComponent()
-{
-    auto find = components_.find( Component::getComponentID() );
-    
-    ///< コンポーネントが登録されている
-    if( find != components_.end() )
-    {
-        return find.second;
-    }
-    ///< コンポーネントが登録されていない
-    else
-    {
-        return nullptr;
-    }
-}
 END_EGEG
 #endif /// !INCLUDED_EGEG_GAME_OBJECT_HEADER_
 /// EOF

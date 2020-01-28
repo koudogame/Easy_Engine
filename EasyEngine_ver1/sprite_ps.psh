@@ -11,7 +11,10 @@ struct VS_OUTPUT
 float4 ps_main( VS_OUTPUT input ) : SV_TARGET
 {
     float4 output = cb_Texture.Sample( cb_SamplerState, input.uv );
-
+    output.x += input.color.x * input.color.w;
+    output.y += input.color.y * input.color.w;
+    output.z += input.color.z * input.color.w;
+    output.w = input.color.w;
 
     return output;
 }

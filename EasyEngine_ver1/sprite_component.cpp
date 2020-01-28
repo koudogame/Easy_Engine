@@ -46,10 +46,10 @@ void SpriteComponent::setStatus(
     const float kTop  = 0.0F;
     const float kRight = Width;
     const float kBottom = Height;
-    vertices[0] = Vector3D{ kLeft, kTop, Depth };       // 左上
-    vertices[1] = Vector3D{ kRight, kTop, Depth };      // 右上
-    vertices[2] = Vector3D{ kLeft, kBottom, Depth };    // 左下
-    vertices[3] = Vector3D{ kRight, kBottom, Depth };   // 右下
+    vertices[0] = Vector3D{ kLeft, kTop, 1.0F };       // 左上
+    vertices[1] = Vector3D{ kRight, kTop, 1.0F };      // 右上
+    vertices[2] = Vector3D{ kLeft, kBottom, 1.0F };    // 左下
+    vertices[3] = Vector3D{ kRight, kBottom, 1.0F };   // 右下
     // 頂点座標の変換
     const Matrix3x3 kTranslation   = Matrix3x3::createTranslationMatrix( Position );
     const Matrix3x3 kRotarion      = Matrix3x3::createRotationMatrix( RotationDEG );
@@ -59,6 +59,7 @@ void SpriteComponent::setStatus(
     for( auto& vertex : vertices )
     {
         vertex = kTransform * vertex;
+        vertex.z = Depth;
     }
     // 頂点座標の正規化
     const Vector2D kScreenSize = RenderingManager::instance()->getScreenSize();
