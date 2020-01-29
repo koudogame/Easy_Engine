@@ -31,7 +31,7 @@ Component* Actor::addComponent( uint32_t ComponentID )
     }
 
     // コンポーネントの生成＆初期化
-    Component* component = ComponentFactory::instance()->create( ComponentID );
+    Component* component = ComponentFactory::instance()->create( ComponentID, this );
     if( component == nullptr )
     {
         SystemManager::instance()->showDialogBox(
@@ -40,7 +40,7 @@ Component* Actor::addComponent( uint32_t ComponentID )
         );
         return nullptr;
     }
-    if( component->initialize(this) == false )
+    if( component->initialize() == false )
     {
         SystemManager::instance()->showDialogBox(
             "コンポーネントの初期化に失敗しました。\n"

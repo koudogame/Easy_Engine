@@ -14,7 +14,7 @@ BEGIN_EGEG
 /// @details シングルトンクラスです。アクセスにはinstance関数を使用して下さい。
 ///
 class ComponentFactory :
-    public Factory<Component, Component*(*)()>
+    public Factory<Component, Component*(*)(Actor*), Actor*>
 {
 public :
     ///

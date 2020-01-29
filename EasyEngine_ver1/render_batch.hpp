@@ -7,6 +7,7 @@
 #include <unordered_set>
 #include "egeg_common.hpp"
 BEGIN_EGEG
+class RenderComponent;
 ///
 /// @class  RenderBatch
 ///          
@@ -29,13 +30,13 @@ public :
     ///
     /// @param[in] pComponent : 登録するレンダーコンポーネント
     ///
-    //void registerComponent( RenderComponent* pComponent ) { components_.insert( pComponent ); }
+    void registerComponent( RenderComponent* pComponent ) { components_.insert( pComponent ); }
     ///
     /// @brief  コンポーネントの削除
     ///
     /// @param[in] pComponent : 削除対象のコンポーネント
     ///
-    //void unregisterComponent( RenderComponent* pComponent ) { components_.erase( pComponent ); }
+    void unregisterComponent( RenderComponent* pComponent ) { components_.erase( pComponent ); }
 
     ///
     /// @brief  登録されているコンポーネントのrender関数を呼び出します。
@@ -47,7 +48,7 @@ private :
     RenderBatch( const RenderBatch& ) = delete;
     RenderBatch& operator=( const RenderBatch& ) = delete;
 
-    //std::unordered_set<RenderComponent*> components_;
+    std::unordered_set<RenderComponent*> components_;
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_RENDER_BATCH_HEADER_

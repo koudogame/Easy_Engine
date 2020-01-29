@@ -1,5 +1,6 @@
 // ì¬ŽÒ : ”Âê
 #include "render_batch.hpp"
+#include "render_component.hpp"
 
 BEGIN_EGEG
 // RenderBatch : ŠÖ”‚ÌŽÀ‘•
@@ -7,10 +8,10 @@ BEGIN_EGEG
 // ƒoƒbƒ`ˆ—
 void RenderBatch::render()
 {
-    /*for( auto& component : components_ )
+    for( auto& component : components_ )
     {
         component->render();
-    }*/
+    }
 }
 END_EGEG
 // EOF

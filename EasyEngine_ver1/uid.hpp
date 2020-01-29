@@ -19,11 +19,11 @@ class UID
 {
 public :
     ///
-    /// @brief  UIDの取得
+    /// @brief  オブジェクトの型に対応するUIDの取得
     ///
     /// @return UID
     ///
-    static uint32_t get() noexcept { static uint32_t uid = reinterpret_cast<uint32_t>(&uid); return uid; }
+    static uint32_t ID() noexcept { static uint32_t uid = reinterpret_cast<uint32_t>(&uid); return uid; }
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_UID_HEADER_

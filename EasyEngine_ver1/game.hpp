@@ -39,7 +39,6 @@ public :
     bool update( uint64_t DeltaTimeMS );
 
 private :
-    SpriteComponent sprite;
     ITexture *texture_;
 };
 END_EGEG

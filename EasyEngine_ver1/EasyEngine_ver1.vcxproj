@@ -156,6 +156,7 @@
     <ClInclude Include="geometry_shader_d3d11.hpp" />
     <ClInclude Include="pixel_shader_d3d11.hpp" />
     <ClInclude Include="render_batch.hpp" />
+    <ClInclude Include="render_component.hpp" />
     <ClInclude Include="scene.hpp" />
     <ClInclude Include="scene_factory.hpp" />
     <ClInclude Include="scene_manager.hpp" />

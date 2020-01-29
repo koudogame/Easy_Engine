@@ -6,14 +6,16 @@
 ///
 #ifndef INCLUDED_EGEG_SPRITE_HEADER_
 #define INCLUDED_EGEG_SPRITE_HEADER_
+#include "render_component.hpp"
 #include "egeg_math.hpp"
 #include "texture.hpp"
 #include "model.hpp"
 BEGIN_EGEG
-class SpriteComponent
+class SpriteComponent :
+    public RenderComponent
 {
 public :
-    SpriteComponent();
+    SpriteComponent( Actor* Owner );
 
     ///
     /// @brief  スプライト情報のセット
@@ -56,6 +58,10 @@ public :
     ///
     void setTrimming( const Vector4D& Trimming ) { trimming_ = Trimming; }
     ///
+    /// @brief   転角のセット
+    ///
+    void setRotation( float RotationDEG ) { rotation_ = RotationDEG; }
+    ///
     /// @brief  拡縮率のセット
     ///
     /// @param[in] Scale : 拡縮率
@@ -94,19 +100,30 @@ public :
     /// @param[in] Depth : 深度値( 0.0F ~ 1.0F )
     ///
     void setDepth( float Depth ) { depth_ = Depth; }
-
+        
+/*-----------------------------------------------------------------*/
+// Component
+    bool initialize() override;
+    void finalize() override;
+/*-----------------------------------------------------------------*/
 private :
+/*-----------------------------------------------------------------*/
+// RenderComponent
+    void render() override;             /// 通常RenderBatch以外からの呼び出しを禁止しています。
+/*-----------------------------------------------------------------*/
+    void getModelStatus( Model* );
+    void getVerticesPositoin( Vector3D* );
+    void getVerticesUV( Vector2D* );
 
-    bool  is_validity_ = false;    /// 有効状態か
-    
-    ITexture* p_texture_;       /// テクスチャ
-    Vector2D  position_;        /// 描画座標
-    Vector4D  trimming_;        /// テクスチャ切り取り範囲
-    Vector2D  scale_;           /// 拡縮率
-    Vector2D  origin_;          /// 原点
-    Vector4D  color_;           /// 色情報
-    float     depth_;           /// 深度値
-
+    bool  is_validity_ = false;         /// 有効状態判定フラグ
+    ITexture* p_texture_ = nullptr;     /// テクスチャ
+    Vector2D  position_;                /// 描画座標
+    Vector4D  trimming_;                /// テクスチャ切り取り範囲
+    float     rotation_;                /// 回転角(度数法)
+    Vector2D  scale_;                   /// 拡縮率
+    Vector2D  origin_;                  /// 原点
+    Vector4D  color_;                   /// 色情報
+    float     depth_;                   /// 深度値
     IVertexShader* p_vertex_shader_;    /// 頂点シェーダ―
     IPixelShader*  p_pixel_shader_;     /// ピクセルシェーダー
 };

@@ -12,10 +12,11 @@ BEGIN_EGEG
 ///
 /// @brief	汎用ファクトリ
 ///
-/// @tparam Base    : 生成するオブジェクトに共通する基底クラス型
-///	@tparam Creator : 生成処理を行うオブジェクト型
+/// @tparam Base      : 生成するオブジェクトに共通する基底クラス型
+///	@tparam Creator   : 生成処理を行うオブジェクト型
+/// @tparam Arguments : クリエイターの生成関数に渡す引数型リスト
 ///
-template <typename Base, typename Creator>
+template <typename Base, typename Creator, typename ...Arguments>
 class Factory
 {
 public :
@@ -36,16 +37,17 @@ public :
 	/// @brief	 生成
 	/// @details 生成に失敗した場合、nullptrを返却します。
 	///
-	/// @param[in] ID : 生成するオブジェクトの識別ID
+	/// @param[in] ID   : 生成するオブジェクトの識別ID
+    /// @param[in] Args : ID以外の引数
 	///
 	/// @return 生成したオブジェクト
 	///
-	Base* create( uint32_t ID )
+	Base* create( uint32_t ID, Arguments ...Args )
     {
 		auto find = creators_.find( ID );
 		if( find != creators_.end() )
         {
-			return find->second();
+			return find->second( Args... );
         }
 
 		return nullptr;
