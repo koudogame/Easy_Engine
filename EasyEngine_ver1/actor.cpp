@@ -46,6 +46,7 @@ Component* Actor::addComponent( uint32_t ComponentID )
             "コンポーネントの初期化に失敗しました。\n"
             "\n場所 : Actor::addComponent"
         );
+        delete component;
         return nullptr;
     }
 

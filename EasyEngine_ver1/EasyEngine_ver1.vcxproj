@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClInclude Include="actor.hpp" />
     <ClInclude Include="actor_factory.hpp" />
+    <ClInclude Include="timer.hpp" />
     <ClInclude Include="component.hpp" />
     <ClInclude Include="component_factory.hpp" />
     <ClInclude Include="easy_engine.hpp" />

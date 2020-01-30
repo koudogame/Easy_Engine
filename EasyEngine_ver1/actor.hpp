@@ -16,6 +16,12 @@ class Component;
 class Actor
 {
 public :
+    ///
+    /// @brief  コンストラクタ
+    ///
+    /// @param[in] ID : アクター識別ID
+    ///
+    Actor( uint32_t ID ) : id_( ID ) {}
     virtual ~Actor();
 
     ///
@@ -36,10 +42,6 @@ public :
     ///
     virtual void update( uint64_t DeltaTimeMS ) = 0;
 
-    ///
-    /// @brief  アクター識別IDセット
-    ///
-    void setID( uint32_t ID ) { id_ = ID; }
     ///
     /// @brief  アクター識別ID取得
     ///
@@ -72,7 +74,7 @@ public :
     Component* getComponent( uint32_t ComponentID );
 
 private :
-    uint32_t id_ = 0U;                                      /// アクター識別ID
+    uint32_t id_;                                           /// アクター識別ID
     std::unordered_map<uint32_t, Component*> components_;   /// コンポーネント群
 };
 END_EGEG
