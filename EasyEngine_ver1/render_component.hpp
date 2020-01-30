@@ -5,6 +5,7 @@
 #ifndef INCLUDED_EGEG_RENDER_COMPONENT_HEADER_
 #define INCLUDED_EGEG_RENDER_COMPONENT_HEADER_
 #include "component.hpp"
+#include "uid.hpp"
 #include "render_batch.hpp"
 BEGIN_EGEG
 ///
@@ -18,6 +19,14 @@ class RenderComponent :
     public Component
 {
 public :
+    ///< IDの取得
+    static uint32_t getID() { return UID<RenderComponent>::getID(); }
+
+    ///
+    /// @brief  コンストラクタ
+    ///
+    /// @param[in] Owner : オーナー
+    ///
     RenderComponent( Actor* Owner ) :
         Component( Owner )
     {

@@ -7,7 +7,6 @@
 #include <cstdint>
 #include <typeinfo>
 #include <unordered_map>
-#include "uid.hpp"
 #include "system_manager.hpp"
 BEGIN_EGEG
 class Shape;
@@ -99,7 +98,7 @@ template <typename ComponentType>
 ComponentType* Actor::addComponent()
 {
     // 多重登録チェック
-    if( components_.find(UID<ComponentType>::ID()) != components_.end() )
+    if( components_.find(ComponentType::getID()) != components_.end() )
     {
         SystemManager::instance()->showDialogBox(
             "コンポーネントの多重登録を検知しました。\n"
@@ -123,7 +122,7 @@ ComponentType* Actor::addComponent()
     }
 
     // コンポーネントをリストに追加
-    components_.emplace( UID<ComponentType>::ID(), component );
+    components_.emplace( ComponentType::getID(), component );
     return component;
 }
 
@@ -131,7 +130,7 @@ ComponentType* Actor::addComponent()
 template <typename ComponentType>
 void Actor::removeComponent()
 {
-    if( auto find = components_.find(UID<ComponentType>::ID()) != components_.end() )
+    if( auto find = components_.find(ComponentType::getID()) != components_.end() )
     {
         find->second->finalize();
         delete find->second;
@@ -143,7 +142,7 @@ void Actor::removeComponent()
 template <typename ComponentType>
 ComponentType* Actor::getComponent()
 {
-    if( auto find = components_.find(UID<ComponentType>::ID()) != components_.end() )
+    if( auto find = components_.find(ComponentType::getID()) != components_.end() )
     {
         return dynamic_cast<ComponentType*>( find->second );
     }

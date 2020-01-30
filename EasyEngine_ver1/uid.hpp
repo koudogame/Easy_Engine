@@ -23,7 +23,7 @@ public :
     ///
     /// @return UID
     ///
-    static uint32_t ID() noexcept { static uint32_t uid = reinterpret_cast<uint32_t>(&uid); return uid; }
+    static uint32_t getID() noexcept { static uint32_t uid = reinterpret_cast<uint32_t>(&uid); return uid; }
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_UID_HEADER_

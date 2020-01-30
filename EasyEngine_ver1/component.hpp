@@ -10,7 +10,9 @@ BEGIN_EGEG
 /// @class   Component
 ///          
 /// @brief   コンポーネント基底クラス
-/// @detaisl Actorクラスのオーナーに対して影響します。
+/// @detaisl Actorクラスのオーナーに対して影響します。<br>
+///          派生クラスは static uint32_t getID()を実装してください。<br>
+///          
 ///
 class Component
 {
