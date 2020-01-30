@@ -145,9 +145,13 @@
   <ItemGroup>
     <ClInclude Include="actor.hpp" />
     <ClInclude Include="actor_factory.hpp" />
+    <ClInclude Include="body_component.hpp" />
+    <ClInclude Include="circle.hpp" />
+    <ClInclude Include="line.hpp" />
+    <ClInclude Include="rectangle.hpp" />
+    <ClInclude Include="shape.hpp" />
     <ClInclude Include="timer.hpp" />
     <ClInclude Include="component.hpp" />
-    <ClInclude Include="component_factory.hpp" />
     <ClInclude Include="easy_engine.hpp" />
     <ClInclude Include="egeg_common.hpp" />
     <ClInclude Include="egeg_math.hpp" />

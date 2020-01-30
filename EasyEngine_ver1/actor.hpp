@@ -5,9 +5,12 @@
 #ifndef INCLUDED_EGEG_ACTOR_HEADER_
 #define INCLUDED_EGEG_ACTOR_HEADER_
 #include <cstdint>
+#include <typeinfo>
 #include <unordered_map>
-#include "egeg_common.hpp"
+#include "uid.hpp"
+#include "system_manager.hpp"
 BEGIN_EGEG
+class Shape;
 class Component;
 ///
 /// @class  Actor
@@ -16,12 +19,6 @@ class Component;
 class Actor
 {
 public :
-    ///
-    /// @brief  コンストラクタ
-    ///
-    /// @param[in] ID : アクター識別ID
-    ///
-    Actor( uint32_t ID ) : id_( ID ) {}
     virtual ~Actor();
 
     ///
@@ -43,6 +40,13 @@ public :
     virtual void update( uint64_t DeltaTimeMS ) = 0;
 
     ///
+    /// @brief  形の取得
+    ///
+    /// @return 形
+    ///
+    virtual const Shape* getShape() = 0;
+
+    ///
     /// @brief  アクター識別ID取得
     ///
     /// @return ID
@@ -52,31 +56,100 @@ public :
     ///
     /// @brief  コンポーネントの追加
     ///
-    /// @param[in] ComponentID : 追加するコンポーネントの識別ID
+    /// @tparam ComponentType : 追加するコンポーネント型
     ///
-    /// @return 追加したコンポーネントのアドレス
+    /// @return 追加したコンポーネント
     ///
-    Component* addComponent( uint32_t ComponentID );
+    template <typename ComponentType>
+    ComponentType* addComponent();
     ///
     /// @brief  コンポーネントの削除
     ///
-    /// @param[in] ComponentID : 削除するコンポーネントの識別ID
+    /// @tparam ComponentType : 削除するコンポーネント型
     ///
-    void removeComponent( uint32_t ComponentID );
+    template <typename ComponentType>
+    void removeComponent();
     ///
     /// @brief   コンポーネントの取得
-    /// @details IDに対応したコンポーネントを保持していない場合は、nullptrを返却します。
+    /// @details 対応したコンポーネントを保持していない場合は、nullptrを返却します。
     ///
-    /// @param[in] ComponentID : 取得するコンポーネントの識別ID
+    /// @tparam ComponentType : 取得するコンポーネント型
     ///
-    /// @return IDに対応したコンポーネント
+    /// @return コンポーネント
     ///
-    Component* getComponent( uint32_t ComponentID );
+    template <typename ComponentType>
+    ComponentType* getComponent();
+
+protected :
+    ///
+    /// @brief   コンストラクタ
+    /// @details 通常ファクトリ以外での生成を禁止しています。
+    ///
+    /// @param[in] ID : アクター識別ID
+    ///
+    Actor( uint32_t ID ) : id_( ID ) {}
 
 private :
     uint32_t id_;                                           /// アクター識別ID
     std::unordered_map<uint32_t, Component*> components_;   /// コンポーネント群
 };
+
+///< コンポーネントの追加
+template <typename ComponentType>
+ComponentType* Actor::addComponent()
+{
+    // 多重登録チェック
+    if( components_.find(UID<ComponentType>::ID()) != components_.end() )
+    {
+        SystemManager::instance()->showDialogBox(
+            "コンポーネントの多重登録を検知しました。\n"
+            "\n場所 : Actor::addComponent\n"
+            "型 : " + typeid( ComponentType ).name()
+        );
+        return nullptr;
+    }
+
+    // コンポーネントの生成＆初期化
+    ComponentType* component = new ComponentType( this );
+    if( component->initialize() == false )
+    {
+        delete component;
+        SystemManager::instance()->showDialogBox(
+            "コンポーネントの初期化に失敗しました。\n"
+            "\n場所 : Actor::addComponent\n"
+            "型 : " + typeid( ComponentType ).name()
+        );
+        return nullptr;
+    }
+
+    // コンポーネントをリストに追加
+    components_.emplace( UID<ComponentType>::ID(), component );
+    return component;
+}
+
+///< コンポーネントの削除
+template <typename ComponentType>
+void Actor::removeComponent()
+{
+    if( auto find = components_.find(UID<ComponentType>::ID()) != components_.end() )
+    {
+        find->second->finalize();
+        delete find->second;
+        components_.erase( find );
+    }
+}
+
+///< コンポーネントの取得
+template <typename ComponentType>
+ComponentType* Actor::getComponent()
+{
+    if( auto find = components_.find(UID<ComponentType>::ID()) != components_.end() )
+    {
+        return dynamic_cast<ComponentType*>( find->second );
+    }
+    else
+        return nullptr;
+}
 END_EGEG
 #endif /// !INCLUDED_EGEG_ACTOR_HEADER_
 /// EOF

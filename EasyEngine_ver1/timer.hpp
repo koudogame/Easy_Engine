@@ -1,5 +1,6 @@
 ///
 /// @file   timer.hpp
+/// @author î¬èÍ
 ///
 #ifndef INCLUDED_EGEG_TIMER_HEADER_
 #define INCLUDED_EGEG_TIMER_HEADER_
@@ -43,6 +44,7 @@ public :
     
 private :
     std::chrono::time_point<std::chrono::high_resolution_clock> start_;
+    bool is_stop_   = false;
     uint64_t count_ = 0U;
 };
 
@@ -50,6 +52,7 @@ private :
 template <typename Unit>
 void Timer<Unit>::start()
 {
+    is_stop_ = false;
     count_ = 0U;
     start_ = std::chrono::high_resolution_clock::now();
 }
@@ -60,8 +63,40 @@ void Timer<Unit>::stop()
 {
     using namespace std::chrono;
 
+    // ä˘Ç…é~Ç‹Ç¡ÇƒÇ¢ÇÈ
+    if( is_stop_ ) return;
+
+    is_stop_ = true;
     auto erapsed = high_resolution_clock::now() - start_;
     count_ += duration_cast<Unit>( erapsed ).Count();
+}
+
+///< åvë™çƒäJ
+template <typename Unit>
+void Timer<Unit>::resume()
+{
+    // ä˘Ç…ìÆÇ¢ÇƒÇ¢ÇÈ
+    if( is_stop_ == false ) return;
+
+    is_stop_ = false;
+    start_ = std::chrono::high_resolution_clock::now();
+}
+
+///< åoâﬂéûä‘éÊìæ
+template <typename Unit>
+uint64_t Timer<Unit>::erapsed()
+{
+    using namespace std::chrono;
+
+    if( is_stop_ )
+    {
+        return count_;
+    }
+    else
+    {
+        auto erapsed = high_resolution_clock::now() - start_;
+        return count_ + duration_cast<Unit>(erapsed).Count();
+    }
 }
 END_EGEG
 #endif /// !INCLUDED_EGEG_TIMER_HEADER_

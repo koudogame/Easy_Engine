@@ -48,6 +48,9 @@ public :
     ///
     bool isActive() const { return is_active_; }
 
+protected :
+    Scene() = default;  ///< 通常ファクトリ以外での生成を禁止しています。
+
 private :
     bool is_active_ = false;
 };

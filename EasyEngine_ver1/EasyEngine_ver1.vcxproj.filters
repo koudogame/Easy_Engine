@@ -36,9 +36,6 @@
     <Filter Include="EasyEngine\99_System\Windows\DirectX11">
       <UniqueIdentifier>{ac4cb9df-fa96-4bcb-9a16-1250e921bedc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EasyEngine\0_Tools\Components\Factory">
-      <UniqueIdentifier>{9e5a461b-229f-423c-b549-004a2623d535}</UniqueIdentifier>
-    </Filter>
     <Filter Include="EasyEngine\0_Tools\Actor">
       <UniqueIdentifier>{37f54cf2-380a-4491-9a3d-74b86fb6fa96}</UniqueIdentifier>
     </Filter>
@@ -60,8 +57,8 @@
     <Filter Include="EasyEngine\0_Tools\Components\RenderComponent\RenderBatch">
       <UniqueIdentifier>{bb4b4cd0-3386-4936-b132-2ee95935c297}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EasyEngine\0_Tools\Utility\Clock">
-      <UniqueIdentifier>{378b668c-5730-4ccc-abbe-f0f6788c3ec7}</UniqueIdentifier>
+    <Filter Include="EasyEngine\0_Tools\Shape">
+      <UniqueIdentifier>{0afc1142-bdaa-4a32-971d-e8826979bd1d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -182,9 +179,6 @@
     <ClInclude Include="vertex_shader_d3d11.hpp">
       <Filter>EasyEngine\99_System\Windows\DirectX11</Filter>
     </ClInclude>
-    <ClInclude Include="uid.hpp">
-      <Filter>EasyEngine\1_Core</Filter>
-    </ClInclude>
     <ClInclude Include="scene.hpp">
       <Filter>EasyEngine\0_Tools\Scene</Filter>
     </ClInclude>
@@ -196,9 +190,6 @@
     </ClInclude>
     <ClInclude Include="component.hpp">
       <Filter>EasyEngine\0_Tools\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="component_factory.hpp">
-      <Filter>EasyEngine\0_Tools\Components\Factory</Filter>
     </ClInclude>
     <ClInclude Include="actor_factory.hpp">
       <Filter>EasyEngine\0_Tools\Actor\Factory</Filter>
@@ -212,8 +203,26 @@
     <ClInclude Include="entry_scene.hpp">
       <Filter>EasyEngine\0_Tools\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="shape.hpp">
+      <Filter>EasyEngine\0_Tools\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="circle.hpp">
+      <Filter>EasyEngine\0_Tools\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="rectangle.hpp">
+      <Filter>EasyEngine\0_Tools\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="line.hpp">
+      <Filter>EasyEngine\0_Tools\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="uid.hpp">
+      <Filter>EasyEngine\0_Tools\Utility</Filter>
+    </ClInclude>
     <ClInclude Include="timer.hpp">
-      <Filter>EasyEngine\0_Tools\Utility\Clock</Filter>
+      <Filter>EasyEngine\0_Tools\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="body_component.hpp">
+      <Filter>EasyEngine\0_Tools\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
