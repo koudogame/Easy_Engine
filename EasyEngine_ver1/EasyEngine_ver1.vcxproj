@@ -147,9 +147,10 @@
     <ClInclude Include="actor_factory.hpp" />
     <ClInclude Include="body_component.hpp" />
     <ClInclude Include="circle.hpp" />
+    <ClInclude Include="circlebody_component.hpp" />
+    <ClInclude Include="collision_detection.hpp" />
     <ClInclude Include="line.hpp" />
     <ClInclude Include="rectangle.hpp" />
-    <ClInclude Include="shape.hpp" />
     <ClInclude Include="timer.hpp" />
     <ClInclude Include="component.hpp" />
     <ClInclude Include="easy_engine.hpp" />
@@ -200,6 +201,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="actor.cpp" />
+    <ClCompile Include="collision_detection.cpp" />
     <ClCompile Include="easy_engine.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />

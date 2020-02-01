@@ -4,15 +4,16 @@
 ///
 #ifndef INCLUDED_EGEG_CIRCLE_HEADER_
 #define INCLUDED_EGEG_CIRCLE_HEADER_
-#include "shape.hpp"
+#include "egeg_math.hpp"
 BEGIN_EGEG
 ///
 /// @struct Circle
 /// @brief  ‰~Œ`
-struct Circle :
-    public Shape
+///
+struct Circle
 {
-    float radius;   ///< ”¼Œa
+    Vector2D origin;    ///< Œ´“_
+    float    radius;    ///< ”¼Œa
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_CIRCLE_HEADER_

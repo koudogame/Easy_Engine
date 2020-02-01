@@ -8,20 +8,17 @@
 #include <unordered_map>
 #include "component.hpp"
 #include "uid.hpp"
-///
-/// @def    DEF_FIRST_DISPATCH
-/// @brief  ファーストディスパッチを定義します。
-///
-#define DEG_FIRST_DISPATCH  bool isCollision( Actor* Other ) override { if( auto com = Other->getComponent<BodyComponent>() ) { return com->isCollision( this ); } return false; }
+#include "rectangle.hpp"
+#include "circle.hpp"
+#include "line.hpp"
 
 BEGIN_EGEG 
 ///
 /// @class   BodyComponent
+/// @brief   衝突判定用コンポーネント
+///
 /// @details 衝突用コンポーネント<br>
-///          衝突判定は、ダブルディスパッチを使用して行います。<br>
-///          ファーストディスパッチ関数はマクロを使用して定義して下さい。<br>
-///          必要に応じて、具体的な型との衝突処理を追加して下さい。<br>
-///          衝突判定関数のシグネチャは bool isCollision( Type* )です。
+///          衝突判定は、ダブルディスパッチを使用して行います。
 ///
 class BodyComponent :
     public Component
@@ -51,21 +48,41 @@ public :
     void postCollision( uint32_t OtherID, void(ActorType::*pCallBack)(Actor*) );
 
     ///
-    /// @brief  ファーストディスパッチ
+    /// @brief   ファーストディスパッチ
+    /// @details 実装は、アクターのBodyComponentのisCollision関数に、具体的な形を渡して呼び出します。<br>
+    ///          衝突を検出した場合、衝突後の処理が呼び出されます。
     ///
     /// @param[in] Other : 衝突を判定するアクター
     ///
     /// @return 衝突あり[ true ]　衝突なし[ false ]
     ///
-    virtual bool isCollision( Actor* Other ) = 0;
+    virtual bool isCollided( Actor* Other ) = 0;
+    ///
+    /// @brief  矩形との衝突判定
+    ///
+    /// @param[in] Rectangle : 衝突を判定する矩形
+    ///
+    /// @return 衝突あり[ true ]　衝突なし[ false ]
+    ///
+    virtual bool isCollided( const Rectangle& Rectangle ) = 0;
+    ///
+    /// @brief  円形との衝突判定
+    ///
+    /// @param[in] Circle : 衝突を判定する円形
+    ///
+    /// @return 衝突あり[ true ]　衝突なし[ false ]
+    ///
+    virtual bool isCollided( const Circle& Circle ) = 0;
+    ///
+    /// @brief  線分との衝突判定
+    ///
+    /// @param[in] Line : 衝突を判定する線分
+    ///
+    /// @return 衝突あり[ true ]　衝突なし[ false ]
+    ///
+    virtual bool isCollided( const Line& Line ) = 0;
 
-    ///
-    /// @brief  不明な形との衝突判定
-    ///
-    /// @return 常に[ false ]
-    ///
-    bool isCollision( BodyComponent* ) { return false; }
-private :
+protected :
     std::unordered_map<uint32_t, std::function<void(Actor*)> > post_collision_;
 };
 

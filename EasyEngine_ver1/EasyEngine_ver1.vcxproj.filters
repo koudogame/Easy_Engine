@@ -60,6 +60,9 @@
     <Filter Include="EasyEngine\0_Tools\Shape">
       <UniqueIdentifier>{0afc1142-bdaa-4a32-971d-e8826979bd1d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EasyEngine\0_Tools\Components\CollisionComponent">
+      <UniqueIdentifier>{020b6135-ee98-4c23-9b8e-ce948dc767fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="easy_engine.hpp">
@@ -152,9 +155,6 @@
     <ClInclude Include="job_priority.hpp">
       <Filter>EasyEngine\0_Tools\JobScheduler</Filter>
     </ClInclude>
-    <ClInclude Include="egeg_math.hpp">
-      <Filter>EasyEngine\1_Core</Filter>
-    </ClInclude>
     <ClInclude Include="game.hpp">
       <Filter>EasyEngine\1_Core</Filter>
     </ClInclude>
@@ -203,9 +203,6 @@
     <ClInclude Include="entry_scene.hpp">
       <Filter>EasyEngine\0_Tools\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="shape.hpp">
-      <Filter>EasyEngine\0_Tools\Shape</Filter>
-    </ClInclude>
     <ClInclude Include="circle.hpp">
       <Filter>EasyEngine\0_Tools\Shape</Filter>
     </ClInclude>
@@ -221,8 +218,17 @@
     <ClInclude Include="timer.hpp">
       <Filter>EasyEngine\0_Tools\Utility</Filter>
     </ClInclude>
+    <ClInclude Include="egeg_math.hpp">
+      <Filter>EasyEngine\1_Core</Filter>
+    </ClInclude>
     <ClInclude Include="body_component.hpp">
-      <Filter>EasyEngine\0_Tools\Components</Filter>
+      <Filter>EasyEngine\0_Tools\Components\CollisionComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="circlebody_component.hpp">
+      <Filter>EasyEngine\0_Tools\Components\CollisionComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="collision_detection.hpp">
+      <Filter>EasyEngine\0_Tools\Shape</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -282,6 +288,9 @@
     </ClCompile>
     <ClCompile Include="actor.cpp">
       <Filter>EasyEngine\0_Tools\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="collision_detection.cpp">
+      <Filter>EasyEngine\0_Tools\Shape</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -4,17 +4,17 @@
 ///
 #ifndef INCLUDED_EGEG_RECTANGLE_HEADER_
 #define INCLUDED_EGEG_RECTANGLE_HEADER_
-#include "shape.hpp"
+#include "egeg_math.hpp"
 BEGIN_EGEG
 ///
 /// @struct Rectangle
 /// @brief  ‹éŒ`
 ///
-struct Rectangle :
-    public Shape
+struct Rectangle
 {
-    float width;    ///< ‰¡•
-    float height;   ///< ‚‚³
+    Vector2D origin;    ///< Œ´“_
+    float width;        ///< ‰¡•
+    float height;       ///< ‚‚³
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_RECTANGLE_HEADER_

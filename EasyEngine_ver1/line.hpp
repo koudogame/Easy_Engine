@@ -4,17 +4,16 @@
 ///
 #ifndef INCLUDED_EGEG_LINE_HEADER_
 #define INCLUDED_EGEG_LINE_HEADER_
-#include "shape.hpp"
+#include "egeg_math.hpp"
 BEGIN_EGEG
 ///
 /// @struct Line
 /// @brief  線分
 ///
-struct Line :
-    public Shape
+struct Line
 {
-    Vector2D start; ///< 始点
-    Vector2D end;   ///< 終点
+    Vector2D start;     ///< 始点
+    Vector2D vector;    ///< ベクトル
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_LINE_HEADER_
