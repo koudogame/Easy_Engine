@@ -60,22 +60,22 @@ bool CollisionDetection::isCollided( const Circle& Cir1, const Circle& Cir2 )
 bool CollisionDetection::isCollided( const Line& Line1, const Line& Line2, float* DivRat1, float* DivRat2 )
 {
     // •½s”»’è
-    if( Line1.vector.cross( Line2.vector ) == 0.0F )  
+    if( Line1.line.cross( Line2.line ) == 0.0F )  
     {
         return false;
     }
 
     // Œð·”»’è
     Vector2D vec_s_s = Line2.start - Line1.start;
-    float rec_crs_1_2 = 1.F / Line1.vector.cross(Line2.vector);
-    float divrat_2 = vec_s_s.cross(Line1.vector) * rec_crs_1_2;
-    float divrat_1 = vec_s_s.cross(Line2.vector) * rec_crs_1_2;
+    float rec_crs_1_2 = 1.F / Line1.line.cross(Line2.line);
+    float divrat_2 = vec_s_s.cross(Line1.line) * rec_crs_1_2;
+    float divrat_1 = vec_s_s.cross(Line2.line) * rec_crs_1_2;
 
     if( DivRat1 )   *DivRat1 = divrat_1;
     if( DivRat2 )   *DivRat2 = divrat_2;
 
-    if( divrat_1 >= 0.F && divrat_1 <= 1.F &&
-        divrat_2 >= 0.F && divrat_2 <= 1.F )
+    if( divrat_1 >= 0.F && divrat_1 <= 1.00001F &&
+        divrat_2 >= 0.F && divrat_2 <= 1.00001F )
     {
         return true;
     }

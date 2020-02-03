@@ -27,7 +27,7 @@ public :
     ///
     /// @param[in] Position : À•W
     ///
-    void setPosition( const Vector2D& Position ) { shape_.origin = Position; }
+    void setPosition( const Vector2D& Position ) override { shape_.origin = Position; }
     ///
     /// @brief  ‰¡•‚ÌÝ’è
     ///
@@ -43,10 +43,10 @@ public :
 
 /*-----------------------------------------------------------------*/
 // Shape
-    bool isCollision( Shape* Other ) const override { return Other->isCollision( shape_ ); }
-    bool isCollision( const Rectangle& ) const override;
-    bool isCollision( const Circle& ) const override;
-    bool isCollision( const Line& ) const override;
+    bool isCollided( Shape* Other ) const override { return Other->isCollided( shape_ ); }
+    bool isCollided( const Rectangle& ) const override;
+    bool isCollided( const Circle& ) const override;
+    bool isCollided( const Line& ) const override;
 /*-----------------------------------------------------------------*/
 private :
     Rectangle shape_ = {};

@@ -22,6 +22,13 @@ public :
     virtual ~Shape() = default;
 
     ///
+    /// @brief  座標の設定
+    ///
+    /// @param[in] Position : 座標
+    ///
+    virtual void setPosition( const Vector2D& Position ) = 0;
+
+    ///
     /// @brief   衝突判定ファーストディスパッチ
     /// @details 相手の自身の形との衝突判定処理を呼び出します。
     ///
@@ -29,7 +36,7 @@ public :
     ///
     /// @return 衝突あり[ true ]　衝突なし[ false ]
     ///
-    virtual bool isCollision( Shape* Other ) const = 0;
+    virtual bool isCollided( Shape* Other ) const = 0;
     ///
     /// @brief  矩形との衝突判定
     ///
@@ -37,7 +44,7 @@ public :
     ///
     /// @return 衝突あり[ true ]　衝突なし[ false ]
     ///
-    virtual bool isCollision( const Rectangle& Rectangle ) const = 0;
+    virtual bool isCollided( const Rectangle& Rectangle ) const = 0;
     ///
     /// @brief  円形との衝突判定
     ///
@@ -45,7 +52,7 @@ public :
     ///
     /// @return 衝突あり[ true ]　衝突なし[ false ]
     ///
-    virtual bool isCollision( const Circle& Circle ) const = 0;
+    virtual bool isCollided( const Circle& Circle ) const = 0;
     ///
     /// @brief  線分との衝突判定
     ///
@@ -53,7 +60,7 @@ public :
     ///
     /// @return 衝突あり[ true ]　衝突なし[ false ]
     ///
-    virtual bool isCollision( const Line& Line ) const = 0;
+    virtual bool isCollided( const Line& Line ) const = 0;
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_SHAPE_HEADER_

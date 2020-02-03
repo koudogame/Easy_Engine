@@ -26,20 +26,20 @@ public :
     ///
     /// @param[in] Position : 座標
     ///
-    void setPosition( const Vector2D& Position ) { shape_.start = Position; }
+    void setPosition( const Vector2D& Position ) override { shape_.start = Position; }
     ///
     /// @brief  線分のセット
     ///
     /// @param[in] Vector : 線分を表すベクトル
     ///
-    void setVector( const Vector2D& Vector ) { shape_.vector = Vector; }
+    void setVector( const Vector2D& Vector ) { shape_.line = Vector; }
 
 /*-----------------------------------------------------------------*/
 // Shape
-    bool isCollision( Shape* Other ) const override { return Other->isCollision( shape_ ); }
-    bool isCollision( const Rectangle& ) const override;
-    bool isCollision( const Circle& ) const override;
-    bool isCollision( const Line& ) const override;
+    bool isCollided( Shape* Other ) const override { return Other->isCollided( shape_ ); }
+    bool isCollided( const Rectangle& ) const override;
+    bool isCollided( const Circle& ) const override;
+    bool isCollided( const Line& ) const override;
 /*-----------------------------------------------------------------*/
 private :
     Line shape_ = {};
