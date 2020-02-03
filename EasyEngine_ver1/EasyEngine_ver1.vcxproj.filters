@@ -63,6 +63,9 @@
     <Filter Include="EasyEngine\0_Tools\Components\CollisionComponent">
       <UniqueIdentifier>{020b6135-ee98-4c23-9b8e-ce948dc767fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EasyEngine\0_Tools\Shape\Primitive">
+      <UniqueIdentifier>{e322a408-0cac-4a31-aa46-dbf0c85212e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="easy_engine.hpp">
@@ -203,15 +206,6 @@
     <ClInclude Include="entry_scene.hpp">
       <Filter>EasyEngine\0_Tools\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="circle.hpp">
-      <Filter>EasyEngine\0_Tools\Shape</Filter>
-    </ClInclude>
-    <ClInclude Include="rectangle.hpp">
-      <Filter>EasyEngine\0_Tools\Shape</Filter>
-    </ClInclude>
-    <ClInclude Include="line.hpp">
-      <Filter>EasyEngine\0_Tools\Shape</Filter>
-    </ClInclude>
     <ClInclude Include="uid.hpp">
       <Filter>EasyEngine\0_Tools\Utility</Filter>
     </ClInclude>
@@ -228,6 +222,27 @@
       <Filter>EasyEngine\0_Tools\Components\CollisionComponent</Filter>
     </ClInclude>
     <ClInclude Include="collision_detection.hpp">
+      <Filter>EasyEngine\0_Tools\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="shape.hpp">
+      <Filter>EasyEngine\0_Tools\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="circle.hpp">
+      <Filter>EasyEngine\0_Tools\Shape\Primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="line.hpp">
+      <Filter>EasyEngine\0_Tools\Shape\Primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="rectangle.hpp">
+      <Filter>EasyEngine\0_Tools\Shape\Primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="rectangle_shape.hpp">
+      <Filter>EasyEngine\0_Tools\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="circle_shape.hpp">
+      <Filter>EasyEngine\0_Tools\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="line_shape.hpp">
       <Filter>EasyEngine\0_Tools\Shape</Filter>
     </ClInclude>
   </ItemGroup>

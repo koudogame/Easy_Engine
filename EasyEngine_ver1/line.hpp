@@ -13,7 +13,7 @@ BEGIN_EGEG
 struct Line
 {
     Vector2D start;     ///< 始点
-    Vector2D vector;    ///< ベクトル
+    Vector2D vector;    ///< 方向と大きさを示すベクトル
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_LINE_HEADER_
