@@ -145,12 +145,13 @@
   <ItemGroup>
     <ClInclude Include="actor.hpp" />
     <ClInclude Include="actor_factory.hpp" />
-    <ClInclude Include="body_component.hpp" />
+    <ClInclude Include="collision_component.hpp" />
     <ClInclude Include="circle.hpp" />
     <ClInclude Include="circle_shape.hpp" />
     <ClInclude Include="collision_detection.hpp" />
     <ClInclude Include="line.hpp" />
     <ClInclude Include="line_shape.hpp" />
+    <ClInclude Include="physical_collision_component.hpp" />
     <ClInclude Include="rectangle.hpp" />
     <ClInclude Include="rectangle_shape.hpp" />
     <ClInclude Include="shape.hpp" />

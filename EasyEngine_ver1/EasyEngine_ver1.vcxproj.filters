@@ -63,7 +63,7 @@
     <Filter Include="EasyEngine\0_Tools\Shape\Primitive">
       <UniqueIdentifier>{e322a408-0cac-4a31-aa46-dbf0c85212e9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EasyEngine\0_Tools\Components\BodyComponent">
+    <Filter Include="EasyEngine\0_Tools\Components\CollisionComponent">
       <UniqueIdentifier>{020b6135-ee98-4c23-9b8e-ce948dc767fc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -215,9 +215,6 @@
     <ClInclude Include="egeg_math.hpp">
       <Filter>EasyEngine\1_Core</Filter>
     </ClInclude>
-    <ClInclude Include="body_component.hpp">
-      <Filter>EasyEngine\0_Tools\Components\BodyComponent</Filter>
-    </ClInclude>
     <ClInclude Include="collision_detection.hpp">
       <Filter>EasyEngine\0_Tools\Shape</Filter>
     </ClInclude>
@@ -241,6 +238,12 @@
     </ClInclude>
     <ClInclude Include="line_shape.hpp">
       <Filter>EasyEngine\0_Tools\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="collision_component.hpp">
+      <Filter>EasyEngine\0_Tools\Components\CollisionComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="physical_collision_component.hpp">
+      <Filter>EasyEngine\0_Tools\Components\CollisionComponent</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

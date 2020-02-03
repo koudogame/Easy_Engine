@@ -14,36 +14,36 @@
 
 BEGIN_EGEG 
 ///
-/// @class   BodyComponent
+/// @class   CollisionComponent
 /// @brief   衝突判定用コンポーネント
 ///
 /// @details 衝突用コンポーネント<br>
 ///          衝突判定は、ダブルディスパッチを使用して行います。
 ///
-class BodyComponent :
+class CollisionComponent :
     public Component
 {
 public :
     ///< IDの取得
-    static uint32_t getID() { return UID<BodyComponent>::getID(); }
+    static uint32_t getID() { return UID<CollisionComponent>::getID(); }
 
-    virtual ~BodyComponent() = default;
+    virtual ~CollisionComponent() = default;
 
     ///
     /// @brief  コンストラクタ
     ///
-    /// @param[in] Owner : オーナー
+    /// @param[in] pOwner : オーナー
     ///
-    BodyComponent( Actor* Owner ) : Component( Owner ) {}
+    CollisionComponent( Actor* pOwner ) : Component( pOwner ) {}
 
     ///
     /// @brief  アクターとの衝突判定
     ///
-    /// @param[in] Other : 判定を行うアクター
+    /// @param[in] pOther : 判定を行うアクター
     ///
     /// @return 衝突あり[ true ]　衝突なし[ false ]
     ///
-    virtual bool isCollided( Actor* Other );
+    virtual bool isCollided( Actor* pOther );
 
     ///
     /// @brief   衝突後処理の追加
@@ -63,7 +63,7 @@ protected :
 
 ///< 衝突後処理の追加
 template <typename ActorType>
-void BodyComponent::postCollision( uint32_t OtherID, void(ActorType::*pCallBack)(Actor*) )
+void CollisionComponent::postCollision( uint32_t OtherID, void(ActorType::*pCallBack)(Actor*) )
 {
     post_collision_.erase( OtherID );
     post_collision_.emplace( 
