@@ -66,6 +66,9 @@
     <Filter Include="EasyEngine\0_Tools\Components\CollisionComponent">
       <UniqueIdentifier>{020b6135-ee98-4c23-9b8e-ce948dc767fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EasyEngine\0_Tools\Components\CollisionComponent\Space">
+      <UniqueIdentifier>{cf293208-b625-4b6c-8351-1b46e7615023}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="easy_engine.hpp">
@@ -244,6 +247,9 @@
     </ClInclude>
     <ClInclude Include="physical_collision_component.hpp">
       <Filter>EasyEngine\0_Tools\Components\CollisionComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="collision_space.hpp">
+      <Filter>EasyEngine\0_Tools\Components\CollisionComponent\Space</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

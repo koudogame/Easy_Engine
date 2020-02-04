@@ -149,6 +149,7 @@
     <ClInclude Include="circle.hpp" />
     <ClInclude Include="circle_shape.hpp" />
     <ClInclude Include="collision_detection.hpp" />
+    <ClInclude Include="collision_space.hpp" />
     <ClInclude Include="line.hpp" />
     <ClInclude Include="line_shape.hpp" />
     <ClInclude Include="physical_collision_component.hpp" />
