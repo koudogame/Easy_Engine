@@ -39,15 +39,15 @@ public :
     ///
     /// @brief  アクターとの衝突判定
     ///
-    /// @param[in] pOther : 判定を行うアクター
+    /// @param[in] pOther : 衝突を行う衝突コンポーネント
     ///
     /// @return 衝突あり[ true ]　衝突なし[ false ]
     ///
-    virtual bool isCollided( Actor* pOther );
+    virtual bool isCollided( const CollisionComponent* pOther );
 
     ///
-    /// @brief   衝突後処理の追加
-    /// @details IDに対応した処理が既にある場合は上書き
+    /// @brief   衝突後処理の設定
+    /// @details IDに対応した処理が既にある場合は上書きします。
     ///
     /// @tparam ActorType : オーナーの型(省略可)
     ///
@@ -55,7 +55,7 @@ public :
     /// @param[in] pCallBack : 衝突時に呼び出される関数のアドレス
     ///
     template <typename ActorType>
-    void postCollision( uint32_t OtherID, void(ActorType::*pCallBack)(Actor*) );
+    void setPostCollision( uint32_t OtherID, void(ActorType::*pCallBack)(Actor*) );
 
 protected :
     std::unordered_map<uint32_t, std::function<void(Actor*)> > post_collision_;
@@ -63,7 +63,7 @@ protected :
 
 ///< 衝突後処理の追加
 template <typename ActorType>
-void CollisionComponent::postCollision( uint32_t OtherID, void(ActorType::*pCallBack)(Actor*) )
+void CollisionComponent::setPostCollision( uint32_t OtherID, void(ActorType::*pCallBack)(Actor*) )
 {
     post_collision_.erase( OtherID );
     post_collision_.emplace( 

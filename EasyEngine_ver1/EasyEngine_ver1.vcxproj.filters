@@ -69,6 +69,9 @@
     <Filter Include="EasyEngine\0_Tools\Components\CollisionComponent\Space">
       <UniqueIdentifier>{cf293208-b625-4b6c-8351-1b46e7615023}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EasyEngine\0_Tools\GameObject">
+      <UniqueIdentifier>{ebb4a25c-d388-47b7-bf95-cb41d8223a56}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="easy_engine.hpp">
@@ -251,6 +254,12 @@
     <ClInclude Include="collision_space.hpp">
       <Filter>EasyEngine\0_Tools\Components\CollisionComponent\Space</Filter>
     </ClInclude>
+    <ClInclude Include="game_object.hpp">
+      <Filter>EasyEngine\0_Tools\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="game_object_factory.hpp">
+      <Filter>EasyEngine\0_Tools\GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="easy_engine.cpp">
@@ -312,6 +321,9 @@
     </ClCompile>
     <ClCompile Include="collision_detection.cpp">
       <Filter>EasyEngine\0_Tools\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="collision_component.cpp">
+      <Filter>EasyEngine\0_Tools\Components\CollisionComponent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

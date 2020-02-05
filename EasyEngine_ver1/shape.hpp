@@ -36,7 +36,7 @@ public :
     ///
     /// @return Õ“Ë‚ ‚è[ true ]@Õ“Ë‚È‚µ[ false ]
     ///
-    virtual bool isCollided( Shape* Other ) const = 0;
+    virtual bool isCollided( const Shape* Other ) const = 0;
     ///
     /// @brief  ‹éŒ`‚Æ‚ÌÕ“Ë”»’è
     ///

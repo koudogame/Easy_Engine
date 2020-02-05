@@ -7,15 +7,18 @@
 #include "collision_component.hpp"
 BEGIN_EGEG
 ///
-/// @class   ICollisionSpace
-/// @brief   衝突空間インターフェイス
+/// @class   CollisionSpace
+/// @brief   衝突空間クラス
 ///          
-/// @details 衝突判定を行う空間のインターフェイスです。
+/// @details 衝突判定を行う空間のインターフェイスです。<br>
+///          シングルトンクラスです。アクセスにはinstance関数を使用して下さい。
 ///
-class ICollisionSpace
+class CollisionSpace
 {
 public :
-    virtual ~ICollisionSpace() = default;
+    virtual ~CollisionSpace() = default;
+
+    static CollisionSpace* instance();
 
     ///
     /// @brief  空間への登録

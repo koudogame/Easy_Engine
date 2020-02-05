@@ -150,6 +150,8 @@
     <ClInclude Include="circle_shape.hpp" />
     <ClInclude Include="collision_detection.hpp" />
     <ClInclude Include="collision_space.hpp" />
+    <ClInclude Include="game_object.hpp" />
+    <ClInclude Include="game_object_factory.hpp" />
     <ClInclude Include="line.hpp" />
     <ClInclude Include="line_shape.hpp" />
     <ClInclude Include="physical_collision_component.hpp" />
@@ -206,6 +208,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="actor.cpp" />
+    <ClCompile Include="collision_component.cpp" />
     <ClCompile Include="collision_detection.cpp" />
     <ClCompile Include="easy_engine.cpp" />
     <ClCompile Include="game.cpp" />

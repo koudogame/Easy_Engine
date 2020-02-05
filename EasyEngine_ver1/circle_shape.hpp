@@ -36,7 +36,7 @@ public :
 
 /*-----------------------------------------------------------------*/
 // Shape
-    bool isCollided( Shape* Other ) const override { return Other->isCollided( shape_ ); }
+    bool isCollided( const Shape* Other ) const override { return Other->isCollided( shape_ ); }
     bool isCollided( const Rectangle& ) const override;
     bool isCollided( const Circle& ) const override;
     bool isCollided( const Line& ) const override;
