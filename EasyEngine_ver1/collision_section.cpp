@@ -24,7 +24,7 @@ CollisionSection* CollisionSection::pickChild()
     uint32_t curr_idx = child_idx_++;
     
     // ˆê„
-    if( curr_idx > childs_.size() )
+    if( curr_idx >= childs_.size() )
     {
         child_idx_ = 0U;
         return nullptr;

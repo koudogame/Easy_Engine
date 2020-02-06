@@ -47,7 +47,28 @@ public :
     ///
     CollisionComponent* pickComponent();
 
+    ///
+    /// @brief  親セクションの設定
+    ///
+    /// @param[in] pParent : 親セクション
+    ///
+    void setParent( CollisionSection* pParent ) { p_parent_ = pParent; }
+    ///
+    /// @brief  親セクションの取得
+    ///
+    /// @return 親セクション
+    ///
+    CollisionSection* getParent() const { return p_parent_; }
+
+    ///
+    /// @brief  子セクションの追加
+    ///
+    /// @param[in] pChild : 子セクション
+    ///
+    void addChild( CollisionSection* pChild ) { childs_.push_back( pChild ); }
+
 private :
+    CollisionSection*              p_parent_ = nullptr;
     std::vector<CollisionSection*> childs_;
     std::list<CollisionComponent*> components_;
 

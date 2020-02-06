@@ -39,11 +39,11 @@ public :
     CollisionComponent( Actor* pOwner ) : Component( pOwner ) {}
 
     ///
-    /// @brief  アクターとの衝突を通知
+    /// @brief  衝突を通知
     ///
-    /// @param[in] pOther : 衝突を検出したアクター
+    /// @param[in] pOther : 衝突を検出したコンポーネント
     ///
-    virtual void notifyCollision( Actor* pOther );
+    virtual void notifyCollision( const CollisionComponent* pOther );
 
     ///
     /// @brief   衝突後処理の設定

@@ -60,6 +60,8 @@ public :
     void exit( CollisionComponent* pComponent );
 
 private :
+    void judgeSectionAndSection( CollisionSection*, CollisionSection* );
+
     std::vector<CollisionSection> sections_;
 
     CollisionSpace();
