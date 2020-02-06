@@ -12,7 +12,9 @@
 #include "circle.hpp"
 #include "line.hpp"
 
-BEGIN_EGEG 
+BEGIN_EGEG
+class CollisionSection;
+
 ///
 /// @class   CollisionComponent
 /// @brief   衝突判定用コンポーネント
@@ -37,13 +39,11 @@ public :
     CollisionComponent( Actor* pOwner ) : Component( pOwner ) {}
 
     ///
-    /// @brief  アクターとの衝突判定
+    /// @brief  アクターとの衝突を通知
     ///
-    /// @param[in] pOther : 衝突を行う衝突コンポーネント
+    /// @param[in] pOther : 衝突を検出したアクター
     ///
-    /// @return 衝突あり[ true ]　衝突なし[ false ]
-    ///
-    virtual bool isCollided( const CollisionComponent* pOther );
+    virtual void notifyCollision( Actor* pOther );
 
     ///
     /// @brief   衝突後処理の設定
@@ -57,8 +57,37 @@ public :
     template <typename ActorType>
     void setPostCollision( uint32_t OtherID, void(ActorType::*pCallBack)(Actor*) );
 
+    ///
+    /// @brief  形の取得
+    ///
+    /// @return オーナーの形
+    ///
+    const Shape* getShape() const { return owner_->getShape(); }
+
+    ///
+    /// @brief  所属セクションの設定
+    ///
+    /// @param[in] pSection : セクション
+    ///
+    void setBelongSection( CollisionSection* pSection ) { section_ = pSection; }
+    ///
+    /// @brief  所属セクションの取得
+    ///
+    /// @return 所属セクション
+    ///
+    CollisionSection* getBelongSection() const { return section_; }
+
+/*-----------------------------------------------------------------*/
+// Component
+/*-----------------------------------------------------------------*/
+    bool initialize() override;
+    void finalize() override;
+
 protected :
     std::unordered_map<uint32_t, std::function<void(Actor*)> > post_collision_;
+
+private :
+    CollisionSection* section_ = nullptr;   /// 自身の所属する空間セクション
 };
 
 ///< 衝突後処理の追加

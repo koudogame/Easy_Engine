@@ -14,8 +14,7 @@ BEGIN_EGEG
 ///          派生クラスは static uint32_t getID()を実装してください。<br>
 ///          
 ///
-class Component :
-    public GameObject
+class Component
 {
 public :
     ///
@@ -25,6 +24,17 @@ public :
     ///
     Component( Actor* Owner ) : owner_( Owner ) {}
     virtual ~Component() = default;
+
+    ///
+    /// @brief  初期化処理
+    ///
+    /// @return 初期化成功[ true ]　初期化失敗[ false ]
+    ///
+    virtual bool initialize() = 0;
+    ///
+    /// @brief  終了処理
+    ///
+    virtual void finalize() = 0;
 
 protected :
     Actor* owner_;    ///< オーナー
