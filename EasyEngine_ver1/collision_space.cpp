@@ -29,14 +29,11 @@ void CollisionSpace::collision()
             judgeSectionAndSection( section, curr_section );
         }
 
-        // 子をリストに追加
-        CollisionSection* child = curr_section->pickChild();
-        while( child == nullptr && curr_section )
+        // 次に判定を行うセクションへと移行
+        curr_section = nextJudgeSection( curr_section );
+        if( curr_section != nullptr )
         {
-            curr_section = curr_section->getParent();
-            if( curr_section == nullptr ) break;
-
-            child = curr_section->pickChild();
+            to_judge_sections.push_back( curr_section );
         }
     }
 }
@@ -58,6 +55,9 @@ void CollisionSpace::exit( CollisionComponent* pComponent )
 
 
 // セクションとセクションの判定処理
+//
+// in Sec1 : セクション1
+// in Sec2 : セクション2
 void CollisionSpace::judgeSectionAndSection( CollisionSection* Sec1, CollisionSection* Sec2 )
 {
     while( auto sec1_com = Sec1->pickComponent() )
@@ -65,13 +65,35 @@ void CollisionSpace::judgeSectionAndSection( CollisionSection* Sec1, CollisionSe
         while( auto sec2_com = Sec2->pickComponent() )
         {
             // 衝突
-            if( sec1_com->getShape()->isCollided(sec2_com->getShape()) ) 
+            if( (sec1_com != sec2_com) &&
+                (sec1_com->getShape()->isCollided(sec2_com->getShape())) ) 
             {
                 sec1_com->notifyCollision( sec2_com );
                 sec2_com->notifyCollision( sec1_com );
             }
         }
     }
+}
+
+// 現在のセクションから、次に衝突を検出するセクションを取得
+//
+// in CurrSection : 現在のセクション
+//
+// return 次に衝突を検出するセクション
+CollisionSection* nextJudgeSection( CollisionSection* CurrSection )
+{
+    CollisionSection* curr = CurrSection;
+    CollisionSection* next = curr->pickChild();
+    while( next == nullptr )
+    {
+        // 子がいない場合親方向へ一つ戻る
+        curr = CurrSection->getParent();
+        if( curr == nullptr ) break;
+
+        next = curr->pickChild();
+    }
+
+    return next;
 }
 END_EGEG
 // EOF

@@ -24,8 +24,8 @@ public :
     ///          存在しうるセクションをすべて引数のコンテナに格納するモノとします。<br>
     ///          void setSections( std::vector<->* );<br>
     ///<br>
-    ///          createID関数で形( 矩形 )に対応したセクションIDの生成を行います。<br>
-    ///          createSections関数で生成した配列より大きい数字を返さないものとします。<br>
+    ///          createID関数で形に対応したセクションIDの生成を行います。<br>
+    ///          setSections関数で設定したセクション数 - 1を上限とします。<br>
     ///          uint32_t createID( const Shape* )
     ///
     using SpatialDivision = FullScanSpatialDivision;
@@ -61,6 +61,7 @@ public :
 
 private :
     void judgeSectionAndSection( CollisionSection*, CollisionSection* );
+    CollisionSection* nextJudgeSection( CollisionSection* );
 
     std::vector<CollisionSection> sections_;
 
