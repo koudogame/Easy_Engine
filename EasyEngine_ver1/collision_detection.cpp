@@ -86,18 +86,26 @@ bool CollisionDetection::isCollided( const Line& Line1, const Line& Line2, float
 // 矩形と円形
 bool CollisionDetection::isCollided( const Rectangle& Rect, const Circle& Cir )
 {
+    // 矩形の各辺と円形の判定
+
     return false;
 }
 
 // 矩形と線分
 bool CollisionDetection::isCollided( const Rectangle& Rect, const Line& Line )
 {
+    // 矩形の各辺と線分の判定
+
     return false;
 }
 
 // 円形と線分
 bool CollisionDetection::isCollided( const Circle& Cir, const Line& Line )
 {
+    // 線分の始点終点と円形の判定
+
+    // 線分と円形の判定
+
     return false;
 }
 END_EGEG

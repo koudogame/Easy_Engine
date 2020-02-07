@@ -61,6 +61,7 @@ public :
 
 private :
     void judgeSectionAndSection( CollisionSection*, CollisionSection* );
+    void judgeSameSection( CollisionSection* );
     CollisionSection* nextJudgeSection( CollisionSection* );
 
     std::vector<CollisionSection> sections_;

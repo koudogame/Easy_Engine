@@ -23,14 +23,19 @@ void CollisionSpace::collision()
     CollisionSection* curr_section = to_judge_sections.back();
     while( curr_section )
     {
-        // 衝突判定リストと現在のセクションの判定を行う
+        // 判定リストと現在のセクションの判定を行う
         for( auto& section : to_judge_sections )
         {
-            judgeSectionAndSection( section, curr_section );
+            if( section == curr_section )
+                judgeSameSection( section );
+            else
+                judgeSectionAndSection( section, curr_section );
         }
 
         // 次に判定を行うセクションへと移行
         curr_section = nextJudgeSection( curr_section );
+
+        // 判定リストにセクションを追加
         if( curr_section != nullptr )
         {
             to_judge_sections.push_back( curr_section );
@@ -74,6 +79,34 @@ void CollisionSpace::judgeSectionAndSection( CollisionSection* Sec1, CollisionSe
         }
     }
 }
+// 同一セクション同士の判定処理
+// 同じ組み合わせの衝突判定を行わないよう制御
+//
+// in Sec : セクション
+void CollisionSpace::judgeSameSection( CollisionSection* Sec )
+{
+    // セクション内のコンポーネントをリスト化
+    std::vector<CollisionComponent*> objects;
+    objects.reserve( 32U );
+    while( auto component = Sec->pickComponent() )
+    {
+        objects.push_back( component );
+    }
+
+    // 同じ組み合わせが無いよう判定
+    for( int i = objects.size() - 1U; i >= 0; --i )
+    {
+        for( int j = i - 1U; j >= 0; --j )
+        {
+            // 衝突
+            if( objects[i]->getShape()->isCollided( objects[j]->getShape()) )
+            {
+                objects[i]->notifyCollision( objects[j] );
+                objects[j]->notifyCollision( objects[i] );
+            }
+        }
+    }
+}
 
 // 現在のセクションから、次に衝突を検出するセクションを取得
 //
@@ -82,15 +115,14 @@ void CollisionSpace::judgeSectionAndSection( CollisionSection* Sec1, CollisionSe
 // return 次に衝突を検出するセクション
 CollisionSection* nextJudgeSection( CollisionSection* CurrSection )
 {
-    CollisionSection* curr = CurrSection;
-    CollisionSection* next = curr->pickChild();
+    CollisionSection* next = CurrSection->pickChild();
     while( next == nullptr )
     {
         // 子がいない場合親方向へ一つ戻る
-        curr = CurrSection->getParent();
-        if( curr == nullptr ) break;
+        CurrSection = CurrSection->getParent();
+        if( CurrSection == nullptr ) break;
 
-        next = curr->pickChild();
+        next = CurrSection->pickChild();
     }
 
     return next;
