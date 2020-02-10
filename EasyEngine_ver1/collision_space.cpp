@@ -21,7 +21,7 @@ void CollisionSpace::collision()
     
     to_judge_sections.push_back( &(*sections_.begin()) );
     CollisionSection* curr_section = to_judge_sections.back();
-    while( curr_section )
+    while( curr_section != nullptr )
     {
         // 判定リストと現在のセクションの判定を行う
         for( auto& section : to_judge_sections )
@@ -69,7 +69,7 @@ void CollisionSpace::judgeSectionAndSection( CollisionSection* Sec1, CollisionSe
     {
         while( auto sec2_com = Sec2->pickComponent() )
         {
-            // 衝突
+            // 衝突判定
             if( (sec1_com != sec2_com) &&
                 (sec1_com->getShape()->isCollided(sec2_com->getShape())) ) 
             {
@@ -98,7 +98,7 @@ void CollisionSpace::judgeSameSection( CollisionSection* Sec )
     {
         for( int j = i - 1U; j >= 0; --j )
         {
-            // 衝突
+            // 衝突判定
             if( objects[i]->getShape()->isCollided( objects[j]->getShape()) )
             {
                 objects[i]->notifyCollision( objects[j] );

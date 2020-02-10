@@ -86,25 +86,97 @@ bool CollisionDetection::isCollided( const Line& Line1, const Line& Line2, float
 // 矩形と円形
 bool CollisionDetection::isCollided( const Rectangle& Rect, const Circle& Cir )
 {
+    const float kRectWidthHarf = Rect.width * 0.5F;
+    const float kRectHeightHarf = Rect.height * 0.5F;
+
     // 矩形の各辺と円形の判定
+    Line line;
+    line.start = { Rect.origin.x - kRectWidthHarf, Rect.origin.y + kRectHeightHarf };
+    line.line  = { 0.F, -Rect.height };
+    if( isCollided( Cir, line ) )
+        return true;
+
+    line.start = { Rect.origin.x - kRectWidthHarf, Rect.origin.y - kRectHeightHarf };
+    line.line  = { Rect.width, 0.F };
+    if( isCollided( Cir, line ) )
+        return true;
+
+    line.start = { Rect.origin.x + kRectWidthHarf, Rect.origin.y - kRectHeightHarf };
+    line.line  = { 0.F, Rect.height };
+    if( isCollided( Cir, line ) )
+        return true;
+
+    line.start = { Rect.origin.x + kRectWidthHarf, Rect.origin.y + kRectHeightHarf };
+    line.line  = { -Rect.width, 0.0F };
+    if( isCollided( Cir,line ) )
+        return true;
+    
 
     return false;
 }
 
 // 矩形と線分
-bool CollisionDetection::isCollided( const Rectangle& Rect, const Line& Line )
+bool CollisionDetection::isCollided( const Rectangle& Rect, const Line& Segment )
 {
-    // 矩形の各辺と線分の判定
+    const float kRectWidthHarf = Rect.width * 0.5F;
+    const float kRectHeightHarf = Rect.height * 0.5F;
 
+    // 矩形の各辺と線分の判定
+    Line line;
+    line.start = { Rect.origin.x - kRectWidthHarf, Rect.origin.y + kRectHeightHarf };
+    line.line  = { 0.F, -Rect.height };
+    if( isCollided( line, Segment ) )
+        return true;
+
+    line.start = { Rect.origin.x - kRectWidthHarf, Rect.origin.y - kRectHeightHarf };
+    line.line  = { Rect.width, 0.F };
+    if( isCollided( line, Segment ) )
+        return true;
+
+    line.start = { Rect.origin.x + kRectWidthHarf, Rect.origin.y - kRectHeightHarf };
+    line.line  = { 0.F, Rect.height };
+    if( isCollided( line, Segment ) )
+        return true;
+
+    line.start = { Rect.origin.x + kRectWidthHarf, Rect.origin.y + kRectHeightHarf };
+    line.line  = { -Rect.width, 0.0F };
+    if( isCollided( line, Segment ) )
+        return true;
+    
     return false;
 }
 
-// 円形と線分
+// 円形と線分　参考サイト : http://marupeke296.com/COL_2D_No5_PolygonToCircle.html
 bool CollisionDetection::isCollided( const Circle& Cir, const Line& Line )
 {
     // 線分の始点終点と円形の判定
+    Circle point;
+    point.radius = 0.F;
+
+    point.origin.x = Line.start.x;
+    point.origin.y = Line.start.y;
+    if( isCollided( Cir, point ) )
+        return true;
+
+    point.origin.x = Line.start.x + Line.line.x;
+    point.origin.y = Line.start.y + Line.line.y;
+    if( isCollided( Cir, point ) )
+        return true;
 
     // 線分と円形の判定
+    Vector2D linestart_to_circle = Cir.origin - Line.start;
+    float distance = Line.start.cross(linestart_to_circle) / std::hypot(Line.start.x, Line.start.y);   // 線分と円形の距離
+    if( distance <= Cir.radius ) // 衝突の可能性がある
+    {
+        float start_circle_dot = linestart_to_circle.dot( Line.line );
+        Vector2D lineend_to_circle = Cir.origin - ( Line.start + Line.line );
+        float end_circle_dot = lineend_to_circle.dot( Line.line );
+
+        // 円が線分と交差している
+        if( start_circle_dot >= 0 && end_circle_dot >= 0 )
+            return true;
+    }
+    
 
     return false;
 }
