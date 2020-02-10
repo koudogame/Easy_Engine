@@ -1,11 +1,11 @@
 // ì¬Ò : ”Âê
 #include "game.hpp"
 #include "job_scheduler.hpp"
+#include "scene_manager.hpp"
 #include "render_batch.hpp"
 #include "rendering_manager.hpp"
-
-#include "texture_manager.hpp"
-#include "sprite_component.hpp"
+#include "uid.hpp"
+#include "entry_scene.hpp"
 
 BEGIN_EGEG
 // Game : ŠÖ”‚ÌÀ‘•
@@ -13,13 +13,14 @@ BEGIN_EGEG
 // ‰Šú‰»ˆ—
 bool Game::initialize()
 {
+    SceneManager::instance()->push( UID<EntryScene>::getID() );
     return true;
 }
 
 // I—¹ˆ—
 void Game::finalize()
 {
-
+    SceneManager::instance()->destroy();
 }
 
 // XVˆ—

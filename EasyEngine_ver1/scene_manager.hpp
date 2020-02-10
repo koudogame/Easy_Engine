@@ -48,6 +48,10 @@ public :
     ///
     void swap( uint32_t SceneID );
 
+    ///
+    /// @brief  I—¹ˆ—
+    ///
+    void destroy();
 private :
     SceneManager();
     SceneManager( const SceneManager& ) = delete;

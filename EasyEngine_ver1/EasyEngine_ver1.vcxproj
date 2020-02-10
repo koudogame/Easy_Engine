@@ -160,6 +160,8 @@
     <ClInclude Include="rectangle.hpp" />
     <ClInclude Include="rectangle_shape.hpp" />
     <ClInclude Include="shape.hpp" />
+    <ClInclude Include="sprite.hpp" />
+    <ClInclude Include="test_scene.hpp" />
     <ClInclude Include="timer.hpp" />
     <ClInclude Include="component.hpp" />
     <ClInclude Include="easy_engine.hpp" />
@@ -215,6 +217,7 @@
     <ClCompile Include="collision_section.cpp" />
     <ClCompile Include="collision_space.cpp" />
     <ClCompile Include="easy_engine.cpp" />
+    <ClCompile Include="entry_scene.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="message_receive_component.cpp" />
@@ -228,10 +231,12 @@
     <ClCompile Include="shader_loader_d3d11.cpp" />
     <ClCompile Include="shader_manager.cpp" />
     <ClCompile Include="sound_manager.cpp" />
+    <ClCompile Include="sprite.cpp" />
     <ClCompile Include="sprite_component.cpp" />
     <ClCompile Include="system_manager.cpp" />
     <ClCompile Include="job_container.cpp" />
     <ClCompile Include="job_scheduler.cpp" />
+    <ClCompile Include="test_scene.cpp" />
     <ClCompile Include="texture_loader_d3d11.cpp" />
     <ClCompile Include="texture_manager.cpp" />
   </ItemGroup>

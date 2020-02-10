@@ -39,9 +39,6 @@
     <Filter Include="EasyEngine\0_Tools\Scene">
       <UniqueIdentifier>{956c9bc2-989c-4df3-b891-0bc1cc9f064c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EasyEngine\0_Tools\Scene\Factory">
-      <UniqueIdentifier>{00cc52a8-3816-424c-8374-45914af7c6d9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="EasyEngine\0_Tools\Components\RenderComponent">
       <UniqueIdentifier>{6f76f598-1a6a-4f29-8e9c-a61275ccc3c9}</UniqueIdentifier>
     </Filter>
@@ -74,6 +71,9 @@
     </Filter>
     <Filter Include="EasyEngine\0_Tools\Actor\Factory">
       <UniqueIdentifier>{d94d57e2-86c9-4e81-820e-d5f548bfe232}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\Test">
+      <UniqueIdentifier>{187fbf72-3a66-4ba7-97f7-7a46dd8aafaf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -206,9 +206,6 @@
     <ClInclude Include="actor_factory.hpp">
       <Filter>EasyEngine\0_Tools\Actor\Factory</Filter>
     </ClInclude>
-    <ClInclude Include="scene_factory.hpp">
-      <Filter>EasyEngine\0_Tools\Scene\Factory</Filter>
-    </ClInclude>
     <ClInclude Include="render_component.hpp">
       <Filter>EasyEngine\0_Tools\Components\RenderComponent</Filter>
     </ClInclude>
@@ -268,6 +265,15 @@
     </ClInclude>
     <ClInclude Include="messenger.hpp">
       <Filter>EasyEngine\0_Tools\Messenger</Filter>
+    </ClInclude>
+    <ClInclude Include="test_scene.hpp">
+      <Filter>EasyEngine\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="scene_factory.hpp">
+      <Filter>EasyEngine\0_Tools\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite.hpp">
+      <Filter>EasyEngine\Test</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -345,6 +351,15 @@
     </ClCompile>
     <ClCompile Include="messenger.cpp">
       <Filter>EasyEngine\0_Tools\Messenger</Filter>
+    </ClCompile>
+    <ClCompile Include="test_scene.cpp">
+      <Filter>EasyEngine\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="entry_scene.cpp">
+      <Filter>EasyEngine\0_Tools\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="sprite.cpp">
+      <Filter>EasyEngine\Test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
