@@ -69,9 +69,6 @@
     <Filter Include="EasyEngine\0_Tools\Actor">
       <UniqueIdentifier>{37f54cf2-380a-4491-9a3d-74b86fb6fa96}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EasyEngine\0_Tools\Actor\Factory">
-      <UniqueIdentifier>{d94d57e2-86c9-4e81-820e-d5f548bfe232}</UniqueIdentifier>
-    </Filter>
     <Filter Include="EasyEngine\Test">
       <UniqueIdentifier>{187fbf72-3a66-4ba7-97f7-7a46dd8aafaf}</UniqueIdentifier>
     </Filter>
@@ -203,9 +200,6 @@
     <ClInclude Include="component.hpp">
       <Filter>EasyEngine\0_Tools\Components</Filter>
     </ClInclude>
-    <ClInclude Include="actor_factory.hpp">
-      <Filter>EasyEngine\0_Tools\Actor\Factory</Filter>
-    </ClInclude>
     <ClInclude Include="render_component.hpp">
       <Filter>EasyEngine\0_Tools\Components\RenderComponent</Filter>
     </ClInclude>
@@ -274,6 +268,9 @@
     </ClInclude>
     <ClInclude Include="sprite.hpp">
       <Filter>EasyEngine\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="actor_factory.hpp">
+      <Filter>EasyEngine\0_Tools\Actor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
