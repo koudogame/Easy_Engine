@@ -2,7 +2,6 @@
 #include "scene_manager.hpp"
 #include "system_manager.hpp"
 #include "scene_factory.hpp"
-#include "uid.hpp"
 
 BEGIN_EGEG
 // SceneManager : 関数の実装
@@ -10,12 +9,11 @@ BEGIN_EGEG
 // コンストラクタ
 SceneManager::SceneManager()
 {
-
 }
 // デストラクタ
 SceneManager::~SceneManager()
 {
-
+    
 }
 
 // シーンの追加
@@ -41,9 +39,7 @@ void SceneManager::push( uint32_t ID )
         );
         return;
     }
-    next->setActiveState( true );
 
-    scenes_.back()->setActiveState( false );
     scenes_.push_back( next );
 }
 
@@ -91,7 +87,16 @@ void SceneManager::swap( uint32_t ID )
     // アクティブなシーンの入れ替え
     scenes_.pop_back();
     scenes_.push_back( next );
-    scenes_.back()->setActiveState( true );
+}
+
+// 終了処理
+void SceneManager::destroy()
+{
+    for (auto& scene : scenes_)
+    {
+        scene->finalize();
+        delete scene;
+    }
 }
 END_EGEG
 // EOF

@@ -99,24 +99,27 @@ ComponentType* Actor::addComponent()
     // 多重登録チェック
     if( components_.find(ComponentType::getID()) != components_.end() )
     {
-        SystemManager::instance()->showDialogBox(
+        std::string err = 
             "コンポーネントの多重登録を検知しました。\n"
             "\n場所 : Actor::addComponent\n"
-            "型 : " + typeid( ComponentType ).name()
-        );
+            "型 : ";
+        err += typeid( ComponentType ).name();
+        SystemManager::instance()->showDialogBox( err );
         return nullptr;
     }
-
+    
     // コンポーネントの生成＆初期化
     ComponentType* component = new ComponentType( this );
     if( component->initialize() == false )
     {
         delete component;
-        SystemManager::instance()->showDialogBox(
+        std::string err = 
             "コンポーネントの初期化に失敗しました。\n"
             "\n場所 : Actor::addComponent\n"
-            "型 : " + typeid( ComponentType ).name()
-        );
+            "型 : ";
+        err += typeid( ComponentType ).name();
+        SystemManager::instance()->showDialogBox( err );
+
         return nullptr;
     }
 

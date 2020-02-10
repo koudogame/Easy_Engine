@@ -34,25 +34,9 @@ public :
     /// @param[in] DeltaTimeMS : 前回呼び出し時からの時間差(:ミリ秒)
     ///
     virtual void update( uint64_t DeltaTimeMS ) = 0;
-    
-    ///
-    /// @brief  アクティブ状態のセット
-    ///
-    /// @param[in] State : 設定する状態
-    ///
-    void setActiveState( bool State ) { is_active_ = State; }
-    ///
-    /// @brief  アクティブ状態の取得
-    ///
-    /// @return 状態
-    ///
-    bool isActive() const { return is_active_; }
 
 protected :
     Scene() = default;  ///< 通常ファクトリ以外での生成を禁止しています。
-
-private :
-    bool is_active_ = false;
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_SCENE_HEADER_

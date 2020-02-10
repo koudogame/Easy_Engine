@@ -154,10 +154,14 @@
     <ClInclude Include="fullscan_spatial_division.hpp" />
     <ClInclude Include="line.hpp" />
     <ClInclude Include="line_shape.hpp" />
+    <ClInclude Include="message_receive_component.hpp" />
+    <ClInclude Include="messenger.hpp" />
     <ClInclude Include="physical_collision_component.hpp" />
     <ClInclude Include="rectangle.hpp" />
     <ClInclude Include="rectangle_shape.hpp" />
     <ClInclude Include="shape.hpp" />
+    <ClInclude Include="sprite.hpp" />
+    <ClInclude Include="test_scene.hpp" />
     <ClInclude Include="timer.hpp" />
     <ClInclude Include="component.hpp" />
     <ClInclude Include="easy_engine.hpp" />
@@ -213,8 +217,11 @@
     <ClCompile Include="collision_section.cpp" />
     <ClCompile Include="collision_space.cpp" />
     <ClCompile Include="easy_engine.cpp" />
+    <ClCompile Include="entry_scene.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="message_receive_component.cpp" />
+    <ClCompile Include="messenger.cpp" />
     <ClCompile Include="platform_factory.cpp" />
     <ClCompile Include="platform_windows.cpp" />
     <ClCompile Include="renderer_d3d11.cpp" />
@@ -224,10 +231,12 @@
     <ClCompile Include="shader_loader_d3d11.cpp" />
     <ClCompile Include="shader_manager.cpp" />
     <ClCompile Include="sound_manager.cpp" />
+    <ClCompile Include="sprite.cpp" />
     <ClCompile Include="sprite_component.cpp" />
     <ClCompile Include="system_manager.cpp" />
     <ClCompile Include="job_container.cpp" />
     <ClCompile Include="job_scheduler.cpp" />
+    <ClCompile Include="test_scene.cpp" />
     <ClCompile Include="texture_loader_d3d11.cpp" />
     <ClCompile Include="texture_manager.cpp" />
   </ItemGroup>

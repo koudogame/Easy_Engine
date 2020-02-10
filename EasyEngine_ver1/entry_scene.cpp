@@ -1,0 +1,38 @@
+// çÏê¨é“ : î¬èÍ
+#include "entry_scene.hpp"
+#include "uid.hpp"
+#include "timer.hpp"
+#include "scene_factory.hpp"
+#include "scene_manager.hpp"
+#include "job_scheduler.hpp"
+
+REGISTER_SCENE( EGEG UID<EGEG EntryScene>::getID(), []()->EGEG Scene*{ return new EGEG EntryScene; } )
+
+BEGIN_EGEG
+// EntryScene : ä÷êîÇÃé¿ëï
+/*===========================================================================*/
+// èâä˙âª
+bool EntryScene::initialize()
+{
+    job_.setFunction( this, &EntryScene::update );
+    JobScheduler::instance()->registerJob( 0, &job_ );
+
+    return true;
+}
+// èIóπ
+void EntryScene::finalize()
+{
+    JobScheduler::instance()->unregisterJob( &job_ );
+}
+
+// çXêVèàóù
+void EntryScene::update( uint64_t DeltaMS )
+{
+    static uint64_t Erapsed;
+
+    Erapsed += DeltaMS;
+    if( Erapsed >= 1000ULL )
+        SceneManager::instance()->swap( 0U );
+}
+END_EGEG
+// EOF
