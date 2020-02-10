@@ -36,14 +36,8 @@
     <Filter Include="EasyEngine\99_System\Windows\DirectX11">
       <UniqueIdentifier>{ac4cb9df-fa96-4bcb-9a16-1250e921bedc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EasyEngine\0_Tools\Actor">
-      <UniqueIdentifier>{37f54cf2-380a-4491-9a3d-74b86fb6fa96}</UniqueIdentifier>
-    </Filter>
     <Filter Include="EasyEngine\0_Tools\Scene">
       <UniqueIdentifier>{956c9bc2-989c-4df3-b891-0bc1cc9f064c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EasyEngine\0_Tools\Actor\Factory">
-      <UniqueIdentifier>{d94d57e2-86c9-4e81-820e-d5f548bfe232}</UniqueIdentifier>
     </Filter>
     <Filter Include="EasyEngine\0_Tools\Scene\Factory">
       <UniqueIdentifier>{00cc52a8-3816-424c-8374-45914af7c6d9}</UniqueIdentifier>
@@ -53,9 +47,6 @@
     </Filter>
     <Filter Include="EasyEngine\0_Tools\Utility">
       <UniqueIdentifier>{7cd0c82d-58b5-4212-ac23-32a78100e761}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EasyEngine\0_Tools\Components\RenderComponent\RenderBatch">
-      <UniqueIdentifier>{bb4b4cd0-3386-4936-b132-2ee95935c297}</UniqueIdentifier>
     </Filter>
     <Filter Include="EasyEngine\0_Tools\Shape">
       <UniqueIdentifier>{0afc1142-bdaa-4a32-971d-e8826979bd1d}</UniqueIdentifier>
@@ -68,6 +59,21 @@
     </Filter>
     <Filter Include="EasyEngine\0_Tools\Space">
       <UniqueIdentifier>{cf293208-b625-4b6c-8351-1b46e7615023}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\0_Tools\Components\MessageComponent">
+      <UniqueIdentifier>{9fc57253-6590-4e35-a245-6a387f5dec15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\0_Tools\RenderBatch">
+      <UniqueIdentifier>{bb4b4cd0-3386-4936-b132-2ee95935c297}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\0_Tools\Messenger">
+      <UniqueIdentifier>{45e17ed4-afe4-4c8e-8702-6070757c8df0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\0_Tools\Actor">
+      <UniqueIdentifier>{37f54cf2-380a-4491-9a3d-74b86fb6fa96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\0_Tools\Actor\Factory">
+      <UniqueIdentifier>{d94d57e2-86c9-4e81-820e-d5f548bfe232}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -144,7 +150,7 @@
       <Filter>EasyEngine\1_Core\CoreManager</Filter>
     </ClInclude>
     <ClInclude Include="render_batch.hpp">
-      <Filter>EasyEngine\0_Tools\Components\RenderComponent\RenderBatch</Filter>
+      <Filter>EasyEngine\0_Tools\RenderBatch</Filter>
     </ClInclude>
     <ClInclude Include="job.hpp">
       <Filter>EasyEngine\0_Tools\JobScheduler</Filter>
@@ -257,6 +263,12 @@
     <ClInclude Include="fullscan_spatial_division.hpp">
       <Filter>EasyEngine\0_Tools\Space</Filter>
     </ClInclude>
+    <ClInclude Include="message_receive_component.hpp">
+      <Filter>EasyEngine\0_Tools\Components\MessageComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="messenger.hpp">
+      <Filter>EasyEngine\0_Tools\Messenger</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="easy_engine.cpp">
@@ -293,7 +305,7 @@
       <Filter>EasyEngine\0_Tools\JobScheduler</Filter>
     </ClCompile>
     <ClCompile Include="render_batch.cpp">
-      <Filter>EasyEngine\0_Tools\Components\RenderComponent\RenderBatch</Filter>
+      <Filter>EasyEngine\0_Tools\RenderBatch</Filter>
     </ClCompile>
     <ClCompile Include="sprite_component.cpp">
       <Filter>EasyEngine\0_Tools\Components\RenderComponent</Filter>
@@ -327,6 +339,12 @@
     </ClCompile>
     <ClCompile Include="collision_space.cpp">
       <Filter>EasyEngine\0_Tools\Space</Filter>
+    </ClCompile>
+    <ClCompile Include="message_receive_component.cpp">
+      <Filter>EasyEngine\0_Tools\Components\MessageComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="messenger.cpp">
+      <Filter>EasyEngine\0_Tools\Messenger</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

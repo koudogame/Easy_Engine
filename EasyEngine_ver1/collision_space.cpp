@@ -113,7 +113,7 @@ void CollisionSpace::judgeSameSection( CollisionSection* Sec )
 // in CurrSection : 現在のセクション
 //
 // return 次に衝突を検出するセクション
-CollisionSection* nextJudgeSection( CollisionSection* CurrSection )
+CollisionSection* CollisionSpace::nextJudgeSection( CollisionSection* CurrSection )
 {
     CollisionSection* next = CurrSection->pickChild();
     while( next == nullptr )
