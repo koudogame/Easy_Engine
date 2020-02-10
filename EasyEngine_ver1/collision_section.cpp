@@ -5,6 +5,13 @@
 BEGIN_EGEG
 // CollisionSection : 関数の実装
 /*===========================================================================*/
+// コンストラクタ
+CollisionSection::CollisionSection()
+{
+    components_.push_back( nullptr );   // 先頭にダミーを入れておく(空の時もイテレーターを有効にするため)
+    component_itr_ = components_.begin();
+}
+
 // コンポーネントの追加
 void CollisionSection::entry( CollisionComponent* pComponent )
 {
@@ -38,18 +45,16 @@ CollisionSection* CollisionSection::pickChild()
 // 所属コンポーネントの選択
 CollisionComponent* CollisionSection::pickComponent()
 {
-    auto curr_itr = component_itr_++;
+    ++component_itr_;
 
-    // 一巡
-    if( curr_itr == components_.end() )
+    // 全て走査した場合
+    if( component_itr_ == components_.end() )
     {
         component_itr_ = components_.begin();
         return nullptr;
     }
-    else
-    {
-        return *curr_itr;
-    }
+
+    return *component_itr_;
 }
 END_EGEG
 // EOF

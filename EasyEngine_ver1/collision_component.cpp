@@ -1,5 +1,6 @@
 // ì¬ŽÒ : ”Âê
 #include "collision_component.hpp"
+#include "collision_space.hpp"
 #include "shape.hpp"
 
 BEGIN_EGEG
@@ -17,6 +18,18 @@ void CollisionComponent::notifyCollision( const CollisionComponent* pOther )
             function->second( pOther->owner_ );
         }
     }
+}
+
+// ‰Šú‰»
+bool CollisionComponent::initialize()
+{
+    CollisionSpace::instance()->entry( this );
+    return true;
+}
+// I—¹
+void CollisionComponent::finalize()
+{
+    CollisionSpace::instance()->exit( this );
 }
 END_EGEG
 // EOF

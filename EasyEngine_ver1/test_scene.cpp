@@ -7,6 +7,7 @@ REGISTER_SCENE( 0U, &TestScene::create );
 bool TestScene::initialize()
 {
     sprite_.initialize();
+    sprite_1.initialize();
 
     return true;
 }
@@ -14,6 +15,7 @@ bool TestScene::initialize()
 void TestScene::finalize()
 {
     sprite_.finalize();
+    sprite_1.finalize();
 }
 
 void TestScene::update( uint64_t )

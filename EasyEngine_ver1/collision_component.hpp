@@ -52,10 +52,11 @@ public :
     /// @tparam ActorType : オーナーの型(省略可)
     ///
     /// @param[in] OtherID   : 処理に対応するアクターのID
+    /// @param[in] pOwner    : 関数の実行者
     /// @param[in] pCallBack : 衝突時に呼び出される関数のアドレス
     ///
     template <typename ActorType>
-    void setPostCollision( uint32_t OtherID, void(ActorType::*pCallBack)(Actor*) );
+    void setPostCollision( uint32_t OtherID, ActorType* pOwner, void(ActorType::*pCallBack)(Actor*) );
 
     ///
     /// @brief  形の取得
@@ -92,12 +93,12 @@ private :
 
 ///< 衝突後処理の追加
 template <typename ActorType>
-void CollisionComponent::setPostCollision( uint32_t OtherID, void(ActorType::*pCallBack)(Actor*) )
+void CollisionComponent::setPostCollision( uint32_t OtherID, ActorType* pOwner, void(ActorType::*pCallBack)(Actor*) )
 {
     post_collision_.erase( OtherID );
     post_collision_.emplace( 
         OtherID,
-        std::bind<void(Actor*)>(pCallBack, owner_, std::placeholders::_1)
+        std::bind(pCallBack, pOwner, std::placeholders::_1)
     );
 }
 END_EGEG

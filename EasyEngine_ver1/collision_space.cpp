@@ -1,6 +1,7 @@
 // 作成者 : 板場
 #include "collision_space.hpp"
 #include "shape.hpp"
+#include "job_scheduler.hpp"
 
 BEGIN_EGEG
 // CollisionSpace : 関数の実装
@@ -10,10 +11,17 @@ CollisionSpace::CollisionSpace()
 {
     SpatialDivision spatial_division;
     spatial_division.setSections( &sections_ );
+    job_.setFunction( this, &CollisionSpace::collision );
+    JobScheduler::instance()->registerJob( 0U, &job_ );
+}
+// デストラクタ
+CollisionSpace::~CollisionSpace()
+{
+    JobScheduler::instance()->unregisterJob( &job_ );
 }
 
 // 衝突判定
-void CollisionSpace::collision()
+void CollisionSpace::collision( uint64_t )
 {
     std::vector<CollisionSection*> to_judge_sections;    // 判定リスト
     to_judge_sections.reserve( sections_.size() );

@@ -14,6 +14,9 @@ BEGIN_EGEG
 class CollisionSection
 {
 public :
+    ///< コンストラクタ
+    CollisionSection();
+
     ///
     /// @brief  衝突コンポーネントの追加
     ///
@@ -73,7 +76,7 @@ private :
     std::list<CollisionComponent*> components_;
 
     uint32_t child_idx_  = 0U;
-    std::list<CollisionComponent*>::iterator component_itr_ = components_.begin();
+    std::list<CollisionComponent*>::iterator component_itr_;
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_COLLISION_SECTION_HEADER_

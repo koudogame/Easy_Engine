@@ -20,4 +20,5 @@ protected :
 
 private :
     Sprite sprite_;
+    Sprite sprite_1;
 };

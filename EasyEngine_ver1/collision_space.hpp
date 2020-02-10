@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include "collision_component.hpp"
 #include "fullscan_spatial_division.hpp"
+#include "job.hpp"
 BEGIN_EGEG
 ///
 /// @class   CollisionSpace
@@ -30,9 +31,8 @@ public :
     ///
     using SpatialDivision = FullScanSpatialDivision;
 
-
-
-    virtual ~CollisionSpace() = default;
+    ///< デストラクタ
+    ~CollisionSpace();
 
     ///
     /// @brief  インスタンスの取得
@@ -44,7 +44,9 @@ public :
     ///
     /// @brief  衝突判定
     ///
-    void collision();
+    /// @param[in] : ジョブとして登録するためのダミー
+    ///
+    void collision( uint64_t );
 
     ///
     /// @brief  空間への登録
@@ -65,6 +67,7 @@ private :
     CollisionSection* nextJudgeSection( CollisionSection* );
 
     std::vector<CollisionSection> sections_;
+    Job job_;
 
     CollisionSpace();
     CollisionSpace( const CollisionSpace& ) = delete;

@@ -5,6 +5,7 @@
 #ifndef INCLUDED_EGEG_CIRCLE_SHAPE_HEADER_
 #define INCLUDED_EGEG_CIRCLE_SHAPE_HEADER_
 #include "shape.hpp"
+#include "collision_detection.hpp"
 BEGIN_EGEG
 ///
 /// @class  CircleShape
@@ -37,9 +38,9 @@ public :
 /*-----------------------------------------------------------------*/
 // Shape
     bool isCollided( const Shape* Other ) const override { return Other->isCollided( shape_ ); }
-    bool isCollided( const Rectangle& ) const override;
-    bool isCollided( const Circle& ) const override;
-    bool isCollided( const Line& ) const override;
+    bool isCollided( const Rectangle& Other ) const override { return CollisionDetection::isCollided( shape_, Other ); }
+    bool isCollided( const Circle& Other ) const override { return CollisionDetection::isCollided( shape_, Other ); }
+    bool isCollided( const Line& Other ) const override { return CollisionDetection::isCollided( shape_, Other ); }
 /*-----------------------------------------------------------------*/
 private :
     Circle shape_ = {};
