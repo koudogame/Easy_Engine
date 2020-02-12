@@ -26,11 +26,15 @@ public:
 #endif // !_DEBUG
     }
 
-    virtual void run() = 0;
+    void run();
 
 private:
-    Application(const Application&) = delete;
-    Application& operator=(const Application&) = delete;
+    bool initialize();
+    void finalize();
+    void mainLoop();
+
+    Application( const Application& ) = delete;
+    Application& operator=( const Application& ) = delete;
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_APPLICATION_HEADER_

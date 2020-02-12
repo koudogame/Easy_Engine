@@ -12,6 +12,9 @@
     <Filter Include="Project\EasyEngine">
       <UniqueIdentifier>{f9a672b8-e1ac-4e86-ac35-f3d7a8da30dd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\EasyEngine\Utility">
+      <UniqueIdentifier>{037197f8-2b1f-4bce-97a6-bd5e20d69e8b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -24,6 +27,9 @@
     </ClInclude>
     <ClInclude Include="application.hpp">
       <Filter>Project\EasyEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="factory.hpp">
+      <Filter>Project\EasyEngine\Utility</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

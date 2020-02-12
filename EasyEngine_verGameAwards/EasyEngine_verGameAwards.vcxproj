@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="application.hpp" />
     <ClInclude Include="egeg.hpp" />
+    <ClInclude Include="factory.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
