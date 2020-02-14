@@ -142,6 +142,7 @@
     <ClInclude Include="application.hpp" />
     <ClInclude Include="egeg.hpp" />
     <ClInclude Include="factory.hpp" />
+    <ClInclude Include="uid.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

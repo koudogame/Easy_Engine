@@ -31,5 +31,8 @@
     <ClInclude Include="factory.hpp">
       <Filter>Project\EasyEngine\Utility</Filter>
     </ClInclude>
+    <ClInclude Include="uid.hpp">
+      <Filter>Project\EasyEngine\Utility</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

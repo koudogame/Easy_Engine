@@ -3,6 +3,7 @@
 #ifdef _DEBUG
 #include <crtdbg.h>
 #endif // !_DEBUG
+#include "uid.hpp"
 
 // エントリーポイント
 int WINAPI WinMain(
