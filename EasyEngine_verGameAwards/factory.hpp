@@ -6,6 +6,7 @@
 #define INCLUDED_EGEG_FACTORY_HEADER_
 #include <cstdint>
 #include <unordered_map>
+#include <memory>
 #include "egeg.hpp"
 BEGIN_EGEG
 ///
@@ -41,17 +42,19 @@ public :
     /// @param[in] ID : クリエイターの識別ID
     /// @param[in] Args : クリエイターの生成処理に渡す引数リスト
     ///
-    Base* create( uint32_t ID, CreateArgs ...Args )
+    /// @return 生成したオブジェクトの所有権を持つスマートポインタ
+    ///
+    std::unique_ptr<Base> create( uint32_t ID, CreateArgs ...Args )
     {
         auto find = creators_.find( ID );
         if( find == creators_.end() )   return nullptr;
 
-        return find->second( Args... );
+        return std::unique_ptr<Base>( find->second() );
     }
 
 private :
     std::unordered_map<uint32_t, Creator> creators_;    /// 生成ファンクタリスト
 };
 END_EGEG
-#endif /// !INCLUDED_EGEG_FACTORY_HEADER_
+#endif /// INCLUDED_EGEG_FACTORY_HEADER_
 /// EOF

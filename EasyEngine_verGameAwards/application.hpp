@@ -22,10 +22,13 @@ public:
     {
 #ifdef _DEBUG
         static int create_cnt_;
-        assert(!create_cnt_ && "既に生成されています。");
+        assert(!create_cnt_++ && "既に生成されています。");
 #endif // !_DEBUG
     }
 
+    ///
+    /// @brief  アプリケーションの実行
+    ///
     void run();
 
 private:
@@ -37,5 +40,5 @@ private:
     Application& operator=( const Application& ) = delete;
 };
 END_EGEG
-#endif /// !INCLUDED_EGEG_APPLICATION_HEADER_
+#endif /// INCLUDED_EGEG_APPLICATION_HEADER_
 /// EOF

@@ -15,6 +15,12 @@
     <Filter Include="Project\EasyEngine\Utility">
       <UniqueIdentifier>{037197f8-2b1f-4bce-97a6-bd5e20d69e8b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\EasyEngine\Scene">
+      <UniqueIdentifier>{6deff352-317c-426c-af0a-a7c687174fb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\Actor">
+      <UniqueIdentifier>{c5184119-dbe9-4d4f-bfc2-be44555a307d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -34,5 +40,22 @@
     <ClInclude Include="uid.hpp">
       <Filter>Project\EasyEngine\Utility</Filter>
     </ClInclude>
+    <ClInclude Include="actor.hpp">
+      <Filter>Project\EasyEngine\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="game_unit.hpp">
+      <Filter>Project\EasyEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="scene.hpp">
+      <Filter>Project\EasyEngine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="egeg_math.hpp">
+      <Filter>Project\EasyEngine\Utility</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="egeg_math.inl">
+      <Filter>Project\EasyEngine\Utility</Filter>
+    </None>
   </ItemGroup>
 </Project>

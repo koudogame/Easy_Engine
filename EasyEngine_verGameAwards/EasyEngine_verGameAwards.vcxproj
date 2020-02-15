@@ -139,13 +139,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="actor.hpp" />
     <ClInclude Include="application.hpp" />
     <ClInclude Include="egeg.hpp" />
+    <ClInclude Include="egeg_math.hpp" />
     <ClInclude Include="factory.hpp" />
+    <ClInclude Include="game_unit.hpp" />
+    <ClInclude Include="scene.hpp" />
     <ClInclude Include="uid.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="egeg_math.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

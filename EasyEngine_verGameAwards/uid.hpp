@@ -13,9 +13,9 @@ template <class Object>
 class UID
 {
 public :
-    operator uint32_t() noexcept
+    operator uint32_t() const noexcept
     {
-        static uint32_t uid = reinterpret_cast<uint32_t>(&uid);
+        static const uint32_t uid = reinterpret_cast<uint32_t>(&uid);
         return uid;
     }
 };
