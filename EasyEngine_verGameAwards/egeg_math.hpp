@@ -100,6 +100,9 @@ struct Vector4D :
     explicit constexpr Vector4D( float S ) noexcept : XMFLOAT4( S, S, S, S ) {}
     constexpr Vector4D( float X, float Y, float Z, float W ) : XMFLOAT4( X, Y, Z, W ) {}
 
+    Vector4D( DirectX::FXMVECTOR V ) noexcept;
+    Vector4D& operator=( DirectX::FXMVECTOR V ) noexcept;
+
     operator DirectX::XMVECTOR() const noexcept;
     operator bool() const noexcept;
 

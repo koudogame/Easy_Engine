@@ -170,7 +170,79 @@ inline float Vector3D::lengthSquared() const noexcept
 
 /*===========================================================================*/
 
-
+inline Vector4D::Vector4D( DirectX::FXMVECTOR V ) noexcept
+{
+    DirectX::XMStoreFloat4( this, V );
+}
+inline Vector4D& Vector4D::operator=( DirectX::FXMVECTOR V ) noexcept
+{
+    DirectX::XMStoreFloat4( this, V );
+}
+inline Vector4D::operator DirectX::XMVECTOR() const noexcept
+{
+    return DirectX::XMLoadFloat4( this );
+}
+inline bool Vector4D::operator bool() const noexcept
+{
+    return DirectX::XMVector4IsInfinite( *this );
+}
+inline Vector4D Vector4D::operator-() const noexcept
+{
+    return Vector4D( -x, -y, -z, -w );
+}
+inline bool Vector4D::operator==( DirectX::FXMVECTOR V ) const noexcept
+{
+    return DirectX::XMVector4Equal( *this, V );
+}
+inline bool Vector4D::operator!=( DirectX::FXMVECTOR V ) const noexcept
+{
+    return DirectX::XMVector4NotEqual( *this, V );
+}
+inline Vector4D& Vector4D::operator+=( DirectX::FXMVECTOR V ) noexcept
+{
+    *this = DirectX::XMVectorAdd( *this, V );
+    return *this;
+}
+inline Vector4D& Vector4D::operator-=( DirectX::FXMVECTOR V ) noexcept
+{
+    *this = DirectX::XMVectorSubtract( *this, V );
+    return *this;
+}
+inline Vector4D& Vector4D::operator*=( DirectX::FXMVECTOR V ) noexcept
+{
+    *this = DirectX::XMVectorMultiply( *this, V );
+    return *this;
+}
+inline Vector4D& Vector4D::operator/=( DirectX::FXMVECTOR V ) noexcept
+{
+    *this = DirectX::XMVectorDivide( *this, V );
+    return *this;
+}
+inline Vector4D& Vector4D::operator*=( float S ) noexcept
+{
+    using namespace DirectX;
+    return *this *= XMLoadFloat4( &XMFLOAT4{S, S, S, S} );
+}
+inline Vector4D& Vector4F::operator/=( float S ) noexcept
+{
+    using namespace DirectX;
+    return *this /= XMLoadFloat4( &XMFLOAT4{S, S, S, S} );
+}
+inline float Vector4D::dot( DirectX::FXMVECTOR V ) const noexcept
+{
+    Vector2 temp = DirectX::XMVector4Dot( *this, V );
+    return temp.x;
+}
+inline float Vector4D::length() const noexcept
+{
+    Vector2 temp = DirectX::XMVector4Length( *this );
+    return temp.x;
+}
+inline float Vector4D::lengthSquared() const noexcept
+{
+    Vector2 temp = DirectX::XMVector4LengthSq( *this );
+    return temp.x;
+}
 
 #endif /// INCLUDED_EGEG_MATH_INLINE_
 #endif /// INCLUDED_EGEG_MATH_HEADER_
