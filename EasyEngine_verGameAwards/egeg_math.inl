@@ -182,7 +182,7 @@ inline Vector4D::operator DirectX::XMVECTOR() const noexcept
 {
     return DirectX::XMLoadFloat4( this );
 }
-inline bool Vector4D::operator bool() const noexcept
+inline Vector4D::operator bool() const noexcept
 {
     return DirectX::XMVector4IsInfinite( *this );
 }
@@ -223,24 +223,24 @@ inline Vector4D& Vector4D::operator*=( float S ) noexcept
     using namespace DirectX;
     return *this *= XMLoadFloat4( &XMFLOAT4{S, S, S, S} );
 }
-inline Vector4D& Vector4F::operator/=( float S ) noexcept
+inline Vector4D& Vector4D::operator/=( float S ) noexcept
 {
     using namespace DirectX;
     return *this /= XMLoadFloat4( &XMFLOAT4{S, S, S, S} );
 }
 inline float Vector4D::dot( DirectX::FXMVECTOR V ) const noexcept
 {
-    Vector2 temp = DirectX::XMVector4Dot( *this, V );
+    Vector2D temp = DirectX::XMVector4Dot( *this, V );
     return temp.x;
 }
 inline float Vector4D::length() const noexcept
 {
-    Vector2 temp = DirectX::XMVector4Length( *this );
+    Vector2D temp = DirectX::XMVector4Length( *this );
     return temp.x;
 }
 inline float Vector4D::lengthSquared() const noexcept
 {
-    Vector2 temp = DirectX::XMVector4LengthSq( *this );
+    Vector2D temp = DirectX::XMVector4LengthSq( *this );
     return temp.x;
 }
 
