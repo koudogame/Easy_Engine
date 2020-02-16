@@ -12,14 +12,20 @@
     <Filter Include="Project\EasyEngine">
       <UniqueIdentifier>{f9a672b8-e1ac-4e86-ac35-f3d7a8da30dd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project\EasyEngine\Utility">
-      <UniqueIdentifier>{037197f8-2b1f-4bce-97a6-bd5e20d69e8b}</UniqueIdentifier>
+    <Filter Include="Project\EasyEngine\00_Actor">
+      <UniqueIdentifier>{c5184119-dbe9-4d4f-bfc2-be44555a307d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project\EasyEngine\Scene">
+    <Filter Include="Project\EasyEngine\01_Scene">
       <UniqueIdentifier>{6deff352-317c-426c-af0a-a7c687174fb3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project\EasyEngine\Actor">
-      <UniqueIdentifier>{c5184119-dbe9-4d4f-bfc2-be44555a307d}</UniqueIdentifier>
+    <Filter Include="Project\EasyEngine\02_JobScheduler">
+      <UniqueIdentifier>{0f22ccfb-dd3f-4172-a500-2c1b668fb2b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\99_Utility">
+      <UniqueIdentifier>{037197f8-2b1f-4bce-97a6-bd5e20d69e8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\03_RenderBatch">
+      <UniqueIdentifier>{21505498-f87d-4fa4-a8d6-3843af9174e8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -35,27 +41,27 @@
       <Filter>Project\EasyEngine</Filter>
     </ClInclude>
     <ClInclude Include="factory.hpp">
-      <Filter>Project\EasyEngine\Utility</Filter>
+      <Filter>Project\EasyEngine\99_Utility</Filter>
     </ClInclude>
     <ClInclude Include="uid.hpp">
-      <Filter>Project\EasyEngine\Utility</Filter>
+      <Filter>Project\EasyEngine\99_Utility</Filter>
     </ClInclude>
     <ClInclude Include="actor.hpp">
-      <Filter>Project\EasyEngine\Actor</Filter>
+      <Filter>Project\EasyEngine\00_Actor</Filter>
     </ClInclude>
     <ClInclude Include="game_unit.hpp">
       <Filter>Project\EasyEngine</Filter>
     </ClInclude>
     <ClInclude Include="scene.hpp">
-      <Filter>Project\EasyEngine\Scene</Filter>
+      <Filter>Project\EasyEngine\01_Scene</Filter>
     </ClInclude>
     <ClInclude Include="egeg_math.hpp">
-      <Filter>Project\EasyEngine\Utility</Filter>
+      <Filter>Project\EasyEngine\99_Utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="egeg_math.inl">
-      <Filter>Project\EasyEngine\Utility</Filter>
+      <Filter>Project\EasyEngine\99_Utility</Filter>
     </None>
   </ItemGroup>
 </Project>
