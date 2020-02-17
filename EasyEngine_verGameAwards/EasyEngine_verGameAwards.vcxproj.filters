@@ -58,6 +58,9 @@
     <ClInclude Include="egeg_math.hpp">
       <Filter>Project\EasyEngine\99_Utility</Filter>
     </ClInclude>
+    <ClInclude Include="actor2d.hpp">
+      <Filter>Project\EasyEngine\00_Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="egeg_math.inl">
