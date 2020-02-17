@@ -4,6 +4,8 @@
 #include <crtdbg.h>
 #endif // !_DEBUG
 #include "egeg_math.hpp"
+#include "actor2d.hpp"
+#include "actor3d.hpp"
 
 // エントリーポイント
 int WINAPI WinMain(

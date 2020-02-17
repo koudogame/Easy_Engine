@@ -15,9 +15,10 @@ class Actor :
     public GameUnit
 {
 public :
-    Actor( uint32_t ActorID ) noexcept : id_( ActorID ) {}
-
     uint32_t getID() const noexcept { return id_; }
+
+protected :
+    Actor( uint32_t ActorID ) noexcept : id_( ActorID ) {}
 
 private :
     uint32_t id_;   /// アクター識別ID

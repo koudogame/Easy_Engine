@@ -1,11 +1,11 @@
 ///
-/// @file   actor2d.hpp
+/// @file   actor3d.hpp
 /// @author 板場
 ///
-#ifndef INCLUDED_EGEG_ACTOR2D_HEADER_
-#define INCLUDED_EGEG_ACTOR2D_HEADER_
-#include <unordered_map>
+#ifndef INCLUDED_EGEG_ACTOR3D_HEADER_
+#define INCLUDED_EGEG_ACTOR3D_HEADER_
 #include <cassert>
+#include <unordered_map>
 #include "actor.hpp"
 #include "uid.hpp"
 #include "egeg_math.hpp"
@@ -13,10 +13,10 @@ BEGIN_EGEG
 class Component;
 
 ///
-/// @class  Actor2D
-/// @brief  2Dアクター
+/// @class  Actor3D
+/// @brief  3Dアクター
 ///
-class Actor2D :
+class Actor3D :
     public Actor
 {
 public :
@@ -25,13 +25,13 @@ public :
     ///
     /// @param[in] Destination : 座標
     ///
-    void setPosition( const Vector2D& Destination ) noexcept { position_ = Destination; }
+    void setPosition( const Vector3D& Destination ) noexcept { position_ = Destination; }
     ///
     /// @brief  座標の取得
     ///
     /// @return 座標
     ///
-    const Vector2D& getPosition() const noexcept { return position_; }
+    const Vector3D& getPosition() const noexcept { return position_; }
 
     ///
     /// @brief  コンポーネントの追加
@@ -44,7 +44,7 @@ public :
     ComponentType* addComponent();
     ///
     /// @brief   コンポーネントの取得
-    /// @details 対応したコンポーネントを所持していない場合、nullptrを返却します。
+    /// @details 対応するコンポーネントがない場合、nullptrを返却します。
     ///
     /// @tparam ComponentType : 取得するコンポーネント型
     ///
@@ -54,23 +54,22 @@ public :
     ComponentType* getComponent() const;
 
 protected :
-    Actor2D( uint32_t ActorID ) noexcept : Actor( ActorID ) {}
+    Actor3D( uint32_t ActorID ) noexcept : Actor( ActorID ) {}
 
 private :
-    Vector2D position_{ 0.0F, 0.0F };
+    Vector3D position_;
     std::unordered_map<uint32_t, Component*> components_;
 };
 
-
 ///< コンポーネントの追加
 template <class ComponentType>
-ComponentType* Actor2D::addComponent()
+ComponentType* Actor3D::addComponent()
 {
     assert( getComponent<ComponentType>() == nullptr &&
         "コンポーネントの多重登録を検出しました。" );
 
     // コンポーネントの生成
-    ComponentType* component = new ComponentType( this );
+    ComponentType component = new ComponentType( this );
     component->initialize();
 
     // 生成したコンポーネントをリストに追加
@@ -81,14 +80,14 @@ ComponentType* Actor2D::addComponent()
 
 ///< コンポーネントの取得
 template <class ComponentType>
-ComponentType* Actor2D::getComponent() const
+ComponentType* Actor3D::getComponent() const
 {
     auto find = components_.find( UID<ComponentType>() );
     if( find == components_.end() ) return nullptr;
 
-    // 対応するコンポーネントを返却
+    // 対応するコンポーネントの返却
     return static_cast<ComponentType*>( find->second );
 }
 END_EGEG
-#endif /// INCLUDED_EGEG_ACTOR2D_HEADER_
+#endif /// INCLUDED_EGEG_ACTOR3D_HEADER_
 /// EOF

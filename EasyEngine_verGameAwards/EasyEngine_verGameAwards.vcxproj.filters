@@ -18,14 +18,17 @@
     <Filter Include="Project\EasyEngine\01_Scene">
       <UniqueIdentifier>{6deff352-317c-426c-af0a-a7c687174fb3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project\EasyEngine\02_JobScheduler">
-      <UniqueIdentifier>{0f22ccfb-dd3f-4172-a500-2c1b668fb2b5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Project\EasyEngine\99_Utility">
       <UniqueIdentifier>{037197f8-2b1f-4bce-97a6-bd5e20d69e8b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project\EasyEngine\03_RenderBatch">
+    <Filter Include="Project\EasyEngine\03_JobScheduler">
+      <UniqueIdentifier>{0f22ccfb-dd3f-4172-a500-2c1b668fb2b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\04_RenderBatch">
       <UniqueIdentifier>{21505498-f87d-4fa4-a8d6-3843af9174e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\02_Component">
+      <UniqueIdentifier>{365f1458-5657-4580-824e-865cfd79ea6d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -60,6 +63,12 @@
     </ClInclude>
     <ClInclude Include="actor2d.hpp">
       <Filter>Project\EasyEngine\00_Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="actor3d.hpp">
+      <Filter>Project\EasyEngine\00_Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="component.hpp">
+      <Filter>Project\EasyEngine\02_Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

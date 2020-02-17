@@ -141,7 +141,9 @@
   <ItemGroup>
     <ClInclude Include="actor.hpp" />
     <ClInclude Include="actor2d.hpp" />
+    <ClInclude Include="actor3d.hpp" />
     <ClInclude Include="application.hpp" />
+    <ClInclude Include="component.hpp" />
     <ClInclude Include="egeg.hpp" />
     <ClInclude Include="egeg_math.hpp" />
     <ClInclude Include="factory.hpp" />
