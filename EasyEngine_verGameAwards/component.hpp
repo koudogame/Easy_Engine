@@ -34,5 +34,5 @@ protected :
     Actor* owner_;  ///< 自身を保持しているアクター
 };
 END_EGEG
-#endif /// INCLUDED_EGEG_COMPONENT_HEADER_
+#endif /// !INCLUDED_EGEG_COMPONENT_HEADER_
 /// EOF

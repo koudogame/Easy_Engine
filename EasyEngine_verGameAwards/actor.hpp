@@ -15,6 +15,11 @@ class Actor :
     public GameUnit
 {
 public :
+    ///
+    /// @brief  アクター識別IDの取得
+    ///
+    /// @return アクター識別ID
+    ///
     uint32_t getID() const noexcept { return id_; }
 
 protected :
@@ -24,5 +29,5 @@ private :
     uint32_t id_;   /// アクター識別ID
 };
 END_EGEG
-#endif /// INCLUDED_ACTOR_HEADER_
+#endif /// !INCLUDED_ACTOR_HEADER_
 /// EOF

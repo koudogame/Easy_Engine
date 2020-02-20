@@ -24,5 +24,5 @@
 /// @brief  easy_engine–¼‘O‹óŠÔ‚ÌI—¹
 ///
 #define END_EGEG }
-#endif /// INCLUDED_EGEG_HEADER_
+#endif /// !INCLUDED_EGEG_HEADER_
 /// EOF

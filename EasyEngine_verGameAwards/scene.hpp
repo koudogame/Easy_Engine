@@ -17,5 +17,5 @@ public :
 
 };
 END_EGEG
-#endif /// INCLUDED_EGEG_SCENE_HEADER_
+#endif /// !INCLUDED_EGEG_SCENE_HEADER_
 /// EOF

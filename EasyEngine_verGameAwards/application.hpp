@@ -6,7 +6,7 @@
 #define INCLUDED_EGEG_APPLICATION_HEADER_
 #ifdef _DEBUG
 #include <cassert>
-#endif // !_DEBUG
+#endif
 #include "egeg.hpp"
 BEGIN_EGEG
 ///
@@ -40,5 +40,5 @@ private:
     Application& operator=( const Application& ) = delete;
 };
 END_EGEG
-#endif /// INCLUDED_EGEG_APPLICATION_HEADER_
+#endif /// !INCLUDED_EGEG_APPLICATION_HEADER_
 /// EOF

@@ -34,5 +34,5 @@ public :
     virtual void update( uint64_t DeltaTimeMS ) = 0;
 };
 END_EGEG
-#endif /// INCLUDED_EGEG_GAME_UNIT_HEADER_
+#endif /// !INCLUDED_EGEG_GAME_UNIT_HEADER_
 /// EOF

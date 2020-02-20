@@ -89,5 +89,5 @@ ComponentType* Actor3D::getComponent() const
     return static_cast<ComponentType*>( find->second );
 }
 END_EGEG
-#endif /// INCLUDED_EGEG_ACTOR3D_HEADER_
+#endif /// !INCLUDED_EGEG_ACTOR3D_HEADER_
 /// EOF

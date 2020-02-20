@@ -56,5 +56,5 @@ private :
     std::unordered_map<uint32_t, Creator> creators_;    /// 生成ファンクタリスト
 };
 END_EGEG
-#endif /// INCLUDED_EGEG_FACTORY_HEADER_
+#endif /// !INCLUDED_EGEG_FACTORY_HEADER_
 /// EOF

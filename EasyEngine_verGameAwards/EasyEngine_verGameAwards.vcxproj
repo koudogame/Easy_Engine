@@ -143,12 +143,18 @@
     <ClInclude Include="actor2d.hpp" />
     <ClInclude Include="actor3d.hpp" />
     <ClInclude Include="application.hpp" />
+    <ClInclude Include="circle.hpp" />
     <ClInclude Include="component.hpp" />
+    <ClInclude Include="cuboid.hpp" />
     <ClInclude Include="egeg.hpp" />
     <ClInclude Include="egeg_math.hpp" />
     <ClInclude Include="factory.hpp" />
     <ClInclude Include="game_unit.hpp" />
+    <ClInclude Include="line2d.hpp" />
+    <ClInclude Include="line3d.hpp" />
+    <ClInclude Include="rectangle.hpp" />
     <ClInclude Include="scene.hpp" />
+    <ClInclude Include="sphere.hpp" />
     <ClInclude Include="uid.hpp" />
   </ItemGroup>
   <ItemGroup>

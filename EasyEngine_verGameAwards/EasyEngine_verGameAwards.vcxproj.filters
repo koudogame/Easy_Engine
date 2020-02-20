@@ -30,6 +30,9 @@
     <Filter Include="Project\EasyEngine\02_Component">
       <UniqueIdentifier>{365f1458-5657-4580-824e-865cfd79ea6d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\EasyEngine\05_Shape">
+      <UniqueIdentifier>{f7f1c23e-28fa-4dd0-87d0-b6ffb10025ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -69,6 +72,24 @@
     </ClInclude>
     <ClInclude Include="component.hpp">
       <Filter>Project\EasyEngine\02_Component</Filter>
+    </ClInclude>
+    <ClInclude Include="circle.hpp">
+      <Filter>Project\EasyEngine\05_Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="sphere.hpp">
+      <Filter>Project\EasyEngine\05_Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="rectangle.hpp">
+      <Filter>Project\EasyEngine\05_Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="cuboid.hpp">
+      <Filter>Project\EasyEngine\05_Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="line2d.hpp">
+      <Filter>Project\EasyEngine\05_Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="line3d.hpp">
+      <Filter>Project\EasyEngine\05_Shape</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

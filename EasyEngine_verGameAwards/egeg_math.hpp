@@ -45,6 +45,12 @@ struct Vector2D :
     float length() const noexcept;
     float lengthSquared() const noexcept;
 };
+Vector2D operator+( const Vector2D& L, const Vector2D& R ) noexcept;
+Vector2D operator-( const Vector2D& L, const Vector2D& R ) noexcept;
+Vector2D operator*( const Vector2D& L, const Vector2D& R ) noexcept;
+Vector2D operator/( const Vector2D& L, const Vector2D& R ) noexcept;
+Vector2D operator*( const Vector2D& L, float R ) noexcept;
+Vector2D operator/( const Vector2D& L, float R ) noexcept;
 
 // Vector3D
 /*===========================================================================*/
@@ -84,6 +90,13 @@ struct Vector3D :
     float length() const noexcept;
     float lengthSquared() const noexcept;
 };
+Vector3D operator+( const Vector3D& L, const Vector3D& R ) noexcept;
+Vector3D operator-( const Vector3D& L, const Vector3D& R ) noexcept;
+Vector3D operator*( const Vector3D& L, const Vector3D& R ) noexcept;
+Vector3D operator/( const Vector3D& L, const Vector3D& R ) noexcept;
+Vector3D operator*( const Vector3D& L, float R ) noexcept;
+Vector3D operator/( const Vector3D& L, float R ) noexcept;
+
 // Vector4D
 /*===========================================================================*/
 struct Vector4D :
@@ -122,6 +135,12 @@ struct Vector4D :
     float length() const noexcept;
     float lengthSquared() const noexcept;
 };
+Vector4D operator+( const Vector4D& L, const Vector4D& R ) noexcept;
+Vector4D operator-( const Vector4D& L, const Vector4D& R ) noexcept;
+Vector4D operator*( const Vector4D& L, const Vector4D& R ) noexcept;
+Vector4D operator/( const Vector4D& L, const Vector4D& R ) noexcept;
+Vector4D operator*( const Vector4D& L, float R ) noexcept;
+Vector4D operator/( const Vector4D& L, float R ) noexcept;
 
 // Matrix3x3
 /*===========================================================================*/
@@ -137,5 +156,5 @@ struct Vector4D :
 
 #include "egeg_math.inl"
 END_EGEG
-#endif /// INCLUDED_EGEG_MATH_HEADER_
+#endif /// !INCLUDED_EGEG_MATH_HEADER_
 /// EOF

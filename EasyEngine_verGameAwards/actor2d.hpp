@@ -4,8 +4,9 @@
 ///
 #ifndef INCLUDED_EGEG_ACTOR2D_HEADER_
 #define INCLUDED_EGEG_ACTOR2D_HEADER_
-#include <unordered_map>
 #include <cassert>
+#include <list>
+#include <unordered_map>
 #include "actor.hpp"
 #include "uid.hpp"
 #include "egeg_math.hpp"
@@ -20,6 +21,12 @@ class Actor2D :
     public Actor
 {
 public :
+    ///< デストラクタ
+    virtual ~Actor2D() noexcept
+    {
+        if( parent_ ) parent_->removeChild( this );
+    }
+
     ///
     /// @brief  座標の設定
     ///
@@ -32,6 +39,25 @@ public :
     /// @return 座標
     ///
     const Vector2D& getPosition() const noexcept { return position_; }
+
+    ///
+    /// @brief  親アクターの設定
+    ///
+    /// @param[in] Parent : 設定する親アクター
+    ///
+    void setParent( Actor2D* Parent ) noexcept { parent_ = Parent; }
+    ///
+    /// @brief  子アクターの追加
+    ///
+    /// @param[in] Child : 追加する子アクター
+    ///
+    void addChild( Actor2D* Child ) noexcept { assert(Child); Child->setParent( this ); childs_.push_back( Child ); }
+    ///
+    /// @brief  子アクターの削除
+    ///
+    /// @param[in] Child : 削除対象の子アクター
+    ///
+    void removeChild( Actor2D* Child ) noexcept { childs_.remove( Child ); }
 
     ///
     /// @brief  コンポーネントの追加
@@ -55,6 +81,8 @@ public :
 
 protected :
     Actor2D( uint32_t ActorID ) noexcept : Actor( ActorID ) {}
+    Actor2D* parent_ = nullptr;
+    std::list<Actor2D*> childs_;
 
 private :
     Vector2D position_{ 0.0F, 0.0F };
@@ -90,5 +118,5 @@ ComponentType* Actor2D::getComponent() const
     return static_cast<ComponentType*>( find->second );
 }
 END_EGEG
-#endif /// INCLUDED_EGEG_ACTOR2D_HEADER_
+#endif /// !INCLUDED_EGEG_ACTOR2D_HEADER_
 /// EOF

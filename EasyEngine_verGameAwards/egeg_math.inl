@@ -86,6 +86,32 @@ inline float Vector2D::lengthSquared() const noexcept
     Vector2D temp = DirectX::XMVector2LengthSq( *this );
     return temp.x;
 }
+inline Vector2D operator+( const Vector2D& L, const Vector2D& R ) noexcept
+{
+    return DirectX::XMVectorAdd( L, R );
+}
+inline Vector2D operator-( const Vector2D& L, const Vector2D& R ) noexcept
+{
+    return DirectX::XMVectorSubtract( L, R );
+}
+inline Vector2D operator*( const Vector2D& L, const Vector2D& R ) noexcept
+{
+    return DirectX::XMVectorMultiply( L, R );
+}
+inline Vector2D operator/( const Vector2D& L, const Vector2D& R ) noexcept
+{
+    return DirectX::XMVectorDivide( L, R );
+}
+inline Vector2D operator*( const Vector2D& L, const float R ) noexcept
+{
+    using namespace DirectX;
+    return XMVectorMultiply( L, XMLoadFloat2(&XMFLOAT2{R, R}) );
+}
+inline Vector2D operator/( const Vector2D& L, const float R ) noexcept
+{
+    using namespace DirectX;
+    return XMVectorDivide( L, XMLoadFloat2(&XMFLOAT2{R, R}) );
+}
 
 /*===========================================================================*/
 
@@ -167,6 +193,32 @@ inline float Vector3D::lengthSquared() const noexcept
     Vector3D temp = DirectX::XMVector3LengthSq( *this );
     return temp.x;
 }
+inline Vector3D operator+( const Vector3D& L, const Vector3D& R ) noexcept
+{
+    return DirectX::XMVectorAdd( L, R );
+}
+inline Vector3D operator-( const Vector3D& L, const Vector3D& R ) noexcept
+{
+    return DirectX::XMVectorSubtract( L, R );
+}
+inline Vector3D operator*( const Vector3D& L, const Vector3D& R ) noexcept
+{
+    return DirectX::XMVectorMultiply( L, R );
+}
+inline Vector3D operator/( const Vector3D& L, const Vector3D& R ) noexcept
+{
+    return DirectX::XMVectorDivide( L, R );
+}
+inline Vector3D operator*( const Vector3D& L, const float R ) noexcept
+{
+    using namespace DirectX;
+    return XMVectorMultiply( L, XMLoadFloat3(&XMFLOAT3{R, R, R}) );
+}
+inline Vector3D operator/( const Vector3D& L, const float R ) noexcept
+{
+    using namespace DirectX;
+    return XMVectorDivide( L, XMLoadFloat3(&XMFLOAT3{R, R, R}) );
+}
 
 /*===========================================================================*/
 
@@ -243,7 +295,33 @@ inline float Vector4D::lengthSquared() const noexcept
     Vector2D temp = DirectX::XMVector4LengthSq( *this );
     return temp.x;
 }
+inline Vector4D operator+( const Vector4D& L, const Vector4D& R ) noexcept
+{
+    return DirectX::XMVectorAdd( L, R );
+}
+inline Vector4D operator-( const Vector4D& L, const Vector4D& R ) noexcept
+{
+    return DirectX::XMVectorSubtract( L, R );
+}
+inline Vector4D operator*( const Vector4D& L, const Vector4D& R ) noexcept
+{
+    return DirectX::XMVectorMultiply( L, R );
+}
+inline Vector4D operator/( const Vector4D& L, const Vector4D& R ) noexcept
+{
+    return DirectX::XMVectorDivide( L, R );
+}
+inline Vector4D operator*( const Vector4D& L, const float R ) noexcept
+{
+    using namespace DirectX;
+    return XMVectorMultiply( L, XMLoadFloat4(&XMFLOAT4{R, R, R, R}) );
+}
+inline Vector4D operator/( const Vector4D& L, const float R ) noexcept
+{
+    using namespace DirectX;
+    return XMVectorDivide( L, XMLoadFloat4(&XMFLOAT4{R, R, R, R}) );
+}
 
-#endif /// INCLUDED_EGEG_MATH_INLINE_
+#endif /// !INCLUDED_EGEG_MATH_INLINE_
 #endif /// INCLUDED_EGEG_MATH_HEADER_
 /// EOF

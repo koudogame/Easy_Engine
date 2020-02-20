@@ -27,6 +27,8 @@ int WINAPI WinMain(
     Vector3D vec_3;
 
     vec += vec_3;
+    vec + vec_1;
+    vec / 4.0F;
     DirectX::XMVector2Dot( vec, vec_1 );
 }
 // EOF
