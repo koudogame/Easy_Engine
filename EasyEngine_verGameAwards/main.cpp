@@ -6,6 +6,9 @@
 #include "egeg_math.hpp"
 #include "actor2d.hpp"
 #include "actor3d.hpp"
+#include "unit_factory.hpp"
+#include "xinput.hpp"
+
 
 // エントリーポイント
 int WINAPI WinMain(
@@ -21,14 +24,6 @@ int WINAPI WinMain(
 
     USING_NS_EGEG;
 
-    Vector2D vec{ 1.0F };
-    Vector2D vec_1{ vec };
 
-    Vector3D vec_3;
-
-    vec += vec_3;
-    vec + vec_1;
-    vec / 4.0F;
-    DirectX::XMVector2Dot( vec, vec_1 );
 }
 // EOF

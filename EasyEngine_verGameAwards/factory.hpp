@@ -49,7 +49,7 @@ public :
         auto find = creators_.find( ID );
         if( find == creators_.end() )   return nullptr;
 
-        return std::unique_ptr<Base>( find->second() );
+        return std::unique_ptr<Base>( find->second( Args... ) );
     }
 
 private :

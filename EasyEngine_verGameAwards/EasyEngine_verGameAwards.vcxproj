@@ -145,6 +145,7 @@
     <ClInclude Include="application.hpp" />
     <ClInclude Include="circle.hpp" />
     <ClInclude Include="component.hpp" />
+    <ClInclude Include="controller.hpp" />
     <ClInclude Include="cuboid.hpp" />
     <ClInclude Include="egeg.hpp" />
     <ClInclude Include="egeg_math.hpp" />
@@ -156,9 +157,14 @@
     <ClInclude Include="scene.hpp" />
     <ClInclude Include="sphere.hpp" />
     <ClInclude Include="uid.hpp" />
+    <ClInclude Include="unit_factory.hpp" />
+    <ClInclude Include="xinput.hpp" />
+    <ClInclude Include="xinput_controller.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="xinput.cpp" />
+    <ClCompile Include="xinput_controller.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="egeg_math.inl" />
