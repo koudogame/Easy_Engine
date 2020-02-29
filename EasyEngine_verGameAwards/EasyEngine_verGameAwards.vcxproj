@@ -151,10 +151,13 @@
     <ClInclude Include="egeg_math.hpp" />
     <ClInclude Include="factory.hpp" />
     <ClInclude Include="game_unit.hpp" />
+    <ClInclude Include="input_device.hpp" />
+    <ClInclude Include="keyboard.hpp" />
     <ClInclude Include="line2d.hpp" />
     <ClInclude Include="line3d.hpp" />
     <ClInclude Include="rectangle.hpp" />
     <ClInclude Include="scene.hpp" />
+    <ClInclude Include="application_status.hpp" />
     <ClInclude Include="sphere.hpp" />
     <ClInclude Include="uid.hpp" />
     <ClInclude Include="unit_factory.hpp" />
@@ -162,6 +165,8 @@
     <ClInclude Include="xinput_controller.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="application.cpp" />
+    <ClCompile Include="keyboard.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="xinput.cpp" />
     <ClCompile Include="xinput_controller.cpp" />

@@ -5,7 +5,8 @@ BEGIN_EGEG
 // XInputController 関数実装
 /*===========================================================================*/
 // コンストラクタ
-XInputController::XInputController()
+XInputController::XInputController( const XInput* InputDevice ) noexcept :
+    device_( InputDevice )
 {
     buttons_func_.fill( nullptr );
     triggers_func_.fill( nullptr );

@@ -63,7 +63,7 @@ public :
     };
 
     ///< コンストラクタ
-    XInputController();
+    XInputController( const XInput* InputDevice = nullptr ) noexcept;
 
     ///
     /// @brief   ボタン入力に対する関数の追加

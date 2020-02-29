@@ -15,10 +15,10 @@ BEGIN_EGEG
 ///          
 /// @details シングルトンクラスです。グローバルアクセスは提供しません。<br>
 ///
-class Application
+class Application final
 {
 public:
-    inline Application()
+    inline Application() noexcept
     {
 #ifdef _DEBUG
         static int create_cnt_;
@@ -31,13 +31,13 @@ public:
     ///
     void run();
 
-private:
-    bool initialize();
-    void finalize();
-    void mainLoop();
 
     Application( const Application& ) = delete;
     Application& operator=( const Application& ) = delete;
+private :
+    bool initialize();
+    void finalize();
+    void mainloop();
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_APPLICATION_HEADER_

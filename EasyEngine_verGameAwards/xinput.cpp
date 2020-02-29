@@ -11,7 +11,7 @@ namespace
 } // unnamed namespace
 
 BEGIN_EGEG
-// XInput : 関数実装
+// XInput : 関数定義
 /*===========================================================================*/
 // コンストラクタ
 XInput::XInput( DWORD UserIndex ) noexcept :
@@ -21,7 +21,7 @@ XInput::XInput( DWORD UserIndex ) noexcept :
 }
 
 // 入力状態更新
-void XInput::update() noexcept
+void XInput::update()
 {
     _XINPUT_STATE curr_state = {};
 
@@ -74,7 +74,7 @@ void XInput::update() noexcept
 // in ButtonFlag : 状態を取得するボタンの種類( XINPUT_GAMEPAD_~~ )
 //
 // return 状態
-XInput::FlagType XInput::newState( WORD Last, WORD Curr, int ButtonFlag ) noexcept
+InputDevice::FlagType XInput::newState( WORD Last, WORD Curr, int ButtonFlag ) noexcept
 {
     if( !(Last & ButtonFlag) && !(Curr & ButtonFlag) )
         return InputState::kNone;

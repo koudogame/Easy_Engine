@@ -3,12 +3,7 @@
 #ifdef _DEBUG
 #include <crtdbg.h>
 #endif // !_DEBUG
-#include "egeg_math.hpp"
-#include "actor2d.hpp"
-#include "actor3d.hpp"
-#include "unit_factory.hpp"
-#include "xinput.hpp"
-
+#include "application.hpp"
 
 // エントリーポイント
 int WINAPI WinMain(
@@ -21,9 +16,7 @@ int WINAPI WinMain(
     //_CrtSetBreakAlloc(  );
     _CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
 #endif
-
-    USING_NS_EGEG;
-
-
+    EGEG Application application;
+    application.run();
 }
 // EOF
