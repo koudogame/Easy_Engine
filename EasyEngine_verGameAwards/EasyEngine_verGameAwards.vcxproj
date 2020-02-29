@@ -149,6 +149,7 @@
     <ClInclude Include="cuboid.hpp" />
     <ClInclude Include="egeg.hpp" />
     <ClInclude Include="egeg_math.hpp" />
+    <ClInclude Include="egeg_utility.hpp" />
     <ClInclude Include="factory.hpp" />
     <ClInclude Include="game_unit.hpp" />
     <ClInclude Include="input_device.hpp" />

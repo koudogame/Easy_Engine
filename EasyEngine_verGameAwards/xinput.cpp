@@ -2,6 +2,7 @@
 #include "xinput.hpp"
 #include <cassert>
 #include <xutility>
+#include "egeg_utility.hpp"
 #pragma comment( lib, "xinput.lib" )
 
 namespace
@@ -77,13 +78,13 @@ void XInput::update()
 InputDevice::FlagType XInput::newState( WORD Last, WORD Curr, int ButtonFlag ) noexcept
 {
     if( !(Last & ButtonFlag) && !(Curr & ButtonFlag) )
-        return InputState::kNone;
+        return EnumToValue( InputState::kNone );
     else if( (Last & ButtonFlag) && (Curr & ButtonFlag) )
-        return InputState::kInput;
+        return EnumToValue( InputState::kInput );
     else if( Curr & ButtonFlag )
-        return InputState::kInput | InputState::kPressed;
+        return EnumToValue(InputState::kInput) | EnumToValue(InputState::kPressed);
     else
-        return InputState::kReleased;
+        return EnumToValue( InputState::kReleased );
 }
 
 // スティックの値を正規化

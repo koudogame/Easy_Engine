@@ -1,5 +1,6 @@
 // ì¬Ò : ”Âê
 #include "keyboard.hpp"
+#include "egeg_utility.hpp"
 
 namespace
 {
@@ -85,13 +86,13 @@ InputDevice::FlagType Keyboard::newState( uint8_t Key ) noexcept
     unsigned mask = (0b00000001 << ((Key-1) % 8));
 
     if( !(last_state_[elem] & mask) && !(curr_state_[elem] & mask) )
-        return InputState::kNone;
+        return EnumToValue( InputState::kNone );
     else if( (last_state_[elem] & mask) && (curr_state_[elem] & mask) )
-        return InputState::kInput;
+        return EnumToValue( InputState::kInput );
     else if( curr_state_[elem] & mask )
-        return InputState::kPressed | InputState::kInput;
+        return EnumToValue( InputState::kPressed ) | EnumToValue( InputState::kInput );
     else
-        return InputState::kReleased;
+        return EnumToValue( InputState::kReleased );
 }
 END_EGEG
 

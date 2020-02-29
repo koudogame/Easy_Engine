@@ -136,6 +136,9 @@
     <ClInclude Include="application_status.hpp">
       <Filter>Project\EasyEngine\99_System</Filter>
     </ClInclude>
+    <ClInclude Include="egeg_utility.hpp">
+      <Filter>Project\EasyEngine\99_System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="egeg_math.inl">

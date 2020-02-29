@@ -4,7 +4,8 @@
 ///
 #ifndef INCLUDED_EGEG_INPUT_DEVICE_HEADER_
 #define INCLUDED_EGEG_INPUT_DEVICE_HEADER_
-#include "egeg.hpp"
+#include "egeg_utility.hpp"
+BEGIN_EGEG
 ///
 /// @class  InputDevice
 /// @brief  “ü—ÍŽæ“¾ŠÖŒW‚ÌŠî’êƒNƒ‰ƒX
@@ -15,13 +16,21 @@ public :
     using FlagType = unsigned char;
 
     ///< “ü—Íó‘Ô”»’èƒtƒ‰ƒO
-    enum InputState : FlagType
+    enum class InputState : FlagType
     {
         kNone     = 0U,     ///< “ü—Í‚È‚µ
         kInput    = 0b001,  ///< “ü—Í‚ ‚è
         kPressed  = 0b010,  ///< “ü—Í‚ ‚è(‰Ÿ‚³‚ê‚½uŠÔ)
         kReleased = 0b100,  ///< “ü—Í‚È‚µ(—£‚³‚ê‚½uŠÔ)
     };
+
+    /// “ÁŽêƒƒ“ƒoŠÖ”ŒQ
+    virtual ~InputDevice() = default;
+    InputDevice() = default;
+    InputDevice( const InputDevice& ) = default;
+    InputDevice& operator=( const InputDevice& ) = default;
+    InputDevice( InputDevice&& ) = default;
+    InputDevice& operator=( InputDevice&& ) = default;
 
     ///
     /// @brief  “ü—Íó‘Ô‚ÌXVˆ—
@@ -35,7 +44,7 @@ public :
     ///
     /// @return ‰Ÿ‚³‚ê‚Ä‚¢‚é[ true ]@‰Ÿ‚³‚ê‚Ä‚¢‚È‚¢[ false ]
     ///
-    static bool isInput( FlagType ButtonState ) noexcept { return ButtonState & InputState::kInput; }
+    static bool isInput( FlagType ButtonState ) noexcept { return ButtonState & EnumToValue( InputState::kInput ); }
     ///
     /// @brief  ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½uŠÔ‚©”»’è
     ///
@@ -43,7 +52,7 @@ public :
     ///
     /// @return ‰Ÿ‚³‚ê‚½uŠÔ[ true ]@‰Ÿ‚³‚ê‚½uŠÔ‚Å‚Í‚È‚¢[ false ]
     ///
-    static bool isPressed( FlagType ButtonState ) noexcept { return ButtonState & InputState::kPressed; }
+    static bool isPressed( FlagType ButtonState ) noexcept { return ButtonState & EnumToValue( InputState::kPressed ); }
     ///
     /// @brief  ƒ{ƒ^ƒ“‚ªŒp‘±‚µ‚Ä‰Ÿ‚³‚ê‚Ä‚¢‚é‚©”»’è
     ///
@@ -51,7 +60,7 @@ public :
     ///
     /// @return Œp‘±‚µ‚Ä‰Ÿ‚³‚ê‚Ä‚¢‚é[ true ]@Œp‘±‚µ‚Ä‰Ÿ‚³‚ê‚Ä‚¢‚È‚¢[ false ]
     ///
-    static bool isHold( FlagType ButtonState ) noexcept { return ButtonState == InputState::kInput; }
+    static bool isHold( FlagType ButtonState ) noexcept { return ButtonState == EnumToValue( InputState::kInput ); }
     ///
     /// @brief  ƒ{ƒ^ƒ“‚ª—£‚³‚ê‚½uŠÔ‚©”»’è
     ///
@@ -59,7 +68,8 @@ public :
     ///
     /// @return —£‚³‚ê‚½uŠÔ[ true ]@—£‚³‚ê‚½uŠÔ‚Å‚Í‚È‚¢[ false ]
     ///
-    static bool isReleased( FlagType ButtonState ) noexcept { return ButtonState & InputState::kReleased; }
+    static bool isReleased( FlagType ButtonState ) noexcept { return ButtonState & EnumToValue( InputState::kReleased ); }
 };
+END_EGEG
 #endif /// !INCLUDED_EGEG_INPUT_DEVICE_HEADER_
 /// EOF

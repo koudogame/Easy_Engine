@@ -56,6 +56,8 @@ public :
     ///< “ü—Íó‘Ôæ“¾
     const State& getState() const noexcept { return state_; }
 
+    XInput& operator=( const XInput& ) = default;
+
         
 /*-----------------------------------------------------------------*/
 // InputDevice
