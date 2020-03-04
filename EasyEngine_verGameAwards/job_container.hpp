@@ -8,9 +8,6 @@
 #include <vector>
 #include "egeg.hpp"
 BEGIN_EGEG
-template <class T, class ...Ts>
-class Job;
-
 ///
 /// @class  JobContainer
 /// @brief  ジョブコンテナ

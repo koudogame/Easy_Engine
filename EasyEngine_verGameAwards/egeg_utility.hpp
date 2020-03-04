@@ -33,6 +33,25 @@ constexpr auto EnumToValue( EnumClass Enumerator ) noexcept
 {
     return static_cast<std::underlying_type_t<EnumClass>>(Enumerator);
 }
+
+///
+/// @class   コピー禁止属性を付加する
+/// @details コピー - 禁止<br>
+///          ムーブ - 可能
+///
+template <class Base>
+class NonCopyable
+{
+public :
+    NonCopyable( const NonCopyable& ) = delete;
+    NonCopyable& operator=( const NonCopyable& ) = delete;
+    NonCopyable( NonCopyable&& ) = default;
+    NonCopyable& operator=( NonCopyable&& ) = default;
+
+protected :
+    NonCopyable() = default;
+    ~NonCopyable() = default;
+};
 END_EGEG
 #endif /// !INCLUDED_EGEG_UTILITY_HEADER_
-// EOF
+/// EOF

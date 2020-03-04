@@ -5,22 +5,26 @@
 #ifndef INCLUDED_EGEG_JOB_HEADER_
 #define INCLUDED_EGEG_JOB_HEADER_
 #include <functional>
+#include "egeg_utility.hpp"
 #include "job_container.hpp"
 BEGIN_EGEG
 ///
 /// @class   Job
 /// @brief   ジョブ
 ///
-/// @tparam RetValType : ジョブとして実行する関数の、戻り値型
-/// @tparam ...Args    : ジョブとして実行する関数の、仮引数型( パラメータパック )
+/// @tparam FunctionType : ジョブの関数型 ex.) float(int, int)
 ///
-template <class RetValType, class ...Args>
-class Job
+template <class FunctionType>
+class Job;
+
+///< Job定義
+template <class RetValType, class ...ArgTypes>
+class Job<RetValType(ArgTypes...)> : NonCopyable<Job<RetValType(ArgTypes...)>>
 {
 public :
-    using Signature = RetValType(Args...);
-    using FunctionType = std::function<Signature>;
+    using ReturnValueType = RetValType;
 
+    ///< デストラクタ
     ~Job() { exitFromContainer(); } 
 
     ///
@@ -28,7 +32,7 @@ public :
     ///
     /// @param[in] Function : ジョブとして登録する関数オブジェクト
     ///
-    void setJob( FunctionType Function )
+    void setJob( std::function<RetValType(ArgTypes...)> Function )
     {
         job_ = std::move( Function );
     }
@@ -39,17 +43,18 @@ public :
     ///
     /// @param[in] Container : 所属するコンテナ
     ///
-    void setContainer( JobContainer<Job<Signature>>* Container ) { exitFromContainer(); container_ = Container; }
+    void setContainer( JobContainer<Job<RetValType(ArgTypes...)>>* Container ) { exitFromContainer(); container_ = Container; }
     ///< 所属するコンテナの取得
-    JobContainer<Job<Signature>>* getContainer() const noexcept { return container_; }
+    JobContainer<Job<RetValType(ArgTypes...)>>* getContainer() const noexcept { return container_; }
 
     ///
     /// @brief   所持しているジョブの実行
-    /// @details ジョブを所持していない場合、何も行いません。
+    /// @details ジョブを所持していない場合はbad_function_call例外を送出します。<br>
+    ///          ↑戻り値を返却するために、実行しないという選択肢が取れない。
     ///
     /// @param[in] Param : ジョブとして登録されている関数へ転送する引数リスト
     ///
-    void operator()( Args ...Param ) { if( job_ ) job_( Param... ); }
+    RetValType operator()( ArgTypes ...Args ) { return job_( Args... ); }
 
     ///
     /// @brief   現在所属しているコンテナから抜ける
@@ -65,8 +70,8 @@ public :
     }
 
 private :
-    FunctionType job_;
-    JobContainer<Job<Signature>>* container_ = nullptr;
+    std::function<RetValType(ArgTypes...)> job_;
+    JobContainer<Job<RetValType(ArgTypes...)>>* container_ = nullptr;
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_JOB_HEADER_
