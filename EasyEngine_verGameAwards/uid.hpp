@@ -10,12 +10,12 @@
 /// @brief  Œ^î•ñ‚©‚çID‚ğæ“¾‚·‚éƒNƒ‰ƒX
 /// 
 template <class Object>
-class UID
+class UID final
 {
 public :
     operator uint32_t() const noexcept
     {
-        static const uintptr_t uid = reinterpret_cast<uint32_t>(&uid);
+        static const uint32_t uid = reinterpret_cast<uint32_t>(&uid);
         return uid;
     }
 };

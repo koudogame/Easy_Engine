@@ -4,6 +4,7 @@
 ///
 #ifndef INCLUDED_EGEG_CONTROLLER_HEADER_
 #define INCLUDED_EGEG_CONTROLLER_HEADER_
+#include "egeg_utility.hpp"
 #include "input_device.hpp"
 BEGIN_EGEG
 ///
@@ -12,12 +13,11 @@ BEGIN_EGEG
 /// @details 各種デバイスに対応した派生クラスで、キーに対応した処理を登録します。<br>
 ///          複数のコントローラ－から一つのオブジェクトが操作されることを防ぐために、コピーを禁止しています。
 ///
-class Controller
+class Controller : 
+    NonCopyable<Controller>
 {
 public :
-    /// 特殊メンバ関数 -コピーは禁止している
-    Controller( const Controller& )            = delete;
-    Controller& operator=( const Controller& ) = delete;
+    /// 特殊メンバ関数
     Controller()                          = default;
     virtual ~Controller()                 = default;
     Controller( Controller&& )            = default;

@@ -4,9 +4,8 @@
 #include <tchar.h>
 #include <Windows.h>
 #include "application_status.hpp"
-
-#include "job.hpp"
-#include "job_scheduler.hpp"
+#include "xinput.hpp"
+#include "xinput_controller.hpp"
 
 // ウィンドウプロシージャ関数宣言
 LRESULT CALLBACK WinProc( HWND, UINT, WPARAM, LPARAM );
@@ -87,15 +86,13 @@ void Application::mainloop()
     time_point<high_resolution_clock> last_time = high_resolution_clock::now();
     time_point<high_resolution_clock> curr_time;
 
-    using JobType = Job<void(uint64_t)>;
-    JobType job_0;
-    job_0.setJob( [](uint64_t){ assert(false && "first"); } );
-    JobType job_1;
-    job_1.setJob( [](uint64_t){ assert(false && "second"); } );
-
-    JobScheduler<JobType> scheduler;
-    scheduler.registerJob(0, &job_0 );
-    scheduler.registerJob(0, &job_1 );
+    XInputP1 input_device;
+    XInputController controller{ input_device };
+    controller.registerFunction( XInputController::Buttons::kB,
+        []( InputDevice::FlagType Input )
+    {
+        assert( !XInput::isPressed( Input ) );
+    });
 
     MSG msg{};
     while( msg.message != WM_QUIT )
@@ -115,7 +112,8 @@ void Application::mainloop()
             if( duration_cast<microseconds>(erapsed_time).count() >= TimePerFrame<>::value )
             {
                 last_time = curr_time;
-                scheduler.execute( erapsed_time.count() );
+                input_device.update();
+                controller.update();
             }
         }
     }

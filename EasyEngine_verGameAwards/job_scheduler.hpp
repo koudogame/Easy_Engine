@@ -11,7 +11,7 @@ class DefaultExecuter
 {
 public :
     template <class JobType, class ...Ts>
-    void operator()( JobType* Job, Ts&& ...Args )
+    void operator()( JobType* Job, Ts&& ...Args ) const
     {
         (*Job)( std::forward<Ts>(Args)... );
     }

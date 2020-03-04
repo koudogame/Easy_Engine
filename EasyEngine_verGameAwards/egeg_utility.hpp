@@ -45,11 +45,11 @@ class NonCopyable
 public :
     NonCopyable( const NonCopyable& ) = delete;
     NonCopyable& operator=( const NonCopyable& ) = delete;
-    NonCopyable( NonCopyable&& ) = default;
-    NonCopyable& operator=( NonCopyable&& ) = default;
+    NonCopyable( NonCopyable&& ) noexcept = default;
+    NonCopyable& operator=( NonCopyable&& ) noexcept = default;
 
 protected :
-    NonCopyable() = default;
+    NonCopyable() noexcept = default;
     ~NonCopyable() = default;
 };
 END_EGEG

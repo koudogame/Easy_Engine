@@ -12,21 +12,57 @@ namespace
 } // unnamed namespace
 
 BEGIN_EGEG
-// XInput : 関数定義
+// XInput 関数定義
 /*===========================================================================*/
-// コンストラクタ
-XInput::XInput( DWORD UserIndex ) noexcept :
-    user_idx_( UserIndex )
+// 新しい状態の取得
+//
+// in Last : 前回の状態
+// in Curr : 現在の状態
+// in ButtonFlag : 状態を取得するボタンの種類( XINPUT_GAMEPAD_~~ )
+//
+// return 状態
+InputDevice::FlagType XInput::newState( WORD Last, WORD Curr, int ButtonFlag ) noexcept
 {
-    assert( UserIndex < 4 && "UserIndexに4以上の値を設定することはできません。" );
+    if( !(Last & ButtonFlag) && !(Curr & ButtonFlag) )
+        return EnumToValue( InputState::kNone );
+    else if( (Last & ButtonFlag) && (Curr & ButtonFlag) )
+        return EnumToValue( InputState::kInput );
+    else if( Curr & ButtonFlag )
+        return EnumToValue(InputState::kInput) | EnumToValue(InputState::kPressed);
+    else
+        return EnumToValue( InputState::kReleased );
 }
 
-// 入力状態更新
-void XInput::update()
+// スティックの値を正規化
+//
+// in Raw : 正規化前の値
+// in DeadZone : デッドゾーン
+//
+// return 正規化後の値
+float XInput::stickNormalize( SHORT Raw, int DeadZone ) noexcept
+{
+    if( Raw < DeadZone && Raw > -DeadZone )
+        return 0.0F;
+    else
+    {
+        float norm = Raw * ::kStickToNorm;
+        if( norm < -1.0F )
+            norm = -1.0F;
+
+        return norm;
+    }
+}
+
+
+// XInputImpl 関数定義
+/*===========================================================================*/
+// 入力更新
+template <DWORD UserIdx>
+void XInputImpl<UserIdx>::update()
 {
     _XINPUT_STATE curr_state = {};
 
-    if( XInputGetState(user_idx_, &curr_state) == ERROR_SUCCESS )
+    if( XInputGetState(UserIdx, &curr_state) == ERROR_SUCCESS )
     {
         // 接続している
         state_.connected = true;
@@ -68,43 +104,10 @@ void XInput::update()
     last_state_ = std::move( curr_state );
 }
 
-// 新しい状態の取得
-//
-// in Last : 前回の状態
-// in Curr : 現在の状態
-// in ButtonFlag : 状態を取得するボタンの種類( XINPUT_GAMEPAD_~~ )
-//
-// return 状態
-InputDevice::FlagType XInput::newState( WORD Last, WORD Curr, int ButtonFlag ) noexcept
-{
-    if( !(Last & ButtonFlag) && !(Curr & ButtonFlag) )
-        return EnumToValue( InputState::kNone );
-    else if( (Last & ButtonFlag) && (Curr & ButtonFlag) )
-        return EnumToValue( InputState::kInput );
-    else if( Curr & ButtonFlag )
-        return EnumToValue(InputState::kInput) | EnumToValue(InputState::kPressed);
-    else
-        return EnumToValue( InputState::kReleased );
-}
-
-// スティックの値を正規化
-//
-// in Raw : 正規化前の値
-// in DeadZone : デッドゾーン
-//
-// return 正規化後の値
-float XInput::stickNormalize( SHORT Raw, int DeadZone ) noexcept
-{
-    if( Raw < DeadZone && Raw > -DeadZone )
-        return 0.0F;
-    else
-    {
-        float norm = Raw * ::kStickToNorm;
-        if( norm < -1.0F )
-            norm = -1.0F;
-
-        return norm;
-    }
-}
+// 明示的なテンプレートのインスタンス化
+template class XInputImpl<0U>;
+template class XInputImpl<1U>;
+template class XInputImpl<2U>;
+template class XInputImpl<3U>;
 END_EGEG
 // EOF

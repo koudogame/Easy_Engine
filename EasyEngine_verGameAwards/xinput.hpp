@@ -45,34 +45,31 @@ public :
         float right_thumbstick_y;   ///< 0.0F ~ 1.0F の範囲
     };
 
-    ///
-    /// @brief   コンストラクタ
-    /// @details コントローラーのインデックスは[0 ~ 3]の範囲で指定して下さい。
-    ///
-    /// @param[in] UserIndex : コントローラーのインデックス
-    ///
-    XInput( DWORD UserIndex ) noexcept;
-
     ///< 入力状態取得
     const State& getState() const noexcept { return state_; }
 
     XInput& operator=( const XInput& ) = default;
 
-        
-/*-----------------------------------------------------------------*/
-// InputDevice
-    ///< 入力状態更新
-    void update() override;
-/*-----------------------------------------------------------------*/
-
-private :
+protected :
     FlagType newState( WORD, WORD, int ) noexcept;
     float stickNormalize( SHORT, int ) noexcept;
 
-    DWORD user_idx_;
     State state_{};
     _XINPUT_STATE last_state_{};
 };
+
+
+template <DWORD UserIdx>
+class XInputImpl :
+    public XInput
+{
+public :
+    void update() override;
+};
+using XInputP1 = XInputImpl<0U>;
+using XInputP2 = XInputImpl<1U>;
+using XInputP3 = XInputImpl<2U>;
+using XInputP4 = XInputImpl<3U>;
 END_EGEG
 #endif /// !INCLUDED_EGEG_XINPUT_HEADER_
 /// EOF
