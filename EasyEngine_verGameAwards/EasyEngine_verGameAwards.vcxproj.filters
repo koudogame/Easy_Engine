@@ -139,6 +139,15 @@
     <ClInclude Include="egeg_utility.hpp">
       <Filter>Project\EasyEngine\99_System</Filter>
     </ClInclude>
+    <ClInclude Include="job_container.hpp">
+      <Filter>Project\EasyEngine\03_JobScheduler</Filter>
+    </ClInclude>
+    <ClInclude Include="job.hpp">
+      <Filter>Project\EasyEngine\03_JobScheduler</Filter>
+    </ClInclude>
+    <ClInclude Include="job_scheduler.hpp">
+      <Filter>Project\EasyEngine\03_JobScheduler</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="egeg_math.inl">

@@ -5,6 +5,7 @@
 #ifndef INCLUDED_EGEG_XINPUT_CONTROLLER_HEADER_
 #define INCLUDED_EGEG_XINPUT_CONTROLLER_HEADER_
 #include <array>
+#include <type_traits>
 #include "controller.hpp"
 #include "xinput.hpp"
 #include "egeg_utility.hpp"
@@ -141,9 +142,9 @@ private :
     /// @param[in] Args      : 呼び出す関数に渡す引数リスト
     ///
     template <class FuncList, class EnumType, class ...Ts>
-    inline void callFuncSafe( FuncList& Functions, EnumType Index, Ts ...Args )
+    inline void callFuncSafe( FuncList& Functions, EnumType Index, Ts&& ...Args )
     {   // 安全な関数呼び出し
-        if( auto func = Functions.at(EnumToValue(Index)) ) func( Args... );
+        if( auto func = Functions.at(EnumToValue(Index)) ) func( std::forward<Ts>(Args)... );
     }
 
     DeviceType* device_;

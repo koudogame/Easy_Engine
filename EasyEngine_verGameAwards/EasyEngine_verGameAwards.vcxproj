@@ -153,6 +153,9 @@
     <ClInclude Include="factory.hpp" />
     <ClInclude Include="game_unit.hpp" />
     <ClInclude Include="input_device.hpp" />
+    <ClInclude Include="job.hpp" />
+    <ClInclude Include="job_container.hpp" />
+    <ClInclude Include="job_scheduler.hpp" />
     <ClInclude Include="keyboard.hpp" />
     <ClInclude Include="line2d.hpp" />
     <ClInclude Include="line3d.hpp" />

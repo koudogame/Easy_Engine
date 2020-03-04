@@ -15,7 +15,7 @@ class UID
 public :
     operator uint32_t() const noexcept
     {
-        static const uint32_t uid = reinterpret_cast<uint32_t>(&uid);
+        static const uintptr_t uid = reinterpret_cast<uint32_t>(&uid);
         return uid;
     }
 };

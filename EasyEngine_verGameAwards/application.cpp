@@ -4,7 +4,6 @@
 #include <tchar.h>
 #include <Windows.h>
 #include "application_status.hpp"
-#include "xinput_controller.hpp"
 
 
 // ウィンドウプロシージャ関数宣言
@@ -45,8 +44,8 @@ bool Application::initialize()
     // クライアント領域が解像度に合うよう、ウィンドウサイズを調整
     RECT region;
     region.left = region.top = 0L;
-    region.right = getHorizontalResolution<long>();
-    region.bottom = getVerticalResolution<long>();
+    region.right = kHorizontalResolution<long>;
+    region.bottom = kVerticalResolution<long>;
     if( AdjustWindowRectEx(&region, ::kWindowStyle, false, ::kWindowStyleEX) == false )
         return false;
 
