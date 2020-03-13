@@ -4,8 +4,10 @@
 #include <tchar.h>
 #include <Windows.h>
 #include "application_status.hpp"
+
 #include "xinput.hpp"
 #include "xinput_controller.hpp"
+#include "rendering_engine.hpp"
 
 // ウィンドウプロシージャ関数宣言
 LRESULT CALLBACK WinProc( HWND, UINT, WPARAM, LPARAM );
@@ -69,6 +71,7 @@ bool Application::initialize()
     // ウィンドウ表示
     ShowWindow(h_wnd, SW_NORMAL);
 
+
     return true;
 }
 
@@ -91,7 +94,7 @@ void Application::mainloop()
     controller.registerFunction( XInputController::Buttons::kB,
         []( InputDevice::FlagType Input )
     {
-        assert( !XInput::isPressed( Input ) );
+//        assert( !XInput::isPressed( Input ) );
     });
 
     MSG msg{};

@@ -6,6 +6,7 @@
 #define INCLUDED_EGEG_UTILITY_HEADER_
 #include <type_traits>
 #include <cstdint>
+#include <string>
 #include "egeg.hpp"
 BEGIN_EGEG
 ///
@@ -35,11 +36,11 @@ constexpr auto EnumToValue( EnumClass Enumerator ) noexcept
 }
 
 ///
-/// @class   コピー禁止属性を付加する
+/// @class   このクラスを基底に持つクラスに、コピー禁止属性を付加する
 /// @details コピー - 禁止<br>
 ///          ムーブ - 可能
 ///
-template <class Base>
+template <class Derived>
 class NonCopyable
 {
 public :
@@ -51,6 +52,83 @@ public :
 protected :
     NonCopyable() noexcept = default;
     ~NonCopyable() = default;
+};
+
+/// 
+/// @class    DetailedReturnValue
+/// @brief    詳細情報を持つ戻り値
+/// @detailed デバッグ時のみ、文字列を保持することができます。
+///
+template <class RetValType>
+class DetailedReturnValue
+{
+public :
+    using ValueType = RetValType;
+#ifdef _DEBUG
+    template <class ValueType>
+    DetailedReturnValue( bool Condition, ValueType&& Value ) :
+        condition_( Condition ),
+        value_( std::forward<ValueType>(Value) ),
+        status_( "No status" )
+    {}
+    template <class ValueType, class StringType>
+    DetailedReturnValue( bool Condition, ValueType&& Value, StringType&& Status ) :
+        condition_( Condition ),
+        value_( std::forward<ValueType>(Value) ),
+        status_( std::forward<StringType>(Status) )
+    {}
+#else
+    template <class ValueType>
+    DetailedReturnValue( bool Condition, ValueType&& Value ) :
+        condition_( Condition ),
+        value_( std::forward<ValueType>(Value) ) {}
+    template <class ValueType, class StringType>
+    DetailedReturnValue( bool Condition, ValueType&& Value, StringType&& ) :
+        condition_( Condition ),
+        value_( std::forward<ValueType>(Value) ) {}
+#endif
+    operator bool() const noexcept { return condition_; }
+    operator RetValType() &  noexcept { return value_; }
+    operator RetValType() && noexcept { return std::move(value_); }
+    RetValType& get() const noexcept { return value_; }
+
+private :
+    bool condition_;
+    RetValType value_;
+
+#ifdef _DEBUG
+    ::std::string status_;
+#endif
+};
+template <>
+class DetailedReturnValue<bool>
+{
+public: 
+#ifdef _DEBUG
+    DetailedReturnValue( bool Condition ) :
+        condition_( Condition ),
+        status_( "No status" )
+    {}
+    template <class StringType>
+    DetailedReturnValue( bool Condition, StringType&& Status ) :
+        condition_( Condition ),
+        status_( std::forward<StringType>(Status) )
+    {}
+#else
+    DetailedReturnValue( bool Condition ) :
+        condition_( Condition )
+    {}
+    DetailedReturnValue( bool Condition, StringType&& ) :
+        condition_( Condition ),
+    {}
+#endif
+    operator bool() const noexcept { return condition_; }
+
+private :
+    bool condition_;
+#ifdef _DEBUG
+    ::std::string status_;
+#endif
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_UTILITY_HEADER_

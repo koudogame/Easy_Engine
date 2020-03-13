@@ -13,7 +13,7 @@ BEGIN_EGEG
 ///
 struct VertexData
 {
-    Float3 position;
+    //Float3 position;
     Float2 uv;
     Float4 color_rgba;
 };

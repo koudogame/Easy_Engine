@@ -11,13 +11,13 @@ BEGIN_EGEG
 /// @class   Controller
 /// @brief   コントローラー基底クラス
 /// @details 各種デバイスに対応した派生クラスで、キーに対応した処理を登録します。<br>
-///          複数のコントローラ－から一つのオブジェクトが操作されることを防ぐために、コピーを禁止しています。
+///          意図せずに複数のコントローラ－から一つのオブジェクトが操作されることを防ぐために、コピーを禁止しています。
 ///
 class Controller : 
     NonCopyable<Controller>
 {
 public :
-    /// 特殊メンバ関数
+    /// 特殊メンバ関数 - ムーブは許可
     Controller()                          = default;
     virtual ~Controller()                 = default;
     Controller( Controller&& )            = default;

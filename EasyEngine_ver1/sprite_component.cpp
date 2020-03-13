@@ -134,7 +134,7 @@ void SpriteComponent::getModelStatus( Model* pModel )
     for( int i = 0; i < 4; ++i )
     {
         pModel->mesh.vertices.push_back(
-            { position[i], uv[i], color_ }
+            { /*position[i],*/ uv[i], color_ }
         );
     }
     

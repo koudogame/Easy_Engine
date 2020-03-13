@@ -150,8 +150,13 @@
     <ClInclude Include="egeg.hpp" />
     <ClInclude Include="egeg_math.hpp" />
     <ClInclude Include="egeg_utility.hpp" />
+    <ClInclude Include="error.hpp" />
     <ClInclude Include="factory.hpp" />
     <ClInclude Include="game_unit.hpp" />
+    <ClInclude Include="geometry_shader.hpp" />
+    <ClInclude Include="loader.hpp" />
+    <ClInclude Include="pixel_shader.hpp" />
+    <ClInclude Include="rendering_engine.hpp" />
     <ClInclude Include="input_device.hpp" />
     <ClInclude Include="job.hpp" />
     <ClInclude Include="job_container.hpp" />
@@ -160,11 +165,18 @@
     <ClInclude Include="line2d.hpp" />
     <ClInclude Include="line3d.hpp" />
     <ClInclude Include="rectangle.hpp" />
-    <ClInclude Include="scene.hpp" />
+    <ClInclude Include="level.hpp" />
     <ClInclude Include="application_status.hpp" />
+    <ClInclude Include="rendering_engine_child.hpp" />
+    <ClInclude Include="scene.hpp" />
+    <ClInclude Include="shader.hpp" />
+    <ClInclude Include="shader_loader.hpp" />
     <ClInclude Include="sphere.hpp" />
     <ClInclude Include="uid.hpp" />
     <ClInclude Include="unit_factory.hpp" />
+    <ClInclude Include="vertex_binder.hpp" />
+    <ClInclude Include="vertex_data.hpp" />
+    <ClInclude Include="vertex_shader.hpp" />
     <ClInclude Include="xinput.hpp" />
     <ClInclude Include="xinput_controller.hpp" />
   </ItemGroup>
@@ -172,6 +184,8 @@
     <ClCompile Include="application.cpp" />
     <ClCompile Include="keyboard.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="rendering_engine.cpp" />
+    <ClCompile Include="shader_loader.cpp" />
     <ClCompile Include="xinput.cpp" />
     <ClCompile Include="xinput_controller.cpp" />
   </ItemGroup>

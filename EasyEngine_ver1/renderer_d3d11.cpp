@@ -136,7 +136,6 @@ bool RendererD3D11::initialize()
             return false;
     }
 
-
     return true;
 }
 

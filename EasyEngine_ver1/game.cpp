@@ -27,7 +27,7 @@ void Game::finalize()
 bool Game::update( uint64_t Delta )
 {
     JobScheduler::instance()->execute( Delta );
-    RenderingManager::instance()->beginRender( { 1.0F, 1.0F, 1.0F, 1.0F} );
+    RenderingManager::instance()->beginRender( { 0.5F, .5F, 0.5F, 1.0F} );
     RenderBatch::instance()->render();
     RenderingManager::instance()->endRender();
 

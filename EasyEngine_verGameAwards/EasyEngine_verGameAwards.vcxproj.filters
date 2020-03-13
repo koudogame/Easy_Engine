@@ -15,14 +15,8 @@
     <Filter Include="Project\EasyEngine\00_Actor">
       <UniqueIdentifier>{c5184119-dbe9-4d4f-bfc2-be44555a307d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project\EasyEngine\01_Scene">
-      <UniqueIdentifier>{6deff352-317c-426c-af0a-a7c687174fb3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Project\EasyEngine\03_JobScheduler">
       <UniqueIdentifier>{0f22ccfb-dd3f-4172-a500-2c1b668fb2b5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\EasyEngine\04_RenderBatch">
-      <UniqueIdentifier>{21505498-f87d-4fa4-a8d6-3843af9174e8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Project\EasyEngine\02_Component">
       <UniqueIdentifier>{365f1458-5657-4580-824e-865cfd79ea6d}</UniqueIdentifier>
@@ -36,14 +30,32 @@
     <Filter Include="Project\EasyEngine\99_System\Input">
       <UniqueIdentifier>{3d9bc61e-2423-4e35-9537-0179022c984e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project\EasyEngine\99_System\Input\XInput">
-      <UniqueIdentifier>{adcbc180-9ab6-428c-8fc8-d15f6f3c803f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Project\EasyEngine\99_System\Input\Controller">
       <UniqueIdentifier>{375e4309-40ff-4626-a6fd-8d107b6d1e7b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Project\EasyEngine\99_System\Input\Keyboard">
       <UniqueIdentifier>{d0447e9a-d881-49e1-a607-8989a8f7f453}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\99_System\Input\XInput">
+      <UniqueIdentifier>{adcbc180-9ab6-428c-8fc8-d15f6f3c803f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\99_System\Rendering">
+      <UniqueIdentifier>{c57a0814-1b67-4b2d-ae8f-cb83d38e5397}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\99_System\Rendering\Loader">
+      <UniqueIdentifier>{34759648-190b-4e37-88cf-e9c4479d3f5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\01_Level">
+      <UniqueIdentifier>{6deff352-317c-426c-af0a-a7c687174fb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\99_System\Rendering\Scene">
+      <UniqueIdentifier>{01a7b2f5-889a-4308-afcc-630a3b13fc48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\99_System\Rendering\Pipeline">
+      <UniqueIdentifier>{98857fb5-1de2-4f2b-9bd2-03335a7aab89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\04_Shader">
+      <UniqueIdentifier>{7d648bd6-e005-4b97-aefb-c34d4e4c2633}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -62,6 +74,12 @@
     <ClCompile Include="application.cpp">
       <Filter>Project\EasyEngine\99_System</Filter>
     </ClCompile>
+    <ClCompile Include="rendering_engine.cpp">
+      <Filter>Project\EasyEngine\99_System\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_loader.cpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="factory.hpp">
@@ -72,9 +90,6 @@
     </ClInclude>
     <ClInclude Include="actor.hpp">
       <Filter>Project\EasyEngine\00_Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="scene.hpp">
-      <Filter>Project\EasyEngine\01_Scene</Filter>
     </ClInclude>
     <ClInclude Include="egeg_math.hpp">
       <Filter>Project\EasyEngine\99_System</Filter>
@@ -147,6 +162,45 @@
     </ClInclude>
     <ClInclude Include="job_scheduler.hpp">
       <Filter>Project\EasyEngine\03_JobScheduler</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering_engine.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="error.hpp">
+      <Filter>Project\EasyEngine\99_System</Filter>
+    </ClInclude>
+    <ClInclude Include="loader.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_loader.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="level.hpp">
+      <Filter>Project\EasyEngine\01_Level</Filter>
+    </ClInclude>
+    <ClInclude Include="scene.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="vertex_shader.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="pixel_shader.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="geometry_shader.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="shader.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering_engine_child.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="vertex_data.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="vertex_binder.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

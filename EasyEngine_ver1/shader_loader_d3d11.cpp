@@ -73,7 +73,8 @@ bool ShaderLoaderD3D11::loadGeometryShader( const std::string& Path, IGeometrySh
     std::fstream stream( Path, std::ios::binary | std::ios::in );
     if( !stream ) return false;
     size_t file_size = ::getBinaryLength( stream );
-    char* blob = new char[ file_size ];
+    char* blob;
+    { blob = new char[ file_size ]; }
     stream.read( blob, file_size );
     stream.close();
 

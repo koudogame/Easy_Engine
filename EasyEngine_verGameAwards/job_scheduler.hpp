@@ -20,8 +20,8 @@ public :
 /// @class  JobScheduler
 /// @brief  ジョブの実行順序管理クラス
 ///
-/// @tparam JobType : 管理するジョブ型
-/// @tparam Executer : ジョブコンテナを受け取り、ジョブを実行するファンクタ
+/// @tparam JobType  : 管理するジョブ型
+/// @tparam Executer : ジョブを実行するファンクタ
 ///
 template <class JobType, class JobExecuterType = DefaultExecuter>
 class JobScheduler : public JobExecuterType
