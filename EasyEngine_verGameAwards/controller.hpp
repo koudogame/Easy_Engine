@@ -4,7 +4,7 @@
 ///
 #ifndef INCLUDED_EGEG_CONTROLLER_HEADER_
 #define INCLUDED_EGEG_CONTROLLER_HEADER_
-#include "egeg_utility.hpp"
+#include "noncopyable.hpp"
 #include "input_device.hpp"
 BEGIN_EGEG
 ///

@@ -4,7 +4,7 @@
 ///
 #ifndef INCLUDED_EGEG_INPUT_DEVICE_HEADER_
 #define INCLUDED_EGEG_INPUT_DEVICE_HEADER_
-#include "egeg_utility.hpp"
+#include "utility_function.hpp"
 BEGIN_EGEG
 ///
 /// @class  InputDevice

@@ -35,8 +35,6 @@ public:
     Application( const Application& ) = delete;
     Application& operator=( const Application& ) = delete;
 private :
-    bool initialize();
-    void finalize();
     void mainloop();
 };
 END_EGEG

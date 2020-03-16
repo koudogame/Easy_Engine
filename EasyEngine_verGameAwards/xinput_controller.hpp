@@ -8,7 +8,7 @@
 #include <type_traits>
 #include "controller.hpp"
 #include "xinput.hpp"
-#include "egeg_utility.hpp"
+#include "utility_function.hpp"
 BEGIN_EGEG
 ///
 /// @class   XInputController

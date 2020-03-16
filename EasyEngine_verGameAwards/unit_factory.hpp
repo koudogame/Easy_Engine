@@ -7,7 +7,6 @@
 #include <unordered_map>
 #include <memory>
 #include "uid.hpp"
-#include "game_unit.hpp"
 BEGIN_EGEG
 template <class T>
 class Creator;

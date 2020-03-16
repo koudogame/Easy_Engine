@@ -5,7 +5,7 @@
 #ifndef INCLUDED_EGEG_JOB_HEADER_
 #define INCLUDED_EGEG_JOB_HEADER_
 #include <functional>
-#include "egeg_utility.hpp"
+#include "noncopyable.hpp"
 #include "job_container.hpp"
 BEGIN_EGEG
 ///

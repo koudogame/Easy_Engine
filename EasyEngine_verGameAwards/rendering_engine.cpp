@@ -4,7 +4,9 @@
 #include <cassert>
 #endif
 #include <stdexcept>
+#include "utility_function.hpp"
 #include "error.hpp"
+#include "shader_loader.hpp"
 
 #pragma comment ( lib, "d3d11.lib" )
 
@@ -31,8 +33,6 @@ BEGIN_EGEG
 // Dtor
 RenderingEngine::~RenderingEngine()
 {
-    device_->Release();
-    device_context_->Release();
 }
 
 // レンダリングエンジン生成
@@ -40,7 +40,7 @@ std::shared_ptr<RenderingEngine> RenderingEngine::create()
 {
 #ifdef _DEBUG
     static unsigned created_cnt;
-    assert( !created_cnt++ && "RenderingEngineはSingletonObjectです。" );
+    assert( !created_cnt++ && "RenderingEngineはSingletonクラスです。" );
 #endif
     RenderingEngine* created = new RenderingEngine();
 
@@ -54,7 +54,7 @@ std::shared_ptr<RenderingEngine> RenderingEngine::create()
         D3D11_SDK_VERSION,
         &created->device_,
         &created->feature_level_,
-        &created->device_context_
+        &created->immediate_context_
     );
 
     if( FAILED(hr) )
@@ -70,7 +70,7 @@ std::shared_ptr<RenderingEngine> RenderingEngine::create()
             D3D11_SDK_VERSION,
             &created->device_,
             &created->feature_level_,
-            &created->device_context_
+            &created->immediate_context_
         );
 
         if( FAILED(hr) )
@@ -80,6 +80,8 @@ std::shared_ptr<RenderingEngine> RenderingEngine::create()
         }
     }
 
+    // シェーダーローダーの作成
+    created->shader_loader_ = std::make_shared<ShaderLoader>( created->device_ );
     return std::shared_ptr<RenderingEngine>( created );
 }
 

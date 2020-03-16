@@ -4,29 +4,55 @@
 ///
 #ifndef INCLUDED_EGEG_SCENE_HEADER_
 #define INCLUDED_EGEG_SCENE_HEADER_
-#include "egeg_utility.hpp"
-#include "rendering_engine.hpp"
+#include <type_traits>
+#include <wrl.h>
+#include <d3d11.h>
+#include "noncopyable.hpp"
+#include "easy_engine.hpp"
 BEGIN_EGEG
 ///
 /// @class   Scene
 /// @brief   レンダリング単位
-/// @details 派生クラスはシーンへのモデルの登録関数を各自定義して下さい。
 ///
 class Scene :
     NonCopyable<Scene>
 {
 public :
-    Scene( ID3D11DeviceContext* DeviceContext ) :
-        device_context_( DeviceContext )
+    template <class DeviceContextType>
+    Scene( DeviceContextType&& ImmediateContext ) :
+        immediate_context_( std::forward<DeviceContextType>(ImmediateContext) )
     {
-        device_context_->AddRef();
     }
-    virtual ~Scene() { device_context_->Release(); }
+    virtual ~Scene() = default;
 
-    virtual void render() = 0;
+    ///
+    /// @brief  描画
+    ///
+    /// @param[in] RenderTargetView  : 描画ターゲットビュー
+    /// @param[in] Viewports         : ビューポート
+    /// @param[in] ScissorRects:     : シザー矩形
+    /// @param[in] DepthStencilView  : 深度ステンシルビュー
+    /// @param[in] DepthStencilState : 深度ステンシルステート
+    /// @param[in] StencilRef        : ステンシルテストで使用する参照値
+    /// @param[in] RasterizerState   : ラスタライザステート
+    /// @param[in] BlendState        : ブレンドステート
+    /// @param[in] BlendFactor       : ブレンドステート定数
+    /// @param[in] BlendMask         : ブレンドステートサンプル用マスク
+    ///
+    virtual void render( 
+        const std::vector<ID3D11RenderTargetView*>& RenderTargetViews,
+        const std::vector<D3D11_VIEWPORT>& Viewports,
+        const std::vector<D3D11_RECT>& ScissorRects,
+        ID3D11DepthStencilView* DepthStencilView = nullptr,
+        ID3D11DepthStencilState* DepthStencilState = nullptr,
+        UINT StencilRef = 0,
+        ID3D11RasterizerState* RasterizerState = nullptr,
+        ID3D11BlendState* BlendState = nullptr,
+        float* BlendFactor = nullptr,
+        UINT BlendMask = 0xFFFFFFFF ) = 0;
 
 protected :
-    ID3D11DeviceContext* device_context_;
+    Microsoft::WRL::ComPtr<ID3D11DeviceContext> immediate_context_;
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_SCENE_HEADER_

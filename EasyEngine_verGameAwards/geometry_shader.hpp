@@ -4,34 +4,30 @@
 ///
 #ifndef INCLUDED_EGEG_GEOMETRY_SHADER_HEADER_
 #define INCLUDED_EGEG_GEOMETRY_SHADER_HEADER_
+#include <type_traits>
+#include <wrl.h>
 #include "shader.hpp"
 BEGIN_EGEG
 ///
 /// @class   GeometryShader
 /// @brief   パイプライン構成オブジェクト「ジオメトリシェーダー」
-/// @details 派生クラスは、必ずデストラクタより前にシェーダーオブジェクトを生成し保持するものとします。<br>
-///          コンストラクタでの処理を推奨します。
+/// @details 派生クラスは、自身の扱うジオメトリシェーダ―ファイルを<br>
+///          static constexpr const char* kGSFileName<br>
+///          として定義して下さい。ShaderLoaderで利用します。
 ///
 class GeometryShader :
     public Shader
 {
 public :
-    virtual ~GeometryShader() { shader_->Release(); }
-    GeometryShader( const GeometryShader& Lhs )
+    template <class ShaderType>
+    GeometryShader( ShaderType&& Shader ) :
+        shader_( std::forward<ShaderType>(Shader) )
     {
-        shader_ = Lhs.shader_;
-        shader_->AddRef();
     }
-    GeometryShader& operator=( const GeometryShader& Lhs )
-    {
-        Lhs.shader_->AddRef();
-
-        if( shader_ ) shader_->Release();
-        shader_ = Lhs.shader_;
-    }
+    virtual ~GeometryShader() = default;
 
 private :
-    ID3D11GeometryShader* shader_ = nullptr;
+    Microsoft::WRL::ComPtr<ID3D11GeometryShader> shader_ = nullptr;
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_GEOMETRY_SHADER_HEADER_

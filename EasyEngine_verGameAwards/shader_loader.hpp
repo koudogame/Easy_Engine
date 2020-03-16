@@ -4,9 +4,12 @@
 ///
 #ifndef INCLUDED_EGEG_SHADER_LOADER_HEADER_
 #define INCLUDED_EGEG_SHADER_LOADER_HEADER_
+#include <fstream>
+#include <memory>
 #include <unordered_map>
 #include "loader.hpp"
-#include "egeg_utility.hpp"
+#include "utility_function.hpp"
+#include "detailed_returnvalue.hpp"
 BEGIN_EGEG
 ///
 /// @class  ShaderLoader
@@ -16,42 +19,151 @@ class ShaderLoader :
     public Loader
 {
 public :
-    using ReturnValue = DetailedReturnValue<bool>;
+    template <class ReturnType>
+    using ReturnValue = DetailedReturnValue<std::unique_ptr<ReturnType>>;
 
-    ShaderLoader( const std::shared_ptr<RenderingEngine>& Engine ) :
-        Loader( Engine )
+    ShaderLoader( Microsoft::WRL::ComPtr<ID3D11Device> Device ) :
+        Loader( Device )
     {}
 
     ///
-    /// @brief  頂点シェーダーの読み込み
+    /// @brief  頂点シェーダ―の生成
     ///
-    /// @param[in] FileName          : コンパイル済みシェーダーファイル名
-    /// @param[in] InputElementDescs : 頂点入力レイアウトを構成する配列
-    /// @param[in] NumElements       : InputElementDescs配列の要素数
-    /// @param[out] OutShader        : 生成したシェーダーオブジェクトを格納するポインタ
-    /// @param[out] OutInputLayout   : 生成した頂点入力レイアウトオブジェクトを格納するポインタ
+    /// @tparam VertexShaderType : 生成するシェーダー型
     ///
-    /// @return 読み込み成功[ true ]　読み込み失敗[ false ]
+    /// @return シェーダーオブジェクト
     ///
-    ReturnValue load( const TCHAR* FileName, const D3D11_INPUT_ELEMENT_DESC* InputElementDescs, size_t NumElements, ID3D11VertexShader** OutShader, ID3D11InputLayout** OutInputLayout );
+    template <class VertexShaderType>
+    ReturnValue<VertexShaderType> createVertexShader()
+    {
+        using VSTy = VertexShaderType;
+        using RetTy = ReturnValue<VSTy>;
+
+        // ファイルオープン
+        std::fstream stream( VSTy::kVSFileName, std::ios::binary | std::ios::in );
+        if( !stream ) return RetTy( false, nullptr, "ファイルオープン失敗" );
+
+        // シェーダ―読み込み
+        size_t filesize = getFileSize( stream );
+        char* blob = new char[ filesize ];
+        stream.read( blob, filesize );
+        stream.close();
+
+        // オブジェクト生成
+        ID3D11VertexShader* vs = nullptr;
+        HRESULT hr = device_->CreateVertexShader(
+            blob,
+            filesize,
+            nullptr,
+            &vs
+        );
+        if( FAILED(hr) )
+        {
+            delete[] blob;
+            return RetTy( false, nullptr, "シェーダーオブジェクトの生成失敗" );
+        }
+
+        ID3D11InputLayout* il = nullptr;
+        hr = device_->CreateInputLayout(
+            VSTy::kInputElementDescs,
+            getArraySize(VSTy::kInputElementDescs),
+            blob,
+            filesize,
+            &il
+        );
+        delete[] blob;
+        if( FAILED(hr) )
+        {
+            vs->Release();
+            return RetTy( false, nullptr, "入力レイアウトオブジェクトの生成失敗" );
+        }
+
+        RetTy created( true, std::make_unique<VSTy>(vs, il) );
+        vs->Release();
+        il->Release();
+        return created;
+    }
+
     ///
-    /// @brief  ジオメトリシェーダーの読み込み
+    /// @brief  ジオメトリシェーダ―の生成
     ///
-    /// @param[in] FileName   : コンパイル済みシェーダーファイル名
-    /// @param[out] OutShader : 生成したシェーダーオブジェクトを格納するポインタ
+    /// @tparam GeometryShaderType : 生成するシェーダ―型
     ///
-    /// @return 読み込み成功[ true ]　読み込み失敗[ false ]
+    /// @return シェーダーオブジェクト
     ///
-    ReturnValue load( const TCHAR* FileName, ID3D11GeometryShader** OutShader );
+    template <class GeometryShaderType>
+    ReturnValue<GeometryShaderType> createGeometryShader()
+    {
+        using GSTy = GeometryShaderType;
+        using RetTy = ReturnValue<GSTy>;
+
+        // ファイルオープン
+        std::fstream stream( GSTy::kGSFileName, std::ios::binary | std::ios::in );
+        if( !stream ) return RetTy( false, nullptr, "ファイルオープン失敗" );
+
+        // シェーダ―読み込み
+        size_t filesize = getFileSize( stream );
+        char* blob = new char[ filesize ];
+        stream.read( blob, filesize );
+        stream.close();
+
+        // オブジェクトの生成
+        ID3D11GeometryShader* gs = nullptr;
+        HRESULT hr = device_->CreateGeometryShader(
+            blob,
+            filesize,
+            nullptr,
+            gs
+        );
+        delete[] blob;
+        if( FAILED(hr) ) return RetTy( false, nullptr, "シェーダ―オブジェクトの生成失敗" );
+        
+        RetTy created( true, std::make_unique<GSTy>(gs) );
+        gs->Release();
+        return created;
+    }
+
     ///
-    /// @brief  ピクセルシェーダーの読み込み
+    /// @brief  ピクセルシェーダ―の生成
     ///
-    /// @param[in] FileName : コンパイル済みシェーダーファイル名
-    /// @param[out] OutShader : 生成したシェーダーオブジェクトを格納するポインタ
+    /// @tparam PixelShaderType : 生成するシェーダ―型
     ///
-    /// @return 読み込み成功[ true ]　読み込み失敗[ false ]
+    /// @return シェーダーオブジェクト
     ///
-    ReturnValue load( const TCHAR* FileName, ID3D11PixelShader** OutShader );
+    template <class PixelShaderType>
+    ReturnValue<PixelShaderType> createPixelShader()
+    {
+        using PSTy = PixelShaderType;
+        using RetTy = ReturnValue<PSTy>;
+
+        // ファイルオープン
+        std::fstream stream( PSTy::kPSFileName, std::ios::binary | std::ios::in );
+        if( !stream ) return RetTy( false, nullptr, "ファイルオープン失敗" );
+
+        // シェーダ―読み込み
+        size_t filesize = getFileSize( stream );
+        char* blob = new char[ filesize ];
+        stream.read( blob, filesize );
+        stream.close();
+
+        // シェーダーオブジェクトの生成
+        ID3D11PixelShader* ps = nullptr;
+        HRESULT hr = device_->CreatePixelShader(
+            blob,
+            filesize,
+            nullptr,
+            &ps
+        );
+        delete[] blob;
+        if( FAILED(hr) ) return RetTy( false, nullptr, "シェーダ―オブジェクトの生成失敗" );
+
+        RetTy created( true, std::make_unique<PSTy>(ps) );
+        ps->Release();
+        return created;
+    }
+
+private :
+    size_t getFileSize( ::std::fstream& );
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_SHADER_LOADER_HEADER_

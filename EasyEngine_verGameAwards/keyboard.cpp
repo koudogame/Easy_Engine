@@ -1,6 +1,5 @@
 // ì¬Ò : ”Âê
 #include "keyboard.hpp"
-#include "egeg_utility.hpp"
 
 namespace
 {

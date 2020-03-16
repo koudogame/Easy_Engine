@@ -147,15 +147,20 @@
     <ClInclude Include="component.hpp" />
     <ClInclude Include="controller.hpp" />
     <ClInclude Include="cuboid.hpp" />
+    <ClInclude Include="detailed_returnvalue.hpp" />
+    <ClInclude Include="easy_engine.hpp" />
     <ClInclude Include="egeg.hpp" />
     <ClInclude Include="egeg_math.hpp" />
-    <ClInclude Include="egeg_utility.hpp" />
+    <ClInclude Include="level_manager.hpp" />
+    <ClInclude Include="utility_function.hpp" />
     <ClInclude Include="error.hpp" />
     <ClInclude Include="factory.hpp" />
-    <ClInclude Include="game_unit.hpp" />
     <ClInclude Include="geometry_shader.hpp" />
     <ClInclude Include="loader.hpp" />
+    <ClInclude Include="model.hpp" />
+    <ClInclude Include="noncopyable.hpp" />
     <ClInclude Include="pixel_shader.hpp" />
+    <ClInclude Include="rendering3d_component.hpp" />
     <ClInclude Include="rendering_engine.hpp" />
     <ClInclude Include="input_device.hpp" />
     <ClInclude Include="job.hpp" />
@@ -167,8 +172,9 @@
     <ClInclude Include="rectangle.hpp" />
     <ClInclude Include="level.hpp" />
     <ClInclude Include="application_status.hpp" />
-    <ClInclude Include="rendering_engine_child.hpp" />
     <ClInclude Include="scene.hpp" />
+    <ClInclude Include="scene2d.hpp" />
+    <ClInclude Include="scene3d.hpp" />
     <ClInclude Include="shader.hpp" />
     <ClInclude Include="shader_loader.hpp" />
     <ClInclude Include="sphere.hpp" />
@@ -181,16 +187,34 @@
     <ClInclude Include="xinput_controller.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="actor.cpp" />
     <ClCompile Include="application.cpp" />
+    <ClCompile Include="easy_engine.cpp" />
     <ClCompile Include="keyboard.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="rendering3d_component.cpp" />
     <ClCompile Include="rendering_engine.cpp" />
+    <ClCompile Include="scene3d.cpp" />
     <ClCompile Include="shader_loader.cpp" />
     <ClCompile Include="xinput.cpp" />
     <ClCompile Include="xinput_controller.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="egeg_math.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="test_ps.psh">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="test_vs.vsh">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

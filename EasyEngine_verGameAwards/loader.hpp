@@ -4,28 +4,27 @@
 ///
 #ifndef INCLUDED_EGEG_LOADER_HEADER_
 #define INCLUDED_EGEG_LOADER_HEADER_
+#include <wrl.h>
 #include <d3d11.h>
-#include "rendering_engine_child.hpp"
-#include "egeg_utility.hpp"
+#include "easy_engine.hpp"
+#include "noncopyable.hpp"
 BEGIN_EGEG
 ///
 /// @class  Loader
 /// @brief  ÉçÅ[É_Å[
 ///
 class Loader :
-    public RenderingEngineChild,
     NonCopyable<Loader>
 {
 public :
-    Loader( const std::shared_ptr<RenderingEngine>& Engine ) :
-        RenderingEngineChild( Engine ),
-        device_( Engine->getDevice() )
+    Loader( const Microsoft::WRL::ComPtr<ID3D11Device>& Device ) :
+        device_( Device )
     {
     }
-    virtual ~Loader() { device_->Release(); }
+    virtual ~Loader() = default;
 
 protected :
-    ID3D11Device* device_;
+    Microsoft::WRL::ComPtr<ID3D11Device> device_;
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_LOADER_HEADER_

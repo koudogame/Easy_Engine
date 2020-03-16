@@ -6,7 +6,6 @@
 #define INCLUDED_EGEG_ACTOR2D_HEADER_
 #include <cassert>
 #include <list>
-#include <unordered_map>
 #include "actor.hpp"
 #include "uid.hpp"
 #include "egeg_math.hpp"
@@ -102,7 +101,7 @@ ComponentType* Actor2D::addComponent()
     component->initialize();
 
     // 生成したコンポーネントをリストに追加
-    components_.emplace( UID<ComponentType>(), component );
+    components_.emplace( ComponentType::getID(), component );
 
     return component;
 }
@@ -111,7 +110,7 @@ ComponentType* Actor2D::addComponent()
 template <class ComponentType>
 ComponentType* Actor2D::getComponent() const
 {
-    auto find = components_.find( UID<ComponentType>() );
+    auto find = components_.find( ComponentType::getID() );
     if( find == components_.end() ) return nullptr;
 
     // 対応するコンポーネントを返却

@@ -51,11 +51,14 @@
     <Filter Include="Project\EasyEngine\99_System\Rendering\Scene">
       <UniqueIdentifier>{01a7b2f5-889a-4308-afcc-630a3b13fc48}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project\EasyEngine\99_System\Rendering\Pipeline">
-      <UniqueIdentifier>{98857fb5-1de2-4f2b-9bd2-03335a7aab89}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Project\EasyEngine\04_Shader">
       <UniqueIdentifier>{7d648bd6-e005-4b97-aefb-c34d4e4c2633}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\99_System\Rendering\Shader">
+      <UniqueIdentifier>{98857fb5-1de2-4f2b-9bd2-03335a7aab89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\99_System\Utility">
+      <UniqueIdentifier>{341d67f1-f149-4e91-a4c3-bc5311f2a0a5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -80,12 +83,21 @@
     <ClCompile Include="shader_loader.cpp">
       <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
     </ClCompile>
+    <ClCompile Include="easy_engine.cpp">
+      <Filter>Project\EasyEngine\99_System</Filter>
+    </ClCompile>
+    <ClCompile Include="rendering3d_component.cpp">
+      <Filter>Project\EasyEngine\02_Component</Filter>
+    </ClCompile>
+    <ClCompile Include="scene3d.cpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="actor.cpp">
+      <Filter>Project\EasyEngine\00_Actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="factory.hpp">
-      <Filter>Project\EasyEngine\99_System</Filter>
-    </ClInclude>
-    <ClInclude Include="uid.hpp">
       <Filter>Project\EasyEngine\99_System</Filter>
     </ClInclude>
     <ClInclude Include="actor.hpp">
@@ -130,9 +142,6 @@
     <ClInclude Include="egeg.hpp">
       <Filter>Project\EasyEngine\99_System</Filter>
     </ClInclude>
-    <ClInclude Include="game_unit.hpp">
-      <Filter>Project\EasyEngine</Filter>
-    </ClInclude>
     <ClInclude Include="xinput.hpp">
       <Filter>Project\EasyEngine\99_System\Input\XInput</Filter>
     </ClInclude>
@@ -149,9 +158,6 @@
       <Filter>Project\EasyEngine\99_System\Input</Filter>
     </ClInclude>
     <ClInclude Include="application_status.hpp">
-      <Filter>Project\EasyEngine\99_System</Filter>
-    </ClInclude>
-    <ClInclude Include="egeg_utility.hpp">
       <Filter>Project\EasyEngine\99_System</Filter>
     </ClInclude>
     <ClInclude Include="job_container.hpp">
@@ -182,19 +188,16 @@
       <Filter>Project\EasyEngine\99_System\Rendering\Scene</Filter>
     </ClInclude>
     <ClInclude Include="vertex_shader.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Pipeline</Filter>
+      <Filter>Project\EasyEngine\99_System\Rendering\Shader</Filter>
     </ClInclude>
     <ClInclude Include="pixel_shader.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Pipeline</Filter>
+      <Filter>Project\EasyEngine\99_System\Rendering\Shader</Filter>
     </ClInclude>
     <ClInclude Include="geometry_shader.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Pipeline</Filter>
+      <Filter>Project\EasyEngine\99_System\Rendering\Shader</Filter>
     </ClInclude>
     <ClInclude Include="shader.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Pipeline</Filter>
-    </ClInclude>
-    <ClInclude Include="rendering_engine_child.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering</Filter>
+      <Filter>Project\EasyEngine\99_System\Rendering\Shader</Filter>
     </ClInclude>
     <ClInclude Include="vertex_data.hpp">
       <Filter>Project\EasyEngine\99_System\Rendering</Filter>
@@ -202,10 +205,48 @@
     <ClInclude Include="vertex_binder.hpp">
       <Filter>Project\EasyEngine\99_System\Rendering</Filter>
     </ClInclude>
+    <ClInclude Include="scene3d.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="easy_engine.hpp">
+      <Filter>Project\EasyEngine\99_System</Filter>
+    </ClInclude>
+    <ClInclude Include="model.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering3d_component.hpp">
+      <Filter>Project\EasyEngine\02_Component</Filter>
+    </ClInclude>
+    <ClInclude Include="scene2d.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="uid.hpp">
+      <Filter>Project\EasyEngine\99_System\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="noncopyable.hpp">
+      <Filter>Project\EasyEngine\99_System\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="detailed_returnvalue.hpp">
+      <Filter>Project\EasyEngine\99_System\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utility_function.hpp">
+      <Filter>Project\EasyEngine\99_System\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="level_manager.hpp">
+      <Filter>Project\EasyEngine\01_Level</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="egeg_math.inl">
       <Filter>Project\EasyEngine\99_System</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="test_vs.vsh">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="test_ps.psh">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

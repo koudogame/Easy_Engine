@@ -4,34 +4,30 @@
 ///
 #ifndef INCLUDED_EGEG_PIXEL_SHADER_HEADER_
 #define INCLUDED_EGEG_PIXEL_SHADER_HEADER_
+#include <type_traits>
+#include <wrl.h>
 #include "shader.hpp"
 BEGIN_EGEG
 ///
 /// @class   PixelShader
 /// @brief   パイプライン構成オブジェクト「ピクセルシェーダー」
-/// @details 派生クラスは、必ずデストラクタより前にシェーダーオブジェクトを生成し保持するものとします。<br>
-///          コンストラクタでの処理を推奨します。
+/// @details 派生クラスは、自身の扱うピクセルシェーダ―ファイルを<br>
+///          static constexpr const char* kPSFileName<br>
+///          として定義して下さい。ShaderLoaderで利用します。
 ///
 class PixelShader :
     public Shader
 {
 public :
-    virtual ~PixelShader() { shader_->Release(); }
-    PixelShader( const PixelShader& Lhs )
+    template <class ShaderType>
+    PixelShader( ShaderType&& Shader ) :
+        shader_( std::forward<ShaderType>(Shader) )
     {
-        shader_ = Lhs.shader_;
-        shader_->AddRef();
     }
-    PixelShader& operator=( const PixelShader& Lhs )
-    {
-        Lhs.shader_->AddRef();
-
-        if( shader_ ) shader_->Release();
-        shader_ = Lhs.shader_;
-    }
+    virtual ~PixelShader() = default;
     
 protected :
-    ID3D11PixelShader* shader_ = nullptr;
+    Microsoft::WRL::ComPtr<ID3D11PixelShader> shader_ = nullptr;
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_PIXEL_SHADER_HEADER_

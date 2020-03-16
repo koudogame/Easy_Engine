@@ -2,7 +2,6 @@
 #include "xinput.hpp"
 #include <cassert>
 #include <xutility>
-#include "egeg_utility.hpp"
 #pragma comment( lib, "xinput.lib" )
 
 namespace

@@ -5,7 +5,6 @@
 #ifndef INCLUDED_EGEG_ACTOR3D_HEADER_
 #define INCLUDED_EGEG_ACTOR3D_HEADER_
 #include <cassert>
-#include <unordered_map>
 #include "actor.hpp"
 #include "uid.hpp"
 #include "egeg_math.hpp"
@@ -58,7 +57,6 @@ protected :
 
 private :
     Vector3D position_;
-    std::unordered_map<uint32_t, Component*> components_;
 };
 
 ///< コンポーネントの追加
@@ -69,11 +67,11 @@ ComponentType* Actor3D::addComponent()
         "コンポーネントの多重登録を検出しました。" );
 
     // コンポーネントの生成
-    ComponentType component = new ComponentType( this );
+    ComponentType* component = new ComponentType( this );
     component->initialize();
 
     // 生成したコンポーネントをリストに追加
-    components_.emplace( UID<ComponentType>(), component );
+    components_.emplace( ComponentType::getID(), component );
 
     return component;
 }
@@ -82,7 +80,7 @@ ComponentType* Actor3D::addComponent()
 template <class ComponentType>
 ComponentType* Actor3D::getComponent() const
 {
-    auto find = components_.find( UID<ComponentType>() );
+    auto find = components_.find( ComponentType::getID() );
     if( find == components_.end() ) return nullptr;
 
     // 対応するコンポーネントの返却

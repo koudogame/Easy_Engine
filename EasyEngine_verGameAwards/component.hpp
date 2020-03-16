@@ -9,8 +9,10 @@ BEGIN_EGEG
 class Actor;
 
 ///
-/// @class  Component
-/// @brief  コンポーネント基底
+/// @class   Component
+/// @brief   コンポーネント基底
+/// @details 派生クラスはコンポーネントIDを返却する関数を<br>
+///          static uint32_t getID() として定義して下さい。
 ///
 class Component
 {

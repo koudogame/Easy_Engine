@@ -6,8 +6,8 @@
 #define INCLUDED_EGEG_VERTEX_BINDER_HEADER_
 #include <vector>
 #include <string>
+#include "detailed_returnvalue.hpp"
 #include "vertex_data.hpp"
-#include "egeg_utility.hpp"
 BEGIN_EGEG
 struct BindedVertexData
 {
@@ -22,7 +22,7 @@ struct BindedVertexData
 class VertexBinder
 {
 public :
-    using RetValue = DetailedReturnValue<VertexData>;
+    using RetValue = DetailedReturnValue<BindedVertexData>;
 
     ///
     /// @brief   バインドオブジェクト生成
@@ -33,7 +33,7 @@ public :
     template <class ...Args>
     VertexBinder( Args&& ...Semantic )
     {
-        corresponds_.push_back( Semantic );
+        addCorresponds( Semantic... );
     }
 
     ///
@@ -61,10 +61,9 @@ public :
                 return RetValue( false, std::move(output) );
 #endif
             }
-            buffer->Release();
 
             // 出力
-            output.buffers.push_back( buffer );
+            output.buffers.push_back( buffer.Get() );
             output.strides.push_back(
                 semantic == kVertexPositionSemantic ? sizeof( VertexPositionType ) :
                 semantic == kVertexUVSemantic ? sizeof( VertexUVType ) :
@@ -77,6 +76,19 @@ public :
     }
 
 private :
+    template <class String, class ...Args>
+    void addCorresponds( String&& Semantic, Args&& ...Rest )
+    {
+        corresponds_.push_back( std::forward<String>(Semantic) );
+        addCorresponds( Rest... );
+    }
+    template <class String>
+    void addCorresponds( String&& Semantic )
+    {
+        corresponds_.push_back( std::forward<String>(Semantic) );
+    }
+
+
     VertexBinder() = default;
     std::vector<std::string> corresponds_;
 };
