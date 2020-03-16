@@ -50,7 +50,7 @@ public :
         {
             kVertexPositionSemantic,
             0,
-            DXGI_FORMAT_R32G32B32A32_FLOAT,
+            DXGI_FORMAT_R32G32B32_FLOAT,
             0,
             0,
             D3D11_INPUT_PER_VERTEX_DATA,
@@ -228,7 +228,7 @@ void Application::mainloop()
     UINT index[] =
     {
         0,1,2,
-        2,1,3
+        1,3,2
     };
     D3D11_SUBRESOURCE_DATA v_idx {};
     v_idx.pSysMem = index;
@@ -277,8 +277,15 @@ void Application::mainloop()
             if( duration_cast<microseconds>(erapsed_time).count() >= TimePerFrame<>::value )
             {
                 last_time = curr_time;
-
+                
                 scene.entry( &test );
+
+                float backcolor[4] = { 1.0F, 1.0F, 1.0F, 1.0F };
+                EasyEngine::getRenderingEngine()->getImmediateContext()->
+                ClearRenderTargetView(
+                    render_target.Get(),
+                    backcolor
+                );
                 scene.render(
                     {render_target.Get()},
                     {{
@@ -288,16 +295,11 @@ void Application::mainloop()
                         kVerticalResolution<float>,
                         0.0F,
                         1.0F
-                        }},
+                    }},
                     {}
                 );
 
-                float backcolor[4] = { 1.0F, 1.0F, 1.0F, 1.0F };
-                EasyEngine::getRenderingEngine()->getImmediateContext()->
-                ClearRenderTargetView(
-                    render_target.Get(),
-                    backcolor
-                );
+                
                 sc->Present(0,0);
             }
         }
