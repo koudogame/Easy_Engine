@@ -19,7 +19,7 @@ BEGIN_EGEG
 ///
 struct Mesh
 {
-    std::vector<VertexData> vertices;   ///< 頂点データ
+    std::vector<Mesh> vertices;   ///< 頂点データ
     std::vector<VertexIndex> indices;   ///< 頂点のインデックス
 };
 END_EGEG

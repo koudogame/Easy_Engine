@@ -1,9 +1,9 @@
 ///
-/// @file   vertex_data.hpp
+/// @file   mesh.hpp
 /// @author 板場
 ///
-#ifndef INCLUDED_EGEG_VERTEX_DATA_HEADER_
-#define INCLUDED_EGEG_VERTEX_DATA_HEADER_
+#ifndef INCLUDED_EGEG_MESH_HEADER_
+#define INCLUDED_EGEG_MESH_HEADER_
 #include <type_traits>
 #include <string>
 #include <unordered_map>
@@ -19,13 +19,13 @@ using VertexPositionType = DirectX::XMFLOAT3;
 using VertexUVType       = DirectX::XMFLOAT2;
 using VertexNormalType   = DirectX::XMFLOAT3;
 ///
-/// @class  VertexData
+/// @class  Mesh
 /// @brief  頂点データ
 ///
-class VertexData
+class Mesh
 {
 public :
-    VertexData() = default;
+    Mesh() = default;
 
     ///< 頂点数のセット
     void setNumVertices( UINT Num ) noexcept { num_vertices_ = Num; }
@@ -38,14 +38,14 @@ public :
     /// @param[in] Semantic : 頂点バッファのセマンティック
     /// @param[in] Buffer   : 設定する頂点バッファ
     ///
-    template <class BufferType>
-    void setVertexBuffer( const char* Semantic, BufferType&& Buffer ) 
+    template <class StringType, class BufferType>
+    void setVertexBuffer( StringType&& Semantic, BufferType&& Buffer ) 
     {
         auto buffer_itr = vertex_buffers_.find( Semantic );
         if( buffer_itr != vertex_buffers_.end() )
             buffer_itr->second = std::forward<BufferType>( Buffer );
         else
-            vertex_buffers_.emplace( Semantic, std::forward<BufferType>(Buffer) );
+            vertex_buffers_.emplace( std::forward<StringType>(Semantic), std::forward<BufferType>(Buffer) );
     }
     ///< インデックスバッファのセット
     template <class BufferType>
@@ -61,7 +61,7 @@ public :
     ///
     /// @return セマンティックに対応した頂点バッファ
     ///
-    Microsoft::WRL::ComPtr<ID3D11Buffer> getVertexBuffer( const char* Semantic )
+    Microsoft::WRL::ComPtr<ID3D11Buffer> getVertexBuffer( const char* Semantic ) const
     {
         auto buffer_itr = vertex_buffers_.find( Semantic );
         if( buffer_itr == vertex_buffers_.end() ) return nullptr;
@@ -69,7 +69,7 @@ public :
         return buffer_itr->second;
     }
     ///< インデックスバッファの取得
-    Microsoft::WRL::ComPtr<ID3D11Buffer> getIndexBuffer() noexcept
+    Microsoft::WRL::ComPtr<ID3D11Buffer> getIndexBuffer() const noexcept
     {
         return index_buffer_;
     }
@@ -80,5 +80,5 @@ private :
     Microsoft::WRL::ComPtr<ID3D11Buffer> index_buffer_ = nullptr;
 };
 END_EGEG
-#endif /// !INCLUDED_EGEG_VERTEX_DATA_HEADER_
+#endif /// !INCLUDED_EGEG_MESH_HEADER_
 /// EOF

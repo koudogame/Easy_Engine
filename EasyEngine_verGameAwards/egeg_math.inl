@@ -5,6 +5,7 @@
 #ifdef INCLUDED_EGEG_MATH_HEADER_
 #ifndef INCLUDED_EGEG_MATH_INLINE_
 #define INCLUDED_EGEG_MATH_INLINE_
+
 /*===========================================================================*/
 
 inline Vector2D::Vector2D( DirectX::FXMVECTOR V ) noexcept
@@ -320,6 +321,37 @@ inline Vector4D operator/( const Vector4D& L, const float R ) noexcept
 {
     using namespace DirectX;
     return XMVectorDivide( L, XMLoadFloat4(&XMFLOAT4{R, R, R, R}) );
+}
+
+/*===========================================================================*/
+
+inline Matrix3x3::Matrix3x3( DirectX::FXMMATRIX M ) noexcept
+{
+    DirectX::XMStoreFloat3x3( this, M );
+}
+inline Matrix3x3& Matrix3x3::operator=( DirectX::FXMMATRIX M ) noexcept
+{
+    DirectX::XMStoreFloat3x3( this, M );
+}
+inline Matrix3x3::operator DirectX::XMMATRIX() const noexcept
+{
+    return DirectX::XMLoadFloat3x3( this );
+}
+inline Matrix3x3::operator bool() const noexcept
+{
+    return DirectX::XMMatrixIsInfinite( *this );
+}
+inline Matrix3x3& Matrix3x3::operator*=( DirectX::FXMMATRIX M ) noexcept
+{
+    *this = this->operator DirectX::XMMATRIX() * M;
+    return *this;
+}
+inline Matrix3x3 operator*( const Matrix3x3& L, const Matrix3x3& R ) noexcept
+{
+    using namespace DirectX;
+    XMMATRIX temp = L;
+    temp *= R;
+    return temp;
 }
 
 #endif /// !INCLUDED_EGEG_MATH_INLINE_

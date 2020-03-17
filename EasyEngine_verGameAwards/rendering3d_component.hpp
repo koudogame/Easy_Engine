@@ -6,7 +6,7 @@
 #define INCLUDED_EGEG_RENDERING3D_COMPONENT3D_HEADER_
 #include "component.hpp"
 #include "model.hpp"
-#include "vertex_data.hpp"
+#include "mesh.hpp"
 #include "vertex_shader.hpp"
 #include "geometry_shader.hpp"
 #include "pixel_shader.hpp"
@@ -29,13 +29,13 @@ public :
     template <class ModelType>
     void setModel( ModelType& Model )
     {
-        vertex_data_ = &Model.vertex_data;
+        vertex_data_ = &Model.mesh;
         vertex_shader_ = Model.vertex_shader.get();
         geometry_shader_ = Model.geometry_shader.get();
         pixel_shader_ = Model.pixel_shader.get();
     }
 
-    VertexData* getVertexData() const noexcept { return vertex_data_; }
+    Mesh* getVertexData() const noexcept { return vertex_data_; }
     VertexShader* getVertexShader() const noexcept { return vertex_shader_; }
     GeometryShader* getGeometryShader() const noexcept { return geometry_shader_; }
     PixelShader* getPixelShader() const noexcept { return pixel_shader_; }
@@ -46,7 +46,7 @@ public :
     void finalize()   override;
 /*-----------------------------------------------------------------*/
 private :
-    VertexData*   vertex_data_ = nullptr;
+    Mesh*   vertex_data_ = nullptr;
     VertexShader* vertex_shader_ = nullptr;
     GeometryShader* geometry_shader_ = nullptr;
     PixelShader* pixel_shader_ = nullptr;

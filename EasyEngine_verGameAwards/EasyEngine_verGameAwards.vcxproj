@@ -152,11 +152,12 @@
     <ClInclude Include="egeg.hpp" />
     <ClInclude Include="egeg_math.hpp" />
     <ClInclude Include="level_manager.hpp" />
+    <ClInclude Include="loader.hpp" />
+    <ClInclude Include="WavefrontOBJ_loader.hpp" />
     <ClInclude Include="utility_function.hpp" />
     <ClInclude Include="error.hpp" />
     <ClInclude Include="factory.hpp" />
     <ClInclude Include="geometry_shader.hpp" />
-    <ClInclude Include="loader.hpp" />
     <ClInclude Include="model.hpp" />
     <ClInclude Include="noncopyable.hpp" />
     <ClInclude Include="pixel_shader.hpp" />
@@ -181,7 +182,7 @@
     <ClInclude Include="uid.hpp" />
     <ClInclude Include="unit_factory.hpp" />
     <ClInclude Include="vertex_binder.hpp" />
-    <ClInclude Include="vertex_data.hpp" />
+    <ClInclude Include="mesh.hpp" />
     <ClInclude Include="vertex_shader.hpp" />
     <ClInclude Include="xinput.hpp" />
     <ClInclude Include="xinput_controller.hpp" />
@@ -196,6 +197,7 @@
     <ClCompile Include="rendering_engine.cpp" />
     <ClCompile Include="scene3d.cpp" />
     <ClCompile Include="shader_loader.cpp" />
+    <ClCompile Include="WavefrontOBJ_loader.cpp" />
     <ClCompile Include="xinput.cpp" />
     <ClCompile Include="xinput_controller.cpp" />
   </ItemGroup>

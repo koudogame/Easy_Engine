@@ -17,6 +17,8 @@
 #include "rendering3d_component.hpp"
 #include "scene3d.hpp"
 
+#include "egeg_math.hpp"
+
 #pragma comment( lib, "dxgi.lib" )
 
 // ウィンドウプロシージャ関数宣言
@@ -239,16 +241,16 @@ void Application::mainloop()
         &idx_buffer
     );
     ShaderLoader loader{ EasyEngine::getRenderingEngine()->getDevice() };
-    auto vs = loader.createVertexShader<TestVS>();
-    auto ps = loader.createPixelShader<TestPS>();
+    auto vs = loader.loadVertexShader<TestVS>();
+    auto ps = loader.loadPixelShader<TestPS>();
 
 
     Model<TestVS, TestGS, TestPS> model;
     model.vertex_shader = std::move(vs);
     model.pixel_shader = std::move(ps);
-    model.vertex_data.setNumVertices( getArraySize(index) );
-    model.vertex_data.setVertexBuffer( kVertexPositionSemantic, buffer.Get() );
-    model.vertex_data.setIndexBuffer( idx_buffer.Get() );
+    model.mesh.setNumVertices( getArraySize(index) );
+    model.mesh.setVertexBuffer( kVertexPositionSemantic, buffer.Get() );
+    model.mesh.setIndexBuffer( idx_buffer.Get() );
     
     TestActor test;
     auto component = test.addComponent<Rendering3DComponent>();
@@ -258,6 +260,7 @@ void Application::mainloop()
     EasyEngine::getRenderingEngine()->getImmediateContext();
     Scene3D scene{ EasyEngine::getRenderingEngine()->getImmediateContext() };
     scene.entry( &test );
+
 
     MSG msg{};
     while( msg.message != WM_QUIT )

@@ -95,6 +95,9 @@
     <ClCompile Include="actor.cpp">
       <Filter>Project\EasyEngine\00_Actor</Filter>
     </ClCompile>
+    <ClCompile Include="WavefrontOBJ_loader.cpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="factory.hpp">
@@ -175,9 +178,6 @@
     <ClInclude Include="error.hpp">
       <Filter>Project\EasyEngine\99_System</Filter>
     </ClInclude>
-    <ClInclude Include="loader.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
-    </ClInclude>
     <ClInclude Include="shader_loader.hpp">
       <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
     </ClInclude>
@@ -198,9 +198,6 @@
     </ClInclude>
     <ClInclude Include="shader.hpp">
       <Filter>Project\EasyEngine\99_System\Rendering\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="vertex_data.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="vertex_binder.hpp">
       <Filter>Project\EasyEngine\99_System\Rendering</Filter>
@@ -234,6 +231,15 @@
     </ClInclude>
     <ClInclude Include="level_manager.hpp">
       <Filter>Project\EasyEngine\01_Level</Filter>
+    </ClInclude>
+    <ClInclude Include="WavefrontOBJ_loader.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="mesh.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="loader.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

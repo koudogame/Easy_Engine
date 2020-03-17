@@ -40,8 +40,8 @@ public :
         value_( std::forward<ValueType>(Value) ) {}
 #endif
     operator bool() const noexcept { return condition_; }
-    operator RetValType() &  noexcept { return value_; }
     operator RetValType() && noexcept { return std::move(value_); }
+    RetValType* operator->() const noexcept { return &value_; }
     RetValType& get() noexcept { return value_; }
 
 private :

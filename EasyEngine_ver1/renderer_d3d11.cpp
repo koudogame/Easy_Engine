@@ -158,7 +158,7 @@ void RendererD3D11::renderModel( const Model& Model, BlendMode Mode )
     // 頂点バッファ作成
     const D3D11_BUFFER_DESC kVertexBufferDesc =
     {
-        sizeof(VertexData)* Model.mesh.vertices.size(),
+        sizeof(Mesh)* Model.mesh.vertices.size(),
         D3D11_USAGE_DEFAULT,
         D3D11_BIND_VERTEX_BUFFER,
         0,
@@ -236,7 +236,7 @@ void RendererD3D11::renderModel( const Model& Model, BlendMode Mode )
 
     // パイプラインステートを設定
     p_immediate_context_->IASetInputLayout( p_inputlayout );
-    size_t size = sizeof VertexData;
+    size_t size = sizeof Mesh;
     unsigned offset = 0U;
     p_immediate_context_->IASetVertexBuffers( 0, 1, &p_vertexbuffer, &size, &offset );
     p_immediate_context_->IASetIndexBuffer( p_indexbuffer, DXGI_FORMAT_R32_UINT, 0 );

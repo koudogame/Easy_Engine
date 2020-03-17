@@ -7,7 +7,7 @@
 #include <vector>
 #include <string>
 #include "detailed_returnvalue.hpp"
-#include "vertex_data.hpp"
+#include "mesh.hpp"
 BEGIN_EGEG
 struct BindedVertexData
 {
@@ -44,7 +44,7 @@ public :
     ///
     /// @return バインド成功[ true ]  バインド失敗[ false ]
     ///
-    RetValue bind( VertexData* Source )
+    RetValue bind( Mesh* Source )
     {
         BindedVertexData output;
 

@@ -13,16 +13,16 @@ BEGIN_EGEG
 // in Stream : サイズを取得するファイルストリーム
 //
 // return ファイルサイズ
-size_t ShaderLoader::getFileSize( std::fstream& Stream )
-{
-    Stream.seekg( 0, std::ios::end );
-    auto end = Stream.tellg();
-    Stream.clear();
-    Stream.seekg( 0, std::ios::beg );
-    auto beg = Stream.tellg();
-    
-    return static_cast<size_t>( end - beg );
-}
+//size_t ShaderLoader::getFileSize( std::fstream& Stream )
+//{
+//    Stream.seekg( 0, std::ios::end );
+//    auto end = Stream.tellg();
+//    Stream.clear();
+//    Stream.seekg( 0, std::ios::beg );
+//    auto beg = Stream.tellg();
+//    
+//    return static_cast<size_t>( end - beg );
+//}
 
 END_EGEG
 // EOF

@@ -5,7 +5,7 @@
 #ifndef INCLUDED_EGEG_MODEL_HEADER_
 #define INCLUDED_EGEG_MODEL_HEADER_
 #include <memory>
-#include "vertex_data.hpp"
+#include "mesh.hpp"
 BEGIN_EGEG
 ///
 /// @struct Model
@@ -21,7 +21,7 @@ template <
     class PixelShaderType >
 struct Model
 {
-    VertexData vertex_data;
+    Mesh mesh;
     std::unique_ptr<VertexShaderType> vertex_shader;
     std::unique_ptr<GeometryShaderType> geometry_shader;
     std::unique_ptr<PixelShaderType> pixel_shader;

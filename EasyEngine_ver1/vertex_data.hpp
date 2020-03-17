@@ -11,7 +11,7 @@ BEGIN_EGEG
 ///
 /// @brief  頂点データ
 ///
-struct VertexData
+struct Mesh
 {
     //Float3 position;
     Float2 uv;

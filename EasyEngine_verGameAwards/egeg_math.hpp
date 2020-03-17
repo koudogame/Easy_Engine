@@ -144,6 +144,33 @@ Vector4D operator/( const Vector4D& L, float R ) noexcept;
 
 // Matrix3x3
 /*===========================================================================*/
+struct Matrix3x3 :
+    public DirectX::XMFLOAT3X3
+{
+    Matrix3x3() = default;
+
+    Matrix3x3( const Matrix3x3& ) = default;
+    Matrix3x3& operator=( const Matrix3x3& ) = default;
+
+    Matrix3x3( Matrix3x3&& ) = default;
+    Matrix3x3& operator=( Matrix3x3&& ) = default;
+
+    constexpr Matrix3x3( float m00, float m01, float m02,
+                         float m10, float m11, float m12,
+                         float m20, float m21, float m22 ) :
+        XMFLOAT3X3( m00, m01, m02, m10, m11, m12, m20, m21, m22 )
+    {}
+
+    Matrix3x3( DirectX::FXMMATRIX M ) noexcept;
+    Matrix3x3& operator=( DirectX::FXMMATRIX M ) noexcept;
+
+    operator DirectX::XMMATRIX() const noexcept;
+    operator bool() const noexcept;
+    operator float() = delete;
+
+    Matrix3x3& operator*=( DirectX::FXMMATRIX M ) noexcept;
+};
+Matrix3x3 operator*( const Matrix3x3& L, const Matrix3x3& R ) noexcept;
 
 // Matrix4x3
 /*===========================================================================*/
@@ -153,6 +180,11 @@ Vector4D operator/( const Vector4D& L, float R ) noexcept;
 
 // Matrix4x4
 /*===========================================================================*/
+struct Matrix4x4 :
+    public DirectX::XMFLOAT4X4
+{
+
+};
 
 #include "egeg_math.inl"
 END_EGEG
