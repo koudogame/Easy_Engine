@@ -6,9 +6,10 @@
 #define INCLUDED_EGEG_LEVEL_MANAGER_HEADER_
 #include <memory>
 #include <vector>
-#include "egeg.hpp"
+#include "factory.hpp"
 BEGIN_EGEG
 class Level;    ///< Levelクラス前方前言( 循環参照回避 )
+using LevelFactory = Factory<Level>;
 
 ///
 /// @class  LevelManager

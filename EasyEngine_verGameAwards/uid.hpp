@@ -15,6 +15,7 @@ template <class Object>
 class UID final
 {
 public :
+    constexpr UID() noexcept {}
     operator uint32_t() const noexcept
     {
         static const uint32_t uid = reinterpret_cast<uint32_t>(&uid);

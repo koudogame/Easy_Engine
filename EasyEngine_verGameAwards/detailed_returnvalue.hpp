@@ -70,8 +70,9 @@ public:
     DetailedReturnValue( bool Condition ) :
         condition_( Condition )
     {}
+    template <class StringType>
     DetailedReturnValue( bool Condition, StringType&& ) :
-        condition_( Condition ),
+        condition_( Condition )
     {}
 #endif
     operator bool() const noexcept { return condition_; }

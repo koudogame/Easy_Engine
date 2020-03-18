@@ -7,7 +7,7 @@
 #include "level_manager.hpp"
 BEGIN_EGEG
 ///
-/// @file   Lewel
+/// @file   Level
 /// @brief  ƒŒƒxƒ‹Šî’ê
 ///
 class Level

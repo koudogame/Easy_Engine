@@ -180,7 +180,6 @@
     <ClInclude Include="shader_loader.hpp" />
     <ClInclude Include="sphere.hpp" />
     <ClInclude Include="uid.hpp" />
-    <ClInclude Include="unit_factory.hpp" />
     <ClInclude Include="vertex_binder.hpp" />
     <ClInclude Include="mesh.hpp" />
     <ClInclude Include="vertex_shader.hpp" />

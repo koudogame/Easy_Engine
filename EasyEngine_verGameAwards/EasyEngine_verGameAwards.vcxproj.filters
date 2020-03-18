@@ -139,9 +139,6 @@
     <ClInclude Include="line3d.hpp">
       <Filter>Project\EasyEngine\05_Shape</Filter>
     </ClInclude>
-    <ClInclude Include="unit_factory.hpp">
-      <Filter>Project\EasyEngine\99_System</Filter>
-    </ClInclude>
     <ClInclude Include="application.hpp">
       <Filter>Project\EasyEngine\99_System</Filter>
     </ClInclude>
@@ -177,9 +174,6 @@
     </ClInclude>
     <ClInclude Include="rendering_engine.hpp">
       <Filter>Project\EasyEngine\99_System\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="error.hpp">
-      <Filter>Project\EasyEngine\99_System</Filter>
     </ClInclude>
     <ClInclude Include="shader_loader.hpp">
       <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
@@ -243,6 +237,9 @@
     </ClInclude>
     <ClInclude Include="loader.hpp">
       <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="error.hpp">
+      <Filter>Project\EasyEngine\99_System\Utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
