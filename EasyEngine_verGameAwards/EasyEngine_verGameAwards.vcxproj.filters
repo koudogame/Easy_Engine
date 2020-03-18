@@ -98,6 +98,9 @@
     <ClCompile Include="WavefrontOBJ_loader.cpp">
       <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
     </ClCompile>
+    <ClCompile Include="level_manager.cpp">
+      <Filter>Project\EasyEngine\01_Level</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="factory.hpp">

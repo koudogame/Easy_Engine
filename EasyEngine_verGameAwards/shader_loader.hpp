@@ -143,7 +143,6 @@ private :
             length( Rhs.length )
         {
             Rhs.bytecode = nullptr;
-            Rhs.length = 0;
         }
         BinaryData& operator=( BinaryData&& Rhs )
         {

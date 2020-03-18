@@ -192,6 +192,7 @@
     <ClCompile Include="application.cpp" />
     <ClCompile Include="easy_engine.cpp" />
     <ClCompile Include="keyboard.cpp" />
+    <ClCompile Include="level_manager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="rendering3d_component.cpp" />
     <ClCompile Include="rendering_engine.cpp" />

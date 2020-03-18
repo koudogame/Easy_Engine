@@ -12,49 +12,75 @@ BEGIN_EGEG
 ///
 /// @class   Factory
 /// @brief   汎用ファクトリ
-/// @details クリエイターはoperator()をオーバーロードしたファンクタです。
+/// @details このクラスにより生成されるクラスは、Factory<Base>::Element<T>を継承して下さい。<br>
+///          Factory<Base>::Element<T> のTはそのクラス自身の型を指定します。
 ///
-/// @tparam Base        : 生成するオブジェクトの基底クラス型
-/// @tparam Creator     : 生成処理を行うクリエイター型
-/// @tparam CreateArgs  : 生成処理の引数型
-///
-template <class Base, class Creator, class ...CreateArgs>
+template <class Base>
 class Factory
 {
+private :
+    class Creator
+    {
+    public :
+        virtual std::unique_ptr<Base> create() = 0;
+    };
+
+public :
+    ///< ファクトリにより生成されるクラス
+    template <class Derived>
+    class Element :
+        public Creator
+    {
+    public :
+        std::unique_ptr<Base> create() override
+        {
+            return std::make_unique<Derived>();
+        }
+    };
+
 public :
     ///
-    /// @brief   生成ファンクタの登録
-    /// @details 既に同IDのファンクタが登録されている場合は、新規に登録を行いません。
+    /// @brief  クラスをファクトリにより生成されるオブジェクトとして登録
     ///
-    /// @param[in] ID      : クリエイターを識別するID
-    /// @param[in] Creator : クリエイター
+    /// @param[in] ID : クラスと紐づけるID
     ///
-    void registerCreator( uint32_t ID, const Creator& Creator )
+    template <class Elem>
+    static void Register( uint32_t ID )
     {
-        creators_.emplace( ID, Creator );
+        if( creator_list_.find( ID ) == creator_list_.end() )
+        { // 既に登録されているオブジェクトはここで弾く
+            // Attention : メモリ割り当てを避けるためにあえて弾いている。
+            creator_list_.emplace( ID, new Element<Elem>() );
+        }
     }
 
     ///
-    /// @brief   生成処理
-    /// @details IDに対応するクリエイターがある場合、クリエイターの実行結果を返却します。<br>
-    ///          ない場合はnullptrを返却します。
+    /// @brief   オブジェクトの生成
+    /// @details 登録されていないクラスについては、nullptrを返却します。
     ///
-    /// @param[in] ID : クリエイターの識別ID
-    /// @param[in] Args : クリエイターの生成処理に渡す引数リスト
+    /// @param[in] ID : 生成するオブジェクトID
     ///
-    /// @return 生成したオブジェクトの所有権を持つスマートポインタ
+    /// @return 生成したオブジェクト
     ///
-    std::unique_ptr<Base> create( uint32_t ID, CreateArgs ...Args )
+    static std::unique_ptr<Base> create( uint32_t ID )
     {
-        auto find = creators_.find( ID );
-        if( find == creators_.end() )   return nullptr;
-
-        return std::unique_ptr<Base>( find->second( Args... ) );
+        auto find = creator_list_.find( ID );
+        if( find == creator_list_.end() )
+        { // 生成処理が登録されていない。
+            return nullptr; 
+        }
+        else
+        { // 生成して返却
+            return find->second->create();
+        }
     }
 
 private :
-    std::unordered_map<uint32_t, Creator> creators_;    /// 生成ファンクタリスト
+    static std::unordered_map<uint32_t, std::unique_ptr<Creator>> creator_list_;
 };
+
+template <class Base>
+std::unordered_map<uint32_t, std::unique_ptr<typename Factory<Base>::Creator>> Factory<Base>::creator_list_;
 END_EGEG
 #endif /// !INCLUDED_EGEG_FACTORY_HEADER_
 /// EOF

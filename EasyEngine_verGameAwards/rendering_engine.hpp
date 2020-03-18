@@ -36,7 +36,7 @@ public :
 private :
     RenderingEngine() = default;
 
-    D3D_FEATURE_LEVEL    feature_level_;
+    D3D_FEATURE_LEVEL feature_level_;
     Microsoft::WRL::ComPtr<ID3D11Device> device_ = nullptr;
     Microsoft::WRL::ComPtr<ID3D11DeviceContext> immediate_context_ = nullptr;
 
