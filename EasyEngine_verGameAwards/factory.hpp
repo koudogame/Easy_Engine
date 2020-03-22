@@ -13,8 +13,8 @@ BEGIN_EGEG
 ///
 /// @class   Factory
 /// @brief   汎用ファクトリ
-/// @details このクラスにより生成されるクラスは、Factory<BaseType>::Element<T>を継承して下さい。<br>
-///          Factory<BaseType>::Element<T> のTはそのクラス自身の型を指定します。<br>
+/// @details このクラスにより生成されるクラスは、Factory<BaseType>::Element<T, ID>を継承して下さい。<br>
+///          Factory<BaseType>::Element<T, ID> のTはそのクラス自身の型を指定します。IDはオブジェクトと紐づけるIDファンクタを指定します。<br>
 ///          このファクトリにより生成されるクラスは、必ず引数を受け取らないコンストラクタを定義して下さい。
 ///
 template <class BaseType>
@@ -31,10 +31,10 @@ public :
     ///
     /// @class  このファクトリの要素であることを示す
     ///
-    /// @tparam Derived : 継承先のクラス型
-    /// @tparam ID      : クラス型に対応したIDを返却するファンクタ
+    /// @tparam DerivedType   : 継承先のクラス型
+    /// @tparam IDFunctorType : クラス型に対応したIDを返却するファンクタ
     ///
-    template <class DerivedType, class IDType>
+    template <class DerivedType, class IDFunctorType>
     class Element :
         public Creator
     {
@@ -49,7 +49,8 @@ public :
         public :
             Registerer()
             {
-                Factory::registration( IDType() );
+                IDFunctorType id;
+                Factory::registration( id() );
             }
         };
         static Registerer register_;
@@ -100,23 +101,21 @@ private :
 };
 
 ///
-/// @def    REGISTER_FACTORY
+/// @def    REGISTER_WITH_FACTORY
 /// @brief  ファクトリにオブジェクトを登録
 ///
-/// @param[in] BaseType   : ファクトリが生成する基底クラス型名
-/// @param[in] ObjectType : ファクトリに登録するクラス型名
-/// @param[in] IDType     : 登録するクラスに対応させるIDファンクタ
+/// @param[in] BaseType      : ファクトリが生成する基底クラス型名
+/// @param[in] ObjectType    : ファクトリに登録するクラス型名
+/// @param[in] IDFunctorType : 登録するクラスに対応させるIDファンクタ
 ///
-#define REGISTER_FACTORY( BaseType, ObjectType, IDType ) \
-template class Factory<BaseType>::Element<ObjectType, IDType>
+#define REGISTER_WITH_FACTORY( BaseType, ObjectType, IDFunctorType ) \
+template class Factory<BaseType>::Element<ObjectType, IDFunctorType>
 
 template <class BaseType>
 std::unordered_map<uint32_t, std::unique_ptr<typename Factory<BaseType>::Creator>> Factory<BaseType>::creator_list_;
-
 template <class BaseType>
-template <class ObjectType, class IDType>
-typename Factory<BaseType>::template Element<ObjectType, IDType>::Registerer Factory<BaseType>::Element<ObjectType, IDType>::register_;
-
+template <class ObjectType, class IDFunctorType>
+typename Factory<BaseType>::template Element<ObjectType, IDFunctorType>::Registerer Factory<BaseType>::Element<ObjectType, IDFunctorType>::register_;
 END_EGEG
 #endif /// !INCLUDED_EGEG_FACTORY_HEADER_
 /// EOF

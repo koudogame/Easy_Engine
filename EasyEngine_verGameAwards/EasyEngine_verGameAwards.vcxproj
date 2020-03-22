@@ -143,6 +143,7 @@
     <ClInclude Include="actor2d.hpp" />
     <ClInclude Include="actor3d.hpp" />
     <ClInclude Include="application.hpp" />
+    <ClInclude Include="camera.hpp" />
     <ClInclude Include="circle.hpp" />
     <ClInclude Include="component.hpp" />
     <ClInclude Include="controller.hpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="egeg_math.hpp" />
     <ClInclude Include="level_manager.hpp" />
     <ClInclude Include="loader.hpp" />
+    <ClInclude Include="test_level.hpp" />
     <ClInclude Include="WavefrontOBJ_loader.hpp" />
     <ClInclude Include="utility_function.hpp" />
     <ClInclude Include="error.hpp" />
@@ -197,6 +199,7 @@
     <ClCompile Include="rendering_engine.cpp" />
     <ClCompile Include="scene3d.cpp" />
     <ClCompile Include="shader_loader.cpp" />
+    <ClCompile Include="test_level.cpp" />
     <ClCompile Include="WavefrontOBJ_loader.cpp" />
     <ClCompile Include="xinput.cpp" />
     <ClCompile Include="xinput_controller.cpp" />

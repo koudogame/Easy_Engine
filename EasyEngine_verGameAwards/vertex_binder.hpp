@@ -44,7 +44,7 @@ public :
     ///
     /// @return バインド成功[ true ]  バインド失敗[ false ]
     ///
-    RetValue bind( Mesh* Source )
+    RetValue bind( const Mesh* Source )
     {
         BindedVertexData output;
 

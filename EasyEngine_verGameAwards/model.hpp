@@ -21,7 +21,7 @@ template <
     class PixelShaderType >
 struct Model
 {
-    Mesh mesh;
+    std::shared_ptr<const Mesh> mesh;
     std::unique_ptr<VertexShaderType> vertex_shader;
     std::unique_ptr<GeometryShaderType> geometry_shader;
     std::unique_ptr<PixelShaderType> pixel_shader;

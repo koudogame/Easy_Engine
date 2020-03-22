@@ -29,13 +29,13 @@ public :
     template <class ModelType>
     void setModel( ModelType& Model )
     {
-        vertex_data_ = &Model.mesh;
+        mesh_data_ = Model.mesh.get();
         vertex_shader_ = Model.vertex_shader.get();
         geometry_shader_ = Model.geometry_shader.get();
         pixel_shader_ = Model.pixel_shader.get();
     }
 
-    Mesh* getVertexData() const noexcept { return vertex_data_; }
+    const Mesh* getMesh() const noexcept { return mesh_data_; }
     VertexShader* getVertexShader() const noexcept { return vertex_shader_; }
     GeometryShader* getGeometryShader() const noexcept { return geometry_shader_; }
     PixelShader* getPixelShader() const noexcept { return pixel_shader_; }
@@ -46,7 +46,7 @@ public :
     void finalize()   override;
 /*-----------------------------------------------------------------*/
 private :
-    Mesh*   vertex_data_ = nullptr;
+    const Mesh*   mesh_data_ = nullptr;
     VertexShader* vertex_shader_ = nullptr;
     GeometryShader* geometry_shader_ = nullptr;
     PixelShader* pixel_shader_ = nullptr;

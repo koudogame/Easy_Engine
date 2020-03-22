@@ -9,15 +9,8 @@
 #include "application_status.hpp"
 #include "easy_engine.hpp"
 
-#include "shader_loader.hpp"
-#include "vertex_shader.hpp"
-#include "geometry_shader.hpp"
-#include "pixel_shader.hpp"
-#include "actor3d.hpp"
-#include "rendering3d_component.hpp"
-#include "scene3d.hpp"
+#include "test_level.hpp"
 
-#include "egeg_math.hpp"
 
 #pragma comment( lib, "dxgi.lib" )
 
@@ -32,113 +25,6 @@ namespace
 
 
 BEGIN_EGEG
- class TestActor :
-    public Actor3D
-{
-public :
-    TestActor() :
-        Actor3D( UID<TestActor>() )
-    {}
-
-    bool initialize() override { return true; }
-    void finalize() override {}
-};
-class TestVS :
-    public VertexShader
-{
-public :
-    static constexpr D3D11_INPUT_ELEMENT_DESC kInputElementDescs[] =
-    {
-        {
-            kVertexPositionSemantic,
-            0,
-            DXGI_FORMAT_R32G32B32_FLOAT,
-            0,
-            0,
-            D3D11_INPUT_PER_VERTEX_DATA,
-            0
-        },
-    };
-    static constexpr const char* kVSFileName = "test_vs.cso";
-
-    TestVS( ID3D11VertexShader* VS, ID3D11InputLayout* IL ) :
-        VertexShader( VS, IL )
-    {}
-
-    VertexBinder getVertexBinder() const override
-    {
-        return VertexBinder( "POSITION" );
-    }
-
-    void setShaderOnPipeline( ID3D11DeviceContext* DC ) override
-    {
-        DC->VSSetShader( shader_.Get(), nullptr, 0 );
-    }
-    void setShaderResourcesOnPipeline( ID3D11DeviceContext* DC ) override
-    {
-        DC->VSSetShaderResources( 0, 0, nullptr );
-    }
-    void setConstantBuffersOnPipeline( ID3D11DeviceContext* DC ) override
-    {
-        DC->VSSetConstantBuffers( 0, 0, nullptr );
-    }
-    void setSamplersOnPipeline( ID3D11DeviceContext* DC ) override
-    {
-        DC->VSSetSamplers( 0, 0, nullptr );
-    }
-};
-class TestGS :
-    public GeometryShader
-{
-public :
-    TestGS( ID3D11GeometryShader* GS ) :
-        GeometryShader( GS )
-    {}
-
-    void setShaderOnPipeline( ID3D11DeviceContext* DC ) override
-    {
-        DC->GSSetShader( nullptr, nullptr, 0 );
-    }
-    void setShaderResourcesOnPipeline( ID3D11DeviceContext* DC ) override
-    {
-        DC->GSSetShaderResources( 0, 0, nullptr );
-    }
-    void setConstantBuffersOnPipeline( ID3D11DeviceContext* DC ) override
-    {
-        DC->GSSetConstantBuffers( 0, 0, nullptr );
-    }
-    void setSamplersOnPipeline( ID3D11DeviceContext* DC ) override
-    {
-        DC->GSSetSamplers( 0, 0, nullptr );
-    }
-};
-class TestPS :
-    public PixelShader
-{
-public :
-    static constexpr const char* kPSFileName = "test_ps.cso";
-
-    TestPS( ID3D11PixelShader* PS ) :
-        PixelShader( PS )
-    {}
-
-    void setShaderOnPipeline( ID3D11DeviceContext* DC ) override
-    {
-        DC->PSSetShader( shader_.Get(), nullptr, 0 );
-    }
-    void setShaderResourcesOnPipeline( ID3D11DeviceContext* DC ) override
-    {
-        DC->PSSetShaderResources( 0, 0, nullptr );
-    }
-    void setConstantBuffersOnPipeline( ID3D11DeviceContext* DC ) override
-    {
-        DC->PSSetConstantBuffers( 0, 0, nullptr );
-    }
-    void setSamplersOnPipeline( ID3D11DeviceContext* DC ) override
-    {
-        DC->PSSetSamplers( 0, 0, nullptr );
-    }
-};
 
 // Application ä÷êîíËã`
 /*===========================================================================*/
@@ -199,68 +85,8 @@ void Application::mainloop()
         &render_target
     );
 
-
-    D3D11_BUFFER_DESC bf_desc {};
-    bf_desc.Usage = D3D11_USAGE_DEFAULT;
-    bf_desc.ByteWidth = sizeof( VertexPositionType ) * 4;
-    bf_desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-
-    VertexPositionType pos[] =
-    {
-        { -1.0F, 1.0F, 0.0F },
-        {  0.0F, 1.0F, 0.0F },
-        { -1.0F, 0.0F, 0.0F },
-        {  0.0F, 0.0F, 0.0F }
-    };
-    D3D11_SUBRESOURCE_DATA v_srd {};
-    v_srd.pSysMem = pos;
-    ComPtr<ID3D11Buffer> buffer;
-    EasyEngine::getRenderingEngine()->getDevice()->
-    CreateBuffer(
-        &bf_desc,
-        &v_srd,
-        &buffer
-    );
-
-    ComPtr<ID3D11Buffer> idx_buffer;
-    D3D11_BUFFER_DESC idx_desc {};
-    idx_desc.Usage = D3D11_USAGE_DEFAULT;
-    idx_desc.ByteWidth = sizeof( UINT ) * 6;
-    idx_desc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-    UINT index[] =
-    {
-        0,1,2,
-        1,3,2
-    };
-    D3D11_SUBRESOURCE_DATA v_idx {};
-    v_idx.pSysMem = index;
-    EasyEngine::getRenderingEngine()->getDevice()->
-    CreateBuffer(
-        &idx_desc,
-        &v_idx,
-        &idx_buffer
-    );
-    ShaderLoader loader{ EasyEngine::getRenderingEngine()->getDevice() };
-    auto vs = loader.loadVertexShader<TestVS>();
-    auto ps = loader.loadPixelShader<TestPS>();
-
-
-    Model<TestVS, TestGS, TestPS> model;
-    model.vertex_shader = std::move(vs);
-    model.pixel_shader = std::move(ps);
-    model.mesh.setNumVertices( getArraySize(index) );
-    model.mesh.setVertexBuffer( kVertexPositionSemantic, buffer.Get() );
-    model.mesh.setIndexBuffer( idx_buffer.Get() );
-    
-    TestActor test;
-    auto component = test.addComponent<Rendering3DComponent>();
-    component->setModel( model );
-
-
-    EasyEngine::getRenderingEngine()->getImmediateContext();
-    Scene3D scene{ EasyEngine::getRenderingEngine()->getImmediateContext() };
-    scene.entry( &test );
-
+    TestLevel level;
+    if( !level.initialize() )    return;
 
     MSG msg{};
     while( msg.message != WM_QUIT )
@@ -280,8 +106,6 @@ void Application::mainloop()
             if( duration_cast<microseconds>(erapsed_time).count() >= TimePerFrame<>::value )
             {
                 last_time = curr_time;
-                
-                scene.entry( &test );
 
                 float backcolor[4] = { 1.0F, 1.0F, 1.0F, 1.0F };
                 EasyEngine::getRenderingEngine()->getImmediateContext()->
@@ -289,24 +113,15 @@ void Application::mainloop()
                     render_target.Get(),
                     backcolor
                 );
-                scene.render(
-                    {render_target.Get()},
-                    {{
-                        0.0F,
-                        0.0F,
-                        kHorizontalResolution<float>,
-                        kVerticalResolution<float>,
-                        0.0F,
-                        1.0F
-                    }},
-                    {}
-                );
-
+                
+                level.update( render_target.Get() );
                 
                 sc->Present(0,0);
             }
         }
     }
+
+    level.finalize();
 }
 
 END_EGEG

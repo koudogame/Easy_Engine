@@ -25,6 +25,12 @@ public :
     }
     virtual ~Scene() = default;
 
+    ///< ‰Šú‰»ˆ—
+    virtual bool initialize() = 0;
+
+    ///< I—¹ˆ—
+    virtual void finalize() = 0;
+
     ///
     /// @brief  •`‰æ
     ///

@@ -21,6 +21,10 @@ public :
         static const uint32_t uid = reinterpret_cast<uint32_t>(&uid);
         return uid;
     }
+    uint32_t operator()() const noexcept
+    {
+        return *this;
+    }
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_UID_HEADER_

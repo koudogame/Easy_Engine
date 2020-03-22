@@ -12,9 +12,6 @@
     <Filter Include="Project\EasyEngine">
       <UniqueIdentifier>{f9a672b8-e1ac-4e86-ac35-f3d7a8da30dd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project\EasyEngine\00_Actor">
-      <UniqueIdentifier>{c5184119-dbe9-4d4f-bfc2-be44555a307d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Project\EasyEngine\03_JobScheduler">
       <UniqueIdentifier>{0f22ccfb-dd3f-4172-a500-2c1b668fb2b5}</UniqueIdentifier>
     </Filter>
@@ -45,9 +42,6 @@
     <Filter Include="Project\EasyEngine\99_System\Rendering\Loader">
       <UniqueIdentifier>{34759648-190b-4e37-88cf-e9c4479d3f5a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project\EasyEngine\01_Level">
-      <UniqueIdentifier>{6deff352-317c-426c-af0a-a7c687174fb3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Project\EasyEngine\99_System\Rendering\Scene">
       <UniqueIdentifier>{01a7b2f5-889a-4308-afcc-630a3b13fc48}</UniqueIdentifier>
     </Filter>
@@ -59,6 +53,18 @@
     </Filter>
     <Filter Include="Project\EasyEngine\99_System\Utility">
       <UniqueIdentifier>{341d67f1-f149-4e91-a4c3-bc5311f2a0a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\00_Objects">
+      <UniqueIdentifier>{c5184119-dbe9-4d4f-bfc2-be44555a307d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\00_Objects\Actor">
+      <UniqueIdentifier>{8c66c6de-920b-4955-afe6-92f86d65d566}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\00_Objects\Level">
+      <UniqueIdentifier>{6deff352-317c-426c-af0a-a7c687174fb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\00_Objects\Camera">
+      <UniqueIdentifier>{a3cb9126-e9c8-4859-aea2-f1c4cae85d09}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -92,31 +98,22 @@
     <ClCompile Include="scene3d.cpp">
       <Filter>Project\EasyEngine\99_System\Rendering\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="actor.cpp">
-      <Filter>Project\EasyEngine\00_Actor</Filter>
-    </ClCompile>
     <ClCompile Include="WavefrontOBJ_loader.cpp">
       <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
     </ClCompile>
     <ClCompile Include="level_manager.cpp">
-      <Filter>Project\EasyEngine\01_Level</Filter>
+      <Filter>Project\EasyEngine\00_Objects\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="actor.cpp">
+      <Filter>Project\EasyEngine\00_Objects\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="test_level.cpp">
+      <Filter>Project\EasyEngine\00_Objects\Level</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="factory.hpp">
-      <Filter>Project\EasyEngine\99_System</Filter>
-    </ClInclude>
-    <ClInclude Include="actor.hpp">
-      <Filter>Project\EasyEngine\00_Actor</Filter>
-    </ClInclude>
     <ClInclude Include="egeg_math.hpp">
       <Filter>Project\EasyEngine\99_System</Filter>
-    </ClInclude>
-    <ClInclude Include="actor2d.hpp">
-      <Filter>Project\EasyEngine\00_Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="actor3d.hpp">
-      <Filter>Project\EasyEngine\00_Actor</Filter>
     </ClInclude>
     <ClInclude Include="component.hpp">
       <Filter>Project\EasyEngine\02_Component</Filter>
@@ -179,7 +176,7 @@
       <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
     </ClInclude>
     <ClInclude Include="level.hpp">
-      <Filter>Project\EasyEngine\01_Level</Filter>
+      <Filter>Project\EasyEngine\00_Objects\Level</Filter>
     </ClInclude>
     <ClInclude Include="scene.hpp">
       <Filter>Project\EasyEngine\99_System\Rendering\Scene</Filter>
@@ -227,7 +224,7 @@
       <Filter>Project\EasyEngine\99_System\Utility</Filter>
     </ClInclude>
     <ClInclude Include="level_manager.hpp">
-      <Filter>Project\EasyEngine\01_Level</Filter>
+      <Filter>Project\EasyEngine\00_Objects\Level</Filter>
     </ClInclude>
     <ClInclude Include="WavefrontOBJ_loader.hpp">
       <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
@@ -240,6 +237,24 @@
     </ClInclude>
     <ClInclude Include="error.hpp">
       <Filter>Project\EasyEngine\99_System\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="factory.hpp">
+      <Filter>Project\EasyEngine\99_System\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="actor3d.hpp">
+      <Filter>Project\EasyEngine\00_Objects\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="actor.hpp">
+      <Filter>Project\EasyEngine\00_Objects\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="actor2d.hpp">
+      <Filter>Project\EasyEngine\00_Objects\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="camera.hpp">
+      <Filter>Project\EasyEngine\00_Objects\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="test_level.hpp">
+      <Filter>Project\EasyEngine\00_Objects\Level</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

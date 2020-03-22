@@ -4,8 +4,12 @@
 ///
 #ifndef INCLUDED_EGEG_SCENE3D_HEADER_
 #define INCLUDED_EGEG_SCENE3D_HEADER_
+#include <array>
 #include <set>
+#include <wrl.h>
+#include <d3d11.h>
 #include "scene.hpp"
+#include "camera.hpp"
 #include "actor3d.hpp"
 BEGIN_EGEG
 ///
@@ -21,6 +25,13 @@ public :
         Scene( std::forward<DCType>(ImmediateContext) )
     {
     }
+
+    ///
+    /// @brief  カメラのセット
+    ///
+    /// @param[in] Camera : カメラ
+    ///
+    void setCamera( Camera* Camera ) noexcept { camera_ = Camera; }
 
     ///
     /// @brief  モデルのエントリー
@@ -39,6 +50,8 @@ public :
     
 /*-----------------------------------------------------------------*/
 // Scene
+    bool initialize() override;
+    void finalize() override;
     void render( 
         const std::vector<ID3D11RenderTargetView*>&,
         const std::vector<D3D11_VIEWPORT>&,
@@ -54,7 +67,10 @@ public :
 
 
 protected :
+    Camera* camera_ = nullptr;
     std::set<const Actor3D*> model_list_;
+
+    std::array<Microsoft::WRL::ComPtr<ID3D11Buffer>, 3U> cbuffers_;
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_SCENE3D_HEADER_

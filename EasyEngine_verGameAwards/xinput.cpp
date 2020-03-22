@@ -59,7 +59,7 @@ float XInput::stickNormalize( SHORT Raw, int DeadZone ) noexcept
 template <DWORD UserIdx>
 void XInputImpl<UserIdx>::update()
 {
-    _XINPUT_STATE curr_state = {};
+    _XINPUT_STATE curr_state{};
 
     if( XInputGetState(UserIdx, &curr_state) == ERROR_SUCCESS )
     {
