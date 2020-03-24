@@ -12,15 +12,6 @@
     <Filter Include="Project\EasyEngine">
       <UniqueIdentifier>{f9a672b8-e1ac-4e86-ac35-f3d7a8da30dd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project\EasyEngine\03_JobScheduler">
-      <UniqueIdentifier>{0f22ccfb-dd3f-4172-a500-2c1b668fb2b5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\EasyEngine\02_Component">
-      <UniqueIdentifier>{365f1458-5657-4580-824e-865cfd79ea6d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\EasyEngine\05_Shape">
-      <UniqueIdentifier>{f7f1c23e-28fa-4dd0-87d0-b6ffb10025ec}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Project\EasyEngine\99_System">
       <UniqueIdentifier>{037197f8-2b1f-4bce-97a6-bd5e20d69e8b}</UniqueIdentifier>
     </Filter>
@@ -66,6 +57,15 @@
     <Filter Include="Project\EasyEngine\00_Objects\Camera">
       <UniqueIdentifier>{a3cb9126-e9c8-4859-aea2-f1c4cae85d09}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\EasyEngine\01_Component">
+      <UniqueIdentifier>{365f1458-5657-4580-824e-865cfd79ea6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\02_JobScheduler">
+      <UniqueIdentifier>{0f22ccfb-dd3f-4172-a500-2c1b668fb2b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\03_Shape">
+      <UniqueIdentifier>{f7f1c23e-28fa-4dd0-87d0-b6ffb10025ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -92,9 +92,6 @@
     <ClCompile Include="easy_engine.cpp">
       <Filter>Project\EasyEngine\99_System</Filter>
     </ClCompile>
-    <ClCompile Include="rendering3d_component.cpp">
-      <Filter>Project\EasyEngine\02_Component</Filter>
-    </ClCompile>
     <ClCompile Include="scene3d.cpp">
       <Filter>Project\EasyEngine\99_System\Rendering\Scene</Filter>
     </ClCompile>
@@ -110,31 +107,37 @@
     <ClCompile Include="test_level.cpp">
       <Filter>Project\EasyEngine\00_Objects\Level</Filter>
     </ClCompile>
+    <ClCompile Include="transform3d_component.cpp">
+      <Filter>Project\EasyEngine\01_Component</Filter>
+    </ClCompile>
+    <ClCompile Include="rendering3d_component.cpp">
+      <Filter>Project\EasyEngine\01_Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="egeg_math.hpp">
       <Filter>Project\EasyEngine\99_System</Filter>
     </ClInclude>
     <ClInclude Include="component.hpp">
-      <Filter>Project\EasyEngine\02_Component</Filter>
+      <Filter>Project\EasyEngine\01_Component</Filter>
     </ClInclude>
     <ClInclude Include="circle.hpp">
-      <Filter>Project\EasyEngine\05_Shape</Filter>
+      <Filter>Project\EasyEngine\03_Shape</Filter>
     </ClInclude>
     <ClInclude Include="sphere.hpp">
-      <Filter>Project\EasyEngine\05_Shape</Filter>
+      <Filter>Project\EasyEngine\03_Shape</Filter>
     </ClInclude>
     <ClInclude Include="rectangle.hpp">
-      <Filter>Project\EasyEngine\05_Shape</Filter>
+      <Filter>Project\EasyEngine\03_Shape</Filter>
     </ClInclude>
     <ClInclude Include="cuboid.hpp">
-      <Filter>Project\EasyEngine\05_Shape</Filter>
+      <Filter>Project\EasyEngine\03_Shape</Filter>
     </ClInclude>
     <ClInclude Include="line2d.hpp">
-      <Filter>Project\EasyEngine\05_Shape</Filter>
+      <Filter>Project\EasyEngine\03_Shape</Filter>
     </ClInclude>
     <ClInclude Include="line3d.hpp">
-      <Filter>Project\EasyEngine\05_Shape</Filter>
+      <Filter>Project\EasyEngine\03_Shape</Filter>
     </ClInclude>
     <ClInclude Include="application.hpp">
       <Filter>Project\EasyEngine\99_System</Filter>
@@ -161,13 +164,13 @@
       <Filter>Project\EasyEngine\99_System</Filter>
     </ClInclude>
     <ClInclude Include="job_container.hpp">
-      <Filter>Project\EasyEngine\03_JobScheduler</Filter>
+      <Filter>Project\EasyEngine\02_JobScheduler</Filter>
     </ClInclude>
     <ClInclude Include="job.hpp">
-      <Filter>Project\EasyEngine\03_JobScheduler</Filter>
+      <Filter>Project\EasyEngine\02_JobScheduler</Filter>
     </ClInclude>
     <ClInclude Include="job_scheduler.hpp">
-      <Filter>Project\EasyEngine\03_JobScheduler</Filter>
+      <Filter>Project\EasyEngine\02_JobScheduler</Filter>
     </ClInclude>
     <ClInclude Include="rendering_engine.hpp">
       <Filter>Project\EasyEngine\99_System\Rendering</Filter>
@@ -204,9 +207,6 @@
     </ClInclude>
     <ClInclude Include="model.hpp">
       <Filter>Project\EasyEngine\99_System\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="rendering3d_component.hpp">
-      <Filter>Project\EasyEngine\02_Component</Filter>
     </ClInclude>
     <ClInclude Include="scene2d.hpp">
       <Filter>Project\EasyEngine\99_System\Rendering\Scene</Filter>
@@ -255,6 +255,12 @@
     </ClInclude>
     <ClInclude Include="test_level.hpp">
       <Filter>Project\EasyEngine\00_Objects\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="transform3d_component.hpp">
+      <Filter>Project\EasyEngine\01_Component</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering3d_component.hpp">
+      <Filter>Project\EasyEngine\01_Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

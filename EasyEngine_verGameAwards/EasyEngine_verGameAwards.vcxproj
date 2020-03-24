@@ -155,6 +155,7 @@
     <ClInclude Include="level_manager.hpp" />
     <ClInclude Include="loader.hpp" />
     <ClInclude Include="test_level.hpp" />
+    <ClInclude Include="transform3d_component.hpp" />
     <ClInclude Include="WavefrontOBJ_loader.hpp" />
     <ClInclude Include="utility_function.hpp" />
     <ClInclude Include="error.hpp" />
@@ -200,6 +201,7 @@
     <ClCompile Include="scene3d.cpp" />
     <ClCompile Include="shader_loader.cpp" />
     <ClCompile Include="test_level.cpp" />
+    <ClCompile Include="transform3d_component.cpp" />
     <ClCompile Include="WavefrontOBJ_loader.cpp" />
     <ClCompile Include="xinput.cpp" />
     <ClCompile Include="xinput_controller.cpp" />

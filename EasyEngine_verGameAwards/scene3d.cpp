@@ -1,6 +1,7 @@
 // 作成者 : 板場
 #include "scene3d.hpp"
 #include "rendering3d_component.hpp"
+#include "transform3d_component.hpp"
 
 BEGIN_EGEG
 
@@ -20,10 +21,10 @@ bool Scene3D::initialize()
     immediate_context_->GetDevice( &device );
     
     // 射影変換行列用定数バッファの作成
-    DirectX::XMFLOAT4X4 projection;
+    DirectX::XMFLOAT4X4 projection{};
     DirectX::XMStoreFloat4x4(
         &projection,
-        DirectX::XMMatrixPerspectiveFovLH( 30.0F, 1280.0F / 720.0F, 1.0F, 100.0F )
+        DirectX::XMMatrixPerspectiveFovLH( 30.0F, 1280.0F / 720.0F, 1.F, 10.F )
     );
     D3D11_SUBRESOURCE_DATA srd {};
     srd.pSysMem = &projection;
@@ -32,7 +33,7 @@ bool Scene3D::initialize()
     if( FAILED(hr) ) return false;
     ID3D11Buffer* buf = cbuffers_.at( 0 ).Get();
     immediate_context_->VSSetConstantBuffers( 0, 1, &buf );
-    
+
     // ビュー変換行列用定数バッファの作成
     hr = device->CreateBuffer(
         &desc, nullptr, &cbuffers_.at(1) );
@@ -129,10 +130,11 @@ void Scene3D::render(
         cbuffers_.at(2).Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped_subresource );
         if( FAILED(hr) ) return;
         DirectX::XMFLOAT4X4 world{};
-        world._11 = 1.0F; world._14 = model->getPosition().x;
-        world._22 = 1.0F; world._24 = model->getPosition().y;
-        world._33 = 1.0F; world._33 = model->getPosition().z;
+        world._11 = 0.1F; world._14 = model->getComponent<Transform3DComponent>()->getPosition().x;
+        world._22 = 0.1F; world._24 = model->getComponent<Transform3DComponent>()->getPosition().y;
+        world._33 = 0.1F; world._34 = model->getComponent<Transform3DComponent>()->getPosition().z;
         world._44 = 1.0F;
+
         memcpy( mapped_subresource.pData, &world, sizeof world );
         immediate_context_->Unmap( cbuffers_.at(2).Get(), 0 );
         ID3D11Buffer* world_buf = cbuffers_.at( 2 ).Get();

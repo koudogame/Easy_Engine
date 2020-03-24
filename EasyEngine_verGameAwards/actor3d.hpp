@@ -20,19 +20,6 @@ class Actor3D :
 {
 public :
     ///
-    /// @brief  座標の設定
-    ///
-    /// @param[in] Destination : 座標
-    ///
-    void setPosition( const Vector3D& Destination ) noexcept { position_ = Destination; }
-    ///
-    /// @brief  座標の取得
-    ///
-    /// @return 座標
-    ///
-    const Vector3D& getPosition() const noexcept { return position_; }
-
-    ///
     /// @brief  コンポーネントの追加
     ///
     /// @tparam ComponentType : 追加するコンポーネント型
@@ -54,9 +41,6 @@ public :
 
 protected :
     Actor3D( uint32_t ActorID ) noexcept : Actor( ActorID ) {}
-
-private :
-    Vector3D position_;
 };
 
 ///< コンポーネントの追加

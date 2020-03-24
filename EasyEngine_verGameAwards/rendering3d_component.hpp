@@ -20,7 +20,7 @@ class Rendering3DComponent :
     public Component
 {
 public :
-    static uint32_t getID() noexcept { return UID<Rendering3DComponent>(); }
+    static constexpr UID<Rendering3DComponent> getID() noexcept { return UID<Rendering3DComponent>(); }
 
     Rendering3DComponent( Actor3D* Owner ) :
         Component( Owner )
