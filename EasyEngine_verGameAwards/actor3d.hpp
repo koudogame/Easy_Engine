@@ -9,8 +9,6 @@
 #include "uid.hpp"
 #include "egeg_math.hpp"
 BEGIN_EGEG
-class Component;
-
 ///
 /// @class  Actor3D
 /// @brief  3Dアクター

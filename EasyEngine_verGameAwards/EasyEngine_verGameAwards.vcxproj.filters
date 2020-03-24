@@ -66,6 +66,15 @@
     <Filter Include="Project\EasyEngine\03_Shape">
       <UniqueIdentifier>{f7f1c23e-28fa-4dd0-87d0-b6ffb10025ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\EasyEngine\01_Component\3D">
+      <UniqueIdentifier>{aaa28286-0243-4221-94a8-9526eeb45880}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\01_Component\2D">
+      <UniqueIdentifier>{b4f271b0-fad4-4516-a294-b69bfcd94200}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\01_Component\Common">
+      <UniqueIdentifier>{c740ded3-1148-463b-985c-33e3e6af0ee6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -107,19 +116,16 @@
     <ClCompile Include="test_level.cpp">
       <Filter>Project\EasyEngine\00_Objects\Level</Filter>
     </ClCompile>
-    <ClCompile Include="transform3d_component.cpp">
-      <Filter>Project\EasyEngine\01_Component</Filter>
+    <ClCompile Include="transform3d.cpp">
+      <Filter>Project\EasyEngine\01_Component\3D</Filter>
     </ClCompile>
-    <ClCompile Include="rendering3d_component.cpp">
-      <Filter>Project\EasyEngine\01_Component</Filter>
+    <ClCompile Include="rendering3d.cpp">
+      <Filter>Project\EasyEngine\01_Component\3D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="egeg_math.hpp">
       <Filter>Project\EasyEngine\99_System</Filter>
-    </ClInclude>
-    <ClInclude Include="component.hpp">
-      <Filter>Project\EasyEngine\01_Component</Filter>
     </ClInclude>
     <ClInclude Include="circle.hpp">
       <Filter>Project\EasyEngine\03_Shape</Filter>
@@ -256,11 +262,17 @@
     <ClInclude Include="test_level.hpp">
       <Filter>Project\EasyEngine\00_Objects\Level</Filter>
     </ClInclude>
-    <ClInclude Include="transform3d_component.hpp">
-      <Filter>Project\EasyEngine\01_Component</Filter>
+    <ClInclude Include="transform3d.hpp">
+      <Filter>Project\EasyEngine\01_Component\3D</Filter>
     </ClInclude>
-    <ClInclude Include="rendering3d_component.hpp">
-      <Filter>Project\EasyEngine\01_Component</Filter>
+    <ClInclude Include="component3d.hpp">
+      <Filter>Project\EasyEngine\01_Component\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering3d.hpp">
+      <Filter>Project\EasyEngine\01_Component\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="component.hpp">
+      <Filter>Project\EasyEngine\01_Component\Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

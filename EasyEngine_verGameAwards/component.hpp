@@ -8,6 +8,7 @@
 BEGIN_EGEG
 class Actor;
 
+namespace component {
 ///
 /// @class   Component
 /// @brief   コンポーネント基底
@@ -31,10 +32,14 @@ public :
     ///
     virtual void finalize() = 0;
 
+    ///< オーナーの取得
+    Actor* getOwner() const noexcept { return owner_; }
+
 protected :
     Component( Actor* Owner ) : owner_( Owner ) {}
     Actor* owner_;  ///< 自身を保持しているアクター
 };
+} /// namespace component
 END_EGEG
 #endif /// !INCLUDED_EGEG_COMPONENT_HEADER_
 /// EOF

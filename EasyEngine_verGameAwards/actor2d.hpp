@@ -10,8 +10,6 @@
 #include "uid.hpp"
 #include "egeg_math.hpp"
 BEGIN_EGEG
-class Component;
-
 ///
 /// @class  Actor2D
 /// @brief  2Dアクター
@@ -85,7 +83,6 @@ protected :
 
 private :
     Vector2D position_{ 0.0F, 0.0F };
-    std::unordered_map<uint32_t, Component*> components_;
 };
 
 

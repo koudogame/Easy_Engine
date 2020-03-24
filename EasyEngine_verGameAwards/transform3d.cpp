@@ -1,12 +1,13 @@
 // ì¬Ò : ”Âê
-#include "transform3d_component.hpp"
+#include "transform3d.hpp"
 
 BEGIN_EGEG
+namespace component {
 
 // Transform3DComponent ŠÖ”’è‹`
 /*===========================================================================*/
 // ‰Šú‰»
-bool Transform3DComponent::initialize()
+bool Transform3D::initialize()
 {
     position_ = Vector3D{ 0.0F, 0.0F, 0.0F };
     scale_    = Vector3D{ 1.0F, 1.0F, 1.0F };
@@ -16,9 +17,10 @@ bool Transform3DComponent::initialize()
 }
 
 // I—¹
-void Transform3DComponent::finalize()
+void Transform3D::finalize()
 {
 }
 
+} // namespace component
 END_EGEG
 // EOF

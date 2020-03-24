@@ -88,6 +88,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -114,6 +115,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -146,6 +148,7 @@
     <ClInclude Include="camera.hpp" />
     <ClInclude Include="circle.hpp" />
     <ClInclude Include="component.hpp" />
+    <ClInclude Include="component3d.hpp" />
     <ClInclude Include="controller.hpp" />
     <ClInclude Include="cuboid.hpp" />
     <ClInclude Include="detailed_returnvalue.hpp" />
@@ -155,7 +158,7 @@
     <ClInclude Include="level_manager.hpp" />
     <ClInclude Include="loader.hpp" />
     <ClInclude Include="test_level.hpp" />
-    <ClInclude Include="transform3d_component.hpp" />
+    <ClInclude Include="transform3d.hpp" />
     <ClInclude Include="WavefrontOBJ_loader.hpp" />
     <ClInclude Include="utility_function.hpp" />
     <ClInclude Include="error.hpp" />
@@ -164,7 +167,7 @@
     <ClInclude Include="model.hpp" />
     <ClInclude Include="noncopyable.hpp" />
     <ClInclude Include="pixel_shader.hpp" />
-    <ClInclude Include="rendering3d_component.hpp" />
+    <ClInclude Include="rendering3d.hpp" />
     <ClInclude Include="rendering_engine.hpp" />
     <ClInclude Include="input_device.hpp" />
     <ClInclude Include="job.hpp" />
@@ -196,12 +199,12 @@
     <ClCompile Include="keyboard.cpp" />
     <ClCompile Include="level_manager.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="rendering3d_component.cpp" />
+    <ClCompile Include="rendering3d.cpp" />
     <ClCompile Include="rendering_engine.cpp" />
     <ClCompile Include="scene3d.cpp" />
     <ClCompile Include="shader_loader.cpp" />
     <ClCompile Include="test_level.cpp" />
-    <ClCompile Include="transform3d_component.cpp" />
+    <ClCompile Include="transform3d.cpp" />
     <ClCompile Include="WavefrontOBJ_loader.cpp" />
     <ClCompile Include="xinput.cpp" />
     <ClCompile Include="xinput_controller.cpp" />

@@ -8,7 +8,7 @@
 #include <unordered_map>
 #include "egeg.hpp"
 BEGIN_EGEG
-class Component; ///< コンポーネント前方宣言( 循環参照回避 )
+namespace component { class Component; } ///< コンポーネント前方宣言( 循環参照回避 )
 
 ///
 /// @class  Actor
@@ -39,7 +39,7 @@ public :
 
 protected :
     Actor( uint32_t ActorID ) noexcept : id_( ActorID ) {}
-    std::unordered_map<uint32_t, Component*> components_; ///< コンポーネント
+    std::unordered_map<uint32_t, component::Component*> components_; ///< コンポーネント
 
 private :
     uint32_t id_;   /// アクター識別ID

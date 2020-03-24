@@ -1,7 +1,7 @@
 // ì¬ŽÒ : ”Âê
 #include "scene3d.hpp"
-#include "rendering3d_component.hpp"
-#include "transform3d_component.hpp"
+#include "rendering3d.hpp"
+#include "transform3d.hpp"
 
 BEGIN_EGEG
 
@@ -99,7 +99,7 @@ void Scene3D::render(
     // ƒ‚ƒfƒ‹‚Ì•`‰æ
     for( auto& model : model_list_ )
     {
-        Rendering3DComponent* component = model->getComponent<Rendering3DComponent>();
+        auto component = model->getComponent<component::Rendering3D>();
         if( component == nullptr ) continue;
 
         auto vertex_binder = component->getVertexShader()->getVertexBinder();
@@ -129,11 +129,24 @@ void Scene3D::render(
         hr = immediate_context_->Map(
         cbuffers_.at(2).Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped_subresource );
         if( FAILED(hr) ) return;
-        DirectX::XMFLOAT4X4 world{};
-        world._11 = 0.1F; world._14 = model->getComponent<Transform3DComponent>()->getPosition().x;
-        world._22 = 0.1F; world._24 = model->getComponent<Transform3DComponent>()->getPosition().y;
-        world._33 = 0.1F; world._34 = model->getComponent<Transform3DComponent>()->getPosition().z;
-        world._44 = 1.0F;
+        DirectX::XMFLOAT4X4 translation {};
+        translation._11 = 0.1F; translation._14 = model->getComponent<component::Transform3D>()->getPosition().x;
+        translation._22 = 0.1F; translation._24 = model->getComponent<component::Transform3D>()->getPosition().y;
+        translation._33 = 0.1F; translation._34 = model->getComponent<component::Transform3D>()->getPosition().z;
+        translation._44 = 1.0F;
+        DirectX::XMFLOAT4X4 scale{};
+        scale._11 = model->getComponent<component::Transform3D>()->getScale().x;
+        scale._22 = model->getComponent<component::Transform3D>()->getScale().y;
+        scale._33 = model->getComponent<component::Transform3D>()->getScale().z;
+        scale._44 = 1.0F;
+        DirectX::XMFLOAT4X4 world {};
+        DirectX::XMStoreFloat4x4(
+            &world,
+            DirectX::XMMatrixMultiply( 
+                DirectX::XMLoadFloat4x4(&translation),
+                DirectX::XMLoadFloat4x4(&scale)
+            )
+        );
 
         memcpy( mapped_subresource.pData, &world, sizeof world );
         immediate_context_->Unmap( cbuffers_.at(2).Get(), 0 );

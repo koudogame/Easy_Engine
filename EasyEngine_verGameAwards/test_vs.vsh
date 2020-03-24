@@ -19,11 +19,11 @@ struct Output
 
 Output main( float3 Position : POSITION )
 {
-    matrix affine = mul( World, View );
-    affine = mul(affine, Projection);
+    matrix transform = mul( World, View );
+    transform = mul(transform, Projection);
 
     Output output;
-    output.position = mul( float4(Position, 1.0F), affine);
+    output.position = mul( float4(Position, 1.0F), transform);
     output.z = Position.z;
 
     return output;

@@ -2,8 +2,8 @@
 #include "application_status.hpp"
 #include "shader_loader.hpp"
 #include "WavefrontOBJ_loader.hpp"
-#include "rendering3d_component.hpp"
-#include "transform3d_component.hpp"
+#include "rendering3d.hpp"
+#include "transform3d.hpp"
 
 BEGIN_EGEG
 
@@ -26,7 +26,7 @@ bool TestLevel::initialize()
     camera_position_ = {0.0F, 0.0F, -1.0F};
     scene_.setCamera( &camera_ );
     
-    actor_.addComponent<Transform3DComponent>()->setPosition( {0.0F, 0.0F, 0.0F} );
+    actor_.addComponent<component::Transform3D>()->setPosition( {0.0F, 0.0F, 0.0F} );
 
     ShaderLoader loader{ EasyEngine::getRenderingEngine()->getDevice() };
     auto vs = loader.loadVertexShader<TestVS>();
@@ -37,7 +37,7 @@ bool TestLevel::initialize()
     model_.pixel_shader = std::move(ps);
     model_.mesh = obj_loader.loadMesh( "character.obj" );
     
-    auto component = actor_.addComponent<Rendering3DComponent>();
+    auto component = actor_.addComponent<component::Rendering3D>();
     component->setModel( model_ );
 
     return true;
@@ -50,13 +50,20 @@ void TestLevel::finalize()
 
 void TestLevel::update( ID3D11RenderTargetView* RTV )
 {
-    Vector3D after = actor_.getComponent<Transform3DComponent>()->getPosition();
+    Vector3D after = actor_.getComponent<component::Transform3D>()->getPosition();
     input_.update();
     if( input_.getState().dpad_up )    after.z += 0.1F;
     if( input_.getState().dpad_down )  after.z -= 0.1F;
     if( input_.getState().dpad_left )  after.x -= 0.1F;
     if( input_.getState().dpad_right ) after.x += 0.1F;
-    actor_.getComponent<Transform3DComponent>()->setPosition( after );
+    actor_.getComponent<component::Transform3D>()->setPosition( after );
+
+    Vector3D scale {
+        input_.getState().right_thumbstick_x + 1.0F,
+        input_.getState().right_thumbstick_y + 1.0F,
+        1.0F 
+    };
+    actor_.getComponent<component::Transform3D>()->setScale( scale );
 
     DirectX::XMFLOAT4X4 view;
     DirectX::XMStoreFloat4x4(

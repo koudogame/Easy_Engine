@@ -2,25 +2,28 @@
 /// @file   transform3d_component.hpp
 /// @author 板場
 ///
-#ifndef INCLUDED_EGEG_TRANSFORM3D_COMPONENT_HEADER_
-#define INCLUDED_EGEG_TRANSFORM3D_COMPONENT_HEADER_
-#include "component.hpp"
+#ifndef INCLUDED_EGEG_TRANSFORM3D_COMPONENT3D_HEADER_
+#define INCLUDED_EGEG_TRANSFORM3D_COMPONENT3D_HEADER_
+#include "component3d.hpp"
 #include "egeg_math.hpp"
 #include "actor3d.hpp"
 #include "uid.hpp"
+
 BEGIN_EGEG
+namespace component {
+
 ///
-/// @class  Transform3DComponent
+/// @class  Transform3D
 /// @brief  ワールド座標の管理コンポーネント
 ///
-class Transform3DComponent :
-    public Component
+class Transform3D :
+    public Component3D
 {
 public :
-    static constexpr UID<Transform3DComponent> getID() noexcept { return UID<Transform3DComponent>(); }
+    static constexpr UID<Transform3D> getID() noexcept { return UID<Transform3D>(); }
 
-    Transform3DComponent( Actor3D* Owner ) :
-        Component( Owner )
+    Transform3D( Actor3D* Owner ) :
+        Component3D( Owner )
     {}
 
     ///< 座標のセット
@@ -48,6 +51,8 @@ private :
     Vector3D scale_;
     Vector3D rotation_;
 };
+
+} /// namespace component
 END_EGEG
 #endif /// !INCLUDED_EGEG_TRANSFORM3D_COMPONENT_HEADER_
 /// EOF

@@ -6,7 +6,9 @@
 #define INCLUDED_EGEG_UID_HEADER_
 #include <cstdint>
 #include "egeg.hpp"
+
 BEGIN_EGEG
+
 ///
 /// @class  UID
 /// @brief  Œ^î•ñ‚©‚çID‚ğæ“¾‚·‚éƒNƒ‰ƒX
@@ -26,6 +28,7 @@ public :
         return *this;
     }
 };
+
 END_EGEG
 #endif /// !INCLUDED_EGEG_UID_HEADER_
 /// EOF

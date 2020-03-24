@@ -4,7 +4,7 @@
 ///
 #ifndef INCLUDED_EGEG_RENDERING3D_COMPONENT3D_HEADER_
 #define INCLUDED_EGEG_RENDERING3D_COMPONENT3D_HEADER_
-#include "component.hpp"
+#include "component3d.hpp"
 #include "model.hpp"
 #include "mesh.hpp"
 #include "vertex_shader.hpp"
@@ -12,18 +12,19 @@
 #include "pixel_shader.hpp"
 #include "actor3d.hpp"
 BEGIN_EGEG
+namespace component {
 ///
-/// @class  RenderingComponent
+/// @class  Rendering
 /// @brief  描画コンポ―ネント
 ///
-class Rendering3DComponent :
-    public Component
+class Rendering3D :
+    public Component3D
 {
 public :
-    static constexpr UID<Rendering3DComponent> getID() noexcept { return UID<Rendering3DComponent>(); }
+    static constexpr UID<Rendering3D> getID() noexcept { return UID<Rendering3D>(); }
 
-    Rendering3DComponent( Actor3D* Owner ) :
-        Component( Owner )
+    Rendering3D( Actor3D* Owner ) :
+        Component3D( Owner )
     {}
 
     template <class ModelType>
@@ -51,6 +52,7 @@ private :
     GeometryShader* geometry_shader_ = nullptr;
     PixelShader* pixel_shader_ = nullptr;
 };
+} /// namespace component
 END_EGEG
 #endif /// !INCLUDED_EGEG_RENDERING3D_COMPONENT_HEADER_
 /// EOF
