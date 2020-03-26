@@ -161,7 +161,6 @@ private :
     Model<TestVS, TestGS, TestPS> model_;
     TestCamera camera_;
     Scene3D scene_;
-    XInputP1 input_;
     DirectX::XMFLOAT3 camera_position_;
 };
 

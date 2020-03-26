@@ -23,13 +23,13 @@ BEGIN_EGEG
 InputDevice::FlagType XInput::newState( WORD Last, WORD Curr, int ButtonFlag ) noexcept
 {
     if( !(Last & ButtonFlag) && !(Curr & ButtonFlag) )
-        return EnumToValue( InputState::kNone );
+        return enumToValue( InputState::kNone );
     else if( (Last & ButtonFlag) && (Curr & ButtonFlag) )
-        return EnumToValue( InputState::kInput );
+        return enumToValue( InputState::kInput );
     else if( Curr & ButtonFlag )
-        return EnumToValue(InputState::kInput) | EnumToValue(InputState::kPressed);
+        return enumToValue(InputState::kInput) | enumToValue(InputState::kPressed);
     else
-        return EnumToValue( InputState::kReleased );
+        return enumToValue( InputState::kReleased );
 }
 
 // スティックの値を正規化

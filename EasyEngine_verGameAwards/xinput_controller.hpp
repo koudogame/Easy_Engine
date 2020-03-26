@@ -19,8 +19,6 @@ class XInputController :
     public Controller
 {
 public :
-    using DeviceType = const XInput;
-
     using ButtonsFunctionType  = void(*)( InputDevice::FlagType );
     using TriggersFunctionType = void(*)( float );
     using SticksFunctionType   = void(*)( float, float );
@@ -70,7 +68,7 @@ public :
     };
 
     ///< コンストラクタ
-    XInputController( DeviceType& InputDevice ) noexcept;
+    XInputController( const XInput* InputDevice ) noexcept;
 
     ///
     /// @brief   ボタン入力に対する関数の追加
@@ -79,13 +77,13 @@ public :
     /// @param[in] Button   ; 関数と紐づけるボタン
     /// @param[in] Function : 呼び出す関数
     ///
-    void registerFunction( Buttons Button, ButtonsFunctionType Function ) { buttons_func_.at( EnumToValue(Button) ) = Function; }
+    void registerFunction( Buttons Button, ButtonsFunctionType Function ) { button_func_list_.at( enumToValue(Button) ) = Function; }
     ///
     /// @brief  ボタンと関数の紐づけを解除
     ///
     /// @param[in] Button : 紐づけを解除するボタン
     ///
-    void unregisterFunction( Buttons Button ) { buttons_func_.at( EnumToValue(Button) ) = nullptr; }
+    void unregisterFunction( Buttons Button ) { button_func_list_.at( enumToValue(Button) ) = nullptr; }
     ///
     /// @brief   トリガー入力に対する関数の追加
     /// @details 関数の引数には、トリガーの入力値(XInputの定める範囲)を渡します。
@@ -93,13 +91,13 @@ public :
     /// @param[in] Trigger  : 関数と紐づけるトリガー
     /// @param[in] Function : 呼び出す関数
     ///
-    void registerFunction( Triggers Trigger, TriggersFunctionType Function ) { triggers_func_.at( EnumToValue(Trigger) ) = Function; }
+    void registerFunction( Triggers Trigger, TriggersFunctionType Function ) { trigger_func_list_.at( enumToValue(Trigger) ) = Function; }
     ///
     /// @brief  トリガーと関数の紐づけを解除
     ///
     /// @param[in] Trigger : 紐づけを解除するトリガー
     ///
-    void unregisterFunction( Triggers Trigger ) { triggers_func_.at( EnumToValue(Trigger) ) = nullptr; }
+    void unregisterFunction( Triggers Trigger ) { trigger_func_list_.at( enumToValue(Trigger) ) = nullptr; }
     ///
     /// @brief   スティック入力(押し倒し)に対する関数の追加
     /// @details 関数の引数には、スティックの入力値(XInputの定める範囲)を渡します。<br>
@@ -109,26 +107,26 @@ public :
     /// @param[in] Stick    : 関数と紐づけるスティック
     /// @param[in] Function : 呼び出す関数
     ///
-    void registerFunction( Sticks Stick, SticksFunctionType Function ) { sticks_func_.at( EnumToValue(Stick) ) = Function; }
+    void registerFunction( Sticks Stick, SticksFunctionType Function ) { stick_func_list_.at( enumToValue(Stick) ) = Function; }
     ///
     /// @brief  スティックと関数の紐づけを解除
     ///
     /// @param[in] Stick : 紐づけを解除するスティック
     ///
-    void unregisterFunction( Sticks Stick ) { sticks_func_.at( EnumToValue(Stick) ) = nullptr; }
+    void unregisterFunction( Sticks Stick ) { stick_func_list_.at( enumToValue(Stick) ) = nullptr; }
     
     ///
     /// @brief  入力デバイスの設定
     ///
     /// @param[in] XInputDevice : 設定するデバイス
     ///
-    void setDevice( DeviceType& XInputDevice ) noexcept { device_ = &XInputDevice; }
+    void setDevice( const XInput& XInputDevice ) noexcept { device_ = &XInputDevice; }
     ///
     /// @brief  入力デバイスの取得
     ///
     /// @return 入力デバイス
     ///
-    DeviceType& getDevice() const noexcept { return *device_; }
+    const XInput& getDevice() const noexcept { return *device_; }
         
 /*-----------------------------------------------------------------*/
 // Controller
@@ -144,13 +142,13 @@ private :
     template <class FuncList, class EnumType, class ...Ts>
     inline void callFuncSafe( FuncList& Functions, EnumType Index, Ts&& ...Args )
     {   // 安全な関数呼び出し
-        if( auto func = Functions.at(EnumToValue(Index)) ) func( std::forward<Ts>(Args)... );
+        if( auto func = Functions.at(enumToValue(Index)) ) func( std::forward<Ts>(Args)... );
     }
 
-    DeviceType* device_;
-    FunctionList<ButtonsFunctionType, 14U> buttons_func_;
-    FunctionList<TriggersFunctionType, 2U> triggers_func_;
-    FunctionList<SticksFunctionType, 2U> sticks_func_;
+    const XInput* device_;
+    FunctionList<ButtonsFunctionType, 14U> button_func_list_;
+    FunctionList<TriggersFunctionType, 2U> trigger_func_list_;
+    FunctionList<SticksFunctionType, 2U> stick_func_list_;
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_XINPUT_CONTROLLER_HEADER_

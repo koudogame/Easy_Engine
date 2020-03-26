@@ -6,7 +6,9 @@
 #define INCLUDED_EGEG_EASY_ENGINE_HEADER_
 #include "detailed_returnvalue.hpp"
 #include "rendering_engine.hpp"
+
 BEGIN_EGEG
+
 ///
 /// @class  EasyEngine
 /// @brief  ƒGƒ“ƒWƒ“–{‘Ì
@@ -26,6 +28,7 @@ private :
     struct Impl;
     static std::unique_ptr<Impl> p_impl_;
 };
+
 END_EGEG
 #endif /// !INCLUDED_EGEG_EASY_ENGINE_HEADER_
 /// EOF

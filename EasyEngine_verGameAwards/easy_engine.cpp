@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include <tchar.h>
 #include "application_status.hpp"
+#include "keyboard.hpp"
 
 // ウィンドウプロシージャ関数宣言
 LRESULT CALLBACK WinProc( HWND, UINT, WPARAM, LPARAM );
@@ -164,9 +165,14 @@ LRESULT CALLBACK WinProc( HWND hWnd, UINT Message, WPARAM wParam, LPARAM lParam 
         return 0;
 
     case WM_KEYDOWN:
+    case WM_SYSKEYDOWN :
         // Escキーの押下で終了する。
         if( wParam == VK_ESCAPE )
             PostMessage( hWnd, WM_CLOSE, 0, 0 );
+
+    case WM_KEYUP :
+    case WM_SYSKEYUP :
+        EGEG Keyboard::instance()->eventProcessing( Message, wParam, lParam );
         return 0;
 
     case WM_DESTROY:

@@ -51,16 +51,16 @@ void TestLevel::finalize()
 void TestLevel::update( ID3D11RenderTargetView* RTV )
 {
     Vector3D after = actor_.getComponent<component::Transform3D>()->getPosition();
-    input_.update();
-    if( input_.getState().dpad_up )    after.z += 0.1F;
-    if( input_.getState().dpad_down )  after.z -= 0.1F;
-    if( input_.getState().dpad_left )  after.x -= 0.1F;
-    if( input_.getState().dpad_right ) after.x += 0.1F;
+    XInputP1::instance()->update();
+    if( XInputP1::instance()->getState().dpad_up )    after.z += 0.1F;
+    if( XInputP1::instance()->getState().dpad_down )  after.z -= 0.1F;
+    if( XInputP1::instance()->getState().dpad_left )  after.x -= 0.1F;
+    if( XInputP1::instance()->getState().dpad_right ) after.x += 0.1F;
     actor_.getComponent<component::Transform3D>()->setPosition( after );
 
     Vector3D scale {
-        input_.getState().right_thumbstick_x + 1.0F,
-        input_.getState().right_thumbstick_y + 1.0F,
+        XInputP1::instance()->getState().right_thumbstick_x + 1.0F,
+        XInputP1::instance()->getState().right_thumbstick_y + 1.0F,
         1.0F 
     };
     actor_.getComponent<component::Transform3D>()->setScale( scale );
@@ -101,6 +101,7 @@ void TestLevel::update( ID3D11RenderTargetView* RTV )
         0,
         rs.Get()
     );
+
 }
 
 END_EGEG

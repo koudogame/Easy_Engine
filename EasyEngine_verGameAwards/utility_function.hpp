@@ -31,7 +31,7 @@ constexpr size_t getArraySize( const Elem (&)[Size] ) noexcept
 /// @return Šî–{Œ^‚Ö•ÏŠ·‚µ‚½’l
 ///
 template <class EnumClass>
-constexpr auto EnumToValue( EnumClass Enumerator ) noexcept
+constexpr auto enumToValue( EnumClass Enumerator ) noexcept
 {
     return static_cast<std::underlying_type_t<EnumClass>>(Enumerator);
 }

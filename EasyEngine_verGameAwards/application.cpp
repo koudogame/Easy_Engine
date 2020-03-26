@@ -10,6 +10,7 @@
 #include "easy_engine.hpp"
 
 #include "test_level.hpp"
+#include "keyboard_controller.hpp"
 
 
 #pragma comment( lib, "dxgi.lib" )
@@ -88,6 +89,14 @@ void Application::mainloop()
     TestLevel level;
     if( !level.initialize() )    return;
 
+    KeyboardController controller{ Keyboard::instance() };
+    controller.registerFunction( KeyboardController::Keys::kLSquareBracket,
+        []( InputDevice::FlagType Input )
+    {
+        assert( !InputDevice::isReleased(Input) );
+    } );
+
+
     MSG msg{};
     while( msg.message != WM_QUIT )
     {
@@ -114,7 +123,13 @@ void Application::mainloop()
                     backcolor
                 );
                 
+                Keyboard::instance()->update();
+
                 level.update( render_target.Get() );
+
+                auto instance = XInputP1::instance();
+
+                controller.update();
                 
                 sc->Present(0,0);
             }

@@ -9,8 +9,10 @@
 #include "input_device.hpp"
 BEGIN_EGEG
 ///
-/// @class  XInput
-/// @brief  XInputデバイス
+/// @class   XInput
+/// @brief   XInputデバイス
+/// @details Singletonクラスです。インスタンス化は禁止しています。<br>
+///          インスタンスへのアクセスはinstance関数を使用して下さい。
 ///
 class XInput :
     public InputDevice
@@ -64,12 +66,19 @@ class XInputImpl :
     public XInput
 {
 public :
+    static XInputImpl* instance() noexcept { static XInputImpl i; return &i; }
+
     void update() override;
+
+private :
+    XInputImpl() = default;
 };
-using XInputP1 = XInputImpl<0U>;
-using XInputP2 = XInputImpl<1U>;
-using XInputP3 = XInputImpl<2U>;
-using XInputP4 = XInputImpl<3U>;
+
+using XInputP1 = XInputImpl<0U>;    ///< ゲームパッド 0
+using XInputP2 = XInputImpl<1U>;    ///< ゲームパッド 1
+using XInputP3 = XInputImpl<2U>;    ///< ゲームパッド 2
+using XInputP4 = XInputImpl<3U>;    ///< ゲームパッド 3
+
 END_EGEG
 #endif /// !INCLUDED_EGEG_XINPUT_HEADER_
 /// EOF

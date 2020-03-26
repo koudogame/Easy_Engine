@@ -27,6 +27,11 @@ public :
         Component3D( Owner )
     {}
 
+    ///
+    /// @brief  モデル情報のセット
+    ///
+    /// @param[in] Model : セットするモデル
+    ///
     template <class ModelType>
     void setModel( ModelType& Model )
     {
@@ -36,9 +41,13 @@ public :
         pixel_shader_ = Model.pixel_shader.get();
     }
 
+    ///< メッシュデータの取得
     const Mesh* getMesh() const noexcept { return mesh_data_; }
+    ///< 頂点シェーダーの取得
     VertexShader* getVertexShader() const noexcept { return vertex_shader_; }
+    ///< ジオメトリシェーダ―の取得
     GeometryShader* getGeometryShader() const noexcept { return geometry_shader_; }
+    ///< ピクセルシェーダ―の取得
     PixelShader* getPixelShader() const noexcept { return pixel_shader_; }
         
 /*-----------------------------------------------------------------*/

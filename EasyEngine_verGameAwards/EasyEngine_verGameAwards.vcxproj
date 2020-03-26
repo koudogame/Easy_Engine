@@ -155,6 +155,7 @@
     <ClInclude Include="easy_engine.hpp" />
     <ClInclude Include="egeg.hpp" />
     <ClInclude Include="egeg_math.hpp" />
+    <ClInclude Include="keyboard_controller.hpp" />
     <ClInclude Include="level_manager.hpp" />
     <ClInclude Include="loader.hpp" />
     <ClInclude Include="test_level.hpp" />
@@ -197,6 +198,7 @@
     <ClCompile Include="application.cpp" />
     <ClCompile Include="easy_engine.cpp" />
     <ClCompile Include="keyboard.cpp" />
+    <ClCompile Include="keyboard_controller.cpp" />
     <ClCompile Include="level_manager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="rendering3d.cpp" />

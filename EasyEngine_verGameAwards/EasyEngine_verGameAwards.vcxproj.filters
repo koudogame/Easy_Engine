@@ -21,12 +21,6 @@
     <Filter Include="Project\EasyEngine\99_System\Input\Controller">
       <UniqueIdentifier>{375e4309-40ff-4626-a6fd-8d107b6d1e7b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project\EasyEngine\99_System\Input\Keyboard">
-      <UniqueIdentifier>{d0447e9a-d881-49e1-a607-8989a8f7f453}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\EasyEngine\99_System\Input\XInput">
-      <UniqueIdentifier>{adcbc180-9ab6-428c-8fc8-d15f6f3c803f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Project\EasyEngine\99_System\Rendering">
       <UniqueIdentifier>{c57a0814-1b67-4b2d-ae8f-cb83d38e5397}</UniqueIdentifier>
     </Filter>
@@ -75,19 +69,16 @@
     <Filter Include="Project\EasyEngine\01_Component\Common">
       <UniqueIdentifier>{c740ded3-1148-463b-985c-33e3e6af0ee6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\EasyEngine\99_System\Input\Device">
+      <UniqueIdentifier>{dab34000-7c3f-43d5-bd34-0ac11aae8b8d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Project</Filter>
     </ClCompile>
-    <ClCompile Include="xinput.cpp">
-      <Filter>Project\EasyEngine\99_System\Input\XInput</Filter>
-    </ClCompile>
     <ClCompile Include="xinput_controller.cpp">
       <Filter>Project\EasyEngine\99_System\Input\Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="keyboard.cpp">
-      <Filter>Project\EasyEngine\99_System\Input\Keyboard</Filter>
     </ClCompile>
     <ClCompile Include="application.cpp">
       <Filter>Project\EasyEngine\99_System</Filter>
@@ -122,6 +113,15 @@
     <ClCompile Include="rendering3d.cpp">
       <Filter>Project\EasyEngine\01_Component\3D</Filter>
     </ClCompile>
+    <ClCompile Include="xinput.cpp">
+      <Filter>Project\EasyEngine\99_System\Input\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="keyboard.cpp">
+      <Filter>Project\EasyEngine\99_System\Input\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="keyboard_controller.cpp">
+      <Filter>Project\EasyEngine\99_System\Input\Controller</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="egeg_math.hpp">
@@ -151,20 +151,11 @@
     <ClInclude Include="egeg.hpp">
       <Filter>Project\EasyEngine\99_System</Filter>
     </ClInclude>
-    <ClInclude Include="xinput.hpp">
-      <Filter>Project\EasyEngine\99_System\Input\XInput</Filter>
-    </ClInclude>
     <ClInclude Include="controller.hpp">
       <Filter>Project\EasyEngine\99_System\Input\Controller</Filter>
     </ClInclude>
     <ClInclude Include="xinput_controller.hpp">
       <Filter>Project\EasyEngine\99_System\Input\Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="keyboard.hpp">
-      <Filter>Project\EasyEngine\99_System\Input\Keyboard</Filter>
-    </ClInclude>
-    <ClInclude Include="input_device.hpp">
-      <Filter>Project\EasyEngine\99_System\Input</Filter>
     </ClInclude>
     <ClInclude Include="application_status.hpp">
       <Filter>Project\EasyEngine\99_System</Filter>
@@ -273,6 +264,18 @@
     </ClInclude>
     <ClInclude Include="component.hpp">
       <Filter>Project\EasyEngine\01_Component\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="input_device.hpp">
+      <Filter>Project\EasyEngine\99_System\Input\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="xinput.hpp">
+      <Filter>Project\EasyEngine\99_System\Input\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="keyboard.hpp">
+      <Filter>Project\EasyEngine\99_System\Input\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="keyboard_controller.hpp">
+      <Filter>Project\EasyEngine\99_System\Input\Controller</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

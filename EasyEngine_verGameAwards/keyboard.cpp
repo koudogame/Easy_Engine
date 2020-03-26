@@ -1,9 +1,12 @@
 // 作成者 : 板場
 #include "keyboard.hpp"
+#include <cstdint>
+#include "utility_function.hpp"
+#include <cassert>
 
 namespace
 {
-    uint8_t toScancode( LPARAM lParam ) noexcept { return ( lParam >> 16U ) & 0b11111111; }
+    uint16_t toScancode( LPARAM lParam ) noexcept { return ( lParam >> 16U ) & 0b1111111111111111; }
     WPARAM getKeyDetails( WPARAM wParam, LPARAM lParam ) noexcept;
 
     constexpr WPARAM kVKProcessKey  = 0xE5; // 漢字、CapsLK の仮想キーコード
@@ -11,6 +14,7 @@ namespace
     constexpr uint8_t kScancodeRShift = 0b00110110;
     constexpr uint8_t kScancodeKanji  = 0b00101001;
     constexpr uint8_t kScancodeCapsLOCK = 0b00111010;
+    constexpr uint16_t kExtensionBits = 0b0000000100000000;
 
     constexpr float kReciprocal8 = 1.0F / 8.0F;
 } // unnamed namespace
@@ -21,8 +25,8 @@ BEGIN_EGEG
 // コンストラクタ
 Keyboard::Keyboard() noexcept
 {
-    curr_state_ = state_0_;
-    last_state_ = state_1_;
+    raw_.fill( 0 );
+    last_.fill( 0 );
 }
 
 // イベント処理
@@ -47,51 +51,77 @@ void Keyboard::eventProcessing( UINT Mes, WPARAM wPrm, LPARAM lPrm ) noexcept
 // 更新処理
 void Keyboard::update()
 {
+    for( size_t i = 0; i < 32U; ++i )
+    { // 最新の状態と前回の状態を比較
+        for( uint8_t j = 0; j < 8; ++j )
+        { // 一つの変数の中にある8つのキーを比較
+            uint8_t vk = static_cast<uint8_t>(i*8) + j;
+            FlagType* ptr = reinterpret_cast<FlagType*>( &state_ ) + vk;
+            *ptr = newState( vk );
+        }
+    }
 
+    // 現在の状態と前回の状態として保存
+    last_ = raw_;
 }
 
 // キーの押下イベント処理
 // 
-// in Key : 押下されたキーのキーコード( 1 ~255 )
+// in Key : 押下されたキーの仮想キーコード( 1 ~255 )
 //
 //  ・キーに対応したビットが入っている要素番号の取得
 //      - Key / 8 で要素番号の取得を行っている。
+//     
 //  ・マスクの作成
 //      - 0b00000001 ~ 0b10000000 がマスクの範囲
-//      - 0x01を最大7ビット左へシフトする可能性がある。この7という数字は % 8により導き出される
+//      - 0x01を最大7ビット左へシフトする可能性がある。この7という数字は % 8(bit)により導き出される。
 void Keyboard::keyDown( uint8_t Key ) noexcept
 {
     unsigned elem = static_cast<unsigned>( Key * ::kReciprocal8 );
-    unsigned mask = (0b00000001 << ((Key-1) % 8));
+    unsigned mask = (0b00000001 << (Key % 8));
     
-    curr_state_[elem] |= mask;
+    raw_.at(elem) |= mask;
 }
 
 // キーの離上イベント処理
 //
-// in Key : 離上されたキーのキーコード( 1 ~ 255 )
+// in Key : 離上されたキーの仮想キーコード( 1 ~ 255 )
 void Keyboard::keyUp( uint8_t Key ) noexcept
 {
     unsigned elem = static_cast<unsigned>( Key * ::kReciprocal8 );
-    unsigned mask = (0b00000001 << ((Key-1) % 8));
-
-    curr_state_[elem] &= ~mask;
+    unsigned mask = ~(0b00000001 << (Key % 8));
+    
+    raw_.at(elem) &= mask;
 }
 
 // 新しい状態の取得
 InputDevice::FlagType Keyboard::newState( uint8_t Key ) noexcept
 {
     unsigned elem = static_cast<unsigned>( Key * ::kReciprocal8 );
-    unsigned mask = (0b00000001 << ((Key-1) % 8));
+    unsigned mask = (0b00000001 << (Key % 8));
 
-    if( !(last_state_[elem] & mask) && !(curr_state_[elem] & mask) )
-        return EnumToValue( InputState::kNone );
-    else if( (last_state_[elem] & mask) && (curr_state_[elem] & mask) )
-        return EnumToValue( InputState::kInput );
-    else if( curr_state_[elem] & mask )
-        return EnumToValue( InputState::kPressed ) | EnumToValue( InputState::kInput );
+    auto isDown =
+        [=](const std::array<uint8_t,32U>& State )
+        {
+            return State.at(elem) & mask;
+        };
+
+    if( !isDown(last_) && !isDown(raw_) )
+    { // 入力無し
+        return enumToValue( InputState::kNone );
+    }
+    else if( isDown(last_) && isDown(raw_) )
+    { // 入力あり( 押下直後でない )
+        return enumToValue( InputState::kInput );
+    }
+    else if( isDown(raw_) )
+    { // 入力あり( 押下直後 )
+        return enumToValue( InputState::kPressed ) | enumToValue( InputState::kInput );
+    }
     else
-        return EnumToValue( InputState::kReleased );
+    { // 入力なし( 離上直後 )
+        return enumToValue( InputState::kReleased );
+    }
 }
 END_EGEG
 
@@ -113,16 +143,13 @@ WPARAM getKeyDetails( WPARAM wParam, LPARAM lParam ) noexcept
         return toScancode(lParam) == ::kScancodeLShift ? VK_LSHIFT : VK_RSHIFT;
 
     case VK_CONTROL :
-        break;
-        // TODO : コントロールキーのスキャンコードを調べて
-        //        左右の入力に対応する
-        //return toScancode
+        return toScancode(lParam) & ::kExtensionBits ? VK_RCONTROL : VK_LCONTROL;
+
     case VK_MENU :
-        break;
-        // TODO : Altキーの左右入力に対応する
+        return toScancode(lParam) & ::kExtensionBits ? VK_RMENU : VK_LMENU;
     }
 
-    return 0;
+    return wParam;
 }
 } // unnamed namespace
 // EOF
