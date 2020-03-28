@@ -11,6 +11,7 @@
 #include "vertex_shader.hpp"
 #include "geometry_shader.hpp"
 #include "pixel_shader.hpp"
+#include "egeg_math.hpp"
 
 BEGIN_EGEG
 class TestActor :
@@ -161,7 +162,8 @@ private :
     Model<TestVS, TestGS, TestPS> model_;
     TestCamera camera_;
     Scene3D scene_;
-    DirectX::XMFLOAT3 camera_position_;
+    Vector3D camera_position_;
+    Vector3D camera_focus_;
 };
 
 END_EGEG

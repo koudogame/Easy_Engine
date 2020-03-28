@@ -24,7 +24,7 @@ bool Scene3D::initialize()
     DirectX::XMFLOAT4X4 projection{};
     DirectX::XMStoreFloat4x4(
         &projection,
-        DirectX::XMMatrixPerspectiveFovLH( 30.0F, 1280.0F / 720.0F, 1.F, 10.F )
+        DirectX::XMMatrixPerspectiveFovLH( 30.0F, 1280.0F / 720.0F, 0.1F, 10.F )
     );
     D3D11_SUBRESOURCE_DATA srd {};
     srd.pSysMem = &projection;

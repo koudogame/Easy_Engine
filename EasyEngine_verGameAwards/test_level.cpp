@@ -12,21 +12,23 @@ bool TestLevel::initialize()
     if( !scene_.initialize() ) return false;
     if( !actor_.initialize() ) return false;
 
+    camera_position_ = Vector3D{0.0F, 0.0F, -1.0F};
+    camera_focus_ = Vector3D{ 0.0F, 0.0F, 0.1F };
     DirectX::XMFLOAT4X4 view;
     DirectX::XMStoreFloat4x4(
         &view,
         DirectX::XMMatrixLookAtLH(
-            {0.0F, 0.0F, -1.0F},
-            {0.0F, 0.0F, 0.0F},
+            camera_position_,
+            camera_focus_,
             {0.0F, 1.0F, 0.0F}
         )
     );
 
     camera_.setViewMatrix( view );
-    camera_position_ = {0.0F, 0.0F, -1.0F};
     scene_.setCamera( &camera_ );
     
     actor_.addComponent<component::Transform3D>()->setPosition( {0.0F, 0.0F, 0.0F} );
+    actor_.getComponent<component::Transform3D>()->setScale( {0.5F, 0.5F, 0.5F} );
 
     ShaderLoader loader{ EasyEngine::getRenderingEngine()->getDevice() };
     auto vs = loader.loadVertexShader<TestVS>();
@@ -58,19 +60,14 @@ void TestLevel::update( ID3D11RenderTargetView* RTV )
     if( XInputP1::instance()->getState().dpad_right ) after.x += 0.1F;
     actor_.getComponent<component::Transform3D>()->setPosition( after );
 
-    Vector3D scale {
-        XInputP1::instance()->getState().right_thumbstick_x + 1.0F,
-        XInputP1::instance()->getState().right_thumbstick_y + 1.0F,
-        1.0F 
-    };
-    actor_.getComponent<component::Transform3D>()->setScale( scale );
+
 
     DirectX::XMFLOAT4X4 view;
     DirectX::XMStoreFloat4x4(
         &view,
-        DirectX::XMMatrixLookToLH(
-            DirectX::XMLoadFloat3(&camera_position_),
-            {0.0F, 0.0F, 1.0},
+        DirectX::XMMatrixLookAtLH(
+            camera_position_,
+            camera_focus_,
             {0.0F, -1.0F, 0.0F}
         )
     );

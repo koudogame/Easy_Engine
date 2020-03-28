@@ -122,6 +122,9 @@
     <ClCompile Include="keyboard_controller.cpp">
       <Filter>Project\EasyEngine\99_System\Input\Controller</Filter>
     </ClCompile>
+    <ClCompile Include="texture_loader.cpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="egeg_math.hpp">
@@ -276,6 +279,9 @@
     </ClInclude>
     <ClInclude Include="keyboard_controller.hpp">
       <Filter>Project\EasyEngine\99_System\Input\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="texture_loader.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
