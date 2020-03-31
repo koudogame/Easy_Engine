@@ -211,9 +211,6 @@
     <ClInclude Include="WavefrontOBJ_loader.hpp">
       <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
     </ClInclude>
-    <ClInclude Include="loader.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
-    </ClInclude>
     <ClInclude Include="error.hpp">
       <Filter>Project\EasyEngine\99_System\Utility</Filter>
     </ClInclude>

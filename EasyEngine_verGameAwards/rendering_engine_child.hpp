@@ -5,6 +5,7 @@
 #ifndef INCLUDED_EG_EG_RENDERING_ENGINE_CHILD_HEADER_
 #define INCLUDED_EG_EG_RENDERING_ENGINE_CHILD_HEADER_
 
+#include <memory>
 #include "rendering_engine.hpp"
 #include "noncopyable.hpp"
 
@@ -13,21 +14,21 @@ BEGIN_EGEG
 ///
 /// @class   RenderingEngineChild
 /// @brief   レンダリングエンジンに生成されるオブジェクト
-/// @details エンジンにより生成されることを前提としているので、コピーを禁止しています。
+/// @details エンジンにより生成されることを前提としています。
 ///
 class RenderingEngineChild :
     NonCopyable<RenderingEngineChild>
 {
 public :
-    void setRenderingEngine( std::shared_ptr<RenderingEngine>&& Ptr )
+    virtual ~RenderingEngineChild() {}
+
+    void setRenderingEngine( RenderingEngine* Ptr )
     {
-        if( Ptr ) engine_ = std::move( Ptr );
+        if( Ptr ) engine_ = Ptr;
     }
 
-    std::shared_ptr<RenderingEngine> getRenderingEngine() const noexcept { return engine_; }
-
 protected :
-    std::shared_ptr<RenderingEngine> engine_;
+    RenderingEngine* engine_;
 };
 
 END_EGEG

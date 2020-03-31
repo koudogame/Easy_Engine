@@ -38,7 +38,7 @@ bool ShaderLoader::createIL(
     UINT NumElems, 
     ID3D11InputLayout** Output )
 {
-    return SUCCEEDED( device_->CreateInputLayout(
+    return SUCCEEDED( engine_->getDevice()->CreateInputLayout(
         InputDescs,
         NumElems,
         Code.bytecode,
@@ -50,7 +50,7 @@ bool ShaderLoader::createIL(
 // 頂点シェーダ―オブジェクトを生成
 bool ShaderLoader::createVS( const BinaryData& Code, ID3D11VertexShader** Output )
 {
-    return SUCCEEDED( device_->CreateVertexShader(
+    return SUCCEEDED( engine_->getDevice()->CreateVertexShader(
         Code.bytecode,
         Code.length,
         nullptr,
@@ -61,7 +61,7 @@ bool ShaderLoader::createVS( const BinaryData& Code, ID3D11VertexShader** Output
 // ジオメトリシェーダ―オブジェクトを生成
 bool ShaderLoader::createGS( const BinaryData& Code, ID3D11GeometryShader** Output )
 {
-    return SUCCEEDED( device_->CreateGeometryShader(
+    return SUCCEEDED( engine_->getDevice()->CreateGeometryShader(
         Code.bytecode,
         Code.length,
         nullptr,
@@ -72,7 +72,7 @@ bool ShaderLoader::createGS( const BinaryData& Code, ID3D11GeometryShader** Outp
 // ピクセルシェーダ―オブジェクトを生成
 bool ShaderLoader::createPS( const BinaryData& Code, ID3D11PixelShader** Output )
 {
-    return SUCCEEDED( device_->CreatePixelShader(
+    return SUCCEEDED( engine_->getDevice()->CreatePixelShader(
         Code.bytecode,
         Code.length,
         nullptr,

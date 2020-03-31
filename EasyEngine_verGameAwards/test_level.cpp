@@ -30,15 +30,14 @@ bool TestLevel::initialize()
     actor_.addComponent<component::Transform3D>()->setPosition( {0.0F, 0.0F, 0.0F} );
     actor_.getComponent<component::Transform3D>()->setScale( {0.5F, 0.5F, 0.5F} );
 
-    ShaderLoader loader{ EasyEngine::getRenderingEngine()->getDevice() };
-    auto vs = loader.loadVertexShader<TestVS>();
-    auto ps = loader.loadPixelShader<TestPS>();
+    auto loader = EasyEngine::getRenderingEngine()->getShaderLoader();
+    auto vs = loader->loadVertexShader<TestVS>();
+    auto ps = loader->loadPixelShader<TestPS>();
 
-    WavefrontOBJLoader obj_loader{};
-    obj_loader.setRenderingEngine( EasyEngine::getRenderingEngine()->shared_from_this() );
+    auto obj_loader = EasyEngine::getRenderingEngine()->getModelLoader();
     model_.vertex_shader = std::move(vs);
     model_.pixel_shader = std::move(ps);
-    obj_loader.load( "character.obj", &model_.mesh );
+    obj_loader->load( "character.obj", &model_.mesh );
     // TODO : モデルのメッシュがスマートポインタなので、代入ができない
     
     auto component = actor_.addComponent<component::Rendering3D>();

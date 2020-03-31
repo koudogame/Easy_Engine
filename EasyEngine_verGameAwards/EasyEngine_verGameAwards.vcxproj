@@ -157,7 +157,6 @@
     <ClInclude Include="egeg_math.hpp" />
     <ClInclude Include="keyboard_controller.hpp" />
     <ClInclude Include="level_manager.hpp" />
-    <ClInclude Include="loader.hpp" />
     <ClInclude Include="material.hpp" />
     <ClInclude Include="mesh.hpp" />
     <ClInclude Include="rendering_engine_child.hpp" />

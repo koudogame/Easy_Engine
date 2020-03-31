@@ -24,6 +24,7 @@ class WavefrontOBJLoader :
 {
 public :
     WavefrontOBJLoader();
+    ~WavefrontOBJLoader() = default;
 
     DetailedReturnValue<bool> load( const std::string& FileName, Mesh* Output );
     
@@ -48,6 +49,8 @@ private :
         uint32_t    curr_vertex_index;
         std::unordered_map<std::string, Group>    group_list;
         std::unordered_map<std::string, Material> material_list;
+
+        std::string loading_material_name;
     };
 
     void initialize();
@@ -56,6 +59,22 @@ private :
     void loadVertexUV( std::fstream& );
     void loadVertexNormal( std::fstream& );
     void loadFace( std::fstream& );
+    void loadGroupName( std::fstream& );
+    void loadUseMaterialName( std::fstream& );
+    void loadMaterialFile( std::fstream& );
+    void loadMaterialName( std::fstream& );
+    void loadMaterialDiffuseColor( std::fstream& );
+    void loadMaterialSpecularColor( std::fstream& );
+    void loadMaterialAmbientColor( std::fstream& );
+    void loadMaterialTransparency( std::fstream& );
+    void loadMaterialRefractiveIndex( std::fstream& );
+    void loadMaterialDiffiuseMap( std::fstream& );
+    void loadMatarialSpecularMap( std::fstream& );
+    void loadMaterialAmbientMap( std::fstream& );
+    void loadMaterialBumpMap( std::fstream& );
+    void loadMaterialTransparencyMap( std::fstream& );
+    void loadmaterialReflectionMap( std::fstream& );
+
 
     std::unordered_map<std::string, void(WavefrontOBJLoader::*)(std::fstream&)> load_function_list_;
     TemporaryOutput temp_output_;

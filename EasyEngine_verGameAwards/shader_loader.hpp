@@ -7,7 +7,7 @@
 #include <fstream>
 #include <memory>
 #include <unordered_map>
-#include "loader.hpp"
+#include "rendering_engine_child.hpp"
 #include "utility_function.hpp"
 #include "detailed_returnvalue.hpp"
 BEGIN_EGEG
@@ -16,15 +16,13 @@ BEGIN_EGEG
 /// @brief  シェーダーローダー
 ///
 class ShaderLoader :
-    public Loader
+    public RenderingEngineChild
 {
 public :
     template <class ReturnType>
     using RetValType = DetailedReturnValue<std::unique_ptr<ReturnType>>;
 
-    template <class DeviceType>
-    ShaderLoader( DeviceType&& Device ) :
-        Loader( std::forward<DeviceType>(Device) ) {}
+    ~ShaderLoader() = default;
 
     ///
     /// @brief  頂点シェーダ―のロード

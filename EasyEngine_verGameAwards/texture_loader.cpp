@@ -32,7 +32,7 @@ TextureLoader::load( const std::wstring& FilePath )
     // シェーダ―リソースビューを作成
     ID3D11ShaderResourceView* srv = nullptr;
     hr = CreateShaderResourceViewEx(
-        device_.Get(),
+        engine_->getDevice().Get(),
         image.GetImages(),
         image.GetImageCount(),
         metadata,

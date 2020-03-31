@@ -11,11 +11,11 @@
 
 BEGIN_EGEG
 
-using Tag_MaterialDiffuseColor    = Field<Microsoft::WRL::ComPtr<ID3D11Buffer>, 0U>;
-using Tag_MaterialSpecularColor   = Field<Microsoft::WRL::ComPtr<ID3D11Buffer>, 1U>;
-using Tag_MaterialAmbientColor    = Field<Microsoft::WRL::ComPtr<ID3D11Buffer>, 2U>;
-using Tag_MaterialTransparency    = Field<Microsoft::WRL::ComPtr<ID3D11Buffer>, 3U>;
-using Tag_MaterialRefractiveIndex = Field<Microsoft::WRL::ComPtr<ID3D11Buffer>, 4U>;
+using Tag_MaterialDiffuseColor    = Field<float, 0U>;
+using Tag_MaterialSpecularColor   = Field<float, 1U>;
+using Tag_MaterialAmbientColor    = Field<float, 2U>;
+using Tag_MaterialTransparency    = Field<float, 3U>;
+using Tag_MaterialRefractiveIndex = Field<float, 4U>;
 using Tag_MaterialDiffuseTexture  = Field<Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>, 0U>;
 using Tag_MaterialSpecularTexture = Field<Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>, 1U>;
 using Tag_MaterialAmbientTexture  = Field<Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>, 2U>;

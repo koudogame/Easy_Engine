@@ -7,6 +7,7 @@
 #include "utility_function.hpp"
 #include "error.hpp"
 #include "shader_loader.hpp"
+#include "WavefrontOBJ_loader.hpp"
 
 #pragma comment ( lib, "d3d11.lib" )
 
@@ -42,7 +43,8 @@ std::shared_ptr<RenderingEngine> RenderingEngine::create()
     static unsigned created_cnt;
     assert( !created_cnt++ && "RenderingEngineはSingletonクラスです。" );
 #endif
-    RenderingEngine* created = new RenderingEngine();
+    std::shared_ptr<RenderingEngine> created( new RenderingEngine() );
+
 
     HRESULT hr = D3D11CreateDevice(
         nullptr,
@@ -75,14 +77,20 @@ std::shared_ptr<RenderingEngine> RenderingEngine::create()
 
         if( FAILED(hr) )
         {
-            delete created;
             throw std::runtime_error( "レンダリングエンジンの生成に失敗しました。" );
         }
     }
 
     // シェーダーローダーの作成
-    created->shader_loader_ = std::make_shared<ShaderLoader>( created->device_ );
-    return std::shared_ptr<RenderingEngine>( created );
+    created->shader_loader_ = std::make_unique<ShaderLoader>();
+    created->shader_loader_->setRenderingEngine( created.get() );
+
+    // モデルローダーの作成
+    created->model_loader_ = std::make_unique<WavefrontOBJLoader>();
+    created->model_loader_->setRenderingEngine( created.get() );
+
+
+    return created;
 }
 
 END_EGEG

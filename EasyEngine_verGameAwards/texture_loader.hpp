@@ -5,7 +5,7 @@
 #ifndef INCLUDED_EG_EG_TEXTURE_LOADER_HEADER_
 #define INCLUDED_EG_EG_TEXTURE_LOADER_HEADER_
 
-#include "loader.hpp"
+#include "rendering_engine_child.hpp"
 #include "detailed_returnvalue.hpp"
 
 BEGIN_EGEG
@@ -14,13 +14,9 @@ BEGIN_EGEG
 /// @brief  テクスチャリソースのローダー
 ///
 class TextureLoader :
-    public Loader
+    public RenderingEngineChild
 {
 public :
-    TextureLoader( const Microsoft::WRL::ComPtr<ID3D11Device>& Device ) :
-        Loader( Device )
-    {
-    }
 
     ///
     /// @brief  ファイルからテクスチャリソースを読み込む

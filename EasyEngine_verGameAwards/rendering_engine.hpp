@@ -38,7 +38,9 @@ public :
     Microsoft::WRL::ComPtr<ID3D11DeviceContext> getImmediateContext() const noexcept { return immediate_context_; }
 
     ///< シェーダ―ローダーの取得
-    std::shared_ptr<ShaderLoader> getShaderLoader() const noexcept { return shader_loader_; }
+    ShaderLoader* getShaderLoader() const noexcept { return shader_loader_.get(); }
+    ///< モデルローダーの取得
+    WavefrontOBJLoader* getModelLoader() const noexcept { return model_loader_.get(); }
 
 /* 生成関数 */
 
@@ -61,7 +63,8 @@ private :
     Microsoft::WRL::ComPtr<ID3D11Device> device_ = nullptr;
     Microsoft::WRL::ComPtr<ID3D11DeviceContext> immediate_context_ = nullptr;
 
-    std::shared_ptr<ShaderLoader> shader_loader_;
+    std::unique_ptr<ShaderLoader> shader_loader_;
+    std::unique_ptr<WavefrontOBJLoader> model_loader_;
 };
 
 // バッファオブジェクトの生成
