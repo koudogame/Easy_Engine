@@ -1,5 +1,5 @@
 ///
-/// @file   transform3d_component.hpp
+/// @file   transform3d.hpp
 /// @author î¬èÍ
 ///
 #ifndef INCLUDED_EGEG_TRANSFORM3D_COMPONENT3D_HEADER_

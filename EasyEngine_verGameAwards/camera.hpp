@@ -16,7 +16,7 @@ class Camera
 public :
     virtual ~Camera() = default;
 
-    virtual const DirectX::XMFLOAT4X4& getViewMatrix() const = 0;
+    virtual DirectX::FXMMATRIX getViewMatrix() const = 0;
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_CAMERA_HEADER_

@@ -24,8 +24,8 @@ bool TestLevel::initialize()
         )
     );
 
-    camera_.setViewMatrix( view );
-    scene_.setCamera( &camera_ );
+    //camera_.setViewMatrix( view );
+    //scene_.setCamera( &camera_ );
     
     actor_.addComponent<component::Transform3D>()->setPosition( {0.0F, 0.0F, 0.0F} );
     actor_.getComponent<component::Transform3D>()->setScale( {0.5F, 0.5F, 0.5F} );
@@ -34,10 +34,12 @@ bool TestLevel::initialize()
     auto vs = loader.loadVertexShader<TestVS>();
     auto ps = loader.loadPixelShader<TestPS>();
 
-    WavefrontOBJLoader obj_loader( EasyEngine::getRenderingEngine()->getDevice() );
+    WavefrontOBJLoader obj_loader{};
+    obj_loader.setRenderingEngine( EasyEngine::getRenderingEngine()->shared_from_this() );
     model_.vertex_shader = std::move(vs);
     model_.pixel_shader = std::move(ps);
-    model_.mesh = obj_loader.loadMesh( "character.obj" );
+    obj_loader.load( "character.obj", &model_.mesh );
+    // TODO : モデルのメッシュがスマートポインタなので、代入ができない
     
     auto component = actor_.addComponent<component::Rendering3D>();
     component->setModel( model_ );
@@ -71,7 +73,7 @@ void TestLevel::update( ID3D11RenderTargetView* RTV )
             {0.0F, -1.0F, 0.0F}
         )
     );
-    camera_.setViewMatrix( view );
+    //camera_.setViewMatrix( view );
 
     scene_.entry( &actor_ );
 

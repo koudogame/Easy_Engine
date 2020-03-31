@@ -4,11 +4,22 @@
 ///
 #ifndef INCLUDED_EGEG_VERTEX_SHADER_HEADER_
 #define INCLUDED_EGEG_VERTEX_SHADER_HEADER_
+
 #include <type_traits>
 #include <wrl.h>
 #include "shader.hpp"
-#include "vertex_binder.hpp"
+#include "detailed_returnvalue.hpp"
+#include "vertex.hpp"
+
 BEGIN_EGEG
+
+struct BindedVertexData
+{
+    std::vector<ID3D11Buffer*> buffers;
+    std::vector<UINT>          strides;
+    std::vector<UINT>          offsets;
+};
+
 ///
 /// @class   VertexShader
 /// @brief   パイプライン構成オブジェクト「頂点シェーダ―」
@@ -31,7 +42,7 @@ public :
     virtual ~VertexShader() = default;
 
     ///< 頂点の入力レイアウトにバインドするオブジェクトを取得する
-    virtual VertexBinder getVertexBinder() const = 0;
+    virtual DetailedReturnValue<BindedVertexData> bindVertices( const Vertex& Vertices ) const = 0;
 
     ///< パイプラインに頂点入力レイアウトをセット
     void setInputLayoutOnPipeline( ID3D11DeviceContext* ImmediateContext ) 
@@ -43,6 +54,7 @@ protected :
     Microsoft::WRL::ComPtr<ID3D11VertexShader> shader_ = nullptr;
     Microsoft::WRL::ComPtr<ID3D11InputLayout>  input_layout_ = nullptr;
 };
+
 END_EGEG
 #endif /// !INCLUDED_EGEG_VERTEX_SHADER_HEADER_
 /// EOF

@@ -4,58 +4,63 @@
 ///
 #ifndef INCLUDED_EGEG_WAVEFRONTOBJ_LOADER_HEADER_
 #define INCLUDED_EGEG_WAVEFRONTOBJ_LOADER_HEADER_
+
 #include <type_traits>
 #include <memory>
 #include <unordered_map>
-#include "loader.hpp"
+#include <fstream>
+#include "rendering_engine_child.hpp"
 #include "detailed_returnvalue.hpp"
 #include "mesh.hpp"
+
 BEGIN_EGEG
+
 ///
 /// @class  WavefrontOBJLoader
 /// @brief  「WavefrontOBJ形式」ファイルのローダー
 ///
 class WavefrontOBJLoader :
-    public Loader
+    public RenderingEngineChild
 {
 public :
-    template <class DeviceType>
-    WavefrontOBJLoader( DeviceType&& Device ) :
-        Loader( std::forward<DeviceType>(Device) )
-    {}
-    
-    ///
-    /// @brief  「.obj」ファイルからメッシュデータをロード
-    ///
-    /// @param[in] FileName : 読み込むファイル名( ファイル名.obj )
-    ///
-    /// @return ロードしたメッシュデータ
-    ///
-    DetailedReturnValue<std::shared_ptr<const Mesh>> loadMesh( std::string FileName );
-    
-    // TODO : 定義
-    ///
-    /// @brief  「.mtl」ファイルからマテリアルデータをロード
-    ///
-    /// @param[in] FileName : 読み込むファイル名( ファイル名.mtl )
-    ///
-    /// @return ロードしたマテリアルデータ
-    ///
-    DetailedReturnValue<bool> loadMaterial( std::string FileName );
+    WavefrontOBJLoader();
 
-    // TODO : 定義
-    ///
-    /// @brief  「.obj」ファイルからメッシュデータとマテリアルデータをロード
-    ///
-    /// @param[in] FileName : 読み込むファイル名( ファイル名.obj )
-    ///
-    DetailedReturnValue<bool> loadModel( std::string FileName );
-
+    DetailedReturnValue<bool> load( const std::string& FileName, Mesh* Output );
+    
 private :
-    DetailedReturnValue<std::shared_ptr<const Mesh>> loadMeshFromFile( const char* FileName );
+    struct Group
+    {
+        std::string material_name;
+        uint32_t start_index;
+        uint32_t num_vertices;
+    };
+    struct TemporaryOutput
+    {
+        std::vector<VertexPositionType> position;
+        std::vector<VertexUVType>       uv;
+        std::vector<VertexNormalType>   normal;
+        std::vector<VertexPositionType> position_for_buffer;
+        std::vector<VertexUVType>       uv_for_buffer;
+        std::vector<VertexNormalType>   normal_for_buffer;
+        std::vector<uint32_t>           index_for_buffer;
+        std::string curr_group_name;
+        std::string curr_material_name;
+        uint32_t    curr_vertex_index;
+        std::unordered_map<std::string, Group>    group_list;
+        std::unordered_map<std::string, Material> material_list;
+    };
 
-    std::unordered_map<std::string, std::weak_ptr<const Mesh>> mesh_cache_;
+    void initialize();
+
+    void loadVertexPosition( std::fstream& );
+    void loadVertexUV( std::fstream& );
+    void loadVertexNormal( std::fstream& );
+    void loadFace( std::fstream& );
+
+    std::unordered_map<std::string, void(WavefrontOBJLoader::*)(std::fstream&)> load_function_list_;
+    TemporaryOutput temp_output_;
 };
+
 END_EGEG
 #endif /// !INCLUDED_EGEG_MESH_LOADER_HEADER_
 /// EOF

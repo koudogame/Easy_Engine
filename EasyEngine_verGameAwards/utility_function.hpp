@@ -1,5 +1,5 @@
 ///
-/// @file   egeg_utility.hpp
+/// @file   utility_function.hpp
 /// @author î¬èÍ
 ///
 #ifndef INCLUDED_EGEG_UTILITY_HEADER_

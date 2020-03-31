@@ -1,186 +1,190 @@
 // 作成者 : 板場
 #include "WavefrontOBJ_loader.hpp"
-#include <fstream>
-
-namespace
-{
-    template <class VertexDataType>
-    ID3D11Buffer* createBufferFromData( ID3D11Device*, D3D11_BUFFER_DESC*, const std::vector<VertexDataType>& );
-} // unnamed namespace
 
 BEGIN_EGEG
 
-// WavefrontOBJ 関数定義
+// WavefrontOBJLoader 関数定義
 /*===========================================================================*/
-// .objファイルからメッシュデータをロード
-// キャッシュにデータがある場合、コピーを返却
-//
-// 読み込んだメッシュデータはキャッシュに格納する。
-DetailedReturnValue<std::shared_ptr<const Mesh>> WavefrontOBJLoader::loadMesh(
-    std::string FileName )
+// コンストラクタ
+WavefrontOBJLoader::WavefrontOBJLoader() 
 {
-    auto mesh_itr = mesh_cache_.find( FileName ); // キャッシュからメッシュデータを取得
-
-    if( mesh_itr == mesh_cache_.end() )
-    { // キャッシュに存在しない場合
-        // 新規に読み込み、キャッシュに保存
-        auto mesh = loadMeshFromFile( FileName.c_str() );
-        if( mesh ) mesh_cache_.emplace( std::move(FileName), mesh.get() );
-
-        return mesh;
-    }
-    else if( mesh_itr->second.expired() )
-    { // キャッシュにあるが、既に破棄されていた場合
-        // 再度読み込み保管。初回読み込みではないので、ロードのチェックを行っていない。
-        auto mesh = loadMeshFromFile( FileName.c_str() );
-        mesh_itr->second = mesh.get();
-
-        // Attention : このブロックを抜けるとスマートポインタのデストラクタが呼び出され、
-        //             確保したメモリが解放されるのでこのブロック内でreturn文を宣言している。
-        return mesh;
-    }
-
-    // キャッシュされているメッシュを返却
-    return DetailedReturnValue<std::shared_ptr<const Mesh>>( true, mesh_itr->second );
+    initialize();
 }
 
-// .objファイルからメッシュデータをロード
-DetailedReturnValue<std::shared_ptr<const Mesh>> WavefrontOBJLoader::loadMeshFromFile( const char* FileName )
+// 初期化
+void WavefrontOBJLoader::initialize()
 {
-    using RetTy = DetailedReturnValue<std::shared_ptr<const Mesh>>;
+    // 読み込み関数をセット
+    //  キー はコマンド
+    //  要素 はコマンドに対応した関数のアドレス
+    load_function_list_.emplace( "v", &WavefrontOBJLoader::loadVertexPosition );
+    load_function_list_.emplace( "vt", &WavefrontOBJLoader::loadVertexUV );
+    load_function_list_.emplace( "vn", &WavefrontOBJLoader::loadVertexNormal );
+    load_function_list_.emplace( "f", &WavefrontOBJLoader::loadFace );
+}
+
+// ファイル読み込む
+DetailedReturnValue<bool> WavefrontOBJLoader::load( const std::string& FileName, Mesh* Output )
+{
+    using RetTy = DetailedReturnValue<bool>;
 
     // ファイルオープン
     std::fstream stream( FileName );
     if( !stream )
-    { // ファイルオープン失敗
-        return RetTy( false, nullptr, "ファイルオープン失敗" );
+    { // 失敗
+        return RetTy( false, "ファイルオープンに失敗" );
     }
 
-    std::vector<VertexPositionType> position; position.reserve( 256U );
-    std::vector<VertexUVType>       texcoord; texcoord.reserve( 256U );
-    std::vector<VertexNormalType>   normal;   normal.reserve( 256U );
-    std::vector<UINT>               index_for_buf;    index_for_buf.reserve( 1024U );
-    std::vector<VertexPositionType> position_for_buf; position_for_buf.reserve( 256U );
-    std::vector<VertexUVType>       texcoord_for_buf; texcoord_for_buf.reserve( 256U );
-    std::vector<VertexNormalType>   normal_for_buf;   normal_for_buf.reserve( 256U );
+    // 前回読み込み時のデータをクリア
+    //  std::vector::clear()の計算量は線形時間。前回のデータをクリアした方が無駄が無い。
+    temp_output_.position.clear();
+    temp_output_.uv.clear();
+    temp_output_.normal.clear();
+    temp_output_.position_for_buffer.clear();
+    temp_output_.uv_for_buffer.clear();
+    temp_output_.normal_for_buffer.clear();
+    temp_output_.index_for_buffer.clear();
+    temp_output_.curr_vertex_index = 0U;
+    temp_output_.group_list.clear();
+    temp_output_.material_list.clear();
 
-    std::string command;    // コマンド格納用バッファ
-    UINT start_idx = 0U;    // ポリゴンの開始インデックス
-    VertexPositionType vp;  // 頂点座標用一時オブジェクト
-    VertexUVType       vt;  // UV座標用一時オブジェクト
-    VertexNormalType   vn;  // 法線ベクトル用一時オブジェクト
+    // ファイル読み込み
+    std::string command;
     while( stream >> command )
-    { // ファイルからデータを読み込む
-        if( command == "v" )
-        { // 頂点座標の読み込み
-            stream >> vp.x >> vp.y >> vp.z;
-            position.push_back( vp );
-        }
-        else if( command == "vt" )
-        { // テクスチャ座標の読み込み
-            stream >> vt.x >> vt.y;
-            texcoord.push_back( vt );
-        }
-        else if( command == "vn" )
-        { // 法線ベクトルの読み込み
-            stream >> vn.x >> vn.y >> vn.z;
-            normal.push_back( vn );
-        }
-        else if( command == "f" )
-        { // 面(三角形ポリゴン)の読み込み
-            index_for_buf.push_back( start_idx+ 2 );
-            index_for_buf.push_back( start_idx+ 1 );
-            index_for_buf.push_back( start_idx+ 0 );
-
-            start_idx += 3;
-        
-            std::string str;
-            int pos_idx;
-            int uv_idx;
-            int norm_idx;
-            for( int i = 0; i < 3; ++i )
-            { // ポリゴンを形成する３頂点を読み込む
-                stream >> str;
-                sscanf_s( str.data(),
-                    "%d/%d/%d",
-                    &pos_idx, &uv_idx, &norm_idx
-                );
-
-                // 頂点をデータ化
-                position_for_buf.push_back( position.at(pos_idx - 1) );
-                texcoord_for_buf.push_back( texcoord.at(uv_idx - 1) );
-                normal_for_buf.push_back( normal.at(norm_idx - 1) );
-            }
+    { // ファイル終端まで読み込む
+        auto func_itr = load_function_list_.find( command.c_str() );
+        if( func_itr != load_function_list_.end() )
+        { // 対応するコマンドの場合、処理を行う
+            (this->*func_itr->second)(stream);
         }
     }
     stream.close();
 
-    // バッファオブジェクトの作成
-    D3D11_BUFFER_DESC desc {};
+    // バッファオブジェクトの生成
+    D3D11_BUFFER_DESC desc{};
     desc.Usage = D3D11_USAGE_DEFAULT;
     desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 
-    ID3D11Buffer* position_buffer = ::createBufferFromData(device_.Get(), &desc, position_for_buf );
-    if( position_buffer == nullptr )
-    { // バッファオブジェクトの作成に失敗
-        return RetTy( false, nullptr, "頂点座標用頂点バッファの作成に失敗" );
+    // 出力用データの作成
+    using namespace Microsoft::WRL;
+    ComPtr<ID3D11Buffer> position_buffer;
+    ComPtr<ID3D11Buffer> uv_buffer;
+    ComPtr<ID3D11Buffer> normal_buffer;
+    ComPtr<ID3D11Buffer> index_buffer;
+    if( !engine_->createBuffer(&desc, temp_output_.position_for_buffer, &position_buffer) )
+    { // 失敗
+        return RetTy( false, "座標用頂点バッファの作成に失敗" );
     }
-
-    ID3D11Buffer* texcoord_buffer = ::createBufferFromData(device_.Get(), &desc, texcoord_for_buf );
-    if( texcoord_buffer == nullptr )
-    { // バッファオブジェクトの作成に失敗
-        position_buffer->Release();
-        return RetTy( false, nullptr, "UV座標用頂点バッファの作成に失敗" );
+    if( !engine_->createBuffer(&desc, temp_output_.uv_for_buffer, &uv_buffer) )
+    { // 失敗
+        return RetTy( false, "UV座標用頂点バッファの作成に失敗" );
     }
-
-    ID3D11Buffer* normal_buffer = ::createBufferFromData(device_.Get(), &desc, normal_for_buf );
-    if( normal_buffer == nullptr )
-    { // バッファオブジェクトの作成に失敗
-        position_buffer->Release();
-        texcoord_buffer->Release();
-        return RetTy( false, nullptr, "法線ベクトル用頂点バッファの作成に失敗" );
+    if( !engine_->createBuffer(&desc, temp_output_.normal_for_buffer, &normal_buffer) )
+    { // 失敗
+        return RetTy( false, "法線ベクトル用頂点バッファの作成に失敗" );
     }
-    
-
     desc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-    ID3D11Buffer* index_buffer = ::createBufferFromData(device_.Get(), &desc, index_for_buf );
-    if( index_buffer == nullptr )
-    { // バッファオブジェクトの作成に失敗
-        position_buffer->Release();
-        texcoord_buffer->Release();
-        normal_buffer->Release();
-        return RetTy( false, nullptr, "インデックスバッファの作成に失敗" );
+    if( !engine_->createBuffer(&desc, temp_output_.index_for_buffer, &index_buffer ) )
+    { // 失敗
+        return RetTy( false, "インデックスバッファの作成に失敗" );
     }
-    
-    // メッシュデータの作成
-    Mesh* mesh = new Mesh();
-    mesh->setVertexBuffer( kVertexPositionSemantic, position_buffer );
-    mesh->setVertexBuffer( kVertexUVSemantic, texcoord_buffer );
-    mesh->setVertexBuffer( kVertexNormalSemantic, normal_buffer );
-    mesh->setIndexBuffer( index_buffer );
-    mesh->setNumVertices( index_for_buf.size() );
-    position_buffer->Release();
-    texcoord_buffer->Release();
-    normal_buffer->Release();
-    index_buffer->Release();
 
-    return RetTy(true, std::unique_ptr<Mesh>(mesh) );
+    // 頂点データをセット
+    Output->vertices.set<Tag_VertexPosition>( position_buffer );
+    Output->vertices.set<Tag_VertexUV>( uv_buffer );
+    Output->vertices.set<Tag_VertexNormal>( normal_buffer );
+    Output->vertices.set<Tag_VertexIndex>( index_buffer );
+    // サブメッシュをセット
+    SubMesh submesh;
+    for( auto group : temp_output_.group_list )
+    { // グループからサブメッシュをコピー
+        //submesh.material = std::move( temp_output_.material_list.find(group.second.material_name)->second );
+        submesh.start_index = group.second.start_index; 
+        submesh.num_vertices = group.second.num_vertices;
+
+        Output->submesh_list.push_back( submesh );
+    }
+
+    return true;
+}
+
+// 頂点座標の読み込み
+void WavefrontOBJLoader::loadVertexPosition( std::fstream& Stream )
+{
+    temp_output_.position.emplace_back();
+    auto& pos = temp_output_.position.back();
+    Stream >>
+        pos.x >>
+        pos.y >>
+        pos.z;
+}
+
+// 頂点UV座標の読み込み
+void WavefrontOBJLoader::loadVertexUV( std::fstream& Stream )
+{
+    temp_output_.uv.emplace_back();
+    auto& uv = temp_output_.uv.back();
+    Stream >>
+        uv.x >>
+        uv.y;
+}
+
+// 頂点法線ベクトルの読み込み
+void WavefrontOBJLoader::loadVertexNormal( std::fstream& Stream )
+{
+    temp_output_.normal.emplace_back();
+    auto& normal = temp_output_.normal.back();
+    Stream >>
+        normal.x >>
+        normal.y >>
+        normal.z;
+}
+
+// 面の読み込み
+void WavefrontOBJLoader::loadFace( std::fstream& Stream )
+{
+    // 面が所属するグループ
+    auto group_itr = temp_output_.group_list.find(temp_output_.curr_group_name);
+    if( group_itr == temp_output_.group_list.end() )
+    { // 新規グループの場合、リストにグループを追加
+        // Attention : マテリアルは一時出力からコピーしている。
+        //             ムーブの方が高速だが、ムーブによる不具合を現時点で予想できない。
+        Group g;
+        g.material_name = temp_output_.curr_material_name;
+        g.start_index = temp_output_.curr_vertex_index;
+        g.num_vertices = 0U;
+        temp_output_.group_list.emplace(temp_output_.curr_group_name, std::move(g));
+       
+        group_itr = temp_output_.group_list.find(temp_output_.curr_group_name);
+    }
+
+    // 面の追加( インデックス )
+    temp_output_.index_for_buffer.push_back( temp_output_.curr_vertex_index + 2U );
+    temp_output_.index_for_buffer.push_back( temp_output_.curr_vertex_index + 1U );
+    temp_output_.index_for_buffer.push_back( temp_output_.curr_vertex_index );
+    temp_output_.curr_vertex_index += 3U;
+    group_itr->second.num_vertices += 3U;
+
+    // 面の追加( 頂点 )
+    std::string data;
+    int pos_idx;
+    int uv_idx;
+    int nml_idx;
+    for( int i = 0; i < 3; ++i )
+    { // 面を形成する頂点を読み込む : 3頂点分
+        Stream >> data;
+        sscanf_s( data.c_str(),
+            "%d/%d/%d",
+            &pos_idx,
+            &uv_idx,
+            &nml_idx
+        );
+
+        temp_output_.position_for_buffer.push_back( temp_output_.position.at(pos_idx - 1U) );
+        temp_output_.uv_for_buffer.push_back( temp_output_.uv.at(uv_idx - 1U) );
+        temp_output_.normal_for_buffer.push_back( temp_output_.normal.at(nml_idx - 1U) );
+    }
 }
 
 END_EGEG
-
-namespace
-{
-    template <class VertexDataType>
-    ID3D11Buffer* createBufferFromData( ID3D11Device* Device, D3D11_BUFFER_DESC* Desc,  const std::vector<VertexDataType>& Source )
-    {
-        ID3D11Buffer* buffer = nullptr;
-        Desc->ByteWidth = sizeof( VertexDataType ) * Source.size();
-        D3D11_SUBRESOURCE_DATA srd{};
-        srd.pSysMem = Source.data();
-
-        Device->CreateBuffer( Desc, &srd, &buffer );
-        return buffer;
-    }
-} // unnamed namespace
 // EOF

@@ -32,15 +32,15 @@ class TestCamera :
 public :
     void setViewMatrix( const DirectX::XMFLOAT4X4& Source )
     {
-        view_ = Source;
+        //view_ = Source;
     }
-    const DirectX::XMFLOAT4X4& getViewMatrix() const override
+    /*DirectX::FXMMATRIX getViewMatrix() const override
     {
         return view_;
-    }
+    }*/
 
 private :
-    DirectX::XMFLOAT4X4 view_{};
+    Matrix4x4 view_{};
 };
 
 class TestVS :
@@ -50,7 +50,7 @@ public :
     static constexpr D3D11_INPUT_ELEMENT_DESC kInputElementDescs[] =
     {
         {
-            kVertexPositionSemantic,
+            "POSITION",
             0,
             DXGI_FORMAT_R32G32B32_FLOAT,
             0,
@@ -65,9 +65,23 @@ public :
         VertexShader( VS, IL )
     {}
 
-    VertexBinder getVertexBinder() const override
+    DetailedReturnValue<BindedVertexData> bindVertices( const Vertex& Vertices ) const override
     {
-        return VertexBinder( "POSITION" );
+        using RetTy = DetailedReturnValue<BindedVertexData>;
+
+        BindedVertexData binded;
+
+        ID3D11Buffer* ver_buf;
+        ver_buf = Vertices.get<Tag_VertexPosition>().Get();
+        if( ver_buf == nullptr )
+        { // 失敗
+            return RetTy(false, std::move(binded), "必要なデータがありません" );
+        }
+        binded.buffers.push_back( ver_buf );
+        binded.strides.push_back( sizeof(VertexPositionType) );
+        binded.offsets.push_back( 0 );
+
+        return RetTy( true, std::move(binded) );
     }
 
     void setShaderOnPipeline( ID3D11DeviceContext* DC ) override
@@ -160,7 +174,7 @@ public :
 private :
     TestActor actor_;
     Model<TestVS, TestGS, TestPS> model_;
-    TestCamera camera_;
+    //TestCamera camera_;
     Scene3D scene_;
     Vector3D camera_position_;
     Vector3D camera_focus_;

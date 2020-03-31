@@ -1,5 +1,5 @@
 ///
-/// @file   rendering3d_component.hpp
+/// @file   renderin3d.hpp
 /// @author î¬èÍ
 ///
 #ifndef INCLUDED_EGEG_RENDERING3D_COMPONENT3D_HEADER_
@@ -35,7 +35,7 @@ public :
     template <class ModelType>
     void setModel( ModelType& Model )
     {
-        mesh_data_ = Model.mesh.get();
+        mesh_data_ = &Model.mesh;
         vertex_shader_ = Model.vertex_shader.get();
         geometry_shader_ = Model.geometry_shader.get();
         pixel_shader_ = Model.pixel_shader.get();

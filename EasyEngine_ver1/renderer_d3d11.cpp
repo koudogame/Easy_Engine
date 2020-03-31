@@ -184,7 +184,7 @@ void RendererD3D11::renderModel( const Model& Model, BlendMode Mode )
     for( const auto& polygon : Model.mesh.indices )
     {
         for( int i = 0; i < 3; ++i )
-            indices.push_back( polygon.index[i] );
+            indices.push_back( polygon.index_for_buffer[i] );
     }
 
     const D3D11_BUFFER_DESC kIndexBufferDesc =

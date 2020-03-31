@@ -158,9 +158,15 @@
     <ClInclude Include="keyboard_controller.hpp" />
     <ClInclude Include="level_manager.hpp" />
     <ClInclude Include="loader.hpp" />
+    <ClInclude Include="material.hpp" />
+    <ClInclude Include="mesh.hpp" />
+    <ClInclude Include="rendering_engine_child.hpp" />
+    <ClInclude Include="sub_mesh.hpp" />
+    <ClInclude Include="table.hpp" />
     <ClInclude Include="test_level.hpp" />
     <ClInclude Include="texture_loader.hpp" />
     <ClInclude Include="transform3d.hpp" />
+    <ClInclude Include="vertex.hpp" />
     <ClInclude Include="WavefrontOBJ_loader.hpp" />
     <ClInclude Include="utility_function.hpp" />
     <ClInclude Include="error.hpp" />
@@ -188,8 +194,6 @@
     <ClInclude Include="shader_loader.hpp" />
     <ClInclude Include="sphere.hpp" />
     <ClInclude Include="uid.hpp" />
-    <ClInclude Include="vertex_binder.hpp" />
-    <ClInclude Include="mesh.hpp" />
     <ClInclude Include="vertex_shader.hpp" />
     <ClInclude Include="xinput.hpp" />
     <ClInclude Include="xinput_controller.hpp" />

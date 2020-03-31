@@ -33,9 +33,6 @@
     <Filter Include="Project\EasyEngine\04_Shader">
       <UniqueIdentifier>{7d648bd6-e005-4b97-aefb-c34d4e4c2633}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project\EasyEngine\99_System\Rendering\Shader">
-      <UniqueIdentifier>{98857fb5-1de2-4f2b-9bd2-03335a7aab89}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Project\EasyEngine\99_System\Utility">
       <UniqueIdentifier>{341d67f1-f149-4e91-a4c3-bc5311f2a0a5}</UniqueIdentifier>
     </Filter>
@@ -71,6 +68,9 @@
     </Filter>
     <Filter Include="Project\EasyEngine\99_System\Input\Device">
       <UniqueIdentifier>{dab34000-7c3f-43d5-bd34-0ac11aae8b8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\99_System\Rendering\Model">
+      <UniqueIdentifier>{7c6449c7-cdd5-4c6f-a84d-6dc5fdf37057}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -184,29 +184,11 @@
     <ClInclude Include="scene.hpp">
       <Filter>Project\EasyEngine\99_System\Rendering\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="vertex_shader.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="pixel_shader.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="geometry_shader.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="shader.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="vertex_binder.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="scene3d.hpp">
       <Filter>Project\EasyEngine\99_System\Rendering\Scene</Filter>
     </ClInclude>
     <ClInclude Include="easy_engine.hpp">
       <Filter>Project\EasyEngine\99_System</Filter>
-    </ClInclude>
-    <ClInclude Include="model.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="scene2d.hpp">
       <Filter>Project\EasyEngine\99_System\Rendering\Scene</Filter>
@@ -228,9 +210,6 @@
     </ClInclude>
     <ClInclude Include="WavefrontOBJ_loader.hpp">
       <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
-    </ClInclude>
-    <ClInclude Include="mesh.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="loader.hpp">
       <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
@@ -282,6 +261,39 @@
     </ClInclude>
     <ClInclude Include="texture_loader.hpp">
       <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering_engine_child.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="sub_mesh.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="material.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="table.hpp">
+      <Filter>Project\EasyEngine\99_System\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="vertex.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="model.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="vertex_shader.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="geometry_shader.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="pixel_shader.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="shader.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="mesh.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -14,7 +14,7 @@ BEGIN_EGEG
 ///
 struct VertexIndex
 {
-    unsigned index[3];
+    unsigned index_for_buffer[3];
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_VERTEX_INDEX_HEADER_

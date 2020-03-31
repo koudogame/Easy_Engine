@@ -90,7 +90,7 @@ void Scene3D::render(
     HRESULT hr = immediate_context_->Map(
         cbuffers_.at(1).Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped_subresource );
     if( FAILED(hr) ) return;
-    memcpy( mapped_subresource.pData, &camera_->getViewMatrix(), sizeof(DirectX::XMFLOAT4X4) );
+    memcpy( mapped_subresource.pData, &DirectX::XMMatrixIdentity(), sizeof(DirectX::XMFLOAT4X4) );
     immediate_context_->Unmap( cbuffers_.at(1).Get(), 0 );
 
     ID3D11Buffer* buf = cbuffers_.at( 1 ).Get();
@@ -102,14 +102,13 @@ void Scene3D::render(
         auto component = model->getComponent<component::Rendering3D>();
         if( component == nullptr ) continue;
 
-        auto vertex_binder = component->getVertexShader()->getVertexBinder();
-        auto vertex = vertex_binder.bind( component->getMesh() );
+        auto vertex = component->getVertexShader()->bindVertices(model->getComponent<component::Rendering3D>()->getMesh()->vertices);
         if( vertex == false ) continue;
 
         // 頂点情報のセット
         immediate_context_->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST );
         immediate_context_->IASetVertexBuffers( 0, vertex.get().buffers.size(), vertex.get().buffers.data(), vertex.get().strides.data(), vertex.get().offsets.data() );
-        immediate_context_->IASetIndexBuffer( component->getMesh()->getIndexBuffer().Get(), DXGI_FORMAT_R32_UINT, 0 );
+        immediate_context_->IASetIndexBuffer( component->getMesh()->vertices.get<Tag_VertexIndex>().Get(), DXGI_FORMAT_R32_UINT, 0 );
 
         // シェーダ―のセット
         auto setShader = [this]( Shader* Set )
@@ -154,11 +153,15 @@ void Scene3D::render(
         immediate_context_->VSSetConstantBuffers( 2, 1, &world_buf );
 
         // 描画
-        immediate_context_->DrawIndexed(
-            component->getMesh()->getNumVertices(),
-            0,
-            0
-        );
+        for( auto& submesh : model->getComponent<component::Rendering3D>()->getMesh()->submesh_list )
+        {
+            immediate_context_->DrawIndexed(
+                submesh.num_vertices,
+                submesh.start_index,
+                0
+            );
+        }
+        
     }
 
     // 描画終了
