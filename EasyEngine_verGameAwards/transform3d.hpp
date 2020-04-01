@@ -2,11 +2,10 @@
 /// @file   transform3d.hpp
 /// @author î¬èÍ
 ///
-#ifndef INCLUDED_EGEG_TRANSFORM3D_COMPONENT3D_HEADER_
-#define INCLUDED_EGEG_TRANSFORM3D_COMPONENT3D_HEADER_
+#ifndef INCLUDED_EGEG_TRANSFORM3D_COMPONENT_HEADER_
+#define INCLUDED_EGEG_TRANSFORM3D_COMPONENT_HEADER_
 #include "component3d.hpp"
 #include "egeg_math.hpp"
-#include "actor3d.hpp"
 #include "uid.hpp"
 
 BEGIN_EGEG

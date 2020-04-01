@@ -29,6 +29,7 @@ struct Model
     std::unique_ptr<GeometryShaderType> geometry_shader;
     std::unique_ptr<PixelShaderType> pixel_shader;
 };
+
 END_EGEG
 #endif /// !INCLUDED_EGEG_MODEL_HEADER_
 /// EOF

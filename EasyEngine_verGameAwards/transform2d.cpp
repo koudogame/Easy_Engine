@@ -1,19 +1,23 @@
 // ì¬Ò : ”Âê
-#include "rendering3d.hpp"
+#include "transform2d.hpp"
 
 BEGIN_EGEG
 namespace component {
 
-// Rendering3D ŠÖ”’è‹`
+// Transform2D ŠÖ”’è‹`
 /*===========================================================================*/
 // ‰Šú‰»
-bool Rendering3D::initialize()
+bool Transform2D::initialize()
 {
+    position_ = Vector2D( 0.0F, 0.0F );
+    scale_    = Vector2D( 1.0F, 1.0F );
+    rotation_ = 0.0F;
+
     return true;
 }
 
 // I—¹
-void Rendering3D::finalize()
+void Transform2D::finalize()
 {
 
 }

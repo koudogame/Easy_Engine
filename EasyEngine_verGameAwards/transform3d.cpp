@@ -4,7 +4,7 @@
 BEGIN_EGEG
 namespace component {
 
-// Transform3DComponent ŠÖ”’è‹`
+// Transform3D ŠÖ”’è‹`
 /*===========================================================================*/
 // ‰Šú‰»
 bool Transform3D::initialize()

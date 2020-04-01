@@ -69,8 +69,11 @@
     <Filter Include="Project\EasyEngine\99_System\Input\Device">
       <UniqueIdentifier>{dab34000-7c3f-43d5-bd34-0ac11aae8b8d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project\EasyEngine\99_System\Rendering\Model">
+    <Filter Include="Project\EasyEngine\99_System\Rendering\Model%28 3D %29">
       <UniqueIdentifier>{7c6449c7-cdd5-4c6f-a84d-6dc5fdf37057}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\99_System\Rendering\Shader">
+      <UniqueIdentifier>{d0ceaef5-eb4f-4e50-84d7-6deeb409b9c5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +127,9 @@
     </ClCompile>
     <ClCompile Include="texture_loader.cpp">
       <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="transform2d.cpp">
+      <Filter>Project\EasyEngine\01_Component\2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -263,34 +269,43 @@
       <Filter>Project\EasyEngine\99_System\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="sub_mesh.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Model</Filter>
+      <Filter>Project\EasyEngine\99_System\Rendering\Model%28 3D %29</Filter>
     </ClInclude>
     <ClInclude Include="material.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Model</Filter>
+      <Filter>Project\EasyEngine\99_System\Rendering\Model%28 3D %29</Filter>
     </ClInclude>
     <ClInclude Include="table.hpp">
       <Filter>Project\EasyEngine\99_System\Utility</Filter>
     </ClInclude>
     <ClInclude Include="vertex.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Model</Filter>
+      <Filter>Project\EasyEngine\99_System\Rendering\Model%28 3D %29</Filter>
     </ClInclude>
     <ClInclude Include="model.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="vertex_shader.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="geometry_shader.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="pixel_shader.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="shader.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Model</Filter>
+      <Filter>Project\EasyEngine\99_System\Rendering\Model%28 3D %29</Filter>
     </ClInclude>
     <ClInclude Include="mesh.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Model</Filter>
+      <Filter>Project\EasyEngine\99_System\Rendering\Model%28 3D %29</Filter>
+    </ClInclude>
+    <ClInclude Include="component2d.hpp">
+      <Filter>Project\EasyEngine\01_Component\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="transform2d.hpp">
+      <Filter>Project\EasyEngine\01_Component\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering2d.hpp">
+      <Filter>Project\EasyEngine\01_Component\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="shader.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="vertex_shader.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="pixel_shader.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="geometry_shader.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Shader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
