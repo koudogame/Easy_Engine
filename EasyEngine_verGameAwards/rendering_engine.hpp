@@ -13,6 +13,7 @@
 BEGIN_EGEG
 class ShaderLoader;
 class WavefrontOBJLoader;
+class TextureLoader;
 
 ///
 /// @class   RenderingEngine
@@ -36,7 +37,9 @@ public :
     Microsoft::WRL::ComPtr<ID3D11Device> getDevice() const noexcept { return device_; }
     ///< デバイスコンテキストの取得
     Microsoft::WRL::ComPtr<ID3D11DeviceContext> getImmediateContext() const noexcept { return immediate_context_; }
-
+    
+    ///< テクスチャローダーの取得
+    TextureLoader* getTextureLoader() const noexcept { return texture_loader_.get(); }
     ///< シェーダ―ローダーの取得
     ShaderLoader* getShaderLoader() const noexcept { return shader_loader_.get(); }
     ///< モデルローダーの取得
@@ -63,6 +66,7 @@ private :
     Microsoft::WRL::ComPtr<ID3D11Device> device_ = nullptr;
     Microsoft::WRL::ComPtr<ID3D11DeviceContext> immediate_context_ = nullptr;
 
+    std::unique_ptr<TextureLoader> texture_loader_;
     std::unique_ptr<ShaderLoader> shader_loader_;
     std::unique_ptr<WavefrontOBJLoader> model_loader_;
 };

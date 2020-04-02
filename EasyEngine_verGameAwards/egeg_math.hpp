@@ -4,9 +4,12 @@
 ///
 #ifndef INCLUDED_EGEG_MATH_HEADER_
 #define INCLUDED_EGEG_MATH_HEADER_
+
 #include <DirectXMath.h>
 #include "egeg.hpp"
+
 BEGIN_EGEG
+
 // Vector2D 
 /*===========================================================================*/
 struct Vector2D : 
@@ -165,28 +168,87 @@ struct Matrix3x3 :
     Matrix3x3& operator=( DirectX::FXMMATRIX M ) noexcept;
 
     operator DirectX::XMMATRIX() const noexcept;
-    operator bool() const noexcept;
-    operator float() = delete;
-
-    Matrix3x3& operator*=( DirectX::FXMMATRIX M ) noexcept;
 };
-Matrix3x3 operator*( const Matrix3x3& L, const Matrix3x3& R ) noexcept;
 
 // Matrix4x3
 /*===========================================================================*/
+struct Matrix4x3 :
+    public DirectX::XMFLOAT4X3
+{
+public :
+    Matrix4x3() = default;
+    Matrix4x3( const Matrix4x3& ) = default;
+    Matrix4x3& operator=( const Matrix4x3& ) = default;
+    Matrix4x3( Matrix4x3&& ) = default;
+    Matrix4x3& operator=( Matrix4x3&& ) = default;
+
+    constexpr Matrix4x3( float m00, float m01, float m02,
+                         float m10, float m11, float m12,
+                         float m20, float m21, float m22,
+                         float m30, float m31, float m32 ) :
+        XMFLOAT4X3( m00, m01, m02, m10, m11, m12, m20, m21, m22, m30, m31, m32 )
+    {}
+
+    Matrix4x3( DirectX::FXMMATRIX M ) noexcept;
+    Matrix4x3& operator=( DirectX::FXMMATRIX M ) noexcept;
+
+    operator DirectX::XMMATRIX() const noexcept;
+};
 
 // Matrix3x4
 /*===========================================================================*/
+struct Matrix3x4 :
+    public DirectX::XMFLOAT3X4
+{
+public :
+    Matrix3x4() = default;
+    Matrix3x4( const Matrix3x4& ) = default;
+    Matrix3x4& operator=( const Matrix3x4& ) = default;
+    Matrix3x4( Matrix3x4&& ) = default;
+    Matrix3x4& operator=( Matrix3x4&& ) = default;
+
+    constexpr Matrix3x4( float m00, float m01, float m02, float m03,
+                         float m10, float m11, float m12, float m13,
+                         float m20, float m21, float m22, float m23 ) :
+        XMFLOAT3X4( m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23 )
+    {}
+
+    Matrix3x4( DirectX::FXMMATRIX M ) noexcept;
+    Matrix3x4& operator=( DirectX::FXMMATRIX M ) noexcept;
+
+    operator DirectX::XMMATRIX() const noexcept;
+};
 
 // Matrix4x4
 /*===========================================================================*/
 struct Matrix4x4 :
     public DirectX::XMFLOAT4X4
 {
+public :
+    Matrix4x4() = default;
+    Matrix4x4( const Matrix4x4& ) = default;
+    Matrix4x4& operator=( const Matrix4x4& ) = default;
+    Matrix4x4( Matrix4x4&& ) = default;
+    Matrix4x4& operator=( Matrix4x4&& ) = default;
 
+    constexpr Matrix4x4( float m00, float m01, float m02, float m03,
+                         float m10, float m11, float m12, float m13,
+                         float m20, float m21, float m22, float m23,
+                         float m30, float m31, float m32, float m33 ) :
+        XMFLOAT4X4( m00, m01, m02, m03,
+                    m10, m11, m12, m13,
+                    m20, m21, m22, m23,
+                    m30, m31, m32, m33 )
+    {}
+
+    Matrix4x4( DirectX::FXMMATRIX M ) noexcept;
+    Matrix4x4& operator=( DirectX::FXMMATRIX M ) noexcept;
+
+    operator DirectX::XMMATRIX() const noexcept;
 };
 
 #include "egeg_math.inl"
+
 END_EGEG
 #endif /// !INCLUDED_EGEG_MATH_HEADER_
 /// EOF

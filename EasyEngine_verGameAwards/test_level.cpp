@@ -38,7 +38,6 @@ bool TestLevel::initialize()
     model_.vertex_shader = std::move(vs);
     model_.pixel_shader = std::move(ps);
     obj_loader->load( "character.obj", &model_.mesh );
-    // TODO : モデルのメッシュがスマートポインタなので、代入ができない
     
     auto component = actor_.addComponent<component::Rendering3D>();
     component->setModel( model_ );

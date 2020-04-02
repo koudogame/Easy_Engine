@@ -7,6 +7,7 @@
 #define INCLUDED_EGEG_MATH_INLINE_
 
 /*===========================================================================*/
+// Vector2D
 
 inline Vector2D::Vector2D( DirectX::FXMVECTOR V ) noexcept
 {
@@ -115,6 +116,7 @@ inline Vector2D operator/( const Vector2D& L, const float R ) noexcept
 }
 
 /*===========================================================================*/
+// Vector3D
 
 inline Vector3D::Vector3D( DirectX::FXMVECTOR V ) noexcept
 {
@@ -222,6 +224,7 @@ inline Vector3D operator/( const Vector3D& L, const float R ) noexcept
 }
 
 /*===========================================================================*/
+// Vector4D
 
 inline Vector4D::Vector4D( DirectX::FXMVECTOR V ) noexcept
 {
@@ -324,6 +327,7 @@ inline Vector4D operator/( const Vector4D& L, const float R ) noexcept
 }
 
 /*===========================================================================*/
+// Matrix3x3
 
 inline Matrix3x3::Matrix3x3( DirectX::FXMMATRIX M ) noexcept
 {
@@ -332,26 +336,59 @@ inline Matrix3x3::Matrix3x3( DirectX::FXMMATRIX M ) noexcept
 inline Matrix3x3& Matrix3x3::operator=( DirectX::FXMMATRIX M ) noexcept
 {
     DirectX::XMStoreFloat3x3( this, M );
+    return *this;
 }
 inline Matrix3x3::operator DirectX::XMMATRIX() const noexcept
 {
     return DirectX::XMLoadFloat3x3( this );
 }
-inline Matrix3x3::operator bool() const noexcept
+
+/*===========================================================================*/
+// Matrix4x3
+inline Matrix4x3::Matrix4x3( DirectX::FXMMATRIX M ) noexcept
 {
-    return DirectX::XMMatrixIsInfinite( *this );
+    DirectX::XMStoreFloat4x3( this, M );
 }
-inline Matrix3x3& Matrix3x3::operator*=( DirectX::FXMMATRIX M ) noexcept
+inline Matrix4x3& Matrix4x3::operator=( DirectX::FXMMATRIX M ) noexcept
 {
-    *this = this->operator DirectX::XMMATRIX() * M;
+    DirectX::XMStoreFloat4x3( this, M );
     return *this;
 }
-inline Matrix3x3 operator*( const Matrix3x3& L, const Matrix3x3& R ) noexcept
+inline Matrix4x3::operator DirectX::XMMATRIX() const noexcept
 {
-    using namespace DirectX;
-    XMMATRIX temp = L;
-    temp *= R;
-    return temp;
+    return DirectX::XMLoadFloat4x3( this );
+}
+
+/*===========================================================================*/
+// Matrix3x4
+inline Matrix3x4::Matrix3x4( DirectX::FXMMATRIX M ) noexcept
+{
+    DirectX::XMStoreFloat3x4( this, M );
+}
+inline Matrix3x4& Matrix3x4::operator=( DirectX::FXMMATRIX M ) noexcept
+{
+    DirectX::XMStoreFloat3x4( this, M );
+    return *this;
+}
+inline Matrix3x4::operator DirectX::XMMATRIX() const noexcept
+{
+    return DirectX::XMLoadFloat3x4( this );
+}
+
+/*===========================================================================*/
+// Matrix4x4
+inline Matrix4x4::Matrix4x4( DirectX::FXMMATRIX M ) noexcept
+{
+    DirectX::XMStoreFloat4x4( this, M );
+}
+inline Matrix4x4& Matrix4x4::operator=( DirectX::FXMMATRIX M ) noexcept
+{
+    DirectX::XMStoreFloat4x4( this, M );
+    return *this;
+}
+inline Matrix4x4::operator DirectX::XMMATRIX() const noexcept
+{
+    return DirectX::XMLoadFloat4x4( this );
 }
 
 #endif /// !INCLUDED_EGEG_MATH_INLINE_

@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include "utility_function.hpp"
 #include "error.hpp"
+#include "texture_loader.hpp"
 #include "shader_loader.hpp"
 #include "WavefrontOBJ_loader.hpp"
 
@@ -80,6 +81,10 @@ std::shared_ptr<RenderingEngine> RenderingEngine::create()
             throw std::runtime_error( "レンダリングエンジンの生成に失敗しました。" );
         }
     }
+
+    // テクスチャローダーの作成
+    created->texture_loader_ = std::make_unique<TextureLoader>();
+    created->texture_loader_->setRenderingEngine( created.get() );
 
     // シェーダーローダーの作成
     created->shader_loader_ = std::make_unique<ShaderLoader>();

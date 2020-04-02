@@ -10,6 +10,7 @@
 #include <unordered_map>
 #include <fstream>
 #include "rendering_engine_child.hpp"
+#include "texture_loader.hpp"
 #include "detailed_returnvalue.hpp"
 #include "mesh.hpp"
 
@@ -63,17 +64,37 @@ private :
     void loadUseMaterialName( std::fstream& );
     void loadMaterialFile( std::fstream& );
     void loadMaterialName( std::fstream& );
-    void loadMaterialDiffuseColor( std::fstream& );
-    void loadMaterialSpecularColor( std::fstream& );
-    void loadMaterialAmbientColor( std::fstream& );
-    void loadMaterialTransparency( std::fstream& );
-    void loadMaterialRefractiveIndex( std::fstream& );
-    void loadMaterialDiffiuseMap( std::fstream& );
-    void loadMatarialSpecularMap( std::fstream& );
-    void loadMaterialAmbientMap( std::fstream& );
-    void loadMaterialBumpMap( std::fstream& );
-    void loadMaterialTransparencyMap( std::fstream& );
-    void loadmaterialReflectionMap( std::fstream& );
+    template <class MaterialType>
+    void loadMaterialColor( std::fstream& Stream )
+    {
+        DirectX::XMFLOAT3 color;
+        Stream >> color.x >> color.y >> color.z;
+
+        temp_output_.material_list[temp_output_.loading_material_name].set<
+            MaterialType>( color );
+    }
+    template <class MaterialType>
+    void loadMaterialFloat( std::fstream& Stream )
+    {
+        float value;
+        Stream >> value;
+        
+        temp_output_.material_list[temp_output_.loading_material_name].set<
+            MaterialType>( value );
+    }
+    template <class MaterialType>
+    void loadMaterialTexture( std::fstream& Stream )
+    {
+        TextureLoader* texture_loader = engine_->getTextureLoader();
+
+        std::string filename;
+        Stream >> filename;
+        wchar_t* w_filename = new wchar_t[filename.size()];
+        std::mbstowcs( w_filename, filename.c_str(), filename.size() );
+    
+        temp_output_.material_list[temp_output_.loading_material_name].set<
+            MaterialType>( texture_loader->load(w_filename) );
+    }
 
 
     std::unordered_map<std::string, void(WavefrontOBJLoader::*)(std::fstream&)> load_function_list_;

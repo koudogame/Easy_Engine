@@ -1,5 +1,6 @@
 // 作成者 : 板場
 #include "WavefrontOBJ_loader.hpp"
+#include "texture_loader.hpp"
 
 BEGIN_EGEG
 
@@ -25,11 +26,17 @@ void WavefrontOBJLoader::initialize()
     load_function_list_.emplace( "mtllib", &WavefrontOBJLoader::loadMaterialFile );
     load_function_list_.emplace( "usemtl", &WavefrontOBJLoader::loadUseMaterialName );
     load_function_list_.emplace( "newmtl", &WavefrontOBJLoader::loadMaterialName );
-    load_function_list_.emplace( "Kd", &WavefrontOBJLoader::loadMaterialDiffuseColor );
-    load_function_list_.emplace( "Ks", &WavefrontOBJLoader::loadMaterialSpecularColor );
-    load_function_list_.emplace( "Ka", &WavefrontOBJLoader::loadMaterialAmbientColor );
-    load_function_list_.emplace( "d", &WavefrontOBJLoader::loadMaterialTransparency );
-    load_function_list_.emplace( "Ni", &WavefrontOBJLoader::loadMaterialRefractiveIndex );
+    load_function_list_.emplace( "Kd", &WavefrontOBJLoader::loadMaterialColor<Tag_MaterialDiffuseColor> );
+    load_function_list_.emplace( "Ks", &WavefrontOBJLoader::loadMaterialColor<Tag_MaterialSpecularColor> );
+    load_function_list_.emplace( "Ka", &WavefrontOBJLoader::loadMaterialColor<Tag_MaterialAmbientColor> );
+    load_function_list_.emplace( "d", &WavefrontOBJLoader::loadMaterialFloat<Tag_MaterialTransparency> );
+    load_function_list_.emplace( "Ni", &WavefrontOBJLoader::loadMaterialFloat<Tag_MaterialRefractiveIndex> );
+    load_function_list_.emplace( "map_Kd", &WavefrontOBJLoader::loadMaterialTexture<Tag_MaterialDiffuseTexture> );
+    load_function_list_.emplace( "map_Ks", &WavefrontOBJLoader::loadMaterialTexture<Tag_MaterialSpecularTexture> );
+    load_function_list_.emplace( "map_Ka", &WavefrontOBJLoader::loadMaterialTexture<Tag_MaterialAmbientTexture> );
+    load_function_list_.emplace( "map_Bump", &WavefrontOBJLoader::loadMaterialTexture<Tag_MaterialBumpTexture> );
+    load_function_list_.emplace( "map_D", &WavefrontOBJLoader::loadMaterialTexture<Tag_MaterialTransparencyTexture> );
+    load_function_list_.emplace( "refl", &WavefrontOBJLoader::loadMaterialTexture<Tag_MaterialreflectionTexture> );
 }
 
 // ファイル読み込む
@@ -241,53 +248,6 @@ void WavefrontOBJLoader::loadMaterialName( std::fstream& Stream )
 {
     Stream >> temp_output_.loading_material_name;
 }
-
-// マテリアル　拡散色の読み込み
-void WavefrontOBJLoader::loadMaterialDiffuseColor( std::fstream& Stream )
-{
-    float diffuse;
-    Stream >> diffuse;
-
-    temp_output_.material_list[temp_output_.loading_material_name].set<
-        Tag_MaterialDiffuseColor>( diffuse );
-}
-
-// マテリアル　鏡面色の読み込み
-void WavefrontOBJLoader::loadMaterialSpecularColor( std::fstream& Stream )
-{
-    float specular;
-    Stream >> specular;
-    temp_output_.material_list[temp_output_.loading_material_name].set<
-        Tag_MaterialSpecularColor>( specular );
-}
-
-// マテリアル　環境色の読み込み
-void WavefrontOBJLoader::loadMaterialAmbientColor( std::fstream& Stream )
-{
-    float ambient;
-    Stream >> ambient;
-    temp_output_.material_list[temp_output_.loading_material_name].set<
-        Tag_MaterialAmbientColor>( ambient );
-}
-
-// マテリアル　透明度の読み込み
-void WavefrontOBJLoader::loadMaterialTransparency( std::fstream& Stream )
-{
-    float transparency;
-    Stream >> transparency;
-    temp_output_.material_list[temp_output_.loading_material_name].set<
-        Tag_MaterialTransparency>( transparency );
-}
-
-// マテリアル　屈折率の読み込み
-void WavefrontOBJLoader::loadMaterialRefractiveIndex( std::fstream& Stream )
-{
-    float ref_idx;
-    Stream >> ref_idx;
-    temp_output_.material_list[temp_output_.loading_material_name].set<
-        Tag_MaterialRefractiveIndex>( ref_idx );
-}
-
 
 END_EGEG
 // EOF
