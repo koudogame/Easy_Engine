@@ -18,15 +18,10 @@ class Scene :
     NonCopyable<Scene>
 {
 public :
-    template <class DeviceContextType>
-    Scene( DeviceContextType&& ImmediateContext ) :
-        immediate_context_( std::forward<DeviceContextType>(ImmediateContext) )
-    {
-    }
     virtual ~Scene() = default;
 
     ///< 初期化処理
-    virtual bool initialize() = 0;
+    virtual bool initialize( ID3D11Device* Device ) = 0;
 
     ///< 終了処理
     virtual void finalize() = 0;
@@ -34,6 +29,7 @@ public :
     ///
     /// @brief  描画
     ///
+    /// @param[in] ImmediateContext  : デバイスコンテキスト
     /// @param[in] RenderTargetView  : 描画ターゲットビュー
     /// @param[in] Viewports         : ビューポート
     /// @param[in] ScissorRects:     : シザー矩形
@@ -45,7 +41,8 @@ public :
     /// @param[in] BlendFactor       : ブレンドステート定数
     /// @param[in] BlendMask         : ブレンドステートサンプル用マスク
     ///
-    virtual void render( 
+    virtual void render(
+        ID3D11DeviceContext* ImmediateContext,
         const std::vector<ID3D11RenderTargetView*>& RenderTargetViews,
         const std::vector<D3D11_VIEWPORT>& Viewports,
         const std::vector<D3D11_RECT>& ScissorRects,
@@ -56,9 +53,6 @@ public :
         ID3D11BlendState* BlendState = nullptr,
         float* BlendFactor = nullptr,
         UINT BlendMask = 0xFFFFFFFF ) = 0;
-
-protected :
-    Microsoft::WRL::ComPtr<ID3D11DeviceContext> immediate_context_;
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_SCENE_HEADER_

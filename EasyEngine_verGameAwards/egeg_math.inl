@@ -233,6 +233,7 @@ inline Vector4D::Vector4D( DirectX::FXMVECTOR V ) noexcept
 inline Vector4D& Vector4D::operator=( DirectX::FXMVECTOR V ) noexcept
 {
     DirectX::XMStoreFloat4( this, V );
+    return *this;
 }
 inline Vector4D::operator DirectX::XMVECTOR() const noexcept
 {

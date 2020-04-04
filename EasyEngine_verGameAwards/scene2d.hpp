@@ -15,9 +15,6 @@ class Scene2D :
     public Scene
 {
 public :
-    Scene2D( ID3D11DeviceContext* ImmediateContext ) :
-        Scene( ImmediateContext )
-    {}
 
 protected :
 };

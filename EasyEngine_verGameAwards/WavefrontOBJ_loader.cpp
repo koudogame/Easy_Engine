@@ -135,6 +135,7 @@ void WavefrontOBJLoader::loadVertexPosition( std::fstream& Stream )
         pos.x >>
         pos.y >>
         pos.z;
+    pos.z *= -1.0F;     // 右手座標系->左手座標系
 }
 
 // 頂点UV座標の読み込み

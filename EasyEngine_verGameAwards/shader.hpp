@@ -4,9 +4,12 @@
 ///
 #ifndef INCLUDED_EGEG_SHADER_HEADER_
 #define INCLUDED_EGEG_SHADER_HEADER_
+
 #include <d3d11.h>
-#include "egeg.hpp"
+#include "material.hpp"
+
 BEGIN_EGEG
+
 ///
 /// @class  Shader
 /// @brief  シェーダ―オブジェクト基底
@@ -29,7 +32,11 @@ public :
     virtual void setConstantBuffersOnPipeline( ID3D11DeviceContext* ) = 0;
     ///< パイプラインにサンプラーを設定
     virtual void setSamplersOnPipeline( ID3D11DeviceContext* ) = 0;
+
+    ///< シェーダーにマテリアルをセット
+    virtual void setMaterial( const Material& Material ) = 0;
 };
+
 END_EGEG
 #endif /// !INCLUDED_EGEG_SHADER_HEADER_
 /// EOF

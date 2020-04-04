@@ -10,11 +10,9 @@ namespace
     WPARAM getKeyDetails( WPARAM wParam, LPARAM lParam ) noexcept;
 
     constexpr WPARAM kVKProcessKey  = 0xE5; // 漢字、CapsLK の仮想キーコード
-    constexpr uint8_t kScancodeLShift = 0b00101010;
-    constexpr uint8_t kScancodeRShift = 0b00110110;
-    constexpr uint8_t kScancodeKanji  = 0b00101001;
-    constexpr uint8_t kScancodeCapsLOCK = 0b00111010;
-    constexpr uint16_t kExtensionBits = 0b0000000100000000;
+    constexpr uint16_t kScancodeLShift = 0b0000000000101010;
+    constexpr uint16_t kScancodeRShift = 0b0000001101010011;
+    constexpr uint16_t kExtensionBits  = 0b0000000100000000;
 
     constexpr float kReciprocal8 = 1.0F / 8.0F;
 } // unnamed namespace

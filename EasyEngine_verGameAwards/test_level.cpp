@@ -9,23 +9,19 @@ BEGIN_EGEG
 
 bool TestLevel::initialize()
 {
-    if( !scene_.initialize() ) return false;
+    if( !scene_.initialize( EasyEngine::getRenderingEngine()->getDevice().Get()) ) return false;
     if( !actor_.initialize() ) return false;
 
-    camera_position_ = Vector3D{0.0F, 0.0F, -1.0F};
-    camera_focus_ = Vector3D{ 0.0F, 0.0F, 0.1F };
-    DirectX::XMFLOAT4X4 view;
-    DirectX::XMStoreFloat4x4(
-        &view,
+    camera_position_ = Vector3D{ 0.0F, 0.0F, -5.0F };
+    camera_focus_ = Vector3D{ 0.0F, 0.0F, 10.0F };
+    camera_.setViewMatrix(
         DirectX::XMMatrixLookAtLH(
             camera_position_,
             camera_focus_,
             {0.0F, 1.0F, 0.0F}
-        )
+        ) 
     );
-
-    //camera_.setViewMatrix( view );
-    //scene_.setCamera( &camera_ );
+    scene_.setCamera( &camera_ );
     
     actor_.addComponent<component::Transform3D>()->setPosition( {0.0F, 0.0F, 0.0F} );
     actor_.getComponent<component::Transform3D>()->setScale( {0.5F, 0.5F, 0.5F} );
@@ -68,7 +64,7 @@ void TestLevel::update( ID3D11RenderTargetView* RTV )
         DirectX::XMMatrixLookAtLH(
             camera_position_,
             camera_focus_,
-            {0.0F, -1.0F, 0.0F}
+            {0.0F, 1.0F, 0.0F}
         )
     );
     //camera_.setViewMatrix( view );
@@ -83,6 +79,7 @@ void TestLevel::update( ID3D11RenderTargetView* RTV )
         &dc, &rs );
 
     scene_.render(
+        EasyEngine::getRenderingEngine()->getImmediateContext().Get(),
         {RTV},
         {{
             0.0F,

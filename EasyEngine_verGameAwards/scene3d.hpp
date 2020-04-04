@@ -20,12 +20,6 @@ class Scene3D :
     public Scene
 {
 public :
-    template <class DCType>
-    Scene3D( DCType&& ImmediateContext ) :
-        Scene( std::forward<DCType>(ImmediateContext) )
-    {
-    }
-
     ///
     /// @brief  カメラのセット
     ///
@@ -50,9 +44,10 @@ public :
     
 /*-----------------------------------------------------------------*/
 // Scene
-    bool initialize() override;
+    bool initialize( ID3D11Device* ) override;
     void finalize() override;
     void render( 
+        ID3D11DeviceContext* ImmediateContext,
         const std::vector<ID3D11RenderTargetView*>&,
         const std::vector<D3D11_VIEWPORT>&,
         const std::vector<D3D11_RECT>&,

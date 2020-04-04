@@ -30,14 +30,14 @@ class TestCamera :
     public Camera
 {
 public :
-    void setViewMatrix( const DirectX::XMFLOAT4X4& Source )
+    void setViewMatrix( const Matrix4x4& Source )
     {
-        //view_ = Source;
+        view_ = Source;
     }
-    /*DirectX::FXMMATRIX getViewMatrix() const override
+    DirectX::FXMMATRIX getViewMatrix() const override
     {
         return view_;
-    }*/
+    }
 
 private :
     Matrix4x4 view_{};
@@ -100,6 +100,8 @@ public :
     {
         DC->VSSetSamplers( 0, 0, nullptr );
     }
+
+    void setMaterial( const Material& ) override {}
 };
 class TestGS :
     public GeometryShader
@@ -125,6 +127,8 @@ public :
     {
         DC->GSSetSamplers( 0, 0, nullptr );
     }
+
+    void setMaterial( const Material& ) override {}
 };
 class TestPS :
     public PixelShader
@@ -152,6 +156,8 @@ public :
     {
         DC->PSSetSamplers( 0, 0, nullptr );
     }
+
+    void setMaterial( const Material& ) override {}
 };
 
 
@@ -161,8 +167,7 @@ class TestLevel :
 {
 public :
     TestLevel() :
-        Level( nullptr ),
-        scene_( EasyEngine::getRenderingEngine()->getImmediateContext() )
+        Level( nullptr )
     {
     }
 
@@ -174,7 +179,7 @@ public :
 private :
     TestActor actor_;
     Model<TestVS, TestGS, TestPS> model_;
-    //TestCamera camera_;
+    TestCamera camera_;
     Scene3D scene_;
     Vector3D camera_position_;
     Vector3D camera_focus_;
