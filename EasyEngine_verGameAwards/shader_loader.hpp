@@ -136,13 +136,13 @@ private :
         BinaryData() = default;
         BinaryData( const BinaryData& ) = delete;
         BinaryData& operator=( const BinaryData& ) = delete;
-        BinaryData( BinaryData&& Rhs ) :
+        BinaryData( BinaryData&& Rhs ) noexcept :
             bytecode( Rhs.bytecode ),
             length( Rhs.length )
         {
             Rhs.bytecode = nullptr;
         }
-        BinaryData& operator=( BinaryData&& Rhs )
+        BinaryData& operator=( BinaryData&& Rhs ) noexcept
         {
             this->bytecode = Rhs.bytecode;
             this->length = Rhs.length;

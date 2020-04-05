@@ -120,21 +120,33 @@ public :
     KeyboardController( const Keyboard* InputDevice ) noexcept;
 
     ///
-    /// @brief   キーに対応する処理の追加
+    /// @brief   キーに対応する処理の追加( ラムダ式、非メンバ関数用 )
     /// @details 既に処理が登録されている場合、上書きします。
     ///
     /// @param[in] Key      : 処理と紐づけるキー
-    /// @param[in] Function : キーの入力に合わせて呼び出す関数
+    /// @param[in] Function : キーに紐づける処理
     ///
-    template <class FunctionType>
-    void registerFunction( Keys Key, FunctionType&& Function )
+    void registerFunction( Keys Key, void(*Function)(InputDevice::FlagType) )
     {
-        function_list_[enumToValue(Key)] = std::forward<FunctionType>(Function);
+        function_list_[enumToValue(Key)] = Function;
+    }
+    ///
+    /// @brief   キーに対応する処理の追加( メンバ関数用 )
+    /// @details ラムダ用registerFunctionと同じ動作をします。
+    ///
+    /// @param[in] Key      : 処理と紐づけるキー
+    /// @param[in] Owner    : 処理を呼び出すオーナー
+    /// @param[in] Function : キーに紐づける処理
+    ///
+    template <class OwnerType>
+    void registerFunction( Keys Key, OwnerType* Owner, void(OwnerType::*Function)(InputDevice::FlagType) )
+    {
+        registerFunction( Key, std::bind(Function, Owner, std::placeholders::_1) );
     }
 
     ///
     /// @brief   キーに対応する処理の削除
-    /// @details キーの対応した処理が無い場合、何も行いません。<br>
+    /// @details 引数のキーに対応した処理が無い場合、何も行いません。<br>
     ///          registerFunction( Key, nullptr )とした場合と動作が異なります。
     ///
     /// @param[in] Key : 削除する処理に対応したキー

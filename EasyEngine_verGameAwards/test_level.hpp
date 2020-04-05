@@ -12,6 +12,8 @@
 #include "geometry_shader.hpp"
 #include "pixel_shader.hpp"
 #include "egeg_math.hpp"
+#include "xinput_controller.hpp"
+#include "transform3d.hpp"
 
 BEGIN_EGEG
 class TestActor :
@@ -24,6 +26,22 @@ public :
 
     bool initialize() override { return true; }
     void finalize() override {}
+
+    void moveRight( InputDevice::FlagType Input )
+    {
+        if( InputDevice::isInput( Input ) )
+        {
+            auto transform = getComponent<component::Transform3D>();
+            if( transform )
+            {
+                auto position = transform->getPosition();
+                position.x += 1.0F;
+                transform->setPosition( position );
+            }
+        }
+    }
+
+    XInputController* controller;
 };
 
 class TestCamera :

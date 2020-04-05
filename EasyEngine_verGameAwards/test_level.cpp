@@ -37,11 +37,15 @@ bool TestLevel::initialize()
     
     auto component = actor_.addComponent<component::Rendering3D>();
     component->setModel( model_ );
+   
+    actor_.controller = new XInputController( XInputP1::instance() );
+    actor_.controller->registerFunction( XInputController::Buttons::kDpadRight, &actor_, &TestActor::moveRight );
 
     return true;
 }
 void TestLevel::finalize()
 {
+    delete actor_.controller;
     actor_.finalize();
     scene_.finalize();
 }
@@ -53,10 +57,10 @@ void TestLevel::update( ID3D11RenderTargetView* RTV )
     if( XInputP1::instance()->getState().dpad_up )    after.z += 0.1F;
     if( XInputP1::instance()->getState().dpad_down )  after.z -= 0.1F;
     if( XInputP1::instance()->getState().dpad_left )  after.x -= 0.1F;
-    if( XInputP1::instance()->getState().dpad_right ) after.x += 0.1F;
+    //if( XInputP1::instance()->getState().dpad_right ) after.x += 0.1F;
     actor_.getComponent<component::Transform3D>()->setPosition( after );
 
-
+    actor_.controller->update();
 
     DirectX::XMFLOAT4X4 view;
     DirectX::XMStoreFloat4x4(
