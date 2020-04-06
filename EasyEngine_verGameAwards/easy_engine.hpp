@@ -6,6 +6,7 @@
 #define INCLUDED_EGEG_EASY_ENGINE_HEADER_
 
 #include "detailed_returnvalue.hpp"
+#include "input_device_manager.hpp"
 #include "rendering_manager.hpp"
 #include "job_scheduler.hpp"
 
@@ -22,7 +23,8 @@ public :
     static void finalize();
 
     static HWND getWindowHandle() noexcept;
-    static std::shared_ptr<RenderingManager> getRenderingManager() noexcept;
+    static InputDeviceManager* getInputDeviceManager() noexcept;
+    static RenderingManager* getRenderingManager() noexcept;
     static JobScheduler<Job<void(uint64_t)>>* getTaskManager() noexcept;
 
 private :

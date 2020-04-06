@@ -131,6 +131,9 @@
     <ClCompile Include="rendering_manager.cpp">
       <Filter>Project\EasyEngine\99_System\Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="input_device_manager.cpp">
+      <Filter>Project\EasyEngine\99_System\Input\Device</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="egeg_math.hpp">
@@ -309,6 +312,9 @@
     </ClInclude>
     <ClInclude Include="task.hpp">
       <Filter>Project\EasyEngine\02_TaskSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="input_device_manager.hpp">
+      <Filter>Project\EasyEngine\99_System\Input\Device</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

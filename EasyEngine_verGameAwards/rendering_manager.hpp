@@ -24,13 +24,12 @@ class TextureLoader;
 /// @details シングルトンクラスです。
 ///
 class RenderingManager final :
-    public std::enable_shared_from_this<RenderingManager>,
     NonCopyable<RenderingManager>
 {
 public :
     ~RenderingManager();
 
-    static std::shared_ptr<RenderingManager> create();
+    static std::unique_ptr<RenderingManager> create();
 
 /* 取得関数 */
 

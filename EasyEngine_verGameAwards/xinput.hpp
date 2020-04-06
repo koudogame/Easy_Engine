@@ -66,12 +66,8 @@ class XInputImpl :
     public XInput
 {
 public :
-    static XInputImpl* instance() noexcept { static XInputImpl i; return &i; }
-
-    void update() override;
-
-private :
     XInputImpl() = default;
+    void update() override;
 };
 
 using XInputP1 = XInputImpl<0U>;    ///< ゲームパッド 0

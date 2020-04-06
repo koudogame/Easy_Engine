@@ -38,13 +38,13 @@ RenderingManager::~RenderingManager()
 }
 
 // レンダリングエンジン生成
-std::shared_ptr<RenderingManager> RenderingManager::create()
+std::unique_ptr<RenderingManager> RenderingManager::create()
 {
 #ifdef _DEBUG
     static unsigned created_cnt;
-    assert( !created_cnt++ && "RenderingEngineはSingletonクラスです。" );
+    assert( !created_cnt++ && "RenderingManagerはシングルトンクラスです。" );
 #endif
-    std::shared_ptr<RenderingManager> created( new RenderingManager() );
+    std::unique_ptr<RenderingManager> created( new RenderingManager() );
 
 
     HRESULT hr = D3D11CreateDevice(

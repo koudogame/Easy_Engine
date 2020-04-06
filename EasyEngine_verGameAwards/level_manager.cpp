@@ -10,7 +10,7 @@ BEGIN_EGEG
 std::unique_ptr<Level> LevelManager::createLevel( uint32_t ID )
 {
     std::unique_ptr<Level> ptr( LevelFactory::create(ID, this) );
-    if( !ptr && ptr->initialize() ) return ptr;
+    if( ptr && ptr->initialize() ) return ptr;
 
     ptr.reset( nullptr );
     return ptr;

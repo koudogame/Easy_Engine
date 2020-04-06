@@ -15,7 +15,8 @@ BEGIN_EGEG
 struct EasyEngine::Impl
 {
     HWND h_wnd_;
-    std::shared_ptr<RenderingManager> rendering_manager_;
+    std::unique_ptr<InputDeviceManager> input_device_manager_;
+    std::unique_ptr<RenderingManager> rendering_manager_;
     JobScheduler<Job<void(uint64_t)>> task_manager;
 
     bool createWindow();
@@ -56,7 +57,14 @@ DetailedReturnValue<bool> EasyEngine::initialize()
         return RetTy( false, "ウィンドウの生成に失敗" );
     ShowWindow( p_impl_->h_wnd_, SW_NORMAL );
 
-    // レンダリングエンジンを設定
+    // 入力デバイスマネージャーを生成
+    try {
+        p_impl_->input_device_manager_ = InputDeviceManager::create();
+    } catch( std::bad_alloc& e ) {
+        return RetTy( false, e.what() );
+    }
+
+    // レンダリングマネージャ―を生成
     try {
         p_impl_->rendering_manager_ = RenderingManager::create();
     } catch( const std::runtime_error& e ) {
@@ -81,10 +89,16 @@ HWND EasyEngine::getWindowHandle() noexcept
     return p_impl_->h_wnd_;
 }
 
-// レンダリングエンジンの取得
-std::shared_ptr<RenderingManager> EasyEngine::getRenderingManager() noexcept
+// 入力デバイスマネージャ―の取得
+InputDeviceManager* EasyEngine::getInputDeviceManager() noexcept
 {
-    return p_impl_->rendering_manager_;
+    return p_impl_->input_device_manager_.get();
+}
+
+// レンダリングエンジンの取得
+RenderingManager* EasyEngine::getRenderingManager() noexcept
+{
+    return p_impl_->rendering_manager_.get();
 }
 
 // タスクマネージャ―の取得
@@ -179,7 +193,7 @@ LRESULT CALLBACK WinProc( HWND hWnd, UINT Message, WPARAM wParam, LPARAM lParam 
 
     case WM_KEYUP :
     case WM_SYSKEYUP :
-        EGEG Keyboard::instance()->eventProcessing( Message, wParam, lParam );
+        EGEG EasyEngine::getInputDeviceManager()->inputEventProcessing( Message, wParam, lParam );
         return 0;
 
     case WM_DESTROY:

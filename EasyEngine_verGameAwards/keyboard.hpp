@@ -125,13 +125,12 @@ public :
         FlagType padding14[11];         // 0xF4 ~ 0xFE
     };
 
-    ///< インスタンスの取得
-    static Keyboard* instance() noexcept { static Keyboard i; return &i; }
+    Keyboard() noexcept;
 
     ///
     /// @brief  イベント処理
     ///
-    /// @param[in] Message : イベントめせーじ
+    /// @param[in] Message : イベントメッセージ
     /// @param[in] wParam  : 仮想キーコードを格納したパラメータ
     /// @param[in] lParam  : キーデータを格納したパラメータ
     ///
@@ -147,8 +146,6 @@ public :
 /*-----------------------------------------------------------------*/
 
 private :
-    Keyboard() noexcept;
-
     void keyDown( uint8_t ) noexcept;
     void keyUp( uint8_t ) noexcept;
     FlagType newState( uint8_t ) noexcept;

@@ -23,6 +23,15 @@ public :
     {
         job_list_.reserve( Reserved );
     }
+    ///< デストラクタ
+    ~JobContainer()
+    {
+        // ジョブを走査
+        for( auto job : job_list_ )
+        { // 自身に登録してあるジョブを解除
+            job->exitFromContainer();
+        }
+    }
 
     ///
     /// @brief  ジョブの登録

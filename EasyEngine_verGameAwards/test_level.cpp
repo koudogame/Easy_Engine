@@ -38,7 +38,7 @@ bool TestLevel::initialize()
     auto component = actor_.addComponent<component::Rendering3D>();
     component->setModel( model_ );
    
-    actor_.controller = new XInputController( XInputP1::instance() );
+    actor_.controller = new XInputController( EasyEngine::getInputDeviceManager()->connectDevice<XInputP1>() );
     actor_.controller->registerFunction( XInputController::Buttons::kDpadRight, &actor_, &TestActor::moveRight );
     actor_.controller->registerFunction(
         XInputController::Sticks::kLeftStick,
@@ -67,10 +67,10 @@ void TestLevel::finalize()
 void TestLevel::update( ID3D11RenderTargetView* RTV )
 {
     Vector3D after = actor_.getComponent<component::Transform3D>()->getPosition();
-    XInputP1::instance()->update();
-    if( XInputP1::instance()->getState().dpad_up )    after.z += 0.1F;
-    if( XInputP1::instance()->getState().dpad_down )  after.z -= 0.1F;
-    if( XInputP1::instance()->getState().dpad_left )  after.x -= 0.1F;
+    auto& state = EasyEngine::getInputDeviceManager()->getDevice<XInputP1>()->getState();
+    if( state.dpad_up )    after.z += 0.1F;
+    if( state.dpad_down )  after.z -= 0.1F;
+    if( state.dpad_left )  after.x -= 0.1F;
     //if( XInputP1::instance()->getState().dpad_right ) after.x += 0.1F;
     actor_.getComponent<component::Transform3D>()->setPosition( after );
 
