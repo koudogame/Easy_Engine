@@ -64,7 +64,7 @@ private :
             Registerer()
             {
                 IDFunctorType id;
-                Factory::registration( id() );
+                Factory::registration<Element>( id() );
             }
         };
         static Registerer register_;
@@ -78,13 +78,13 @@ public :
     ///
     /// @param[in] ID : クラスと紐づけるID
     ///
-    template <class ObjectType>
+    template <class CreatorType>
     static void registration( uint32_t ID )
     {
         if( creator_list_.find( ID ) == creator_list_.end() )
         { // 既に登録されているオブジェクトはここで弾く
             // Attention : メモリ割り当てを避けるためにあえて弾いている。
-            creator_list_.emplace( ID, new typename ObjectType::Element() );
+            creator_list_.emplace( ID, new CreatorType() );
         }
     }
 

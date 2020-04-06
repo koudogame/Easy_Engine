@@ -47,9 +47,9 @@ public :
     ///
     /// @param[in] Container : 所属するコンテナ
     ///
-    void setContainer( JobContainer<Job<RetValType(ArgTypes...)>>* Container ) { exitFromContainer(); container_ = Container; }
+    void setContainer( JobContainer<Job>* Container ) { exitFromContainer(); container_ = Container; }
     ///< 所属するコンテナの取得
-    JobContainer<Job<RetValType(ArgTypes...)>>* getContainer() const noexcept { return container_; }
+    JobContainer<Job>* getContainer() const noexcept { return container_; }
 
     ///
     /// @brief   所持しているジョブの実行
@@ -75,7 +75,7 @@ public :
 
 private :
     std::function<RetValType(ArgTypes...)> job_;
-    JobContainer<Job<RetValType(ArgTypes...)>>* container_ = nullptr;
+    JobContainer<Job>* container_ = nullptr;
 };
 
 END_EGEG

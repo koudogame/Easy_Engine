@@ -126,9 +126,10 @@ public :
     /// @param[in] Key      : 処理と紐づけるキー
     /// @param[in] Function : キーに紐づける処理
     ///
-    void registerFunction( Keys Key, void(*Function)(InputDevice::FlagType) )
+    template <class FunctionType>
+    void registerFunction( Keys Key, FunctionType&& Function )
     {
-        function_list_[enumToValue(Key)] = Function;
+        function_list_[enumToValue(Key)] = std::forward<FunctionType>(Function);
     }
     ///
     /// @brief   キーに対応する処理の追加( メンバ関数用 )

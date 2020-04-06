@@ -16,18 +16,32 @@ BEGIN_EGEG
 /// @brief  タスクマネージャーに登録する単位
 ///
 class Task :
-    Job<void(uint64_t)>
+    protected Job<void(uint64_t)>
 {
 public :
-    using Job<void(uint64_t)>::operator();
-    using Job<void(uint64_t)>::setContainer;
-    using Job<void(uint64_t)>::exitFromContainer;
+    using Job::operator();
+    using Job::setContainer;
+    using Job::exitFromContainer;
 
+    ///
+    /// @brief   ジョブとして実行する関数のセット
+    /// @details ex.) .setJob( this, &Hoge::update );   <br>
+    ///          セットする関数は、                     <br>
+    ///            「メンバ関数」                       <br>
+    ///            「戻り値void」                       <br>
+    ///            「引数uint64_t」                     <br>
+    ///          という要件を満たしてください。
+    ///
+    /// @param[in] Owner    : 関数の実行者
+    /// @param[in] Function : 実行する関数( メンバ関数 )
+    ///
     template <class OwnerType>
     void setJob( OwnerType* Owner, void(OwnerType::*Function)(uint64_t) )
     {
-        Job<void(uint64_t)>::setJob( std::bind(Function, Owner, std::placeholders::_1) );
+        Job::setJob( std::bind(Function, Owner, std::placeholders::_1) );
     }
+
+    Job* operator&() { return this; }
 };
 
 END_EGEG

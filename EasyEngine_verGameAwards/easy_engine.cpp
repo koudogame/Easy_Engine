@@ -4,7 +4,6 @@
 #include <tchar.h>
 #include "application_status.hpp"
 #include "keyboard.hpp"
-#include "task.hpp"
 
 // ウィンドウプロシージャ関数宣言
 LRESULT CALLBACK WinProc( HWND, UINT, WPARAM, LPARAM );
@@ -17,7 +16,7 @@ struct EasyEngine::Impl
 {
     HWND h_wnd_;
     std::shared_ptr<RenderingManager> rendering_manager_;
-    JobScheduler<Task> task_manager;
+    JobScheduler<Job<void(uint64_t)>> task_manager;
 
     bool createWindow();
 };
@@ -89,7 +88,7 @@ std::shared_ptr<RenderingManager> EasyEngine::getRenderingManager() noexcept
 }
 
 // タスクマネージャ―の取得
-JobScheduler<Task>* EasyEngine::getTaskManager() noexcept
+JobScheduler<Job<void(uint64_t)>>* EasyEngine::getTaskManager() noexcept
 {
     return &p_impl_->task_manager;
 }
