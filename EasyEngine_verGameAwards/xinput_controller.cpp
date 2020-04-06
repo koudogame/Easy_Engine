@@ -2,6 +2,7 @@
 #include "xinput_controller.hpp"
 
 BEGIN_EGEG
+
 // XInputController 関数実装
 /*===========================================================================*/
 // コンストラクタ
@@ -42,5 +43,6 @@ void XInputController::update()
         callFuncSafe( stick_func_list_, Sticks::kRightStick, state.right_thumbstick_x, state.right_thumbstick_y );
     }
 }
+
 END_EGEG
 // EOF

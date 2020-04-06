@@ -1,33 +1,36 @@
 ///
-/// @file   rendering_engine.hpp
+/// @file   rendering_manager.hpp
 /// @author 板場
 ///
-#ifndef INCLUDED_EGEG_RENDERING_ENGINE_HEADER_
-#define INCLUDED_EGEG_RENDERING_ENGINE_HEADER_
+#ifndef INCLUDED_EGEG_RENDERING_MANAGER_HEADER_
+#define INCLUDED_EGEG_RENDERING_MANAGER_HEADER_
+
 #include <memory>
 #include <unordered_map>
 #include <wrl.h>
 #include <d3d11.h>
 #include "noncopyable.hpp"
 #include "detailed_returnvalue.hpp"
+
 BEGIN_EGEG
+
 class ShaderLoader;
 class WavefrontOBJLoader;
 class TextureLoader;
 
 ///
-/// @class   RenderingEngine
-/// @brief   描画エンジン
+/// @class   RenderingManager
+/// @brief   描画管理クラス
 /// @details シングルトンクラスです。
 ///
-class RenderingEngine final :
-    public std::enable_shared_from_this<RenderingEngine>,
-    NonCopyable<RenderingEngine>
+class RenderingManager final :
+    public std::enable_shared_from_this<RenderingManager>,
+    NonCopyable<RenderingManager>
 {
 public :
-    ~RenderingEngine();
+    ~RenderingManager();
 
-    static std::shared_ptr<RenderingEngine> create();
+    static std::shared_ptr<RenderingManager> create();
 
 /* 取得関数 */
 
@@ -60,7 +63,7 @@ public :
     DetailedReturnValue<bool> createBuffer( D3D11_BUFFER_DESC* BufferDesc, const std::vector<DataType>& Source, ID3D11Buffer** Output );
 
 private :
-    RenderingEngine() = default;
+    RenderingManager() = default;
 
     D3D_FEATURE_LEVEL feature_level_;
     Microsoft::WRL::ComPtr<ID3D11Device> device_ = nullptr;
@@ -73,7 +76,7 @@ private :
 
 // バッファオブジェクトの生成
 template <class DataType>
-DetailedReturnValue<bool> RenderingEngine::createBuffer( D3D11_BUFFER_DESC* Desc, const std::vector<DataType>& Source, ID3D11Buffer** Output )
+DetailedReturnValue<bool> RenderingManager::createBuffer( D3D11_BUFFER_DESC* Desc, const std::vector<DataType>& Source, ID3D11Buffer** Output )
 {
     using RetTy = DetailedReturnValue<bool>;
 
@@ -89,5 +92,5 @@ DetailedReturnValue<bool> RenderingEngine::createBuffer( D3D11_BUFFER_DESC* Desc
 }
 
 END_EGEG
-#endif /// !INCLUDED_EGEG_RENDERING_ENGINE_HEADER_
+#endif /// !INCLUDED_EGEG_RENDERING_MANAGER_HEADER_
 /// EOF

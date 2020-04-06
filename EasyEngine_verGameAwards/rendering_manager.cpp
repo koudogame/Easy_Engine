@@ -1,5 +1,5 @@
 // 作成者 : 板場
-#include "rendering_engine.hpp"
+#include "rendering_manager.hpp"
 #ifdef _DEBUG
 #include <cassert>
 #endif
@@ -30,21 +30,21 @@ namespace
 
 BEGIN_EGEG
 
-// RenderingEngine 関数定義
+// RenderingManager 関数定義
 /*===========================================================================*/
 // Dtor
-RenderingEngine::~RenderingEngine()
+RenderingManager::~RenderingManager()
 {
 }
 
 // レンダリングエンジン生成
-std::shared_ptr<RenderingEngine> RenderingEngine::create()
+std::shared_ptr<RenderingManager> RenderingManager::create()
 {
 #ifdef _DEBUG
     static unsigned created_cnt;
     assert( !created_cnt++ && "RenderingEngineはSingletonクラスです。" );
 #endif
-    std::shared_ptr<RenderingEngine> created( new RenderingEngine() );
+    std::shared_ptr<RenderingManager> created( new RenderingManager() );
 
 
     HRESULT hr = D3D11CreateDevice(

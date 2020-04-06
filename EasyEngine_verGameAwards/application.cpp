@@ -11,6 +11,7 @@
 
 #include "test_level.hpp"
 #include "keyboard_controller.hpp"
+#include "task.hpp"
 
 
 #pragma comment( lib, "dxgi.lib" )
@@ -66,7 +67,7 @@ void Application::mainloop()
         sc_desc.Windowed = true;
         sc_desc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
     hr = factory->CreateSwapChain(
-        EasyEngine::getRenderingEngine()->getDevice().Get(),
+        EasyEngine::getRenderingManager()->getDevice().Get(),
         &sc_desc,
         &sc
     );
@@ -79,7 +80,7 @@ void Application::mainloop()
     );
     if( FAILED(hr) ) _asm int 3;
     ComPtr<ID3D11RenderTargetView> render_target;
-    EasyEngine::getRenderingEngine()->getDevice()->
+    EasyEngine::getRenderingManager()->getDevice()->
     CreateRenderTargetView(
         back_buffer.Get(),
         nullptr,
@@ -115,9 +116,10 @@ void Application::mainloop()
             if( duration_cast<microseconds>(erapsed_time).count() >= TimePerFrame<>::value )
             {
                 last_time = curr_time;
+                EasyEngine::getTaskManager()->execute( duration_cast<milliseconds>(erapsed_time).count() );
 
                 float backcolor[4] = { 1.0F, 1.0F, 1.0F, 1.0F };
-                EasyEngine::getRenderingEngine()->getImmediateContext()->
+                EasyEngine::getRenderingManager()->getImmediateContext()->
                 ClearRenderTargetView(
                     render_target.Get(),
                     backcolor

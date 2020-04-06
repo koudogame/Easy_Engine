@@ -4,6 +4,7 @@
 #include <tchar.h>
 #include "application_status.hpp"
 #include "keyboard.hpp"
+#include "task.hpp"
 
 // ウィンドウプロシージャ関数宣言
 LRESULT CALLBACK WinProc( HWND, UINT, WPARAM, LPARAM );
@@ -15,7 +16,8 @@ BEGIN_EGEG
 struct EasyEngine::Impl
 {
     HWND h_wnd_;
-    std::shared_ptr<RenderingEngine> rendering_engine_;
+    std::shared_ptr<RenderingManager> rendering_manager_;
+    JobScheduler<Task> task_manager;
 
     bool createWindow();
 };
@@ -57,7 +59,7 @@ DetailedReturnValue<bool> EasyEngine::initialize()
 
     // レンダリングエンジンを設定
     try {
-        p_impl_->rendering_engine_ = RenderingEngine::create();
+        p_impl_->rendering_manager_ = RenderingManager::create();
     } catch( const std::runtime_error& e ) {
         return RetTy( false, e.what() );
     } catch( const std::bad_alloc& e ) {
@@ -81,9 +83,15 @@ HWND EasyEngine::getWindowHandle() noexcept
 }
 
 // レンダリングエンジンの取得
-std::shared_ptr<RenderingEngine> EasyEngine::getRenderingEngine() noexcept
+std::shared_ptr<RenderingManager> EasyEngine::getRenderingManager() noexcept
 {
-    return p_impl_->rendering_engine_;
+    return p_impl_->rendering_manager_;
+}
+
+// タスクマネージャ―の取得
+JobScheduler<Task>* EasyEngine::getTaskManager() noexcept
+{
+    return &p_impl_->task_manager;
 }
 
 // EasyEngine::Impl 関数定義

@@ -25,18 +25,15 @@ bool Scene3D::initialize( ID3D11Device* Device )
     );
     D3D11_SUBRESOURCE_DATA srd {};
     srd.pSysMem = &projection;
-    HRESULT hr = Device->CreateBuffer( 
-        &desc, &srd, &cbuffers_.at(0) );
+    HRESULT hr = Device->CreateBuffer( &desc, &srd, &cbuffers_.at(0) );
     if( FAILED(hr) ) return false;
 
     // ビュー変換行列用定数バッファの作成
-    hr = Device->CreateBuffer(
-        &desc, nullptr, &cbuffers_.at(1) );
+    hr = Device->CreateBuffer( &desc, nullptr, &cbuffers_.at(1) );
     if( FAILED(hr) ) return false;
 
     // ワールド変換行列用定数バッファの作成
-    hr = Device->CreateBuffer(
-        &desc, nullptr, &cbuffers_.at(2) );
+    hr = Device->CreateBuffer( &desc, nullptr, &cbuffers_.at(2) );
     if( FAILED(hr) ) return false;
     
     return true;
@@ -46,6 +43,12 @@ bool Scene3D::initialize( ID3D11Device* Device )
 void Scene3D::finalize()
 {
 
+}
+
+// 準備
+void Scene3D::prepare()
+{
+    model_list_.clear();
 }
 
 // 描画
@@ -83,8 +86,8 @@ void Scene3D::render(
     
 
     // 射影変換行列の設定
-    ID3D11Buffer* buf = cbuffers_.at( 0 ).Get();
-    ImmediateContext->VSSetConstantBuffers( 0, 1, &buf );
+    ID3D11Buffer* buf[2];
+    buf[0] = cbuffers_.at( 0 ).Get();
 
     // ビュー変換行列の設定
     D3D11_MAPPED_SUBRESOURCE mapped_subresource;
@@ -96,8 +99,8 @@ void Scene3D::render(
     memcpy( mapped_subresource.pData, &view, sizeof(DirectX::XMFLOAT4X4) );
     ImmediateContext->Unmap( cbuffers_.at(1).Get(), 0 );
 
-    buf = cbuffers_.at( 1 ).Get();
-    ImmediateContext->VSSetConstantBuffers( 1, 1, &buf );
+    buf[1] = cbuffers_.at( 1 ).Get();
+    ImmediateContext->VSSetConstantBuffers( 0, 2, buf );
 
     // モデルの描画
     for( auto& model : model_list_ )
@@ -105,7 +108,7 @@ void Scene3D::render(
         auto component = model->getComponent<component::Rendering3D>();
         if( component == nullptr ) continue;
 
-        auto vertex = component->getVertexShader()->bindVertices(model->getComponent<component::Rendering3D>()->getMesh()->vertices);
+        auto vertex = component->getVertexShader()->bindVertices(component->getMesh()->vertices);
         if( vertex == false ) continue;
 
         // 頂点情報のセット
@@ -131,25 +134,27 @@ void Scene3D::render(
         hr = ImmediateContext->Map(
         cbuffers_.at(2).Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped_subresource );
         if( FAILED(hr) ) return;
-            DirectX::XMFLOAT4X4 world;
-        auto transform = model->getComponent<component::Transform3D>();
-        if( transform )
-        {
+        DirectX::XMFLOAT4X4 world;
+        if( auto transform = model->getComponent<component::Transform3D>() )
+        { // 座標変換コンポーネントがある場合、変換行列を作成
             Matrix4x4 translation = DirectX::XMMatrixTranslationFromVector( transform->getPosition() );
-            Matrix4x4 scaling = DirectX::XMMatrixScalingFromVector( transform->getPosition() );
+            Matrix4x4 scaling = DirectX::XMMatrixScalingFromVector( transform->getScale() );
+            Matrix4x4 rotation = DirectX::XMMatrixRotationRollPitchYawFromVector( transform->getRotation() );
             DirectX::XMMATRIX wor = DirectX::XMMatrixMultiply(translation, scaling);
-            DirectX::XMStoreFloat4x4( &world, DirectX::XMMatrixTranspose(translation) );
+            wor = DirectX::XMMatrixMultiply( wor, rotation );
+            DirectX::XMStoreFloat4x4( &world, DirectX::XMMatrixTranspose(wor) );
         }
         else
+        { // 座標変換コンポーネントがない場合、単位行列を変換行列とする。
             DirectX::XMStoreFloat4x4( &world, DirectX::XMMatrixIdentity() );
-
+        }
         memcpy( mapped_subresource.pData, &world, sizeof world );
         ImmediateContext->Unmap( cbuffers_.at(2).Get(), 0 );
         ID3D11Buffer* world_buf = cbuffers_.at( 2 ).Get();
         ImmediateContext->VSSetConstantBuffers( 2, 1, &world_buf );
 
         // 描画
-        for( auto& submesh : model->getComponent<component::Rendering3D>()->getMesh()->submesh_list )
+        for( auto& submesh : component->getMesh()->submesh_list )
         {
             ImmediateContext->DrawIndexed(
                 submesh.num_vertices,
@@ -157,11 +162,7 @@ void Scene3D::render(
                 0
             );
         }
-        
     }
-
-    // 描画終了
-    model_list_.clear();
 }
 
 END_EGEG

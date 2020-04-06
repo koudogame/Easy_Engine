@@ -51,9 +51,6 @@
     <Filter Include="Project\EasyEngine\01_Component">
       <UniqueIdentifier>{365f1458-5657-4580-824e-865cfd79ea6d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project\EasyEngine\02_JobScheduler">
-      <UniqueIdentifier>{0f22ccfb-dd3f-4172-a500-2c1b668fb2b5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Project\EasyEngine\03_Shape">
       <UniqueIdentifier>{f7f1c23e-28fa-4dd0-87d0-b6ffb10025ec}</UniqueIdentifier>
     </Filter>
@@ -75,6 +72,9 @@
     <Filter Include="Project\EasyEngine\99_System\Rendering\Shader">
       <UniqueIdentifier>{d0ceaef5-eb4f-4e50-84d7-6deeb409b9c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\EasyEngine\02_TaskSystem">
+      <UniqueIdentifier>{0f22ccfb-dd3f-4172-a500-2c1b668fb2b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -85,9 +85,6 @@
     </ClCompile>
     <ClCompile Include="application.cpp">
       <Filter>Project\EasyEngine\99_System</Filter>
-    </ClCompile>
-    <ClCompile Include="rendering_engine.cpp">
-      <Filter>Project\EasyEngine\99_System\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="shader_loader.cpp">
       <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
@@ -131,6 +128,9 @@
     <ClCompile Include="transform2d.cpp">
       <Filter>Project\EasyEngine\01_Component\2D</Filter>
     </ClCompile>
+    <ClCompile Include="rendering_manager.cpp">
+      <Filter>Project\EasyEngine\99_System\Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="egeg_math.hpp">
@@ -168,18 +168,6 @@
     </ClInclude>
     <ClInclude Include="application_status.hpp">
       <Filter>Project\EasyEngine\99_System</Filter>
-    </ClInclude>
-    <ClInclude Include="job_container.hpp">
-      <Filter>Project\EasyEngine\02_JobScheduler</Filter>
-    </ClInclude>
-    <ClInclude Include="job.hpp">
-      <Filter>Project\EasyEngine\02_JobScheduler</Filter>
-    </ClInclude>
-    <ClInclude Include="job_scheduler.hpp">
-      <Filter>Project\EasyEngine\02_JobScheduler</Filter>
-    </ClInclude>
-    <ClInclude Include="rendering_engine.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="shader_loader.hpp">
       <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
@@ -265,9 +253,6 @@
     <ClInclude Include="texture_loader.hpp">
       <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
     </ClInclude>
-    <ClInclude Include="rendering_engine_child.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="sub_mesh.hpp">
       <Filter>Project\EasyEngine\99_System\Rendering\Model%28 3D %29</Filter>
     </ClInclude>
@@ -306,6 +291,24 @@
     </ClInclude>
     <ClInclude Include="geometry_shader.hpp">
       <Filter>Project\EasyEngine\99_System\Rendering\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering_manager.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering_manager_child.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="job_scheduler.hpp">
+      <Filter>Project\EasyEngine\99_System\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="job_container.hpp">
+      <Filter>Project\EasyEngine\99_System\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="job.hpp">
+      <Filter>Project\EasyEngine\99_System\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="task.hpp">
+      <Filter>Project\EasyEngine\02_TaskSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

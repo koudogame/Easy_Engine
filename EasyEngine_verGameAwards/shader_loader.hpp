@@ -7,7 +7,7 @@
 #include <fstream>
 #include <memory>
 #include <unordered_map>
-#include "rendering_engine_child.hpp"
+#include "rendering_manager_child.hpp"
 #include "utility_function.hpp"
 #include "detailed_returnvalue.hpp"
 BEGIN_EGEG
@@ -16,7 +16,7 @@ BEGIN_EGEG
 /// @brief  シェーダーローダー
 ///
 class ShaderLoader :
-    public RenderingEngineChild
+    public RenderingManagerChild
 {
 public :
     template <class ReturnType>

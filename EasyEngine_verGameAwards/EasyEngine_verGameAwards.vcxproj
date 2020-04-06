@@ -161,9 +161,10 @@
     <ClInclude Include="material.hpp" />
     <ClInclude Include="mesh.hpp" />
     <ClInclude Include="rendering2d.hpp" />
-    <ClInclude Include="rendering_engine_child.hpp" />
+    <ClInclude Include="rendering_manager_child.hpp" />
     <ClInclude Include="sub_mesh.hpp" />
     <ClInclude Include="table.hpp" />
+    <ClInclude Include="task.hpp" />
     <ClInclude Include="test_level.hpp" />
     <ClInclude Include="texture_loader.hpp" />
     <ClInclude Include="transform2d.hpp" />
@@ -178,7 +179,7 @@
     <ClInclude Include="noncopyable.hpp" />
     <ClInclude Include="pixel_shader.hpp" />
     <ClInclude Include="rendering3d.hpp" />
-    <ClInclude Include="rendering_engine.hpp" />
+    <ClInclude Include="rendering_manager.hpp" />
     <ClInclude Include="input_device.hpp" />
     <ClInclude Include="job.hpp" />
     <ClInclude Include="job_container.hpp" />
@@ -209,7 +210,7 @@
     <ClCompile Include="level_manager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="rendering3d.cpp" />
-    <ClCompile Include="rendering_engine.cpp" />
+    <ClCompile Include="rendering_manager.cpp" />
     <ClCompile Include="scene3d.cpp" />
     <ClCompile Include="shader_loader.cpp" />
     <ClCompile Include="test_level.cpp" />

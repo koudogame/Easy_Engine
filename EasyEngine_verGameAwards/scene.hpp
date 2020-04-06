@@ -27,6 +27,11 @@ public :
     virtual void finalize() = 0;
 
     ///
+    /// @brief  描画準備
+    ///
+    virtual void prepare() = 0;
+
+    ///
     /// @brief  描画
     ///
     /// @param[in] ImmediateContext  : デバイスコンテキスト

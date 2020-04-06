@@ -4,10 +4,13 @@
 ///
 #ifndef INCLUDED_EGEG_JOB_HEADER_
 #define INCLUDED_EGEG_JOB_HEADER_
+
 #include <functional>
 #include "noncopyable.hpp"
 #include "job_container.hpp"
+
 BEGIN_EGEG
+
 ///
 /// @class   Job
 /// @brief   ジョブ
@@ -32,9 +35,10 @@ public :
     ///
     /// @param[in] Function : ジョブとして登録する関数オブジェクト
     ///
-    void setJob( std::function<RetValType(ArgTypes...)> Function )
+    template <class FunctionType>
+    void setJob( FunctionType&& Function )
     {
-        job_ = std::move( Function );
+        job_ = std::forward<FunctionType>( Function );
     }
 
     ///
@@ -73,6 +77,7 @@ private :
     std::function<RetValType(ArgTypes...)> job_;
     JobContainer<Job<RetValType(ArgTypes...)>>* container_ = nullptr;
 };
+
 END_EGEG
 #endif /// !INCLUDED_EGEG_JOB_HEADER_
 /// EOF

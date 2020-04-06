@@ -9,7 +9,7 @@ BEGIN_EGEG
 
 bool TestLevel::initialize()
 {
-    if( !scene_.initialize( EasyEngine::getRenderingEngine()->getDevice().Get()) ) return false;
+    if( !scene_.initialize( EasyEngine::getRenderingManager()->getDevice().Get()) ) return false;
     if( !actor_.initialize() ) return false;
 
     camera_position_ = Vector3D{ 0.0F, 0.0F, -5.0F };
@@ -26,11 +26,11 @@ bool TestLevel::initialize()
     actor_.addComponent<component::Transform3D>()->setPosition( {0.0F, 0.0F, 0.0F} );
     actor_.getComponent<component::Transform3D>()->setScale( {0.5F, 0.5F, 0.5F} );
 
-    auto loader = EasyEngine::getRenderingEngine()->getShaderLoader();
+    auto loader = EasyEngine::getRenderingManager()->getShaderLoader();
     auto vs = loader->loadVertexShader<TestVS>();
     auto ps = loader->loadPixelShader<TestPS>();
 
-    auto obj_loader = EasyEngine::getRenderingEngine()->getModelLoader();
+    auto obj_loader = EasyEngine::getRenderingManager()->getModelLoader();
     model_.vertex_shader = std::move(vs);
     model_.pixel_shader = std::move(ps);
     obj_loader->load( "character.obj", &model_.mesh );
@@ -40,6 +40,20 @@ bool TestLevel::initialize()
    
     actor_.controller = new XInputController( XInputP1::instance() );
     actor_.controller->registerFunction( XInputController::Buttons::kDpadRight, &actor_, &TestActor::moveRight );
+    actor_.controller->registerFunction(
+        XInputController::Sticks::kLeftStick,
+        [&]( float X, float Y )
+        {
+            auto transform = actor_.getComponent<component::Transform3D>();
+            if( transform )
+            {
+                auto rotation = transform->getRotation();
+                float angle = std::atan2(Y, X);
+                rotation.z = angle;
+                transform->setRotation( rotation );
+            }
+        }
+    );
 
     return true;
 }
@@ -79,11 +93,11 @@ void TestLevel::update( ID3D11RenderTargetView* RTV )
     D3D11_RASTERIZER_DESC dc {};
     dc.FillMode = D3D11_FILL_SOLID;
     dc.CullMode = D3D11_CULL_BACK;
-    EasyEngine::getRenderingEngine()->getDevice()->CreateRasterizerState(
+    EasyEngine::getRenderingManager()->getDevice()->CreateRasterizerState(
         &dc, &rs );
 
     scene_.render(
-        EasyEngine::getRenderingEngine()->getImmediateContext().Get(),
+        EasyEngine::getRenderingManager()->getImmediateContext().Get(),
         {RTV},
         {{
             0.0F,

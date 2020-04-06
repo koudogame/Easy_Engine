@@ -9,7 +9,7 @@
 #include <memory>
 #include <unordered_map>
 #include <fstream>
-#include "rendering_engine_child.hpp"
+#include "rendering_manager_child.hpp"
 #include "texture_loader.hpp"
 #include "detailed_returnvalue.hpp"
 #include "mesh.hpp"
@@ -21,7 +21,7 @@ BEGIN_EGEG
 /// @brief  「WavefrontOBJ形式」ファイルのローダー
 ///
 class WavefrontOBJLoader :
-    public RenderingEngineChild
+    public RenderingManagerChild
 {
 public :
     WavefrontOBJLoader();

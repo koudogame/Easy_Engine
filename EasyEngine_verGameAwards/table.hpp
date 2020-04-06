@@ -55,8 +55,8 @@ private :
 ///             Table<Field<const char*, 0U>, Field<const char*, 1U>> table;    <br>
 ///                                                                             <br>
 ///            要素のセット                                                     <br>
-///             table.set<Field<const char*, 0U>>( "texture1.png" );             <br>
-///             table.set<Field<const char*, 1U>>( "texture2.png" );             <br>
+///             table.set<Field<const char*, 0U>>( "texture1.png" );            <br>
+///             table.set<Field<const char*, 1U>>( "texture2.png" );            <br>
 ///                                                                             <br>
 ///            要素の取得                                                       <br>
 ///             table.get<Field<const char*, 0U>>();
@@ -68,7 +68,7 @@ public :
     Table() = default;
     Table( const Table& Lhs ) :
         table_( Lhs.table_ ) {}
-    Table( Table&& Rhs ) :
+    Table( Table&& Rhs ) noexcept :
         table_( std::move(Rhs.table_) ) {}
 
     Table& operator=( const Table& Lhs )
@@ -76,7 +76,7 @@ public :
         table_ = Lhs.table_;
         return *this;
     }
-    Table& operator=( Table&& Rhs )
+    Table& operator=( Table&& Rhs ) noexcept
     {
         table_ = std::move(Rhs.table_);
         return *this;

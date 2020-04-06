@@ -5,7 +5,7 @@
 #ifndef INCLUDED_EG_EG_TEXTURE_LOADER_HEADER_
 #define INCLUDED_EG_EG_TEXTURE_LOADER_HEADER_
 
-#include "rendering_engine_child.hpp"
+#include "rendering_manager_child.hpp"
 #include "detailed_returnvalue.hpp"
 
 BEGIN_EGEG
@@ -14,7 +14,7 @@ BEGIN_EGEG
 /// @brief  テクスチャリソースのローダー
 ///
 class TextureLoader :
-    public RenderingEngineChild
+    public RenderingManagerChild
 {
 public :
 
