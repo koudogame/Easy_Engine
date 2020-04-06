@@ -21,6 +21,7 @@ REGISTER_WITH_FACTORY( LevelFactory, LevelType, LevelID<LevelType> )
 BEGIN_EGEG
 
 class Level;                                               ///< Levelクラス前方宣言( 循環参照回避 )
+template class Factory<Level, class LevelManager*>;        ///< レベル用ファクトリクラスの明示的インスタンス化
 using LevelFactory = Factory<Level, class LevelManager*>;  ///< レベル用ファクトリクラス型
 template <class LevelType> using LevelID = UID<LevelType>; ///< レベル用ID
 

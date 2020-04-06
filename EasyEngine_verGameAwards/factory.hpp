@@ -26,7 +26,11 @@ BEGIN_EGEG
 /// @class   Factory
 /// @brief   汎用ファクトリ
 ///
-/// @details ファクトリへのオブジェクトの登録はREGISTER_WITH_FACTORYマクロを使用して下さい。
+/// @details ファクトリを使用する際はテンプレートの明示的なインスタンス化を行って下さい。   <br>
+///          ファクトリへのオブジェクトの登録はREGISTER_WITH_FACTORYマクロを使用して下さい。<br>
+///          使用例.)                                                                       <br>
+///               class ElementType;-------------------------------------要素型             <br>
+///               template class ElemFactory = Factory<ElementType, …>;-ファクトリ         <br>
 ///
 /// @tparam BaseType     : ファクトリによって生成されるクラスの基底クラス
 /// @tparam CtorArgTypes : オブジェクトのコンストラクタに渡す引数型リスト
