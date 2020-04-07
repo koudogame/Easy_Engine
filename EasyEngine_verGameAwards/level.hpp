@@ -24,6 +24,8 @@ public :
     Level( LevelManager* Manager ) :
         manager_( Manager )
     {}
+    ///< 仮想デストラクタ
+    virtual ~Level() = default;
 
     ///
     /// @brief  初期化処理

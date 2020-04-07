@@ -14,6 +14,10 @@ LevelManager::LevelManager()
 // デストラクタ
 LevelManager::~LevelManager()
 {
+    for( auto& level : level_list_ )
+    { // 全てのレベルを破棄
+        level->finalize();
+    }
 }
 
 // マネージャ―の生成
@@ -22,7 +26,7 @@ std::unique_ptr<LevelManager> LevelManager::create()
     std::unique_ptr<LevelManager> created( new LevelManager() );
     created->transition( 0U );
 
-    return nullptr;
+    return created;
 }
 
 // レベルの生成
