@@ -6,6 +6,25 @@ BEGIN_EGEG
 
 // LevelManager 関数定義
 /*===========================================================================*/
+// コンストラクタ
+LevelManager::LevelManager()
+{
+}
+
+// デストラクタ
+LevelManager::~LevelManager()
+{
+}
+
+// マネージャ―の生成
+std::unique_ptr<LevelManager> LevelManager::create()
+{
+    std::unique_ptr<LevelManager> created( new LevelManager() );
+    created->transition( 0U );
+
+    return nullptr;
+}
+
 // レベルの生成
 std::unique_ptr<Level> LevelManager::createLevel( uint32_t ID )
 {

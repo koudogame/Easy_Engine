@@ -16,8 +16,9 @@ struct EasyEngine::Impl
 {
     HWND h_wnd_;
     std::unique_ptr<InputDeviceManager> input_device_manager_;
-    std::unique_ptr<RenderingManager> rendering_manager_;
-    JobScheduler<Job<void(uint64_t)>> task_manager;
+    std::unique_ptr<RenderingManager>   rendering_manager_;
+    JobScheduler<Job<void(uint64_t)>>   task_manager;
+    std::unique_ptr<LevelManager>       level_manager_;
 
     bool createWindow();
 };
@@ -60,7 +61,7 @@ DetailedReturnValue<bool> EasyEngine::initialize()
     // 入力デバイスマネージャーを生成
     try {
         p_impl_->input_device_manager_ = InputDeviceManager::create();
-    } catch( std::bad_alloc& e ) {
+    } catch( const std::bad_alloc& e ) {
         return RetTy( false, e.what() );
     }
 
@@ -73,6 +74,12 @@ DetailedReturnValue<bool> EasyEngine::initialize()
         return RetTy( false, e.what() );
     }
 
+    // レベルマネージャ―を生成
+    try {
+        p_impl_->level_manager_ = LevelManager::create();
+    } catch ( const std::bad_alloc& e ) {
+        return RetTy( false, e.what() );
+    }
 
     return true;
 };
@@ -105,6 +112,12 @@ RenderingManager* EasyEngine::getRenderingManager() noexcept
 JobScheduler<Job<void(uint64_t)>>* EasyEngine::getTaskManager() noexcept
 {
     return &p_impl_->task_manager;
+}
+
+// レベルマネージャーの取得
+LevelManager* EasyEngine::getLevelManager() noexcept
+{
+    return p_impl_->level_manager_.get();
 }
 
 // EasyEngine::Impl 関数定義

@@ -9,6 +9,7 @@
 #include "input_device_manager.hpp"
 #include "rendering_manager.hpp"
 #include "job_scheduler.hpp"
+#include "level_manager.hpp"
 
 BEGIN_EGEG
 
@@ -26,6 +27,7 @@ public :
     static InputDeviceManager* getInputDeviceManager() noexcept;
     static RenderingManager* getRenderingManager() noexcept;
     static JobScheduler<Job<void(uint64_t)>>* getTaskManager() noexcept;
+    static LevelManager* getLevelManager() noexcept;
 
 private :
     EasyEngine() = default;

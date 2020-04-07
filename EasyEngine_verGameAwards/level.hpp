@@ -4,8 +4,11 @@
 ///
 #ifndef INCLUDED_EGEG_LEVEL_HEADER_
 #define INCLUDED_EGEG_LEVEL_HEADER_
+
 #include "level_manager.hpp"
+
 BEGIN_EGEG
+
 ///
 /// @file   Level
 /// @brief  レベル基底
@@ -39,6 +42,10 @@ public :
 private :
     LevelManager* manager_;
 };
+
+template class Factory<Level, class LevelManager*>;           ///< レベル用ファクトリクラスの明示的インスタンス化
+using LevelFactory = Factory<Level, class LevelManager*>;     ///< レベル用ファクトリクラス型
+
 END_EGEG
 #endif /// !INCLUDED_EGEG_LEVEL_HEADER_
 /// EOF

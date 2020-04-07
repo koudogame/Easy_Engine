@@ -4,10 +4,22 @@
 ///
 #ifndef INCLUDED_EGEG_LEVEL_MANAGER_HEADER_
 #define INCLUDED_EGEG_LEVEL_MANAGER_HEADER_
+
 #include <memory>
 #include <vector>
-#include "factory.hpp"  /// レベルはファクトリによって生成する。
-#include "type_id.hpp"      /// レベルのIDはUIDにより生成する。
+#include "noncopyable.hpp"
+#include "factory.hpp"      /// レベルはファクトリによって生成する。
+#include "type_id.hpp"      /// レベルのIDはTypeIDにより生成する。
+#include "constant_id.hpp"  /// 最初に実行されるレベルは ID0 を設定する。
+
+///
+/// @def    REGISTER_TOP_LEVEL
+/// @brief  最初に実行されるレベルの登録
+///
+/// @param[in] LevelType : 登録するレベル型
+///
+#define REGISTER_TOP_LEVEL( LevelType ) \
+REGISTER_WITH_FACTORY( LevelFactory, LevelType, ConstantID<0U> )
 
 ///
 /// @def    REGISTER_LEVEL
@@ -21,20 +33,23 @@ REGISTER_WITH_FACTORY( LevelFactory, LevelType, LevelID<LevelType> )
 BEGIN_EGEG
 
 class Level;                                               ///< Levelクラス前方宣言( 循環参照回避 )
-template class Factory<Level, class LevelManager*>;        ///< レベル用ファクトリクラスの明示的インスタンス化
-using LevelFactory = Factory<Level, class LevelManager*>;  ///< レベル用ファクトリクラス型
 template <class LevelType> using LevelID = TypeID<LevelType>; ///< レベル用ID
 
 ///
 /// @class   LevelManager
 /// @brief   レベルマネージャー
+/// @details シングルトンクラスです。
+///
 ///
 /// @details 「現在のレベル」「アクティブなレベル」は一番最後に遷移したレベルのことを指します。<br>
-///          レベルの遷移に関して、現在のレベルからのリクエストであることが前提です。
+///          レベルの遷移に関して、現在のレベルからのリクエストであることを前提としています。
 ///
-class LevelManager
+class LevelManager final :
+    NonCopyable<LevelManager>
 {
 public :
+    ~LevelManager();
+    static std::unique_ptr<LevelManager> create();
 
     ///
     /// @brief   レベルの遷移
@@ -85,13 +100,12 @@ public :
     void back();
 
 private :
-    ///< 初期化済みのレベルを返却( 無効な場合nullptr )
-    std::unique_ptr<Level> createLevel( uint32_t LevelID );
+    LevelManager();
 
+    std::unique_ptr<Level> createLevel( uint32_t LevelID );
     void transition( uint32_t );
     void push( uint32_t );
     void swap( uint32_t );
-
 
     std::vector<std::unique_ptr<Level>> level_list_;
     size_t path_idx_ = 0U;

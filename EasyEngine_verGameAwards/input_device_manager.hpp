@@ -15,8 +15,9 @@
 BEGIN_EGEG
 
 ///
-/// @class  InputDeviceManager
-/// @brief  入力デバイスマネージャー
+/// @class   InputDeviceManager
+/// @brief   入力デバイスマネージャー
+/// @details シングルトンクラスです。
 ///
 class InputDeviceManager final :
     NonCopyable<InputDeviceManager>
