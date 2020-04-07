@@ -162,6 +162,7 @@
     <ClInclude Include="level_manager.hpp" />
     <ClInclude Include="material.hpp" />
     <ClInclude Include="mesh.hpp" />
+    <ClInclude Include="model_loader.hpp" />
     <ClInclude Include="rendering2d.hpp" />
     <ClInclude Include="rendering_manager_child.hpp" />
     <ClInclude Include="sub_mesh.hpp" />

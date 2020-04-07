@@ -9,7 +9,7 @@
 #include <memory>
 #include <unordered_map>
 #include <fstream>
-#include "rendering_manager_child.hpp"
+#include "model_loader.hpp"
 #include "texture_loader.hpp"
 #include "detailed_returnvalue.hpp"
 #include "mesh.hpp"
@@ -21,14 +21,16 @@ BEGIN_EGEG
 /// @brief  「WavefrontOBJ形式」ファイルのローダー
 ///
 class WavefrontOBJLoader :
-    public RenderingManagerChild
+    public ModelLoader
 {
 public :
     WavefrontOBJLoader();
     ~WavefrontOBJLoader() = default;
-
-    DetailedReturnValue<bool> load( const std::string& FileName, Mesh* Output );
-    
+        
+/*-----------------------------------------------------------------*/
+// ModelLoader
+    DetailedReturnValue<bool> load( const std::string&, Mesh*, const CoordinateSystem ) override;
+/*-----------------------------------------------------------------*/
 private :
     struct Group
     {
@@ -38,6 +40,7 @@ private :
     };
     struct TemporaryOutput
     {
+        CoordinateSystem                coordinate_system;
         std::vector<VertexPositionType> position;
         std::vector<VertexUVType>       uv;
         std::vector<VertexNormalType>   normal;

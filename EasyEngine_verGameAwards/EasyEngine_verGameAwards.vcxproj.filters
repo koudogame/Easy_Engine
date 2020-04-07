@@ -319,6 +319,9 @@
     <ClInclude Include="constant_id.hpp">
       <Filter>Project\EasyEngine\99_System\Utility</Filter>
     </ClInclude>
+    <ClInclude Include="model_loader.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="egeg_math.inl">

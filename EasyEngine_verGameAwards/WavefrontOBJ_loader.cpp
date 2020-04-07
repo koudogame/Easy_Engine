@@ -40,7 +40,7 @@ void WavefrontOBJLoader::initialize()
 }
 
 // ファイル読み込む
-DetailedReturnValue<bool> WavefrontOBJLoader::load( const std::string& FileName, Mesh* Output )
+DetailedReturnValue<bool> WavefrontOBJLoader::load( const std::string& FileName, Mesh* Output, const CoordinateSystem CoorSys )
 {
     using RetTy = DetailedReturnValue<bool>;
 
@@ -63,6 +63,9 @@ DetailedReturnValue<bool> WavefrontOBJLoader::load( const std::string& FileName,
     temp_output_.curr_vertex_index = 0U;
     temp_output_.group_list.clear();
     temp_output_.material_list.clear();
+
+    // 座標系の選択
+    temp_output_.coordinate_system = CoorSys;
 
     // ファイル読み込み
     std::string command;
@@ -135,7 +138,12 @@ void WavefrontOBJLoader::loadVertexPosition( std::fstream& Stream )
         pos.x >>
         pos.y >>
         pos.z;
-    pos.z *= -1.0F;     // 右手座標系->左手座標系
+
+    // 右手座標系のツールで作成されたモデルは変換する
+    if( temp_output_.coordinate_system == CoordinateSystem::kRightHand )
+    {
+        pos.z *= -1.0F;
+    }
 }
 
 // 頂点UV座標の読み込み

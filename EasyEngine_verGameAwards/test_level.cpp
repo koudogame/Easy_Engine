@@ -33,7 +33,7 @@ bool TestLevel::initialize()
     auto obj_loader = EasyEngine::getRenderingManager()->getModelLoader();
     model_.vertex_shader = std::move(vs);
     model_.pixel_shader = std::move(ps);
-    obj_loader->load( "character.obj", &model_.mesh );
+    obj_loader->load( "character.obj", &model_.mesh, ModelLoader::CoordinateSystem::kRightHand );
     
     auto component = actor_.addComponent<component::Rendering3D>();
     component->setModel( model_ );

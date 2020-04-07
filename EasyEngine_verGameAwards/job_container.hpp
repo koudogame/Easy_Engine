@@ -4,10 +4,13 @@
 ///
 #ifndef INCLUDED_EGEG_JOB_CONTAINER_HEADER_
 #define INCLUDED_EGEG_JOB_CONTAINER_HEADER_
+
 #include <functional>
 #include <vector>
 #include "egeg.hpp"
+
 BEGIN_EGEG
+
 ///
 /// @class  JobContainer
 /// @brief  ジョブコンテナ
@@ -29,7 +32,9 @@ public :
         // ジョブを走査
         index_ = 0U;
         while( JobType* job = pick() )
-        {
+        { // ジョブの登録を解除
+            // Attention : ここで、既に破棄されたコンテナに対して
+            //             Jobが登録解除関数を呼び出してしまうことを避ける。
             job->exitFromContainer();
         }
     }
@@ -94,6 +99,7 @@ private :
     std::vector<JobType*> job_list_;
     std::vector<size_t> empty_idx_list_;
 };
+
 END_EGEG
 #endif /// !INCLUDED_EGEG_JOB_CONTAINER_HEADER_
 /// EOF
