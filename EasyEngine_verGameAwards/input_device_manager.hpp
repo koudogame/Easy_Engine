@@ -26,7 +26,8 @@ public :
     static std::unique_ptr<InputDeviceManager> create();
 
     ///
-    /// @brief  デバイスへの接続
+    /// @brief   デバイスへの接続
+    /// @details 既に接続されている場合、接続されているデバイスを返却します。
     ///
     /// @tparam DeviceType : 接続する入力デバイス型
     ///

@@ -7,7 +7,7 @@
 #include <memory>
 #include <vector>
 #include "factory.hpp"  /// レベルはファクトリによって生成する。
-#include "uid.hpp"      /// レベルのIDはUIDにより生成する。
+#include "type_id.hpp"      /// レベルのIDはUIDにより生成する。
 
 ///
 /// @def    REGISTER_LEVEL
@@ -23,7 +23,7 @@ BEGIN_EGEG
 class Level;                                               ///< Levelクラス前方宣言( 循環参照回避 )
 template class Factory<Level, class LevelManager*>;        ///< レベル用ファクトリクラスの明示的インスタンス化
 using LevelFactory = Factory<Level, class LevelManager*>;  ///< レベル用ファクトリクラス型
-template <class LevelType> using LevelID = UID<LevelType>; ///< レベル用ID
+template <class LevelType> using LevelID = TypeID<LevelType>; ///< レベル用ID
 
 ///
 /// @class   LevelManager

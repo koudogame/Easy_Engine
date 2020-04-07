@@ -150,6 +150,7 @@
     <ClInclude Include="component.hpp" />
     <ClInclude Include="component2d.hpp" />
     <ClInclude Include="component3d.hpp" />
+    <ClInclude Include="constant_id.hpp" />
     <ClInclude Include="controller.hpp" />
     <ClInclude Include="cuboid.hpp" />
     <ClInclude Include="detailed_returnvalue.hpp" />
@@ -197,7 +198,7 @@
     <ClInclude Include="shader.hpp" />
     <ClInclude Include="shader_loader.hpp" />
     <ClInclude Include="sphere.hpp" />
-    <ClInclude Include="uid.hpp" />
+    <ClInclude Include="type_id.hpp" />
     <ClInclude Include="vertex_shader.hpp" />
     <ClInclude Include="xinput.hpp" />
     <ClInclude Include="xinput_controller.hpp" />

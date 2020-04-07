@@ -27,7 +27,7 @@ class CollisionComponent :
 {
 public :
     ///< ID�̎擾
-    static uint32_t getID() { return UID<CollisionComponent>::getID(); }
+    static uint32_t getID() { return TypeID<CollisionComponent>::getID(); }
 
     virtual ~CollisionComponent() = default;
 

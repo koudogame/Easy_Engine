@@ -6,7 +6,7 @@
 #define INCLUDED_EGEG_TRANSFORM3D_COMPONENT_HEADER_
 #include "component3d.hpp"
 #include "egeg_math.hpp"
-#include "uid.hpp"
+#include "type_id.hpp"
 
 BEGIN_EGEG
 namespace component {
@@ -19,7 +19,7 @@ class Transform3D :
     public Component3D
 {
 public :
-    static constexpr UID<Transform3D> getID() noexcept { return UID<Transform3D>(); }
+    static constexpr TypeID<Transform3D> getID() noexcept { return TypeID<Transform3D>(); }
 
     Transform3D( Actor3D* Owner ) :
         Component3D( Owner )

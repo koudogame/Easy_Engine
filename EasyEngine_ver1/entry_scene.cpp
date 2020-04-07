@@ -6,7 +6,7 @@
 #include "scene_manager.hpp"
 #include "job_scheduler.hpp"
 
-REGISTER_SCENE( EGEG UID<EGEG EntryScene>::getID(), []()->EGEG Scene*{ return new EGEG EntryScene; } )
+REGISTER_SCENE( EGEG TypeID<EGEG EntryScene>::getID(), []()->EGEG Scene*{ return new EGEG EntryScene; } )
 
 BEGIN_EGEG
 // EntryScene : ä÷êîÇÃé¿ëï

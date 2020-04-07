@@ -7,7 +7,7 @@
 
 #include "component2d.hpp"
 #include "egeg_math.hpp"
-#include "uid.hpp"
+#include "type_id.hpp"
 
 BEGIN_EGEG
 namespace component
@@ -17,7 +17,7 @@ class Transform2D :
     public Component2D
 {
 public :
-    static constexpr UID<Transform2D> getID() noexcept { return UID<Transform2D>(); }
+    static constexpr TypeID<Transform2D> getID() noexcept { return TypeID<Transform2D>(); }
     
     ///< 座標のセット
     void setPosition( const Vector2D& Destination ) noexcept { position_ = Destination; }

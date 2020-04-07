@@ -62,7 +62,7 @@ void InputDeviceManager::update( uint64_t )
 // キーボードと接続
 const Keyboard* InputDeviceManager::connectDeviceImpl( keyboard )
 {
-    keyboard_ = std::make_unique<Keyboard>();
+    if( !keyboard_ ) keyboard_ = std::make_unique<Keyboard>();
     return keyboard_.get();
 }
 // キーボードの取得
@@ -74,7 +74,7 @@ const Keyboard* InputDeviceManager::getDeviceImpl( keyboard ) noexcept
 // XInputP1ゲームパッドと接続
 const XInputP1* InputDeviceManager::connectDeviceImpl( xinputp1 )
 {
-    xinput_p1_ = std::make_unique<XInputP1>();
+    if( !xinput_p1_ ) xinput_p1_ = std::make_unique<XInputP1>();
     return xinput_p1_.get();
 }
 // XInputP1ゲームパッドの取得
@@ -86,7 +86,7 @@ const XInputP1* InputDeviceManager::getDeviceImpl( xinputp1 ) noexcept
 // XInputP2ゲームパッドと接続
 const XInputP2* InputDeviceManager::connectDeviceImpl( xinputp2 )
 {
-    xinput_p2_ = std::make_unique<XInputP2>();
+    if( !xinput_p2_ ) xinput_p2_ = std::make_unique<XInputP2>();
     return xinput_p2_.get();
 }
 // XInputP2ゲームパッドの取得
@@ -98,7 +98,7 @@ const XInputP2* InputDeviceManager::getDeviceImpl( xinputp2 ) noexcept
 // XInputP3ゲームパッドと接続
 const XInputP3* InputDeviceManager::connectDeviceImpl( xinputp3 )
 {
-    xinput_p3_ = std::make_unique<XInputP3>();
+    if( !xinput_p3_ ) xinput_p3_ = std::make_unique<XInputP3>();
     return xinput_p3_.get();
 }
 // XInputP3ゲームパッドの取得
@@ -110,7 +110,7 @@ const XInputP3* InputDeviceManager::getDeviceImpl( xinputp3 ) noexcept
 // XInputP4ゲームパッドと接続
 const XInputP4* InputDeviceManager::connectDeviceImpl( xinputp4 )
 {
-    xinput_p4_ = std::make_unique<XInputP4>();
+    if( !xinput_p4_ ) xinput_p4_ = std::make_unique<XInputP4>();
     return xinput_p4_.get();
 }
 // XInputP4ゲームパッドの取得

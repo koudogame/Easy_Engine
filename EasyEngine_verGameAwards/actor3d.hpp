@@ -4,11 +4,14 @@
 ///
 #ifndef INCLUDED_EGEG_ACTOR3D_HEADER_
 #define INCLUDED_EGEG_ACTOR3D_HEADER_
+
 #include <cassert>
 #include "actor.hpp"
-#include "uid.hpp"
+#include "type_id.hpp"
 #include "egeg_math.hpp"
+
 BEGIN_EGEG
+
 ///
 /// @class  Actor3D
 /// @brief  3Dアクター
@@ -68,6 +71,7 @@ ComponentType* Actor3D::getComponent() const
     // 対応するコンポーネントの返却
     return static_cast<ComponentType*>( find->second );
 }
+
 END_EGEG
 #endif /// !INCLUDED_EGEG_ACTOR3D_HEADER_
 /// EOF

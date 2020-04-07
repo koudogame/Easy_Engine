@@ -20,7 +20,7 @@ class RenderComponent :
 {
 public :
     ///< IDの取得
-    static uint32_t getID() { return UID<RenderComponent>::getID(); }
+    static uint32_t getID() { return TypeID<RenderComponent>::getID(); }
 
     ///
     /// @brief  コンストラクタ

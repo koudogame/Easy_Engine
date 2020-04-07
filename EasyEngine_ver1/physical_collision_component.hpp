@@ -15,7 +15,7 @@ class PhysicalCollisionComponent :
 {
 public :
     ///< IDの取得
-    static uint32_t getID() { return UID<PhysicalCollisionComponent>::getID(); }
+    static uint32_t getID() { return TypeID<PhysicalCollisionComponent>::getID(); }
 
     ///
     /// @brief  コンストラクタ

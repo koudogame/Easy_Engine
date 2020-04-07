@@ -21,7 +21,7 @@ class TestActor :
 {
 public :
     TestActor() :
-        Actor3D( UID<TestActor>() )
+        Actor3D( TypeID<TestActor>() )
     {}
 
     bool initialize() override { return true; }

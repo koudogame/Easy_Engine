@@ -4,12 +4,15 @@
 ///
 #ifndef INCLUDED_EGEG_ACTOR2D_HEADER_
 #define INCLUDED_EGEG_ACTOR2D_HEADER_
+
 #include <cassert>
 #include <list>
 #include "actor.hpp"
-#include "uid.hpp"
+#include "type_id.hpp"
 #include "egeg_math.hpp"
+
 BEGIN_EGEG
+
 ///
 /// @class  Actor2D
 /// @brief  2Dアクター
@@ -73,6 +76,7 @@ ComponentType* Actor2D::getComponent() const
     // 対応するコンポーネントを返却
     return static_cast<ComponentType*>( find->second );
 }
+
 END_EGEG
 #endif /// !INCLUDED_EGEG_ACTOR2D_HEADER_
 /// EOF

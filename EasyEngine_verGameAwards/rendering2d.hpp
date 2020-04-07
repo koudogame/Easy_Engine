@@ -18,7 +18,7 @@ namespace component
 class Rendering2D :
     public Component2D
 {
-    static constexpr UID<Rendering2D> getID() noexcept { return UID<Rendering2D>(); }
+    static constexpr TypeID<Rendering2D> getID() noexcept { return TypeID<Rendering2D>(); }
 
     Rendering2D( Actor2D* Owner ) :
         Component2D( Owner )

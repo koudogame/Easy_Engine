@@ -13,7 +13,7 @@ BEGIN_EGEG
 // ‰Šú‰»ˆ—
 bool Game::initialize()
 {
-    SceneManager::instance()->push( UID<EntryScene>::getID() );
+    SceneManager::instance()->push( TypeID<EntryScene>::getID() );
     return true;
 }
 

@@ -8,7 +8,7 @@ class Sprite :
     public EGEG Actor
 {
 public :
-    Sprite() : Actor( EGEG UID<Sprite>::getID() ) {}
+    Sprite() : Actor( EGEG TypeID<Sprite>::getID() ) {}
 
     bool initialize() override;
     void finalize() override;
