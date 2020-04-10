@@ -10,7 +10,7 @@
 #include "noncopyable.hpp"
 #include "factory.hpp"      /// レベルはファクトリによって生成する。
 #include "type_id.hpp"      /// レベルのIDはTypeIDにより生成する。
-#include "constant_id.hpp"  /// 最初に実行されるレベルは ID0 を設定する。
+#include "constant_id.hpp"  /// 最初に実行されるレベルは ID:0 を設定する。
 
 ///
 /// @def    REGISTER_TOP_LEVEL
@@ -19,7 +19,7 @@
 /// @param[in] LevelType : 登録するレベル型
 ///
 #define REGISTER_TOP_LEVEL( LevelType ) \
-REGISTER_WITH_FACTORY( LevelFactory, LevelType, ConstantID<0U> )
+REGISTER_WITH_FACTORY( EGEG LevelFactory, LevelType, EGEG ConstantID<0U> )
 
 ///
 /// @def    REGISTER_LEVEL
@@ -28,11 +28,11 @@ REGISTER_WITH_FACTORY( LevelFactory, LevelType, ConstantID<0U> )
 /// @param[in] LevelType : 登録するレベル型
 ///
 #define REGISTER_LEVEL( LevelType ) \
-REGISTER_WITH_FACTORY( LevelFactory, LevelType, LevelID<LevelType> )
+REGISTER_WITH_FACTORY( EGEG LevelFactory, LevelType, EGEG LevelID<LevelType> )
 
 BEGIN_EGEG
 
-class Level;                                               ///< Levelクラス前方宣言( 循環参照回避 )
+class Level;                                                  ///< Levelクラス前方宣言( 循環参照回避 )
 template <class LevelType> using LevelID = TypeID<LevelType>; ///< レベル用ID
 
 ///

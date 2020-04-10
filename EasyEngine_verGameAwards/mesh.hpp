@@ -11,10 +11,6 @@
 
 BEGIN_EGEG
 
-using VertexPositionType = DirectX::XMFLOAT3;
-using VertexUVType       = DirectX::XMFLOAT2;
-using VertexNormalType   = DirectX::XMFLOAT3;
-
 struct Mesh
 {
     Vertex vertices;

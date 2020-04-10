@@ -7,10 +7,8 @@
 
 #include <array>
 #include <set>
-#include <wrl.h>
-#include <d3d11.h>
 #include "scene.hpp"
-#include "camera.hpp"
+#include "camera3d.hpp"
 #include "actor3d.hpp"
 
 BEGIN_EGEG
@@ -18,10 +16,17 @@ BEGIN_EGEG
 ///
 /// @class   Scene3D
 /// @brief   3Dシーン
-/// @details prepare関数では、配置されているモデルをクリアします。                <br>
-///          同一のシーンを複数回描画したい場合等は、                             <br>
-///          一度のprepare関数呼び出しに対して複数のrender関数を呼び出して下さい。<br>
-///          ループを跨いでのrender関数呼び出しも可能ですが、予期せぬ不具合を招く可能性があるので避けてください。
+/// @details prepare関数では、配置されているモデルをクリアします。                                               <br>
+///          モデルのエントリーは、prepare呼び出しから、render呼び出しの間に行って下さい。                       <br>
+///          同一のシーンを複数回描画したい場合等は、                                                            <br>
+///          一度のprepare関数呼び出しに対して複数のrender関数を呼び出して下さい。                               <br>
+///          ループを跨いでのrender関数呼び出しも可能ですが、予期せぬ不具合を招く可能性があるので避けてください。<br>
+///          このシーンがシェーダーにセットする定数バッファは、                                                  <br>
+///          「頂点シェーダ―」                                                                                  <br>
+///             b0 : 射影変換行列
+///             b1 : ビュー変換行列
+///             b2 : ワールド変換行列                                                                            <br>
+///          です。
 ///
 class Scene3D :
     public Scene
@@ -32,26 +37,25 @@ public :
     ///
     /// @param[in] Camera : カメラ
     ///
-    void setCamera( Camera* Camera ) noexcept { camera_ = Camera; }
+    void setCamera( const Camera3D* Camera ) noexcept { camera_ = Camera; }
 
     ///
-    /// @brief  モデルのエントリー
+    /// @brief  アクターのエントリー
     ///
     /// @param[in] Actor : 描画するアクター
     ///
-    void entry( const Actor3D* Actor ) { model_list_.emplace( Actor ); }
+    void entry( const Actor3D* Actor ) { actor_list_.emplace( Actor ); }
     ///
-    /// @brief   モデルのエントリー解除
-    /// @details entry()関数の呼び出しから、prepare()関数の呼び出しまでの間に有効です。
+    /// @brief   アクターのエントリー解除
     ///
     /// @param[in] Actor : エントリーを解除するアクター
     ///
-    void exit( const Actor3D* Actor ) { model_list_.erase( Actor ); }
+    void exit( const Actor3D* Actor ) { actor_list_.erase( Actor ); }
     
     
 /*-----------------------------------------------------------------*/
 // Scene
-    bool initialize( ID3D11Device* ) override;
+    bool initialize( RenderingManager* ) override;
     void finalize() override;
     void prepare() override;
     void render( 
@@ -68,10 +72,9 @@ public :
         UINT = 0xFFFFFFFF ) override;
 /*-----------------------------------------------------------------*/
 
-
-protected :
-    Camera* camera_ = nullptr;
-    std::set<const Actor3D*> model_list_;
+private :
+    const Camera3D* camera_ = nullptr;
+    std::set<const Actor3D*> actor_list_;
 
     std::array<Microsoft::WRL::ComPtr<ID3D11Buffer>, 3U> cbuffers_;
 };

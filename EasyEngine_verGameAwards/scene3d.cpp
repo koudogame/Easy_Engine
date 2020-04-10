@@ -8,7 +8,7 @@ BEGIN_EGEG
 // Scene3D 関数定義
 /*===========================================================================*/
 // 初期化
-bool Scene3D::initialize( ID3D11Device* Device )
+bool Scene3D::initialize( RenderingManager* Manager )
 {
     // 定数バッファの作成
     D3D11_BUFFER_DESC desc{};
@@ -25,15 +25,15 @@ bool Scene3D::initialize( ID3D11Device* Device )
     );
     D3D11_SUBRESOURCE_DATA srd {};
     srd.pSysMem = &projection;
-    HRESULT hr = Device->CreateBuffer( &desc, &srd, &cbuffers_.at(0) );
+    HRESULT hr = Manager->getDevice()->CreateBuffer( &desc, &srd, &cbuffers_.at(0) );
     if( FAILED(hr) ) return false;
 
     // ビュー変換行列用定数バッファの作成
-    hr = Device->CreateBuffer( &desc, nullptr, &cbuffers_.at(1) );
+    hr = Manager->getDevice()->CreateBuffer( &desc, nullptr, &cbuffers_.at(1) );
     if( FAILED(hr) ) return false;
 
     // ワールド変換行列用定数バッファの作成
-    hr = Device->CreateBuffer( &desc, nullptr, &cbuffers_.at(2) );
+    hr = Manager->getDevice()->CreateBuffer( &desc, nullptr, &cbuffers_.at(2) );
     if( FAILED(hr) ) return false;
     
     return true;
@@ -48,12 +48,12 @@ void Scene3D::finalize()
 // 準備
 void Scene3D::prepare()
 {
-    model_list_.clear();
+    actor_list_.clear();
 }
 
 // 描画
 void Scene3D::render(
-        ID3D11DeviceContext* ImmediateContext,
+        ID3D11DeviceContext* DeviceContext,
         const std::vector<ID3D11RenderTargetView*>& RenderTargetViews,
         const std::vector<D3D11_VIEWPORT>& Viewports,
         const std::vector<D3D11_RECT>& ScissorRects,
@@ -65,25 +65,19 @@ void Scene3D::render(
         float* BlendFactor,
         UINT BlendMask )
 {
-    // シーンで共通の設定
-    ImmediateContext->OMSetRenderTargets(
-        RenderTargetViews.size(),
-        RenderTargetViews.data(),
-        DepthStencilView );
-    ImmediateContext->OMSetDepthStencilState( DepthStencilState, StencilRef );
-    if( BlendFactor ) 
-    {
-        ImmediateContext->OMSetBlendState( BlendState, BlendFactor, BlendMask );
-    }
-    else             
-    {
-        float blend_factor[4] = { 0.0F, 0.0F, 0.0F, 0.0F };
-        ImmediateContext->OMSetBlendState( BlendState, blend_factor , BlendMask );
-    }
-    ImmediateContext->RSSetState( RasterizerState );
-    ImmediateContext->RSSetViewports( Viewports.size(), Viewports.data() );
-    ImmediateContext->RSSetScissorRects( ScissorRects.size(), ScissorRects.data() );
-    
+    // シーンの設定
+    setSceneState(
+        DeviceContext,
+        RenderTargetViews,
+        Viewports,
+        ScissorRects,
+        DepthStencilView,
+        DepthStencilState,
+        StencilRef,
+        RasterizerState,
+        BlendState,
+        BlendFactor,
+        BlendMask );
 
     // 射影変換行列の設定
     ID3D11Buffer* buf[2];
@@ -91,51 +85,51 @@ void Scene3D::render(
 
     // ビュー変換行列の設定
     D3D11_MAPPED_SUBRESOURCE mapped_subresource;
-    HRESULT hr = ImmediateContext->Map(
+    HRESULT hr = DeviceContext->Map(
         cbuffers_.at(1).Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped_subresource );
     if( FAILED(hr) ) return;
     DirectX::XMFLOAT4X4 view;
-    DirectX::XMStoreFloat4x4( &view, DirectX::XMMatrixTranspose(camera_->getViewMatrix()) );
+    DirectX::XMStoreFloat4x4( &view, DirectX::XMMatrixTranspose(camera_->calcViewMatrix()) );
     memcpy( mapped_subresource.pData, &view, sizeof(DirectX::XMFLOAT4X4) );
-    ImmediateContext->Unmap( cbuffers_.at(1).Get(), 0 );
+    DeviceContext->Unmap( cbuffers_.at(1).Get(), 0 );
 
     buf[1] = cbuffers_.at( 1 ).Get();
-    ImmediateContext->VSSetConstantBuffers( 0, 2, buf );
+    DeviceContext->VSSetConstantBuffers( 0, 2, buf );
 
     // モデルの描画
-    for( auto& model : model_list_ )
+    for( auto& actor : actor_list_ )
     {
-        auto component = model->getComponent<component::Rendering3D>();
+        auto component = actor->getComponent<component::Rendering3D>();
         if( component == nullptr ) continue;
 
         auto vertex = component->getVertexShader()->bindVertices(component->getMesh()->vertices);
         if( vertex == false ) continue;
 
         // 頂点情報のセット
-        ImmediateContext->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST );
-        ImmediateContext->IASetVertexBuffers( 0, vertex.get().buffers.size(), vertex.get().buffers.data(), vertex.get().strides.data(), vertex.get().offsets.data() );
-        ImmediateContext->IASetIndexBuffer( component->getMesh()->vertices.get<Tag_VertexIndex>().Get(), DXGI_FORMAT_R32_UINT, 0 );
+        DeviceContext->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST );
+        DeviceContext->IASetVertexBuffers( 0, vertex.get().buffers.size(), vertex.get().buffers.data(), vertex.get().strides.data(), vertex.get().offsets.data() );
+        DeviceContext->IASetIndexBuffer( component->getMesh()->vertices.get<Tag_VertexIndex>().Get(), DXGI_FORMAT_R32_UINT, 0 );
 
         // シェーダ―のセット
-        auto setShader = [this, ImmediateContext]( Shader* Set )
+        auto setShader = [this, DeviceContext]( Shader* Set )
         {
-            Set->setShaderOnPipeline( ImmediateContext );
-            Set->setConstantBuffersOnPipeline( ImmediateContext );
-            Set->setSamplersOnPipeline( ImmediateContext );
-            Set->setShaderResourcesOnPipeline( ImmediateContext );
+            Set->setShaderOnPipeline( DeviceContext );
+            Set->setConstantBuffersOnPipeline( DeviceContext );
+            Set->setSamplersOnPipeline( DeviceContext );
+            Set->setShaderResourcesOnPipeline( DeviceContext );
         };
-        component->getVertexShader()->setInputLayoutOnPipeline( ImmediateContext );
+        component->getVertexShader()->setInputLayoutOnPipeline( DeviceContext );
         setShader( component->getVertexShader() );
         if( component->getGeometryShader() ) setShader( component->getGeometryShader() );
-        else ImmediateContext->GSSetShader( nullptr, nullptr, 0 );
+        else DeviceContext->GSSetShader( nullptr, nullptr, 0 );
         setShader( component->getPixelShader() );
         
         // ワールド変換行列の設定
-        hr = ImmediateContext->Map(
+        hr = DeviceContext->Map(
         cbuffers_.at(2).Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped_subresource );
         if( FAILED(hr) ) return;
         DirectX::XMFLOAT4X4 world;
-        if( auto transform = model->getComponent<component::Transform3D>() )
+        if( auto transform = actor->getComponent<component::Transform3D>() )
         { // 座標変換コンポーネントがある場合、変換行列を作成
             Matrix4x4 translation = DirectX::XMMatrixTranslationFromVector( transform->getPosition() );
             Matrix4x4 scaling = DirectX::XMMatrixScalingFromVector( transform->getScale() );
@@ -149,14 +143,14 @@ void Scene3D::render(
             DirectX::XMStoreFloat4x4( &world, DirectX::XMMatrixIdentity() );
         }
         memcpy( mapped_subresource.pData, &world, sizeof world );
-        ImmediateContext->Unmap( cbuffers_.at(2).Get(), 0 );
+        DeviceContext->Unmap( cbuffers_.at(2).Get(), 0 );
         ID3D11Buffer* world_buf = cbuffers_.at( 2 ).Get();
-        ImmediateContext->VSSetConstantBuffers( 2, 1, &world_buf );
+        DeviceContext->VSSetConstantBuffers( 2, 1, &world_buf );
 
         // 描画
         for( auto& submesh : component->getMesh()->submesh_list )
         {
-            ImmediateContext->DrawIndexed(
+            DeviceContext->DrawIndexed(
                 submesh.num_vertices,
                 submesh.start_index,
                 0

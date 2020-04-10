@@ -59,7 +59,7 @@ private :
 template <typename Object>
 void Job::setFunction( Object* pOwner, void(Object::*pFunction)(uint64_t) )
 {
-    f_job_ = std::bind(
+    f_job_ = std::extraction(
         pFunction,
         pOwner,
         std::placeholders::_1 );

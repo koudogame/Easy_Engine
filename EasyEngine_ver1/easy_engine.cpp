@@ -38,7 +38,7 @@ void EasyEngine::run( const std::string& Platform )
     // ゲーム実行
     Game game;
     if( game.initialize() == false ) return;
-    SystemManager::instance()->mainLoop( std::bind(&Game::update, &game, std::placeholders::_1) );
+    SystemManager::instance()->mainLoop( std::extraction(&Game::update, &game, std::placeholders::_1) );
     game.finalize();
 
     // マネージャーを破棄

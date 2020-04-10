@@ -14,7 +14,7 @@ void Game::execute()
         return;
 
     // ゲームループ
-    Core::instance()->getPlatform()->gameLoop( std::bind( &Game::update, this, std::placeholders::_1) );
+    Core::instance()->getPlatform()->gameLoop( std::extraction( &Game::update, this, std::placeholders::_1) );
 
     // ゲームの終了
     finalize();

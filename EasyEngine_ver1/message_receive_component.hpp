@@ -48,7 +48,7 @@ template <typename ActorType>
 void MessageReceiveComponent::setMessageProcessing( void(ActorType::*pFunc)(uint32_t, uint32_t) )
 {
     f_callback_ = 
-        std::bind<void(uint32_t, uint32_t)>(
+        std::extraction<void(uint32_t, uint32_t)>(
             pFunc,
             owner_,
             std::placeholders::_1,

@@ -4,12 +4,15 @@
 ///
 #ifndef INCLUDED_EGEG_SCENE_HEADER_
 #define INCLUDED_EGEG_SCENE_HEADER_
+
 #include <type_traits>
 #include <wrl.h>
 #include <d3d11.h>
 #include "noncopyable.hpp"
 #include "easy_engine.hpp"
+
 BEGIN_EGEG
+
 ///
 /// @class   Scene
 /// @brief   レンダリング単位
@@ -21,7 +24,7 @@ public :
     virtual ~Scene() = default;
 
     ///< 初期化処理
-    virtual bool initialize( ID3D11Device* Device ) = 0;
+    virtual bool initialize( RenderingManager* Manager ) = 0;
 
     ///< 終了処理
     virtual void finalize() = 0;
@@ -47,7 +50,7 @@ public :
     /// @param[in] BlendMask         : ブレンドステートサンプル用マスク
     ///
     virtual void render(
-        ID3D11DeviceContext* ImmediateContext,
+        ID3D11DeviceContext* DeviceContext,
         const std::vector<ID3D11RenderTargetView*>& RenderTargetViews,
         const std::vector<D3D11_VIEWPORT>& Viewports,
         const std::vector<D3D11_RECT>& ScissorRects,
@@ -58,7 +61,22 @@ public :
         ID3D11BlendState* BlendState = nullptr,
         float* BlendFactor = nullptr,
         UINT BlendMask = 0xFFFFFFFF ) = 0;
+
+protected :
+    void setSceneState(
+        ID3D11DeviceContext*,
+        const std::vector<ID3D11RenderTargetView*>&,
+        const std::vector<D3D11_VIEWPORT>&,
+        const std::vector<D3D11_RECT>&,
+        ID3D11DepthStencilView*,
+        ID3D11DepthStencilState*,
+        UINT,
+        ID3D11RasterizerState*,
+        ID3D11BlendState*,
+        float*,
+        UINT );
 };
+
 END_EGEG
 #endif /// !INCLUDED_EGEG_SCENE_HEADER_
 /// EOF

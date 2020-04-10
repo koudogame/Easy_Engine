@@ -3,8 +3,7 @@ texture2D tex : register(t0);
 struct Input
 {
     float4 position : SV_POSITION;
-    float2   uv : TEXCOORD;
-    float3 color : COLOR;
+    float2 texcoord : TEXCOORD;
 };
 
 float4 main( Input input ) : SV_TARGET
@@ -12,11 +11,10 @@ float4 main( Input input ) : SV_TARGET
     uint width, height;
     tex.GetDimensions( width, height );
     float3 texcoord = float3(
-        input.uv.x * width,
-        input.uv.y * height,
+        input.texcoord.x * width,
+        input.texcoord.y * height,
         0
         );
 
-    //return tex.Load(texcoord);
-    return float4( input.color, 1.0F );
+    return tex.Load(texcoord);
 }

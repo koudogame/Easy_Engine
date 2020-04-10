@@ -99,22 +99,22 @@ public :
         return std::get<FieldType>(table_).get();
     }
 
-    template <class ...FieldTypes>
-    Table<FieldTypes...> bind() const noexcept
+    template <class ...BindedFieldTypes>
+    Table<BindedFieldTypes...> extraction() const noexcept
     {
-        Table<FieldTypes...> binded;
-
+        Table<BindedFieldTypes...> binded;
+        return extraction<Table<BindedFieldTypes...>, BindedFieldTypes...>( binded );
     }
 
 private :
     template <class TableType, class FirstTagType, class ...RestTagTypes>
-    void bind( TableType& Destination ) noexcept
+    void extraction( TableType& Destination ) noexcept
     {
         Destination.set<FirstTagType>( this->get<FirstTagType>() );
-        bind<TableType, RestTagTypes...>( Destination );
+        extraction<TableType, RestTagTypes...>( Destination );
     }
     template <class TableType>
-    void bind( TableType& ) noexcept {}
+    void extraction( TableType& ) noexcept {}
 
     std::tuple<FieldTypes...> table_;
 };

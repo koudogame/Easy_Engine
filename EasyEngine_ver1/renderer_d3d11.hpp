@@ -54,7 +54,7 @@ private :
     D3D11_VIEWPORT          viewport_;              /// ビューポート
     ID3D11SamplerState*     p_sampler_state_;       /// サンプラーステート
     ID3D11BlendState*       p_blend_states_[3];     /// ブレンドステート配列
-    std::deque<Model>       model_list_;            /// 描画バッチ
+    std::deque<Model>       actor_list_;            /// 描画バッチ
 };
 END_EGEG
 #endif /// !INCLUDED_EGEG_RENDERER_D3D11_HEADER_

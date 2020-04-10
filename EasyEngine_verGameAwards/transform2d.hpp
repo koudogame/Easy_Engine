@@ -19,10 +19,23 @@ class Transform2D :
 public :
     static constexpr TypeID<Transform2D> getID() noexcept { return TypeID<Transform2D>(); }
     
+    Transform2D( Actor2D* Owner ) :
+        Component2D( Owner )
+    {
+    }
+
     ///< 座標のセット
     void setPosition( const Vector2D& Destination ) noexcept { position_ = Destination; }
     ///< 座標の取得
     const Vector2D& getPosition() const noexcept { return position_; }
+
+    ///
+    /// @brief  軸のセット
+    /// @detais 画像左上からの相対位置で指定して下さい。
+    ///         値は(0,0)左上 ~ (1,1)右下 の範囲で指定して下さい。
+    void setPivot( const Vector2D& Pivot ) noexcept { pivot_ = Pivot; }
+    ///< 軸の取得
+    const Vector2D& getPivot() const noexcept { return pivot_; }
 
     ///< 拡縮率の設定
     void setScale( const Vector2D& Scale ) noexcept { scale_ = Scale; }
@@ -40,7 +53,8 @@ public :
     void finalize() override;
 /*-----------------------------------------------------------------*/
 private :
-    Vector2D position_;
+    Vector2D position_; ///< 左上
+    Vector2D pivot_;    ///< 軸
     Vector2D scale_;
     float rotation_;
 };

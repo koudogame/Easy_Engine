@@ -98,7 +98,7 @@ void CollisionComponent::setPostCollision( uint32_t OtherID, ActorType* pOwner, 
     post_collision_.erase( OtherID );
     post_collision_.emplace( 
         OtherID,
-        std::bind(pCallBack, pOwner, std::placeholders::_1)
+        std::extraction(pCallBack, pOwner, std::placeholders::_1)
     );
 }
 END_EGEG

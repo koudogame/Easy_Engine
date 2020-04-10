@@ -19,10 +19,6 @@ class Task :
     protected Job<void(uint64_t)>
 {
 public :
-    using Job::operator();
-    using Job::setContainer;
-    using Job::exitFromContainer;
-
     ///
     /// @brief   ジョブとして実行する関数のセット
     /// @details ex.) .setJob( this, &Hoge::update );   <br>

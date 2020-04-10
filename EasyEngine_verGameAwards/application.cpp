@@ -9,10 +9,10 @@
 #include "application_status.hpp"
 #include "easy_engine.hpp"
 
-#include "test_level.hpp"
 #include "keyboard_controller.hpp"
 #include "task.hpp"
 #include "input_device_manager.hpp"
+#include "table.hpp"
 
 
 #pragma comment( lib, "dxgi.lib" )
@@ -88,10 +88,6 @@ void Application::mainloop()
         &render_target
     );
 
-    TestLevel level;
-    if( !level.initialize() )    return;
-
-
     MSG msg{};
     while( msg.message != WM_QUIT )
     {
@@ -111,22 +107,9 @@ void Application::mainloop()
             {
                 last_time = curr_time;
                 EasyEngine::getTaskManager()->execute( duration_cast<milliseconds>(erapsed_time).count() );
-
-                float backcolor[4] = { 1.0F, 1.0F, 1.0F, 1.0F };
-                EasyEngine::getRenderingManager()->getImmediateContext()->
-                ClearRenderTargetView(
-                    render_target.Get(),
-                    backcolor
-                );
-
-                level.update( render_target.Get() );
-                
-                sc->Present(0,0);
             }
         }
     }
-
-    level.finalize();
 }
 
 END_EGEG

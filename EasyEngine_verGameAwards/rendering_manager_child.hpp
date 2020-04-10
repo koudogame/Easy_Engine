@@ -28,7 +28,7 @@ public :
     }
 
 protected :
-    RenderingManager* engine_;
+    RenderingManager* engine_ = nullptr;
 };
 
 END_EGEG

@@ -14,6 +14,7 @@
 #include "egeg_math.hpp"
 #include "xinput_controller.hpp"
 #include "transform3d.hpp"
+#include "scene2d.hpp"
 
 BEGIN_EGEG
 class TestActor :
@@ -43,16 +44,26 @@ public :
 
     XInputController* controller;
 };
+class TestActor2D :
+    public Actor2D
+{
+public :
+    TestActor2D() :
+        Actor2D( 0 ) {}
+
+    bool initialize() override { return true; }
+    void finalize() override {}
+};
 
 class TestCamera :
-    public Camera
+    public Camera3D
 {
 public :
     void setViewMatrix( const Matrix4x4& Source )
     {
         view_ = Source;
     }
-    DirectX::FXMMATRIX getViewMatrix() const override
+    DirectX::FXMMATRIX calcViewMatrix() const override
     {
         return view_;
     }
@@ -76,6 +87,15 @@ public :
             D3D11_INPUT_PER_VERTEX_DATA,
             0
         },
+        {
+            "TEXCOORD",
+            0,
+            DXGI_FORMAT_R32G32_FLOAT,
+            1,
+            0,
+            D3D11_INPUT_PER_VERTEX_DATA,
+            0
+        }
     };
     static constexpr const char* kVSFileName = "test_vs.cso";
 
@@ -97,6 +117,15 @@ public :
         }
         binded.buffers.push_back( ver_buf );
         binded.strides.push_back( sizeof(VertexPositionType) );
+        binded.offsets.push_back( 0 );
+        ver_buf = Vertices.get<Tag_VertexUV>().Get();
+        if( ver_buf == nullptr )
+        {
+            binded.buffers.clear();
+            return RetTy(false, std::move(binded) );
+        }
+        binded.buffers.push_back( ver_buf );
+        binded.strides.push_back( sizeof(VertexUVType) );
         binded.offsets.push_back( 0 );
 
         return RetTy( true, std::move(binded) );
@@ -164,7 +193,7 @@ public :
     }
     void setShaderResourcesOnPipeline( ID3D11DeviceContext* DC ) override
     {
-        DC->PSSetShaderResources( 0, 0, nullptr );
+        //DC->PSSetShaderResources( 0, 0, nullptr );
     }
     void setConstantBuffersOnPipeline( ID3D11DeviceContext* DC ) override
     {
@@ -184,8 +213,8 @@ class TestLevel :
     public Level
 {
 public :
-    TestLevel() :
-        Level( nullptr )
+    TestLevel( LevelManager* Manager = nullptr) :
+        Level( Manager )
     {
     }
 
@@ -201,6 +230,13 @@ private :
     Scene3D scene_;
     Vector3D camera_position_;
     Vector3D camera_focus_;
+
+    Scene2D scene2d_;
+    TestActor2D act2d_;
+    std::unique_ptr<TestVS> vs_;
+    std::unique_ptr<TestPS> ps_;
 };
+
+REGISTER_LEVEL( TestLevel );
 
 END_EGEG

@@ -75,6 +75,12 @@
     <Filter Include="Project\EasyEngine\02_TaskSystem">
       <UniqueIdentifier>{0f22ccfb-dd3f-4172-a500-2c1b668fb2b5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Test">
+      <UniqueIdentifier>{0b3545b4-5c11-489e-8ec2-44864c845e63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Test\2DTest">
+      <UniqueIdentifier>{daf7c868-1f99-408e-8717-82a8e2317326}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -104,9 +110,6 @@
     <ClCompile Include="actor.cpp">
       <Filter>Project\EasyEngine\00_Objects\Actor</Filter>
     </ClCompile>
-    <ClCompile Include="test_level.cpp">
-      <Filter>Project\EasyEngine\00_Objects\Level</Filter>
-    </ClCompile>
     <ClCompile Include="transform3d.cpp">
       <Filter>Project\EasyEngine\01_Component\3D</Filter>
     </ClCompile>
@@ -134,6 +137,27 @@
     <ClCompile Include="input_device_manager.cpp">
       <Filter>Project\EasyEngine\99_System\Input\Device</Filter>
     </ClCompile>
+    <ClCompile Include="rendering2d.cpp">
+      <Filter>Project\EasyEngine\01_Component\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="scene2d.cpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="test_level.cpp">
+      <Filter>Project\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="root_level.cpp">
+      <Filter>Project\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="test2d_level.cpp">
+      <Filter>Project\Test\2DTest</Filter>
+    </ClCompile>
+    <ClCompile Include="tast2d_actor.cpp">
+      <Filter>Project\Test\2DTest</Filter>
+    </ClCompile>
+    <ClCompile Include="scene.cpp">
+      <Filter>Project\EasyEngine\99_System\Rendering\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="egeg_math.hpp">
@@ -146,9 +170,6 @@
       <Filter>Project\EasyEngine\03_Shape</Filter>
     </ClInclude>
     <ClInclude Include="rectangle.hpp">
-      <Filter>Project\EasyEngine\03_Shape</Filter>
-    </ClInclude>
-    <ClInclude Include="cuboid.hpp">
       <Filter>Project\EasyEngine\03_Shape</Filter>
     </ClInclude>
     <ClInclude Include="line2d.hpp">
@@ -223,9 +244,6 @@
     <ClInclude Include="camera.hpp">
       <Filter>Project\EasyEngine\00_Objects\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="test_level.hpp">
-      <Filter>Project\EasyEngine\00_Objects\Level</Filter>
-    </ClInclude>
     <ClInclude Include="transform3d.hpp">
       <Filter>Project\EasyEngine\01_Component\3D</Filter>
     </ClInclude>
@@ -261,9 +279,6 @@
     </ClInclude>
     <ClInclude Include="table.hpp">
       <Filter>Project\EasyEngine\99_System\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="vertex.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Model%28 3D %29</Filter>
     </ClInclude>
     <ClInclude Include="model.hpp">
       <Filter>Project\EasyEngine\99_System\Rendering\Model%28 3D %29</Filter>
@@ -322,6 +337,36 @@
     <ClInclude Include="model_loader.hpp">
       <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
     </ClInclude>
+    <ClInclude Include="camera3d.hpp">
+      <Filter>Project\EasyEngine\00_Objects\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="camera2d.hpp">
+      <Filter>Project\EasyEngine\00_Objects\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="cuboid.hpp">
+      <Filter>Project\EasyEngine\03_Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="vertex.hpp">
+      <Filter>Project\EasyEngine\99_System\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="test_level.hpp">
+      <Filter>Project\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="root_level.hpp">
+      <Filter>Project\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="test2d_level.hpp">
+      <Filter>Project\Test\2DTest</Filter>
+    </ClInclude>
+    <ClInclude Include="test2d_actor.hpp">
+      <Filter>Project\Test\2DTest</Filter>
+    </ClInclude>
+    <ClInclude Include="test2d_vs.hpp">
+      <Filter>Project\Test\2DTest</Filter>
+    </ClInclude>
+    <ClInclude Include="test2d_ps.hpp">
+      <Filter>Project\Test\2DTest</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="egeg_math.inl">
@@ -334,6 +379,12 @@
     </FxCompile>
     <FxCompile Include="test_ps.psh">
       <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="test2d_vs.vsh">
+      <Filter>Project\Test\2DTest</Filter>
+    </FxCompile>
+    <FxCompile Include="test2d_ps.psh">
+      <Filter>Project\Test\2DTest</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

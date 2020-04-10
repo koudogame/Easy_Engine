@@ -16,9 +16,11 @@ BEGIN_EGEG
 class Camera
 {
 public :
+    ///< 仮想デストラクタ
     virtual ~Camera() = default;
 
-    virtual DirectX::FXMMATRIX getViewMatrix() const = 0;
+    ///< ビュー変換行列を計算して返却
+    virtual DirectX::FXMMATRIX calcViewMatrix() const = 0;
 };
 
 END_EGEG

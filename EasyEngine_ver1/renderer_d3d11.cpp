@@ -149,7 +149,7 @@ void RendererD3D11::clear( const Vector4D& Color )
 // •`‰æŠJŽn
 void RendererD3D11::beginRender()
 {
-    model_list_.clear();
+    actor_list_.clear();
 }
 
 // ƒ‚ƒfƒ‹•`‰æ
@@ -269,7 +269,7 @@ void RendererD3D11::endRender()
 {
     if( p_swap_chain_->Present( 0U, DXGI_PRESENT_TEST ) == S_OK )
         p_swap_chain_->Present( 0U, 0U );
-    model_list_.clear();
+    actor_list_.clear();
 }
 END_EGEG
 // EOF

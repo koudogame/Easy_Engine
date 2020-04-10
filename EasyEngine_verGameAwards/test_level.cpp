@@ -4,12 +4,14 @@
 #include "WavefrontOBJ_loader.hpp"
 #include "rendering3d.hpp"
 #include "transform3d.hpp"
+#include "rendering2d.hpp"
 
 BEGIN_EGEG
 
 bool TestLevel::initialize()
 {
-    if( !scene_.initialize( EasyEngine::getRenderingManager()->getDevice().Get()) ) return false;
+    if( !scene2d_.initialize( EasyEngine::getRenderingManager()) ) return false;
+    if( !scene_.initialize( EasyEngine::getRenderingManager()) ) return false;
     if( !actor_.initialize() ) return false;
 
     camera_position_ = Vector3D{ 0.0F, 0.0F, -5.0F };
@@ -55,6 +57,15 @@ bool TestLevel::initialize()
         }
     );
 
+
+    auto tex_loader = EasyEngine::getRenderingManager()->getTextureLoader();
+    auto rend2d = act2d_.addComponent<component::Rendering2D>();
+    vs_ = loader->loadVertexShader<TestVS>();
+    ps_ = loader->loadPixelShader<TestPS>();
+    rend2d->setVertexShader( vs_.get() );
+    rend2d->setPixelShader( ps_.get() );
+    rend2d->setTexture( tex_loader->load( L"pyoro.png") );
+
     return true;
 }
 void TestLevel::finalize()
@@ -62,6 +73,8 @@ void TestLevel::finalize()
     delete actor_.controller;
     actor_.finalize();
     scene_.finalize();
+    act2d_.finalize();
+    scene2d_.finalize();
 }
 
 void TestLevel::update( ID3D11RenderTargetView* RTV )
@@ -96,7 +109,27 @@ void TestLevel::update( ID3D11RenderTargetView* RTV )
     EasyEngine::getRenderingManager()->getDevice()->CreateRasterizerState(
         &dc, &rs );
 
-    scene_.render(
+    /*scene_.render(
+        EasyEngine::getRenderingManager()->getImmediateContext().Get(),
+        {RTV},
+        {{
+            0.0F,
+            0.0F,
+            kHorizontalResolution<float>,
+            kVerticalResolution<float>,
+            0.0F,
+            1.0F
+        }},
+        {},
+        nullptr,
+        nullptr,
+        0,
+        rs.Get()
+    );*/
+
+
+    scene2d_.entry( &act2d_ );
+    scene2d_.render(
         EasyEngine::getRenderingManager()->getImmediateContext().Get(),
         {RTV},
         {{
@@ -113,7 +146,6 @@ void TestLevel::update( ID3D11RenderTargetView* RTV )
         0,
         rs.Get()
     );
-
 }
 
 END_EGEG

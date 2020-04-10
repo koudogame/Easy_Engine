@@ -12,7 +12,11 @@
 
 BEGIN_EGEG
 
-using Tag_VertexPosition = Field<Microsoft::WRL::ComPtr<ID3D11Buffer>>;
+using VertexPositionType = DirectX::XMFLOAT3;
+using VertexUVType       = DirectX::XMFLOAT2;
+using VertexNormalType   = DirectX::XMFLOAT3;
+
+using Tag_VertexPosition = Field<Microsoft::WRL::ComPtr<ID3D11Buffer>, 0U>;
 using Tag_VertexUV       = Field<Microsoft::WRL::ComPtr<ID3D11Buffer>, 1U>;
 using Tag_VertexNormal   = Field<Microsoft::WRL::ComPtr<ID3D11Buffer>, 2U>;
 using Tag_VertexIndex    = Field<Microsoft::WRL::ComPtr<ID3D11Buffer>, 3U>;
