@@ -6,6 +6,7 @@
 #define INCLUDED_EGEG_MODEL_LOADER_HEADER_
 
 #include "rendering_manager_child.hpp"
+#include "result.hpp"
 #include "mesh.hpp"
 
 BEGIN_EGEG
@@ -33,7 +34,7 @@ public :
     ///
     /// @return ê¨å˜ : trueÅ@é∏îs : false
     ///
-    virtual DetailedReturnValue<bool> load(
+    virtual DetailedResult<bool> load(
         const std::string& FilePath,
         Mesh* Output,
         const CoordinateSystem CoordinateSystem

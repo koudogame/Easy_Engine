@@ -4,7 +4,9 @@
 ///
 #ifndef INCLUDED_EGEG_COMPONENT_HEADER_
 #define INCLUDED_EGEG_COMPONENT_HEADER_
-#include "egeg.hpp"
+
+#include "component_id.hpp"
+
 BEGIN_EGEG
 class Actor;
 
@@ -13,7 +15,8 @@ namespace component {
 /// @class   Component
 /// @brief   コンポーネント基底
 /// @details 派生クラスはコンポーネントIDを返却する関数を<br>
-///          static uint32_t getID() として定義して下さい。
+///          static uint32_t getID() として定義して下さい。 <br>
+///          getIDはテンプレート関数で呼び出します。TypeID<T>を使用しないで下さい。
 ///
 class Component
 {
@@ -39,6 +42,7 @@ protected :
     Component( Actor* Owner ) : owner_( Owner ) {}
     Actor* owner_;  ///< 自身を保持しているアクター
 };
+
 } /// namespace component
 END_EGEG
 #endif /// !INCLUDED_EGEG_COMPONENT_HEADER_

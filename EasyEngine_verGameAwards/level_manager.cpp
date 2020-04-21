@@ -24,7 +24,8 @@ LevelManager::~LevelManager()
 std::unique_ptr<LevelManager> LevelManager::create()
 {
     std::unique_ptr<LevelManager> created( new LevelManager() );
-    created->transition( 0U );
+    created->level_list_.push_back( created->createLevel(0) );
+    created->transition_path_.push_back( 0 );
 
     return created;
 }
@@ -56,8 +57,8 @@ void LevelManager::transition( uint32_t NextID )
     level_list_.push_back( std::move(level) );
 
     // —š—ð‚ð’Ç‰Á
-    if( auto find = std::find(transition_path_.begin(), transition_path_.end(), NextID);
-        find != transition_path_.end() )
+    auto find = std::find(transition_path_.begin(), transition_path_.end(), NextID);
+    if( find != transition_path_.end() )
     { // —š—ð‚É‚ ‚éƒŒƒxƒ‹‚Ö‚Ì‘JˆÚ
         // —š—ð‚ð‚»‚±‚Ü‚Å–ß‚·
         path_idx_ = std::distance( transition_path_.begin(), find );

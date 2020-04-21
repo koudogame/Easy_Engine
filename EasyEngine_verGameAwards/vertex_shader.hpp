@@ -6,9 +6,10 @@
 #define INCLUDED_EGEG_VERTEX_SHADER_HEADER_
 
 #include <type_traits>
+#include <vector>
 #include <wrl.h>
 #include "shader.hpp"
-#include "detailed_returnvalue.hpp"
+#include "result.hpp"
 #include "vertex.hpp"
 
 BEGIN_EGEG
@@ -42,7 +43,7 @@ public :
     virtual ~VertexShader() = default;
 
     ///< 頂点の入力レイアウトにバインドするオブジェクトを取得する
-    virtual DetailedReturnValue<BindedVertexData> bindVertices( const Vertex& Vertices ) const = 0;
+    virtual DetailedResult<BindedVertexData> bindVertices( const Vertex& Vertices ) const = 0;
 
     ///< パイプラインに頂点入力レイアウトをセット
     void setInputLayoutOnPipeline( ID3D11DeviceContext* ImmediateContext ) 

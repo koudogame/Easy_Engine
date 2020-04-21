@@ -12,29 +12,8 @@
     <Filter Include="Project\EasyEngine">
       <UniqueIdentifier>{f9a672b8-e1ac-4e86-ac35-f3d7a8da30dd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project\EasyEngine\99_System">
-      <UniqueIdentifier>{037197f8-2b1f-4bce-97a6-bd5e20d69e8b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\EasyEngine\99_System\Input">
-      <UniqueIdentifier>{3d9bc61e-2423-4e35-9537-0179022c984e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\EasyEngine\99_System\Input\Controller">
-      <UniqueIdentifier>{375e4309-40ff-4626-a6fd-8d107b6d1e7b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\EasyEngine\99_System\Rendering">
-      <UniqueIdentifier>{c57a0814-1b67-4b2d-ae8f-cb83d38e5397}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\EasyEngine\99_System\Rendering\Loader">
-      <UniqueIdentifier>{34759648-190b-4e37-88cf-e9c4479d3f5a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\EasyEngine\99_System\Rendering\Scene">
-      <UniqueIdentifier>{01a7b2f5-889a-4308-afcc-630a3b13fc48}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Project\EasyEngine\04_Shader">
       <UniqueIdentifier>{7d648bd6-e005-4b97-aefb-c34d4e4c2633}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\EasyEngine\99_System\Utility">
-      <UniqueIdentifier>{341d67f1-f149-4e91-a4c3-bc5311f2a0a5}</UniqueIdentifier>
     </Filter>
     <Filter Include="Project\EasyEngine\00_Objects">
       <UniqueIdentifier>{c5184119-dbe9-4d4f-bfc2-be44555a307d}</UniqueIdentifier>
@@ -63,15 +42,6 @@
     <Filter Include="Project\EasyEngine\01_Component\Common">
       <UniqueIdentifier>{c740ded3-1148-463b-985c-33e3e6af0ee6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project\EasyEngine\99_System\Input\Device">
-      <UniqueIdentifier>{dab34000-7c3f-43d5-bd34-0ac11aae8b8d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\EasyEngine\99_System\Rendering\Model%28 3D %29">
-      <UniqueIdentifier>{7c6449c7-cdd5-4c6f-a84d-6dc5fdf37057}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Project\EasyEngine\99_System\Rendering\Shader">
-      <UniqueIdentifier>{d0ceaef5-eb4f-4e50-84d7-6deeb409b9c5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Project\EasyEngine\02_TaskSystem">
       <UniqueIdentifier>{0f22ccfb-dd3f-4172-a500-2c1b668fb2b5}</UniqueIdentifier>
     </Filter>
@@ -81,28 +51,58 @@
     <Filter Include="Project\Test\2DTest">
       <UniqueIdentifier>{daf7c868-1f99-408e-8717-82a8e2317326}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\EasyEngine\05_Input">
+      <UniqueIdentifier>{3d9bc61e-2423-4e35-9537-0179022c984e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\05_Input\Controller">
+      <UniqueIdentifier>{375e4309-40ff-4626-a6fd-8d107b6d1e7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\05_Input\Device">
+      <UniqueIdentifier>{dab34000-7c3f-43d5-bd34-0ac11aae8b8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\06_Rendering">
+      <UniqueIdentifier>{c57a0814-1b67-4b2d-ae8f-cb83d38e5397}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\06_Rendering\Loader">
+      <UniqueIdentifier>{34759648-190b-4e37-88cf-e9c4479d3f5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\06_Rendering\Scene">
+      <UniqueIdentifier>{01a7b2f5-889a-4308-afcc-630a3b13fc48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\06_Rendering\Model%28 3D %29">
+      <UniqueIdentifier>{7c6449c7-cdd5-4c6f-a84d-6dc5fdf37057}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\06_Rendering\Shader">
+      <UniqueIdentifier>{d0ceaef5-eb4f-4e50-84d7-6deeb409b9c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\07_TemplateLibrary">
+      <UniqueIdentifier>{341d67f1-f149-4e91-a4c3-bc5311f2a0a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\EasyEngine\99_System">
+      <UniqueIdentifier>{037197f8-2b1f-4bce-97a6-bd5e20d69e8b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Project</Filter>
     </ClCompile>
     <ClCompile Include="xinput_controller.cpp">
-      <Filter>Project\EasyEngine\99_System\Input\Controller</Filter>
+      <Filter>Project\EasyEngine\05_Input\Controller</Filter>
     </ClCompile>
     <ClCompile Include="application.cpp">
       <Filter>Project\EasyEngine\99_System</Filter>
     </ClCompile>
     <ClCompile Include="shader_loader.cpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
+      <Filter>Project\EasyEngine\06_Rendering\Loader</Filter>
     </ClCompile>
     <ClCompile Include="easy_engine.cpp">
       <Filter>Project\EasyEngine\99_System</Filter>
     </ClCompile>
     <ClCompile Include="scene3d.cpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Scene</Filter>
+      <Filter>Project\EasyEngine\06_Rendering\Scene</Filter>
     </ClCompile>
     <ClCompile Include="WavefrontOBJ_loader.cpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
+      <Filter>Project\EasyEngine\06_Rendering\Loader</Filter>
     </ClCompile>
     <ClCompile Include="level_manager.cpp">
       <Filter>Project\EasyEngine\00_Objects\Level</Filter>
@@ -117,31 +117,31 @@
       <Filter>Project\EasyEngine\01_Component\3D</Filter>
     </ClCompile>
     <ClCompile Include="xinput.cpp">
-      <Filter>Project\EasyEngine\99_System\Input\Device</Filter>
+      <Filter>Project\EasyEngine\05_Input\Device</Filter>
     </ClCompile>
     <ClCompile Include="keyboard.cpp">
-      <Filter>Project\EasyEngine\99_System\Input\Device</Filter>
+      <Filter>Project\EasyEngine\05_Input\Device</Filter>
     </ClCompile>
     <ClCompile Include="keyboard_controller.cpp">
-      <Filter>Project\EasyEngine\99_System\Input\Controller</Filter>
+      <Filter>Project\EasyEngine\05_Input\Controller</Filter>
     </ClCompile>
     <ClCompile Include="texture_loader.cpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
+      <Filter>Project\EasyEngine\06_Rendering\Loader</Filter>
     </ClCompile>
     <ClCompile Include="transform2d.cpp">
       <Filter>Project\EasyEngine\01_Component\2D</Filter>
     </ClCompile>
     <ClCompile Include="rendering_manager.cpp">
-      <Filter>Project\EasyEngine\99_System\Rendering</Filter>
+      <Filter>Project\EasyEngine\06_Rendering</Filter>
     </ClCompile>
     <ClCompile Include="input_device_manager.cpp">
-      <Filter>Project\EasyEngine\99_System\Input\Device</Filter>
+      <Filter>Project\EasyEngine\05_Input\Device</Filter>
     </ClCompile>
     <ClCompile Include="rendering2d.cpp">
       <Filter>Project\EasyEngine\01_Component\2D</Filter>
     </ClCompile>
     <ClCompile Include="scene2d.cpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Scene</Filter>
+      <Filter>Project\EasyEngine\06_Rendering\Scene</Filter>
     </ClCompile>
     <ClCompile Include="test_level.cpp">
       <Filter>Project\Test</Filter>
@@ -156,7 +156,28 @@
       <Filter>Project\Test\2DTest</Filter>
     </ClCompile>
     <ClCompile Include="scene.cpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Scene</Filter>
+      <Filter>Project\EasyEngine\06_Rendering\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="model_vertex_shader.cpp">
+      <Filter>Project\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="model_pixel_shader.cpp">
+      <Filter>Project\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="sprite.cpp">
+      <Filter>Project\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="sprite_pixel_shader.cpp">
+      <Filter>Project\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="sprite_vertex_shader.cpp">
+      <Filter>Project\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="body3d.cpp">
+      <Filter>Project\EasyEngine\01_Component\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="body2d.cpp">
+      <Filter>Project\EasyEngine\01_Component\2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -185,52 +206,49 @@
       <Filter>Project\EasyEngine\99_System</Filter>
     </ClInclude>
     <ClInclude Include="controller.hpp">
-      <Filter>Project\EasyEngine\99_System\Input\Controller</Filter>
+      <Filter>Project\EasyEngine\05_Input\Controller</Filter>
     </ClInclude>
     <ClInclude Include="xinput_controller.hpp">
-      <Filter>Project\EasyEngine\99_System\Input\Controller</Filter>
+      <Filter>Project\EasyEngine\05_Input\Controller</Filter>
     </ClInclude>
     <ClInclude Include="application_status.hpp">
       <Filter>Project\EasyEngine\99_System</Filter>
     </ClInclude>
     <ClInclude Include="shader_loader.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
+      <Filter>Project\EasyEngine\06_Rendering\Loader</Filter>
     </ClInclude>
     <ClInclude Include="level.hpp">
       <Filter>Project\EasyEngine\00_Objects\Level</Filter>
     </ClInclude>
     <ClInclude Include="scene.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Scene</Filter>
+      <Filter>Project\EasyEngine\06_Rendering\Scene</Filter>
     </ClInclude>
     <ClInclude Include="scene3d.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Scene</Filter>
+      <Filter>Project\EasyEngine\06_Rendering\Scene</Filter>
     </ClInclude>
     <ClInclude Include="easy_engine.hpp">
       <Filter>Project\EasyEngine\99_System</Filter>
     </ClInclude>
     <ClInclude Include="scene2d.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Scene</Filter>
+      <Filter>Project\EasyEngine\06_Rendering\Scene</Filter>
     </ClInclude>
     <ClInclude Include="noncopyable.hpp">
-      <Filter>Project\EasyEngine\99_System\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="detailed_returnvalue.hpp">
-      <Filter>Project\EasyEngine\99_System\Utility</Filter>
+      <Filter>Project\EasyEngine\07_TemplateLibrary</Filter>
     </ClInclude>
     <ClInclude Include="utility_function.hpp">
-      <Filter>Project\EasyEngine\99_System\Utility</Filter>
+      <Filter>Project\EasyEngine\07_TemplateLibrary</Filter>
     </ClInclude>
     <ClInclude Include="level_manager.hpp">
       <Filter>Project\EasyEngine\00_Objects\Level</Filter>
     </ClInclude>
     <ClInclude Include="WavefrontOBJ_loader.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
+      <Filter>Project\EasyEngine\06_Rendering\Loader</Filter>
     </ClInclude>
     <ClInclude Include="error.hpp">
-      <Filter>Project\EasyEngine\99_System\Utility</Filter>
+      <Filter>Project\EasyEngine\07_TemplateLibrary</Filter>
     </ClInclude>
     <ClInclude Include="factory.hpp">
-      <Filter>Project\EasyEngine\99_System\Utility</Filter>
+      <Filter>Project\EasyEngine\07_TemplateLibrary</Filter>
     </ClInclude>
     <ClInclude Include="actor3d.hpp">
       <Filter>Project\EasyEngine\00_Objects\Actor</Filter>
@@ -257,34 +275,34 @@
       <Filter>Project\EasyEngine\01_Component\Common</Filter>
     </ClInclude>
     <ClInclude Include="input_device.hpp">
-      <Filter>Project\EasyEngine\99_System\Input\Device</Filter>
+      <Filter>Project\EasyEngine\05_Input\Device</Filter>
     </ClInclude>
     <ClInclude Include="xinput.hpp">
-      <Filter>Project\EasyEngine\99_System\Input\Device</Filter>
+      <Filter>Project\EasyEngine\05_Input\Device</Filter>
     </ClInclude>
     <ClInclude Include="keyboard.hpp">
-      <Filter>Project\EasyEngine\99_System\Input\Device</Filter>
+      <Filter>Project\EasyEngine\05_Input\Device</Filter>
     </ClInclude>
     <ClInclude Include="keyboard_controller.hpp">
-      <Filter>Project\EasyEngine\99_System\Input\Controller</Filter>
+      <Filter>Project\EasyEngine\05_Input\Controller</Filter>
     </ClInclude>
     <ClInclude Include="texture_loader.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
+      <Filter>Project\EasyEngine\06_Rendering\Loader</Filter>
     </ClInclude>
     <ClInclude Include="sub_mesh.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Model%28 3D %29</Filter>
+      <Filter>Project\EasyEngine\06_Rendering\Model%28 3D %29</Filter>
     </ClInclude>
     <ClInclude Include="material.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Model%28 3D %29</Filter>
+      <Filter>Project\EasyEngine\06_Rendering\Model%28 3D %29</Filter>
     </ClInclude>
     <ClInclude Include="table.hpp">
-      <Filter>Project\EasyEngine\99_System\Utility</Filter>
+      <Filter>Project\EasyEngine\07_TemplateLibrary</Filter>
     </ClInclude>
     <ClInclude Include="model.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Model%28 3D %29</Filter>
+      <Filter>Project\EasyEngine\06_Rendering\Model%28 3D %29</Filter>
     </ClInclude>
     <ClInclude Include="mesh.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Model%28 3D %29</Filter>
+      <Filter>Project\EasyEngine\06_Rendering\Model%28 3D %29</Filter>
     </ClInclude>
     <ClInclude Include="component2d.hpp">
       <Filter>Project\EasyEngine\01_Component\2D</Filter>
@@ -296,46 +314,46 @@
       <Filter>Project\EasyEngine\01_Component\2D</Filter>
     </ClInclude>
     <ClInclude Include="shader.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Shader</Filter>
+      <Filter>Project\EasyEngine\06_Rendering\Shader</Filter>
     </ClInclude>
     <ClInclude Include="vertex_shader.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Shader</Filter>
+      <Filter>Project\EasyEngine\06_Rendering\Shader</Filter>
     </ClInclude>
     <ClInclude Include="pixel_shader.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Shader</Filter>
+      <Filter>Project\EasyEngine\06_Rendering\Shader</Filter>
     </ClInclude>
     <ClInclude Include="geometry_shader.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Shader</Filter>
+      <Filter>Project\EasyEngine\06_Rendering\Shader</Filter>
     </ClInclude>
     <ClInclude Include="rendering_manager.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering</Filter>
+      <Filter>Project\EasyEngine\06_Rendering</Filter>
     </ClInclude>
     <ClInclude Include="rendering_manager_child.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering</Filter>
+      <Filter>Project\EasyEngine\06_Rendering</Filter>
     </ClInclude>
     <ClInclude Include="job_scheduler.hpp">
-      <Filter>Project\EasyEngine\99_System\Utility</Filter>
+      <Filter>Project\EasyEngine\07_TemplateLibrary</Filter>
     </ClInclude>
     <ClInclude Include="job_container.hpp">
-      <Filter>Project\EasyEngine\99_System\Utility</Filter>
+      <Filter>Project\EasyEngine\07_TemplateLibrary</Filter>
     </ClInclude>
     <ClInclude Include="job.hpp">
-      <Filter>Project\EasyEngine\99_System\Utility</Filter>
+      <Filter>Project\EasyEngine\07_TemplateLibrary</Filter>
     </ClInclude>
     <ClInclude Include="task.hpp">
       <Filter>Project\EasyEngine\02_TaskSystem</Filter>
     </ClInclude>
     <ClInclude Include="input_device_manager.hpp">
-      <Filter>Project\EasyEngine\99_System\Input\Device</Filter>
+      <Filter>Project\EasyEngine\05_Input\Device</Filter>
     </ClInclude>
     <ClInclude Include="type_id.hpp">
-      <Filter>Project\EasyEngine\99_System\Utility</Filter>
+      <Filter>Project\EasyEngine\07_TemplateLibrary</Filter>
     </ClInclude>
     <ClInclude Include="constant_id.hpp">
-      <Filter>Project\EasyEngine\99_System\Utility</Filter>
+      <Filter>Project\EasyEngine\07_TemplateLibrary</Filter>
     </ClInclude>
     <ClInclude Include="model_loader.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering\Loader</Filter>
+      <Filter>Project\EasyEngine\06_Rendering\Loader</Filter>
     </ClInclude>
     <ClInclude Include="camera3d.hpp">
       <Filter>Project\EasyEngine\00_Objects\Camera</Filter>
@@ -347,7 +365,7 @@
       <Filter>Project\EasyEngine\03_Shape</Filter>
     </ClInclude>
     <ClInclude Include="vertex.hpp">
-      <Filter>Project\EasyEngine\99_System\Rendering</Filter>
+      <Filter>Project\EasyEngine\06_Rendering</Filter>
     </ClInclude>
     <ClInclude Include="test_level.hpp">
       <Filter>Project\Test</Filter>
@@ -366,6 +384,36 @@
     </ClInclude>
     <ClInclude Include="test2d_ps.hpp">
       <Filter>Project\Test\2DTest</Filter>
+    </ClInclude>
+    <ClInclude Include="focused_camera.hpp">
+      <Filter>Project\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="model_pixel_shader.hpp">
+      <Filter>Project\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="model_vertex_shader.hpp">
+      <Filter>Project\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite.hpp">
+      <Filter>Project\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite_pixel_shader.hpp">
+      <Filter>Project\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite_vertex_shader.hpp">
+      <Filter>Project\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="component_id.hpp">
+      <Filter>Project\EasyEngine\01_Component\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="result.hpp">
+      <Filter>Project\EasyEngine\07_TemplateLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="body3d.hpp">
+      <Filter>Project\EasyEngine\01_Component\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="body2d.hpp">
+      <Filter>Project\EasyEngine\01_Component\2D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

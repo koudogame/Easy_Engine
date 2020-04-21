@@ -23,7 +23,7 @@
     <ProjectGuid>{C0332708-19AC-4BBA-97B7-AF52681FE6C9}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>EasyEngineverGameAwards</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -88,7 +88,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -115,7 +115,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -141,6 +141,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="body2d.hpp" />
+    <ClInclude Include="body3d.hpp" />
+    <ClInclude Include="component_id.hpp" />
+    <ClInclude Include="focused_camera.hpp" />
+    <ClInclude Include="model_pixel_shader.hpp" />
+    <ClInclude Include="model_vertex_shader.hpp" />
+    <ClInclude Include="result.hpp" />
+    <ClInclude Include="sprite.hpp" />
+    <ClInclude Include="sprite_pixel_shader.hpp" />
+    <ClInclude Include="sprite_vertex_shader.hpp" />
     <ClInclude Include="test2d_actor.hpp" />
     <ClInclude Include="test2d_level.hpp" />
     <ClInclude Include="actor.hpp" />
@@ -157,7 +167,6 @@
     <ClInclude Include="constant_id.hpp" />
     <ClInclude Include="controller.hpp" />
     <ClInclude Include="cuboid.hpp" />
-    <ClInclude Include="detailed_returnvalue.hpp" />
     <ClInclude Include="easy_engine.hpp" />
     <ClInclude Include="egeg.hpp" />
     <ClInclude Include="egeg_math.hpp" />
@@ -212,7 +221,14 @@
     <ClInclude Include="xinput_controller.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="body2d.cpp" />
+    <ClCompile Include="body3d.cpp" />
+    <ClCompile Include="model_pixel_shader.cpp" />
+    <ClCompile Include="model_vertex_shader.cpp" />
     <ClCompile Include="scene.cpp" />
+    <ClCompile Include="sprite.cpp" />
+    <ClCompile Include="sprite_pixel_shader.cpp" />
+    <ClCompile Include="sprite_vertex_shader.cpp" />
     <ClCompile Include="tast2d_actor.cpp" />
     <ClCompile Include="test2d_level.cpp" />
     <ClCompile Include="actor.cpp" />
@@ -265,12 +281,15 @@
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="test_vs.vsh">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
     </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

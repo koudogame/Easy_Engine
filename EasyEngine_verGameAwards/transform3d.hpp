@@ -4,9 +4,9 @@
 ///
 #ifndef INCLUDED_EGEG_TRANSFORM3D_COMPONENT_HEADER_
 #define INCLUDED_EGEG_TRANSFORM3D_COMPONENT_HEADER_
+
 #include "component3d.hpp"
 #include "egeg_math.hpp"
-#include "type_id.hpp"
 
 BEGIN_EGEG
 namespace component {
@@ -19,7 +19,7 @@ class Transform3D :
     public Component3D
 {
 public :
-    static constexpr TypeID<Transform3D> getID() noexcept { return TypeID<Transform3D>(); }
+    static uint32_t getID() noexcept { return ComponentID::kTransform3D; }
 
     Transform3D( Actor3D* Owner ) :
         Component3D( Owner )

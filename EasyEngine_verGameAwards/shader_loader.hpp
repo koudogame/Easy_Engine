@@ -9,7 +9,7 @@
 #include <unordered_map>
 #include "rendering_manager_child.hpp"
 #include "utility_function.hpp"
-#include "detailed_returnvalue.hpp"
+#include "result.hpp"
 BEGIN_EGEG
 ///
 /// @class  ShaderLoader
@@ -20,7 +20,7 @@ class ShaderLoader :
 {
 public :
     template <class ReturnType>
-    using RetValType = DetailedReturnValue<std::unique_ptr<ReturnType>>;
+    using RetValType = DetailedResult<std::unique_ptr<ReturnType>>;
 
     ~ShaderLoader() = default;
 
@@ -41,14 +41,14 @@ public :
         auto blob = loadBinary( VSTy::kVSFileName );
         if( !blob ) 
         { // ファイルの読み込みに失敗
-            return RetTy( false, nullptr, "ファイルの読み込みに失敗" );
+            return RetTy( Failure(), "ファイルの読み込みに失敗" );
         }
 
         // シェーダーオブジェクトの生成
         ID3D11VertexShader* vs = nullptr;
         if( !createVS(blob.get(), &vs) )
         { // シェーダーオブジェクトの生成に失敗
-            return RetTy( false, nullptr, "シェーダーオブジェクトの生成に失敗" );
+            return RetTy( Failure(), "シェーダーオブジェクトの生成に失敗" );
         }
 
         // 入力レイアウトオブジェクトの生成
@@ -56,10 +56,10 @@ public :
         if( !createIL(blob.get(), VSTy::kInputElementDescs, getArraySize(VSTy::kInputElementDescs), &il) )
         { // 入力レイアウトオブジェクトの生成に失敗
             vs->Release();
-            return RetTy( false, nullptr, "入力レイアウトオブジェクトの生成に失敗" );
+            return RetTy( Failure(), "入力レイアウトオブジェクトの生成に失敗" );
         }
         
-        RetTy shader( true, std::make_unique<VSTy>(vs, il) );
+        RetTy shader( Success(), std::make_unique<VSTy>(vs, il) );
         vs->Release();
         il->Release();
         return shader;
@@ -82,17 +82,17 @@ public :
         auto blob = loadBinary( GSTy::kGSFileName );
         if( !blob )
         { // ファイルの読み込みに失敗
-            return RetTy( false, nullptr, "ファイルの読み込みに失敗" );
+            return RetTy( Failure(), "ファイルの読み込みに失敗" );
         }
 
         // シェーダ―オブジェクトの生成
         ID3D11GeometryShader* gs = nullptr;
         if( !createGS(blob.get(), &gs) )
         { // シェーダ―オブジェクトの生成に失敗
-            return RetTy( false, nullptr, "シェーダ―オブジェクトの生成に失敗" );
+            return RetTy( Failure(), "シェーダ―オブジェクトの生成に失敗" );
         }
 
-        RetTy shader( true, std::make_unique<GSTy>(gs) );
+        RetTy shader( Success(), std::make_unique<GSTy>(gs) );
         gs->Release();
         return shader;
     }
@@ -114,17 +114,17 @@ public :
         auto blob = loadBinary( PSTy::kPSFileName );
         if( !blob )
         { // ファイルの読み込みに失敗
-            return RetTy( false, nullptr, "ファイルの読み込みに失敗" );
+            return RetTy( Failure(), "ファイルの読み込みに失敗" );
         }
 
         // シェーダーオブジェクトの生成
         ID3D11PixelShader* ps = nullptr;
         if( !createPS(blob.get(), &ps) )
         { // シェーダ―オブジェクトの生成に失敗
-            return RetTy( false, nullptr, "シェーダ―オブジェクトの生成に失敗" );
+            return RetTy( Failure(), "シェーダ―オブジェクトの生成に失敗" );
         }
 
-        RetTy shader( true, std::make_unique<PSTy>(ps) );
+        RetTy shader( Success(), std::make_unique<PSTy>(ps) );
         ps->Release();
         return shader;
     }
@@ -152,7 +152,7 @@ private :
         char* bytecode = nullptr;
         size_t length;
     };
-    DetailedReturnValue<BinaryData> loadBinary( const char* );
+    DetailedResult<BinaryData> loadBinary( const char* );
     bool createIL( const BinaryData&, const D3D11_INPUT_ELEMENT_DESC*, UINT, ID3D11InputLayout** );
     bool createVS( const BinaryData&, ID3D11VertexShader** );
     bool createGS( const BinaryData&, ID3D11GeometryShader** );

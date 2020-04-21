@@ -33,29 +33,29 @@ public :
         VertexShader( VS, IL )
     {}
 
-    EGEG DetailedReturnValue<EGEG BindedVertexData> bindVertices( const EGEG Vertex& Vertices ) const override 
+    EGEG DetailedResult<EGEG BindedVertexData> bindVertices( const EGEG Vertex& Vertices ) const override 
     {
         USING_NS_EGEG;
-        using RetTy = DetailedReturnValue<BindedVertexData>;
+        using RetTy = DetailedResult<BindedVertexData>;
         
         BindedVertexData binded;
         ID3D11Buffer* to_use;
         
         to_use = Vertices.get<Tag_VertexPosition>().Get();
         if( to_use == nullptr )
-            return RetTy( false, BindedVertexData{}, "Insufficient vertex data" );
+            return RetTy( Failure(), "Insufficient vertex data" );
         binded.buffers.push_back( to_use );
         binded.strides.push_back( sizeof(VertexPositionType) );
         binded.offsets.push_back( 0 );
 
         to_use = Vertices.get<Tag_VertexUV>().Get();
         if( to_use == nullptr )
-            return RetTy( false, BindedVertexData{}, "Insufficient vertex data" );
+            return RetTy( Failure(), "Insufficient vertex data" );
         binded.buffers.push_back( to_use );
         binded.strides.push_back( sizeof(VertexUVType) );
         binded.offsets.push_back( 0 );
 
-        return RetTy( true, std::move(binded) );
+        return RetTy( Success(), std::move(binded) );
     }
 
     void setShaderOnPipeline( ID3D11DeviceContext* DC ) override

@@ -24,7 +24,7 @@ class Rendering2D :
     public Component2D
 {
 public :
-    static constexpr TypeID<Rendering2D> getID() noexcept { return TypeID<Rendering2D>(); }
+    static uint32_t getID() noexcept { return ComponentID::kRendering2D; }
 
     Rendering2D( Actor2D* Owner ) :
         Component2D( Owner )

@@ -36,7 +36,17 @@ public :
     /// @brief  アクター終了処理
     ///
     virtual void finalize() = 0;
-
+    
+    ///
+    /// @brief   コンポーネントの取得
+    /// @details 対応するコンポーネントがない場合、nullptrを返却します。
+    ///
+    /// @tparam ComponentType : 取得するコンポーネント型
+    ///
+    /// @return コンポーネント
+    ///
+    template <class ComponentType>
+    ComponentType* getComponent() const;
 protected :
     Actor( uint32_t ActorID ) noexcept : id_( ActorID ) {}
     std::unordered_map<uint32_t, component::Component*> components_; ///< コンポーネント
@@ -44,6 +54,18 @@ protected :
 private :
     uint32_t id_;   /// アクター識別ID
 };
+
+///< コンポーネントの取得
+template <class ComponentType>
+ComponentType* Actor::getComponent() const
+{
+    auto find = components_.find( ComponentType::getID() );
+    if( find == components_.end() ) return nullptr;
+
+    // 対応するコンポーネントの返却
+    return static_cast<ComponentType*>( find->second );
+}
+
 END_EGEG
 #endif /// !INCLUDED_ACTOR_HEADER_
 /// EOF

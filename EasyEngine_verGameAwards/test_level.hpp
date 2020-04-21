@@ -103,9 +103,9 @@ public :
         VertexShader( VS, IL )
     {}
 
-    DetailedReturnValue<BindedVertexData> bindVertices( const Vertex& Vertices ) const override
+    DetailedResult<BindedVertexData> bindVertices( const Vertex& Vertices ) const override
     {
-        using RetTy = DetailedReturnValue<BindedVertexData>;
+        using RetTy = DetailedResult<BindedVertexData>;
 
         BindedVertexData binded;
 
@@ -113,7 +113,7 @@ public :
         ver_buf = Vertices.get<Tag_VertexPosition>().Get();
         if( ver_buf == nullptr )
         { // 失敗
-            return RetTy(false, std::move(binded), "必要なデータがありません" );
+            return RetTy(Failure(), "頂点座標がありません" );
         }
         binded.buffers.push_back( ver_buf );
         binded.strides.push_back( sizeof(VertexPositionType) );
@@ -121,14 +121,13 @@ public :
         ver_buf = Vertices.get<Tag_VertexUV>().Get();
         if( ver_buf == nullptr )
         {
-            binded.buffers.clear();
-            return RetTy(false, std::move(binded) );
+            return RetTy(Failure(), "UV座標がありません。" );
         }
         binded.buffers.push_back( ver_buf );
         binded.strides.push_back( sizeof(VertexUVType) );
         binded.offsets.push_back( 0 );
 
-        return RetTy( true, std::move(binded) );
+        return RetTy( Success(), std::move(binded) );
     }
 
     void setShaderOnPipeline( ID3D11DeviceContext* DC ) override

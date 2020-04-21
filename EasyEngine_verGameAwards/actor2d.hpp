@@ -33,16 +33,6 @@ public :
     ///
     template <class ComponentType>
     ComponentType* addComponent();
-    ///
-    /// @brief   コンポーネントの取得
-    /// @details 対応したコンポーネントを所持していない場合、nullptrを返却します。
-    ///
-    /// @tparam ComponentType : 取得するコンポーネント型
-    ///
-    /// @return コンポーネント
-    ///
-    template <class ComponentType>
-    ComponentType* getComponent() const;
 
 protected :
     Actor2D( uint32_t ActorID ) noexcept : Actor( ActorID ) {}
@@ -64,17 +54,6 @@ ComponentType* Actor2D::addComponent()
     components_.emplace( ComponentType::getID(), component );
 
     return component;
-}
-
-///< コンポーネントの取得
-template <class ComponentType>
-ComponentType* Actor2D::getComponent() const
-{
-    auto find = components_.find( ComponentType::getID() );
-    if( find == components_.end() ) return nullptr;
-
-    // 対応するコンポーネントを返却
-    return static_cast<ComponentType*>( find->second );
 }
 
 END_EGEG

@@ -7,7 +7,6 @@
 
 #include "component2d.hpp"
 #include "egeg_math.hpp"
-#include "type_id.hpp"
 
 BEGIN_EGEG
 namespace component
@@ -17,7 +16,7 @@ class Transform2D :
     public Component2D
 {
 public :
-    static constexpr TypeID<Transform2D> getID() noexcept { return TypeID<Transform2D>(); }
+    static uint32_t getID() noexcept { return ComponentID::kTransform2D; }
     
     Transform2D( Actor2D* Owner ) :
         Component2D( Owner )

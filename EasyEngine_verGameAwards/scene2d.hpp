@@ -36,13 +36,6 @@ class Scene2D :
 {
 public :
     ///
-    /// @brief  カメラのセット
-    ///
-    /// @param[in] Camera : 2D空間用カメラ
-    ///
-    void setCamera( const Camera2D* Camera ) noexcept { camera_ = Camera; }
-
-    ///
     /// @brief  アクターのエントリー
     ///
     /// @param[in] Actor : 2Dアクター
@@ -76,7 +69,6 @@ public :
 /*-----------------------------------------------------------------*/
 
 private :
-    const Camera2D* camera_ = nullptr;
     std::set<const Actor2D*> actor_list_;
     std::array<ID3D11Buffer*, 2U> cbuffer_list_;
     Vertex vertices_;

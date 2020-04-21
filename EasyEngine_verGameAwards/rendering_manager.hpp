@@ -10,7 +10,7 @@
 #include <wrl.h>
 #include <d3d11.h>
 #include "noncopyable.hpp"
-#include "detailed_returnvalue.hpp"
+#include "result.hpp"
 
 BEGIN_EGEG
 
@@ -59,7 +59,7 @@ public :
     /// @return 生成したバッファ
     ///
     template <class DataType>
-    DetailedReturnValue<bool> createBuffer( D3D11_BUFFER_DESC* BufferDesc, const std::vector<DataType>& Source, ID3D11Buffer** Output );
+    DetailedResult<bool> createBuffer( D3D11_BUFFER_DESC* BufferDesc, const std::vector<DataType>& Source, ID3D11Buffer** Output );
 
 private :
     RenderingManager() = default;
@@ -75,9 +75,9 @@ private :
 
 // バッファオブジェクトの生成
 template <class DataType>
-DetailedReturnValue<bool> RenderingManager::createBuffer( D3D11_BUFFER_DESC* Desc, const std::vector<DataType>& Source, ID3D11Buffer** Output )
+DetailedResult<bool> RenderingManager::createBuffer( D3D11_BUFFER_DESC* Desc, const std::vector<DataType>& Source, ID3D11Buffer** Output )
 {
-    using RetTy = DetailedReturnValue<bool>;
+    using RetTy = DetailedResult<bool>;
 
     Desc->ByteWidth = sizeof(DataType) * Source.size();
     D3D11_SUBRESOURCE_DATA srd{};
@@ -85,9 +85,9 @@ DetailedReturnValue<bool> RenderingManager::createBuffer( D3D11_BUFFER_DESC* Des
 
     HRESULT hr = device_->CreateBuffer(
         Desc, &srd, Output );
-    if( FAILED(hr) ) return RetTy( false, "バッファオブジェクトの生成に失敗" );
+    if( FAILED(hr) ) return RetTy( Failure(), "バッファオブジェクトの生成に失敗" );
 
-    return RetTy( true );
+    return Success();
 }
 
 END_EGEG

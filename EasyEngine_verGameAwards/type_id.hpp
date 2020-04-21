@@ -6,29 +6,36 @@
 #define INCLUDED_EGEG_TYPE_ID_HEADER_
 
 #include <cstdint>
-#include "egeg.hpp"
+#include "utility_function.hpp"
 
 BEGIN_EGEG
 
 ///
 /// @class  TypeID
 /// @brief  Œ^î•ñ‚©‚çID‚ğæ“¾‚·‚éƒNƒ‰ƒX
+///
+/// @tparam Type : ID‚ğæ“¾‚·‚éŒ^
 /// 
-template <class Object>
-class TypeID final
+template <class Type>
+class TypeID
 {
 public :
-    constexpr TypeID() noexcept {}
-    operator uint32_t() const noexcept
+    constexpr TypeID() noexcept = default;
+
+    operator ::std::uintptr_t() const noexcept
     {
-        static const uint32_t uid = reinterpret_cast<uint32_t>(&uid);
-        return uid;
+        return id_;
     }
-    uint32_t operator()() const noexcept
+    ::std::uintptr_t operator()() const noexcept
     {
         return *this;
     }
+private :
+    static const ::std::uintptr_t id_;
 };
+
+template <class Type>
+const ::std::uintptr_t TypeID<Type>::id_{ uniqueid_cast<::std::uintptr_t>(id_) };
 
 END_EGEG
 #endif /// !INCLUDED_EGEG_TYPE_ID_HEADER_

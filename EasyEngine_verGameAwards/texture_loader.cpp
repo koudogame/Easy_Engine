@@ -17,17 +17,17 @@ BEGIN_EGEG
 //
 // DirectXTexを利用してテクスチャをロードする
 // 戻り値はテクスチャのシェーダ―リソースビュー
-DetailedReturnValue<Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>>
+DetailedResult<Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>>
 TextureLoader::load( const std::wstring& FilePath )
 {
-    using RetTy = DetailedReturnValue<Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>>;
+    using RetTy = DetailedResult<Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>>;
     using namespace DirectX;
 
     // ファイルからデータを読み込む
     TexMetadata metadata;
     ScratchImage image;
     HRESULT hr = LoadFromWICFile(FilePath.c_str(), 0, &metadata, image);
-    if( FAILED(hr) ) { RetTy(false, nullptr, "ファイル読み込みに失敗"); }
+    if( FAILED(hr) ) { return RetTy(Failure(), "ファイル読み込みに失敗"); }
 
     // シェーダ―リソースビューを作成
     ID3D11ShaderResourceView* srv = nullptr;
@@ -43,9 +43,9 @@ TextureLoader::load( const std::wstring& FilePath )
         false,
         &srv
     );
-    if( FAILED(hr) ) { RetTy(false, nullptr, "シェーダ―リソースビューの生成に失敗"); }
+    if( FAILED(hr) ) { return RetTy(Failure(), "シェーダ―リソースビューの生成に失敗"); }
 
-    RetTy ret( true, srv );
+    RetTy ret( Success(), srv );
     srv->Release();
     return ret;
 }

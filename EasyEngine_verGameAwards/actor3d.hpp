@@ -29,16 +29,6 @@ public :
     ///
     template <class ComponentType>
     ComponentType* addComponent();
-    ///
-    /// @brief   コンポーネントの取得
-    /// @details 対応するコンポーネントがない場合、nullptrを返却します。
-    ///
-    /// @tparam ComponentType : 取得するコンポーネント型
-    ///
-    /// @return コンポーネント
-    ///
-    template <class ComponentType>
-    ComponentType* getComponent() const;
 
 protected :
     Actor3D( uint32_t ActorID ) noexcept : Actor( ActorID ) {}
@@ -59,17 +49,6 @@ ComponentType* Actor3D::addComponent()
     components_.emplace( ComponentType::getID(), component );
 
     return component;
-}
-
-///< コンポーネントの取得
-template <class ComponentType>
-ComponentType* Actor3D::getComponent() const
-{
-    auto find = components_.find( ComponentType::getID() );
-    if( find == components_.end() ) return nullptr;
-
-    // 対応するコンポーネントの返却
-    return static_cast<ComponentType*>( find->second );
 }
 
 END_EGEG

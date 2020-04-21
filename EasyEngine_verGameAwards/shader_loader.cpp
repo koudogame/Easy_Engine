@@ -7,14 +7,14 @@ BEGIN_EGEG
 // ShaderLoader 関数実装
 /*===========================================================================*/
 // ファイルからバイトコードを読み込む
-DetailedReturnValue<ShaderLoader::BinaryData> ShaderLoader::loadBinary( const char* FileName )
+DetailedResult<ShaderLoader::BinaryData> ShaderLoader::loadBinary( const char* FileName )
 {
-    using RetValTy = DetailedReturnValue<ShaderLoader::BinaryData>;
+    using RetValTy = DetailedResult<ShaderLoader::BinaryData>;
 
     //ファイルオープン
     std::fstream stream( FileName, std::ios::binary | std::ios::in );
     if( !stream ) 
-        return RetValTy( false, BinaryData{}, "ファイルのオープンに失敗" );
+        return RetValTy( Failure(), "ファイルのオープンに失敗" );
 
     // シェーダ―コードを読み込む
     stream.seekg( 0, std::ios::end );
@@ -28,7 +28,7 @@ DetailedReturnValue<ShaderLoader::BinaryData> ShaderLoader::loadBinary( const ch
     stream.read( data.bytecode, data.length );
     stream.close();
     
-    return RetValTy( true, std::move(data) );
+    return RetValTy( Success(), std::move(data) );
 }
 
 // インプットレイアウトオブジェクトを生成

@@ -19,7 +19,7 @@
 /// @param[in] LevelType : “o˜^‚·‚éƒŒƒxƒ‹Œ^
 ///
 #define REGISTER_TOP_LEVEL( LevelType ) \
-REGISTER_WITH_FACTORY( EGEG LevelFactory, LevelType, EGEG ConstantID<0U> )
+REGISTER_WITH_FACTORY( easy_engine::LevelFactory, LevelType, easy_engine::ConstantID<0U> )
 
 ///
 /// @def    REGISTER_LEVEL
@@ -28,7 +28,7 @@ REGISTER_WITH_FACTORY( EGEG LevelFactory, LevelType, EGEG ConstantID<0U> )
 /// @param[in] LevelType : “o˜^‚·‚éƒŒƒxƒ‹Œ^
 ///
 #define REGISTER_LEVEL( LevelType ) \
-REGISTER_WITH_FACTORY( EGEG LevelFactory, LevelType, EGEG LevelID<LevelType> )
+REGISTER_WITH_FACTORY( easy_engine::LevelFactory, LevelType, easy_engine::LevelID<LevelType> )
 
 BEGIN_EGEG
 

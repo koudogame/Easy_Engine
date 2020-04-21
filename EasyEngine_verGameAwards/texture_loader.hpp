@@ -6,7 +6,7 @@
 #define INCLUDED_EG_EG_TEXTURE_LOADER_HEADER_
 
 #include "rendering_manager_child.hpp"
-#include "detailed_returnvalue.hpp"
+#include "result.hpp"
 
 BEGIN_EGEG
 ///
@@ -25,7 +25,7 @@ public :
     ///
     /// @return 読み込んだテクスチャのシェーダ―リソースビュー
     ///
-    DetailedReturnValue<Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>> load(
+    DetailedResult<Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>> load(
         const std::wstring& FilePath );
 };
 END_EGEG

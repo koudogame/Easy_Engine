@@ -5,7 +5,7 @@
 #ifndef INCLUDED_EGEG_EASY_ENGINE_HEADER_
 #define INCLUDED_EGEG_EASY_ENGINE_HEADER_
 
-#include "detailed_returnvalue.hpp"
+#include "result.hpp"
 #include "input_device_manager.hpp"
 #include "rendering_manager.hpp"
 #include "job_scheduler.hpp"
@@ -20,7 +20,7 @@ BEGIN_EGEG
 class EasyEngine final
 {
 public :
-    static DetailedReturnValue<bool> initialize();
+    static DetailedResult<bool> initialize();
     static void finalize();
 
     static HWND getWindowHandle() noexcept;

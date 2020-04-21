@@ -40,15 +40,15 @@ void WavefrontOBJLoader::initialize()
 }
 
 // ファイル読み込む
-DetailedReturnValue<bool> WavefrontOBJLoader::load( const std::string& FileName, Mesh* Output, const CoordinateSystem CoorSys )
+DetailedResult<bool> WavefrontOBJLoader::load( const std::string& FileName, Mesh* Output, const CoordinateSystem CoorSys )
 {
-    using RetTy = DetailedReturnValue<bool>;
+    using RetTy = DetailedResult<bool>;
 
     // ファイルオープン
     std::fstream stream( FileName );
     if( !stream )
     { // 失敗
-        return RetTy( false, "ファイルオープンに失敗" );
+        return RetTy( Failure(), "ファイルオープンに失敗" );
     }
 
     // 前回読み込み時のデータをクリア
@@ -92,20 +92,20 @@ DetailedReturnValue<bool> WavefrontOBJLoader::load( const std::string& FileName,
     ComPtr<ID3D11Buffer> index_buffer;
     if( !engine_->createBuffer(&desc, temp_output_.position_for_buffer, &position_buffer) )
     { // 失敗
-        return RetTy( false, "座標用頂点バッファの作成に失敗" );
+        return RetTy( Failure(), "座標用頂点バッファの作成に失敗" );
     }
     if( !engine_->createBuffer(&desc, temp_output_.uv_for_buffer, &uv_buffer) )
     { // 失敗
-        return RetTy( false, "UV座標用頂点バッファの作成に失敗" );
+        return RetTy( Failure(), "UV座標用頂点バッファの作成に失敗" );
     }
     if( !engine_->createBuffer(&desc, temp_output_.normal_for_buffer, &normal_buffer) )
     { // 失敗
-        return RetTy( false, "法線ベクトル用頂点バッファの作成に失敗" );
+        return RetTy( Failure(), "法線ベクトル用頂点バッファの作成に失敗" );
     }
     desc.BindFlags = D3D11_BIND_INDEX_BUFFER;
     if( !engine_->createBuffer(&desc, temp_output_.index_for_buffer, &index_buffer ) )
     { // 失敗
-        return RetTy( false, "インデックスバッファの作成に失敗" );
+        return RetTy( Failure(), "インデックスバッファの作成に失敗" );
     }
 
     // 頂点データをセット
@@ -115,7 +115,7 @@ DetailedReturnValue<bool> WavefrontOBJLoader::load( const std::string& FileName,
     Output->vertices.set<Tag_VertexIndex>( index_buffer );
     // サブメッシュをセット
     SubMesh submesh;
-    for( auto group : temp_output_.group_list )
+    for( auto& group : temp_output_.group_list )
     { // グループからサブメッシュをコピー
         auto mtl_itr = temp_output_.material_list.find(group.second.material_name);
         if( mtl_itr != temp_output_.material_list.end() )
@@ -126,7 +126,7 @@ DetailedReturnValue<bool> WavefrontOBJLoader::load( const std::string& FileName,
         Output->submesh_list.push_back( submesh );
     }
 
-    return true;
+    return Success();
 }
 
 // 頂点座標の読み込み

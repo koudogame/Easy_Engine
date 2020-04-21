@@ -4,6 +4,7 @@
 ///
 #ifndef INCLUDED_EGEG_WAVEFRONTOBJ_LOADER_HEADER_
 #define INCLUDED_EGEG_WAVEFRONTOBJ_LOADER_HEADER_
+#define _CRT_SECURE_NO_WARNINGS
 
 #include <type_traits>
 #include <memory>
@@ -11,8 +12,6 @@
 #include <fstream>
 #include "model_loader.hpp"
 #include "texture_loader.hpp"
-#include "detailed_returnvalue.hpp"
-#include "mesh.hpp"
 
 BEGIN_EGEG
 
@@ -29,7 +28,7 @@ public :
         
 /*-----------------------------------------------------------------*/
 // ModelLoader
-    DetailedReturnValue<bool> load( const std::string&, Mesh*, const CoordinateSystem ) override;
+    DetailedResult<bool> load( const std::string&, Mesh*, const CoordinateSystem ) override;
 /*-----------------------------------------------------------------*/
 private :
     struct Group

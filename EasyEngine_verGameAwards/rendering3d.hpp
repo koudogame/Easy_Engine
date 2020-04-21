@@ -23,7 +23,7 @@ class Rendering3D :
     public Component3D
 {
 public :
-    static constexpr TypeID<Rendering3D> getID() noexcept { return TypeID<Rendering3D>(); }
+    static uint32_t getID() noexcept { return ComponentID::kRendering3D; }
 
     Rendering3D( Actor3D* Owner ) :
         Component3D( Owner )

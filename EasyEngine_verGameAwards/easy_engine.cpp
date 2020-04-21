@@ -41,47 +41,47 @@ std::unique_ptr<EasyEngine::Impl> EasyEngine::p_impl_;
 // EasyEngine 関数定義
 /*===========================================================================*/
 // エンジン初期化
-DetailedReturnValue<bool> EasyEngine::initialize()
+DetailedResult<bool> EasyEngine::initialize()
 {
-    using RetTy = DetailedReturnValue<bool>;
+    using RetTy = DetailedResult<bool>;
 
     // エンジンの実装部を生成
     try {
         p_impl_ = std::make_unique<Impl>();
     }
     catch ( const std::bad_alloc& e ) {
-        return RetTy( false, e.what() );
+        return RetTy( Failure(), e.what() );
     }
 
     // ウィンドウの生成＆表示
     if( p_impl_->createWindow() == false )
-        return RetTy( false, "ウィンドウの生成に失敗" );
+        return RetTy( Failure(), "ウィンドウの生成に失敗" );
     ShowWindow( p_impl_->h_wnd_, SW_NORMAL );
 
     // 入力デバイスマネージャーを生成
     try {
         p_impl_->input_device_manager_ = InputDeviceManager::create();
     } catch( const std::bad_alloc& e ) {
-        return RetTy( false, e.what() );
+        return RetTy( Failure(), e.what() );
     }
 
     // レンダリングマネージャ―を生成
     try {
         p_impl_->rendering_manager_ = RenderingManager::create();
     } catch( const std::runtime_error& e ) {
-        return RetTy( false, e.what() );
+        return RetTy( Failure(), e.what() );
     } catch( const std::bad_alloc& e ) {
-        return RetTy( false, e.what() );
+        return RetTy( Failure(), e.what() );
     }
 
     // レベルマネージャ―を生成
     try {
         p_impl_->level_manager_ = LevelManager::create();
     } catch ( const std::bad_alloc& e ) {
-        return RetTy( false, e.what() );
+        return RetTy( Failure(), e.what() );
     }
 
-    return true;
+    return Success();
 };
 
 // エンジン終了

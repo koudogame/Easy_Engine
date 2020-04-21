@@ -9,12 +9,6 @@
 #include "application_status.hpp"
 #include "easy_engine.hpp"
 
-#include "keyboard_controller.hpp"
-#include "task.hpp"
-#include "input_device_manager.hpp"
-#include "table.hpp"
-
-
 #pragma comment( lib, "dxgi.lib" )
 
 // ウィンドウプロシージャ関数宣言
@@ -40,8 +34,6 @@ void Application::run()
 }
 
 // メインループ
-template <class Ty>
-using ComPtr = Microsoft::WRL::ComPtr<Ty>;
 void Application::mainloop()
 {
     using namespace std::chrono;
@@ -49,45 +41,6 @@ void Application::mainloop()
     time_point<high_resolution_clock> last_time = high_resolution_clock::now();
     time_point<high_resolution_clock> curr_time;
    
-    ComPtr<IDXGIFactory> factory;
-    HRESULT hr = CreateDXGIFactory( IID_PPV_ARGS(&factory) );
-    if( FAILED(hr) )    return;
-
-    ComPtr<IDXGISwapChain> sc;
-    DXGI_SWAP_CHAIN_DESC sc_desc {};
-        sc_desc.BufferCount = 1;
-        sc_desc.BufferDesc.Width = kHorizontalResolution<UINT>;
-        sc_desc.BufferDesc.Height = kVerticalResolution<UINT>;
-        sc_desc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-        sc_desc.BufferDesc.RefreshRate.Numerator = 60;
-        sc_desc.BufferDesc.RefreshRate.Denominator = 1;
-        sc_desc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-        sc_desc.OutputWindow = EasyEngine::getWindowHandle();
-        sc_desc.SampleDesc.Count = 1;
-        sc_desc.SampleDesc.Quality = 0;
-        sc_desc.Windowed = true;
-        sc_desc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
-    hr = factory->CreateSwapChain(
-        EasyEngine::getRenderingManager()->getDevice().Get(),
-        &sc_desc,
-        &sc
-    );
-    if( FAILED(hr) ) _asm int 3;
-    ComPtr<ID3D11Texture2D> back_buffer = nullptr;
-    hr = sc->GetBuffer(
-        0,
-        __uuidof(ID3D11Texture2D),
-        (void**)&back_buffer
-    );
-    if( FAILED(hr) ) _asm int 3;
-    ComPtr<ID3D11RenderTargetView> render_target;
-    EasyEngine::getRenderingManager()->getDevice()->
-    CreateRenderTargetView(
-        back_buffer.Get(),
-        nullptr,
-        &render_target
-    );
-
     MSG msg{};
     while( msg.message != WM_QUIT )
     {

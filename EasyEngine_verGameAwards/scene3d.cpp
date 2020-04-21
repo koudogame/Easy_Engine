@@ -1,5 +1,6 @@
 // 作成者 : 板場
 #include "scene3d.hpp"
+#include "application_status.hpp"
 #include "rendering3d.hpp"
 #include "transform3d.hpp"
 
@@ -10,18 +11,24 @@ BEGIN_EGEG
 // 初期化
 bool Scene3D::initialize( RenderingManager* Manager )
 {
+    using namespace DirectX;
+
     // 定数バッファの作成
     D3D11_BUFFER_DESC desc{};
     desc.Usage = D3D11_USAGE_DYNAMIC;
     desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-    desc.ByteWidth = sizeof( DirectX::XMFLOAT4X4 );
+    desc.ByteWidth = sizeof( XMFLOAT4X4 );
     desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
     
     // 射影変換行列用定数バッファの作成
-    DirectX::XMFLOAT4X4 projection{};
-    DirectX::XMStoreFloat4x4(
+    XMFLOAT4X4 projection{};
+    XMStoreFloat4x4(
         &projection,
-        DirectX::XMMatrixTranspose(DirectX::XMMatrixPerspectiveFovLH( DirectX::XMConvertToRadians(45.0F), 1280.0F / 720.0F, 0.1F, 10.F ))
+        XMMatrixTranspose(
+            XMMatrixPerspectiveFovLH( 
+                XMConvertToRadians(45.0F), kHorizontalResolution<float> / kVerticalResolution<float>, 0.1F, 100.F 
+            )
+        )
     );
     D3D11_SUBRESOURCE_DATA srd {};
     srd.pSysMem = &projection;
@@ -133,9 +140,13 @@ void Scene3D::render(
         { // 座標変換コンポーネントがある場合、変換行列を作成
             Matrix4x4 translation = DirectX::XMMatrixTranslationFromVector( transform->getPosition() );
             Matrix4x4 scaling = DirectX::XMMatrixScalingFromVector( transform->getScale() );
-            Matrix4x4 rotation = DirectX::XMMatrixRotationRollPitchYawFromVector( transform->getRotation() );
-            DirectX::XMMATRIX wor = DirectX::XMMatrixMultiply(translation, scaling);
-            wor = DirectX::XMMatrixMultiply( wor, rotation );
+            Vector3D rotation_rad = transform->getRotation();
+            rotation_rad.x = DirectX::XMConvertToRadians( rotation_rad.x );
+            rotation_rad.y = DirectX::XMConvertToRadians( rotation_rad.y );
+            rotation_rad.z = DirectX::XMConvertToRadians( rotation_rad.z );
+            Matrix4x4 rotation = DirectX::XMMatrixRotationRollPitchYawFromVector( rotation_rad );
+            DirectX::XMMATRIX wor = DirectX::XMMatrixMultiply(scaling, rotation);
+            wor = DirectX::XMMatrixMultiply( wor, translation );
             DirectX::XMStoreFloat4x4( &world, DirectX::XMMatrixTranspose(wor) );
         }
         else

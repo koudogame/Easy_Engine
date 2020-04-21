@@ -15,18 +15,18 @@ BEGIN_EGEG
 /// @brief  ’è”’l‚ğID‚Æ‚µ‚Äæ“¾‚·‚éƒNƒ‰ƒX
 ///
 template <uint32_t ID>
-class ConstantID final
+class ConstantID
 {
 public :
     constexpr ConstantID() noexcept {}
+
     constexpr operator uint32_t() const noexcept
     {
         return ID;
     }
-
     constexpr uint32_t operator()() const noexcept
     {
-        return ID;
+        return *this;
     }
 };
 
