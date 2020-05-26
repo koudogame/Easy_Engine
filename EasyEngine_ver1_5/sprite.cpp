@@ -11,6 +11,7 @@
 #include "task_order.hpp"
 #include "transform2d_component.hpp"
 #include "rendering_component.hpp"
+#include "sprite_shader.hpp"
 
 
 BEGIN_EGEG
@@ -24,9 +25,9 @@ namespace
 {
     const std::vector<VertexPositionType> kVertexPositions
     {
-        VertexPositionType{ -1.0F, 1.0F, 0.0F },    // ç∂è„
-        VertexPositionType{ 1.0F, 1.0F, 0.0F },     // âEè„
-        VertexPositionType{ -1.0F, -1.0F, 0.0F },   // ç∂â∫
+        VertexPositionType{ 0.0F, 0.0F, 0.0F },     // ç∂è„
+        VertexPositionType{ 1.0F, 0.0F, 0.0F },     // âEè„
+        VertexPositionType{ 0.0F, -1.0F, 0.0F },    // ç∂â∫
         VertexPositionType{ 1.0F, -1.0F, 0.0F }     // âEâ∫
     };
     const std::vector<UINT> kVertexIndices
@@ -52,14 +53,6 @@ bool Sprite::initialize( std::istream& DataStream )
     if( !loadTexture(kInitialData.get<0>()) ) return false;
     initComponent();
     registerTask();
-
-    width_ = 100.0F;
-    height_ = 500.0F;
-    auto* transform = getComponent<Transform2DComponent>();
-    transform->setPivot( Vector2D{50.0F, 250.0F} );
-    transform->setScale( Vector2D{1.0F, 1.0F} );
-   // transform->setRotationDeg( 90.0F );
-    transform->setPosition( Vector2D{ 640.0F, 0.0F } );
 
 	return true;
 }
@@ -107,19 +100,22 @@ DirectX::XMMATRIX Sprite::calcWorldMatrix() const
     using namespace DirectX;
 
     auto* transform = getComponent<Transform2DComponent>();
+    if( !transform ) return XMMatrixIdentity();
 
-    const auto kAdjustSizeScaling = XMMatrixScaling(width_/kWindowWidth<float>, height_/kWindowHeight<float>, 1.0F);
-    const auto kMoveToOrigin = XMMatrixTranslation( (width_-transform->getPivot().x*2.0F)/kWindowWidth<float>, (-height_+transform->getPivot().y*2.0F)/(kWindowHeight<float>), 0.0F );
+    const auto kAdjustSizeScaling = XMMatrixScaling(width_, height_, 1.0F );
+    const auto kAdjustOrigin = XMMatrixTranslation( -transform->getPivot().x, transform->getPivot().y, 0.0F );
     const auto kScaling = XMMatrixScalingFromVector( transform->getScale() );
-    const auto kRotation = XMMatrixRotationZ( XMConvertToRadians(transform->getRotationDeg() ) );
-    const auto kTranslation = XMMatrixTranslation( transform->getPosition().x/(kWindowWidth<float>), transform->getPosition().y/(kWindowHeight<float>), 0.0F );
-    const auto kMoveToScreenOrigin = XMMatrixTranslation( -1.0F+((width_*0.5F+transform->getPosition().x)/(kWindowWidth<float>*0.5F)), 1.0F-((height_*0.5F+transform->getPosition().y)/(kWindowHeight<float>*0.5F)), 0.0F );
+    const auto kRotation = XMMatrixRotationZ( XMConvertToRadians(transform->getRotationDeg()) );
+    const auto kTranslation = XMMatrixTranslation( transform->getPosition().x, -transform->getPosition().y, 0.0F );
+    auto normalize = XMMatrixScaling(2.0F/kWindowWidth<float>, 2.0F/kWindowHeight<float>, 1.0F );
+    normalize = XMMatrixMultiply( normalize, XMMatrixTranslation( -1.0F, 1.0F, 0.0F) );
 
-    Matrix4x4 affine{ XMMatrixMultiply(kAdjustSizeScaling, kMoveToOrigin) };
+    Matrix4x4 affine{ XMMatrixMultiply(kAdjustSizeScaling, kAdjustOrigin) };
     affine = XMMatrixMultiply( affine, kScaling );
     affine = XMMatrixMultiply( affine, kRotation );
     affine = XMMatrixMultiply( affine, kTranslation );
-    affine = XMMatrixMultiply( affine, kMoveToScreenOrigin );
+    affine = XMMatrixMultiply( affine, normalize );
+    
     return affine;
 }
 

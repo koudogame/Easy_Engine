@@ -24,12 +24,10 @@ DirectX::XMMATRIX Actor2D::calcWorldMatrix() const
     auto* transform = getComponent<Transform2DComponent>();
     if( !transform ) return XMMatrixIdentity();
 
-    const float kRotationRad = XMConvertToRadians( transform->getRotationDeg() );
-
     return DirectX::XMMatrixAffineTransformation2D(
         transform->getScale(),
         transform->getPosition() + transform->getPivot(),
-        kRotationRad,
+        XMConvertToRadians( transform->getRotationDeg() ),
         transform->getPosition()
     );
 }

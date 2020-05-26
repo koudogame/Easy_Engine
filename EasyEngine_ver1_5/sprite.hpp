@@ -6,9 +6,10 @@
 #define INCLUDED_EGEG_SPRITE_HEADER_
 
 #include "actor2d.hpp"
+#include "egeg_math.hpp"
 #include "task.hpp"
 #include "mesh.hpp"
-#include "sprite_shader.hpp"
+#include "shader.hpp"
 
 BEGIN_EGEG
 
@@ -84,7 +85,7 @@ private :
 
     Task task_;
     Mesh mesh_;
-    std::unique_ptr<SpriteShader> shader_;
+    std::unique_ptr<IShader> shader_;
     Vector2D trim_base_point_;
     float width_ = 0.0F;
     float height_= 0.0F;
