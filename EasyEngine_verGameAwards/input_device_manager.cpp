@@ -60,61 +60,61 @@ void InputDeviceManager::update( uint64_t )
 }
 
 // キーボードと接続
-const Keyboard* InputDeviceManager::connectDeviceImpl( keyboard )
+const Keyboard* InputDeviceManager::connectDeviceImpl( Keyboard_ )
 {
     if( !keyboard_ ) keyboard_ = std::make_unique<Keyboard>();
     return keyboard_.get();
 }
 // キーボードの取得
-const Keyboard* InputDeviceManager::getDeviceImpl( keyboard ) noexcept
+const Keyboard* InputDeviceManager::getDeviceImpl( Keyboard_ ) noexcept
 {
     return keyboard_.get();
 }
 
 // XInputP1ゲームパッドと接続
-const XInputP1* InputDeviceManager::connectDeviceImpl( xinputp1 )
+const XInputP1* InputDeviceManager::connectDeviceImpl( XInputP1_ )
 {
     if( !xinput_p1_ ) xinput_p1_ = std::make_unique<XInputP1>();
     return xinput_p1_.get();
 }
 // XInputP1ゲームパッドの取得
-const XInputP1* InputDeviceManager::getDeviceImpl( xinputp1 ) noexcept
+const XInputP1* InputDeviceManager::getDeviceImpl( XInputP1_ ) noexcept
 {
     return xinput_p1_.get();
 }
 
 // XInputP2ゲームパッドと接続
-const XInputP2* InputDeviceManager::connectDeviceImpl( xinputp2 )
+const XInputP2* InputDeviceManager::connectDeviceImpl( XInputP2_ )
 {
     if( !xinput_p2_ ) xinput_p2_ = std::make_unique<XInputP2>();
     return xinput_p2_.get();
 }
 // XInputP2ゲームパッドの取得
-const XInputP2* InputDeviceManager::getDeviceImpl( xinputp2 ) noexcept
+const XInputP2* InputDeviceManager::getDeviceImpl( XInputP2_ ) noexcept
 {
     return xinput_p2_.get();
 }
 
 // XInputP3ゲームパッドと接続
-const XInputP3* InputDeviceManager::connectDeviceImpl( xinputp3 )
+const XInputP3* InputDeviceManager::connectDeviceImpl( XInputP3_ )
 {
     if( !xinput_p3_ ) xinput_p3_ = std::make_unique<XInputP3>();
     return xinput_p3_.get();
 }
 // XInputP3ゲームパッドの取得
-const XInputP3* InputDeviceManager::getDeviceImpl( xinputp3 ) noexcept
+const XInputP3* InputDeviceManager::getDeviceImpl( XInputP3_ ) noexcept
 {
     return xinput_p3_.get();
 }
 
 // XInputP4ゲームパッドと接続
-const XInputP4* InputDeviceManager::connectDeviceImpl( xinputp4 )
+const XInputP4* InputDeviceManager::connectDeviceImpl( XInputP4_ )
 {
     if( !xinput_p4_ ) xinput_p4_ = std::make_unique<XInputP4>();
     return xinput_p4_.get();
 }
 // XInputP4ゲームパッドの取得
-const XInputP4* InputDeviceManager::getDeviceImpl( xinputp4 ) noexcept
+const XInputP4* InputDeviceManager::getDeviceImpl( XInputP4_ ) noexcept
 {
     return xinput_p4_.get();
 }

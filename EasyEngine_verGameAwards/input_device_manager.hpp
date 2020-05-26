@@ -58,37 +58,37 @@ public :
     void inputEventProcessing( UINT Message, WPARAM wParam, LPARAM lParam ) noexcept;
 
 private :
-    struct keyboard{};
-    struct xinputp1{};
-    struct xinputp2{};
-    struct xinputp3{};
-    struct xinputp4{};
+    struct Keyboard_{};
+    struct XInputP1_{};
+    struct XInputP2_{};
+    struct XInputP3_{};
+    struct XInputP4_{};
     template <class DeviceType>
     struct Device;
     template <>
-    struct Device<Keyboard> : keyboard {};
+    struct Device<Keyboard> : Keyboard_ {};
     template <>
-    struct Device<XInputP1> : xinputp1 {};
+    struct Device<XInputP1> : XInputP1_ {};
     template <>
-    struct Device<XInputP2> : xinputp2 {};
+    struct Device<XInputP2> : XInputP2_ {};
     template <>
-    struct Device<XInputP3> : xinputp3 {};
+    struct Device<XInputP3> : XInputP3_ {};
     template <>
-    struct Device<XInputP4> : xinputp4 {};
+    struct Device<XInputP4> : XInputP4_ {};
     
     InputDeviceManager();
 
     void update( uint64_t );
-    const Keyboard* connectDeviceImpl( keyboard );
-    const XInputP1* connectDeviceImpl( xinputp1 );
-    const XInputP2* connectDeviceImpl( xinputp2 );
-    const XInputP3* connectDeviceImpl( xinputp3 );
-    const XInputP4* connectDeviceImpl( xinputp4 );
-    const Keyboard* getDeviceImpl( keyboard ) noexcept;
-    const XInputP1* getDeviceImpl( xinputp1 ) noexcept;
-    const XInputP2* getDeviceImpl( xinputp2 ) noexcept;
-    const XInputP3* getDeviceImpl( xinputp3 ) noexcept;
-    const XInputP4* getDeviceImpl( xinputp4 ) noexcept;
+    const Keyboard* connectDeviceImpl( Keyboard_ );
+    const XInputP1* connectDeviceImpl( XInputP1_ );
+    const XInputP2* connectDeviceImpl( XInputP2_ );
+    const XInputP3* connectDeviceImpl( XInputP3_ );
+    const XInputP4* connectDeviceImpl( XInputP4_ );
+    const Keyboard* getDeviceImpl( Keyboard_ ) noexcept;
+    const XInputP1* getDeviceImpl( XInputP1_ ) noexcept;
+    const XInputP2* getDeviceImpl( XInputP2_ ) noexcept;
+    const XInputP3* getDeviceImpl( XInputP3_ ) noexcept;
+    const XInputP4* getDeviceImpl( XInputP4_ ) noexcept;
 
     Task task_;
     std::unique_ptr<Keyboard> keyboard_;

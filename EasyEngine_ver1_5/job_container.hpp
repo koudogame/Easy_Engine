@@ -1,13 +1,11 @@
 ///
 /// @file   job_container.hpp
 /// @author 板場
-///
+/// 
 #ifndef INCLUDED_EGEG_JOB_CONTAINER_HEADER_
 #define INCLUDED_EGEG_JOB_CONTAINER_HEADER_
 
-#include <functional>
-#include <vector>
-#include "egeg.hpp"
+#include "non_copyable.hpp"
 
 BEGIN_EGEG
 
@@ -18,11 +16,11 @@ BEGIN_EGEG
 /// @tparam JobType : 管理するジョブの型
 ///
 template <class JobType>
-class JobContainer
+class JobContainer : NonCopyable<JobContainer<JobType>>
 {
 public :
     ///< コンストラクタ
-    explicit JobContainer( size_t Reserved = 32U )
+    JobContainer( size_t Reserved = 128U )
     {
         job_list_.reserve( Reserved );
     }
@@ -42,7 +40,7 @@ public :
     ///
     /// @brief   ジョブの登録
     /// @details nullptrは登録しないで下さい。<br>
-    ///          ジョブの解除は必ずexit関数を使用して下さい。
+    ///           ジョブの解除は必ずexit関数を使用して下さい。
     ///
     /// @param[in] Entry : 登録するジョブ
     ///

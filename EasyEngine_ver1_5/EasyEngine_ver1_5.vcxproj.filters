@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="EasyEngine">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="EasyEngine\99_System">
+      <UniqueIdentifier>{546e8911-b30d-40a4-8979-001f81f58e91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\05_TemplateLibrary">
+      <UniqueIdentifier>{43b9b7b4-2bbb-4b7f-8e94-b29339ee5f23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\03_Input">
+      <UniqueIdentifier>{0794ad0e-ce30-4829-bfb7-c3a98dbc1428}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\03_Input\Device">
+      <UniqueIdentifier>{872c7894-ecbd-4a0c-9c89-82df071bdf73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\03_Input\Controller">
+      <UniqueIdentifier>{d7f76136-51f0-4f2c-a281-7d4c83328137}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\02_TaskSystem">
+      <UniqueIdentifier>{87783329-9540-457b-aa73-0d72bb5b89d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\04_Rendering">
+      <UniqueIdentifier>{4fe1bac1-c83a-4ab1-8e15-c40157e4949f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\04_Rendering\Model">
+      <UniqueIdentifier>{b3ea6f02-4db6-4704-9af8-4c43bec133ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\04_Rendering\Loader">
+      <UniqueIdentifier>{29bde130-1680-4d45-9eba-a578cee91cc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\00_Object">
+      <UniqueIdentifier>{6697cc4c-4d3e-46f5-afb7-3ee84d309571}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\00_Object\Level">
+      <UniqueIdentifier>{0309d430-3cb2-4437-b808-ce368becb719}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\00_Object\Actor">
+      <UniqueIdentifier>{b73249a8-1ef5-4647-83ee-4c3e8995c461}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\01_Component">
+      <UniqueIdentifier>{88bfecb1-66fe-42b2-9972-56ac81f570df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\01_Component\2D">
+      <UniqueIdentifier>{99118aa9-7b1a-4fe8-97ae-f2359805d8bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\01_Component\3D">
+      <UniqueIdentifier>{3312b632-9778-4a99-bd3f-a6977dffbdc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test">
+      <UniqueIdentifier>{44236455-8999-4ae6-8c36-a49878f30cf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Shader">
+      <UniqueIdentifier>{40553f19-410d-44b0-970e-987ee6814f30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\00_Object\Actor\Sprite">
+      <UniqueIdentifier>{783386c7-6b02-4b2e-a18c-55f27fc0304d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\01_Component\Common">
+      <UniqueIdentifier>{1ef37a41-79dd-45d4-8372-5d0117e484f6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>EasyEngine\99_System</Filter>
+    </ClCompile>
+    <ClCompile Include="application.cpp">
+      <Filter>EasyEngine\99_System</Filter>
+    </ClCompile>
+    <ClCompile Include="engine.cpp">
+      <Filter>EasyEngine\99_System</Filter>
+    </ClCompile>
+    <ClCompile Include="xinput.cpp">
+      <Filter>EasyEngine\03_Input\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="keyboard.cpp">
+      <Filter>EasyEngine\03_Input\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="input_device_manager.cpp">
+      <Filter>EasyEngine\03_Input\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="xinput_controller.cpp">
+      <Filter>EasyEngine\03_Input\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="keyboard_controller.cpp">
+      <Filter>EasyEngine\03_Input\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="level_manager.cpp">
+      <Filter>EasyEngine\00_Object\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="level.cpp">
+      <Filter>EasyEngine\00_Object\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="actor.cpp">
+      <Filter>EasyEngine\00_Object\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="scene.cpp">
+      <Filter>EasyEngine\04_Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="rendering_manager.cpp">
+      <Filter>EasyEngine\04_Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="transform2d_component.cpp">
+      <Filter>EasyEngine\01_Component\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="actor2d.cpp">
+      <Filter>EasyEngine\00_Object\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="actor3d.cpp">
+      <Filter>EasyEngine\00_Object\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="texture_loader.cpp">
+      <Filter>EasyEngine\04_Rendering\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_loader.cpp">
+      <Filter>EasyEngine\04_Rendering\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="wavefrontobj_loader.cpp">
+      <Filter>EasyEngine\04_Rendering\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="transform3d_component.cpp">
+      <Filter>EasyEngine\01_Component\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="sprite.cpp">
+      <Filter>EasyEngine\00_Object\Actor\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="sprite_shader.cpp">
+      <Filter>EasyEngine\00_Object\Actor\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="rendering_component.cpp">
+      <Filter>EasyEngine\01_Component\Common</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="egeg.hpp">
+      <Filter>EasyEngine\99_System</Filter>
+    </ClInclude>
+    <ClInclude Include="egeg_def.hpp">
+      <Filter>EasyEngine\99_System</Filter>
+    </ClInclude>
+    <ClInclude Include="application.hpp">
+      <Filter>EasyEngine\99_System</Filter>
+    </ClInclude>
+    <ClInclude Include="application_status.hpp">
+      <Filter>EasyEngine\99_System</Filter>
+    </ClInclude>
+    <ClInclude Include="engine.hpp">
+      <Filter>EasyEngine\99_System</Filter>
+    </ClInclude>
+    <ClInclude Include="id.hpp">
+      <Filter>EasyEngine\05_TemplateLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="raw_number.hpp">
+      <Filter>EasyEngine\05_TemplateLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="return_value.hpp">
+      <Filter>EasyEngine\05_TemplateLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="job.hpp">
+      <Filter>EasyEngine\05_TemplateLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="job_container.hpp">
+      <Filter>EasyEngine\05_TemplateLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="non_copyable.hpp">
+      <Filter>EasyEngine\05_TemplateLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="job_scheduler.hpp">
+      <Filter>EasyEngine\05_TemplateLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="property.hpp">
+      <Filter>EasyEngine\05_TemplateLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="table.hpp">
+      <Filter>EasyEngine\05_TemplateLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="factory.hpp">
+      <Filter>EasyEngine\05_TemplateLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="input_device.hpp">
+      <Filter>EasyEngine\03_Input\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="xinput.hpp">
+      <Filter>EasyEngine\03_Input\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="keyboard.hpp">
+      <Filter>EasyEngine\03_Input\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="input_device_manager.hpp">
+      <Filter>EasyEngine\03_Input\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="task.hpp">
+      <Filter>EasyEngine\02_TaskSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="controller.hpp">
+      <Filter>EasyEngine\03_Input\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="xinput_controller.hpp">
+      <Filter>EasyEngine\03_Input\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="keyboard_controller.hpp">
+      <Filter>EasyEngine\03_Input\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="vertex.hpp">
+      <Filter>EasyEngine\04_Rendering\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="egeg_math.hpp">
+      <Filter>EasyEngine\99_System</Filter>
+    </ClInclude>
+    <ClInclude Include="material.hpp">
+      <Filter>EasyEngine\04_Rendering\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="mesh.hpp">
+      <Filter>EasyEngine\04_Rendering\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="shader.hpp">
+      <Filter>EasyEngine\04_Rendering\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="actor.hpp">
+      <Filter>EasyEngine\00_Object\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="level.hpp">
+      <Filter>EasyEngine\00_Object\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="level_manager.hpp">
+      <Filter>EasyEngine\00_Object\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="actor2d.hpp">
+      <Filter>EasyEngine\00_Object\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="actor3d.hpp">
+      <Filter>EasyEngine\00_Object\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="scene.hpp">
+      <Filter>EasyEngine\04_Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering_manager.hpp">
+      <Filter>EasyEngine\04_Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="component2d.hpp">
+      <Filter>EasyEngine\01_Component\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="component3d.hpp">
+      <Filter>EasyEngine\01_Component\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="transform2d_component.hpp">
+      <Filter>EasyEngine\01_Component\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="transform3d_component.hpp">
+      <Filter>EasyEngine\01_Component\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="camera.hpp">
+      <Filter>EasyEngine\00_Object\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="texture_loader.hpp">
+      <Filter>EasyEngine\04_Rendering\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering_manager_child.hpp">
+      <Filter>EasyEngine\04_Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_loader.hpp">
+      <Filter>EasyEngine\04_Rendering\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="model_loader.hpp">
+      <Filter>EasyEngine\04_Rendering\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="wavefrontobj_loader.hpp">
+      <Filter>EasyEngine\04_Rendering\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="name.hpp">
+      <Filter>EasyEngine\05_TemplateLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="task_order.hpp">
+      <Filter>EasyEngine\02_TaskSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite.hpp">
+      <Filter>EasyEngine\00_Object\Actor\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite_shader.hpp">
+      <Filter>EasyEngine\00_Object\Actor\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering_component.hpp">
+      <Filter>EasyEngine\01_Component\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="component.hpp">
+      <Filter>EasyEngine\01_Component\Common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="egeg_math.inl">
+      <Filter>EasyEngine\99_System</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="sprite_vs.hlsl">
+      <Filter>EasyEngine\00_Object\Actor\Sprite</Filter>
+    </FxCompile>
+    <FxCompile Include="sprite_ps.hlsl">
+      <Filter>EasyEngine\00_Object\Actor\Sprite</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>
