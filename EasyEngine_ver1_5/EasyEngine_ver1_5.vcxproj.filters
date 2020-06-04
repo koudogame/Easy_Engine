@@ -36,23 +36,8 @@
     <Filter Include="EasyEngine\04_Rendering\Loader">
       <UniqueIdentifier>{29bde130-1680-4d45-9eba-a578cee91cc7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EasyEngine\00_Object">
-      <UniqueIdentifier>{6697cc4c-4d3e-46f5-afb7-3ee84d309571}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EasyEngine\00_Object\Level">
-      <UniqueIdentifier>{0309d430-3cb2-4437-b808-ce368becb719}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EasyEngine\00_Object\Actor">
-      <UniqueIdentifier>{b73249a8-1ef5-4647-83ee-4c3e8995c461}</UniqueIdentifier>
-    </Filter>
     <Filter Include="EasyEngine\01_Component">
       <UniqueIdentifier>{88bfecb1-66fe-42b2-9972-56ac81f570df}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EasyEngine\01_Component\2D">
-      <UniqueIdentifier>{99118aa9-7b1a-4fe8-97ae-f2359805d8bf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EasyEngine\01_Component\3D">
-      <UniqueIdentifier>{3312b632-9778-4a99-bd3f-a6977dffbdc8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Test">
       <UniqueIdentifier>{44236455-8999-4ae6-8c36-a49878f30cf1}</UniqueIdentifier>
@@ -60,11 +45,8 @@
     <Filter Include="Test\Shader">
       <UniqueIdentifier>{40553f19-410d-44b0-970e-987ee6814f30}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EasyEngine\00_Object\Actor\Sprite">
-      <UniqueIdentifier>{783386c7-6b02-4b2e-a18c-55f27fc0304d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EasyEngine\01_Component\Common">
-      <UniqueIdentifier>{1ef37a41-79dd-45d4-8372-5d0117e484f6}</UniqueIdentifier>
+    <Filter Include="EasyEngine\00_Level">
+      <UniqueIdentifier>{6697cc4c-4d3e-46f5-afb7-3ee84d309571}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -92,29 +74,11 @@
     <ClCompile Include="keyboard_controller.cpp">
       <Filter>EasyEngine\03_Input\Controller</Filter>
     </ClCompile>
-    <ClCompile Include="level_manager.cpp">
-      <Filter>EasyEngine\00_Object\Level</Filter>
-    </ClCompile>
-    <ClCompile Include="level.cpp">
-      <Filter>EasyEngine\00_Object\Level</Filter>
-    </ClCompile>
-    <ClCompile Include="actor.cpp">
-      <Filter>EasyEngine\00_Object\Actor</Filter>
-    </ClCompile>
     <ClCompile Include="scene.cpp">
       <Filter>EasyEngine\04_Rendering</Filter>
     </ClCompile>
     <ClCompile Include="rendering_manager.cpp">
       <Filter>EasyEngine\04_Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="transform2d_component.cpp">
-      <Filter>EasyEngine\01_Component\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="actor2d.cpp">
-      <Filter>EasyEngine\00_Object\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="actor3d.cpp">
-      <Filter>EasyEngine\00_Object\Actor</Filter>
     </ClCompile>
     <ClCompile Include="texture_loader.cpp">
       <Filter>EasyEngine\04_Rendering\Loader</Filter>
@@ -125,17 +89,8 @@
     <ClCompile Include="wavefrontobj_loader.cpp">
       <Filter>EasyEngine\04_Rendering\Loader</Filter>
     </ClCompile>
-    <ClCompile Include="transform3d_component.cpp">
-      <Filter>EasyEngine\01_Component\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="sprite.cpp">
-      <Filter>EasyEngine\00_Object\Actor\Sprite</Filter>
-    </ClCompile>
-    <ClCompile Include="sprite_shader.cpp">
-      <Filter>EasyEngine\00_Object\Actor\Sprite</Filter>
-    </ClCompile>
-    <ClCompile Include="rendering_component.cpp">
-      <Filter>EasyEngine\01_Component\Common</Filter>
+    <ClCompile Include="level_node.cpp">
+      <Filter>EasyEngine\00_Level</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -223,41 +178,11 @@
     <ClInclude Include="shader.hpp">
       <Filter>EasyEngine\04_Rendering\Model</Filter>
     </ClInclude>
-    <ClInclude Include="actor.hpp">
-      <Filter>EasyEngine\00_Object\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="level.hpp">
-      <Filter>EasyEngine\00_Object\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="level_manager.hpp">
-      <Filter>EasyEngine\00_Object\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="actor2d.hpp">
-      <Filter>EasyEngine\00_Object\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="actor3d.hpp">
-      <Filter>EasyEngine\00_Object\Actor</Filter>
-    </ClInclude>
     <ClInclude Include="scene.hpp">
       <Filter>EasyEngine\04_Rendering</Filter>
     </ClInclude>
     <ClInclude Include="rendering_manager.hpp">
       <Filter>EasyEngine\04_Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="component2d.hpp">
-      <Filter>EasyEngine\01_Component\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="component3d.hpp">
-      <Filter>EasyEngine\01_Component\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="transform2d_component.hpp">
-      <Filter>EasyEngine\01_Component\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="transform3d_component.hpp">
-      <Filter>EasyEngine\01_Component\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="camera.hpp">
-      <Filter>EasyEngine\00_Object\Actor</Filter>
     </ClInclude>
     <ClInclude Include="texture_loader.hpp">
       <Filter>EasyEngine\04_Rendering\Loader</Filter>
@@ -280,30 +205,25 @@
     <ClInclude Include="task_order.hpp">
       <Filter>EasyEngine\02_TaskSystem</Filter>
     </ClInclude>
-    <ClInclude Include="sprite.hpp">
-      <Filter>EasyEngine\00_Object\Actor\Sprite</Filter>
-    </ClInclude>
-    <ClInclude Include="sprite_shader.hpp">
-      <Filter>EasyEngine\00_Object\Actor\Sprite</Filter>
-    </ClInclude>
-    <ClInclude Include="rendering_component.hpp">
-      <Filter>EasyEngine\01_Component\Common</Filter>
+    <ClInclude Include="level_node.hpp">
+      <Filter>EasyEngine\00_Level</Filter>
     </ClInclude>
     <ClInclude Include="component.hpp">
-      <Filter>EasyEngine\01_Component\Common</Filter>
+      <Filter>EasyEngine\01_Component</Filter>
+    </ClInclude>
+    <ClInclude Include="level_actor.hpp">
+      <Filter>EasyEngine\00_Level</Filter>
+    </ClInclude>
+    <ClInclude Include="level_camera.hpp">
+      <Filter>EasyEngine\00_Level</Filter>
+    </ClInclude>
+    <ClInclude Include="level_light.hpp">
+      <Filter>EasyEngine\00_Level</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="egeg_math.inl">
       <Filter>EasyEngine\99_System</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="sprite_vs.hlsl">
-      <Filter>EasyEngine\00_Object\Actor\Sprite</Filter>
-    </FxCompile>
-    <FxCompile Include="sprite_ps.hlsl">
-      <Filter>EasyEngine\00_Object\Actor\Sprite</Filter>
-    </FxCompile>
   </ItemGroup>
 </Project>

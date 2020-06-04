@@ -4,32 +4,22 @@
 	include
 
 ******************************************************************************/
-#include "transform2d_component.hpp"
+#include "level_node.hpp"
+#include "component.hpp"
 
 
 BEGIN_EGEG
 
 /******************************************************************************
 
-	Transform2DComponent
+	LevelNode::ComponentDeleter
 
 ******************************************************************************/
- // ‰Šú‰»
-bool Transform2DComponent::initialize()
+ // operator()
+void LevelNode::ComponentDeleter::operator()( Component* Ptr ) const
 {
-    pivot_              = Vector2D{ 0.0F, 0.0F };
-    position_           = Vector2D{ 0.0F, 0.0F };
-    rotation_angle_deg_ = 0.0F;
-    scale_              = Vector2D{ 1.0F, 1.0F };
-
-    return true;
-}
-
-
- // I—¹
-void Transform2DComponent::finalize()
-{
-    
+	Ptr->finalize();
+	delete Ptr;
 }
 
 END_EGEG
