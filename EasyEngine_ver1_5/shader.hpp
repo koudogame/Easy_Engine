@@ -21,8 +21,8 @@ public : static std::unique_ptr<ShaderClassName> create(); DetailedReturnValue<b
 /// @brief   シェーダ―インタフェイス
 /// @details 注意点
 ///             各派生クラスは、static std::unique_ptr<T> create() としてシェーダ―オブジェクトの生成処理を定義して下さい。 <br>
-///             頂点シェーダ―の定数バッファは スロット0 ~ スロット2 は以下のように設定されます。 <br>
-///                 b0 : 射影変換行列( DirectX::XMFLOAT4X4 ) <br>
+///             頂点シェーダ―の定数バッファの スロット0 ~ スロット2 は以下のように設定されます。 <br>
+///                 b0 : 射影変換行列( DirectX::XMFLOAT4X4 )  <br>
 ///                 b1 : ビュー変換行列( DirectX::XMFLOAT4X4 ) <br>
 ///                 b2 : ワールド変換行列( DirectX::XMFLOAT4X4 )
 ///
@@ -39,9 +39,9 @@ public :
     /// @param[in] Vertices : 頂点データ
     /// @param[in] Material : マテリアル
     ///
-    /// @return true : 成功　false : 失敗
+    /// @return true:成功　false:失敗
     ///
-    virtual DetailedReturnValue<bool> shading( ID3D11DeviceContext* DC, const VertexData& Vertices, const Material& Material ) = 0;
+    virtual DetailedReturnValue<bool> shading( ID3D11DeviceContext* DC, const VertexData& Vertices, const Material& Material ) const = 0;
 };
 
 END_EGEG

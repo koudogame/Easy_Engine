@@ -69,7 +69,7 @@ struct ConstantID<Value, std::false_type>
 /// @class  TypeID
 /// @brief  Œ^–ˆ‚ÉˆêˆÓ‚ÈID
 ///
-/// @tparam Type      : ID‚ðŽæ“¾‚·‚éŒ^
+/// @tparam NodeType      : ID‚ðŽæ“¾‚·‚éŒ^
 /// @tparam ValueType : ID‚ÌŒ^( ƒfƒtƒHƒ‹ƒg‚Ístd::uintptr_t )
 ///
 template <class Type, class ValueType=std::uintptr_t>

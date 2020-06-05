@@ -14,7 +14,7 @@ BEGIN_EGEG
 /// @class  TypeID
 /// @brief  Œ^î•ñ‚©‚çID‚ğæ“¾‚·‚éƒNƒ‰ƒX
 ///
-/// @tparam Type : ID‚ğæ“¾‚·‚éŒ^
+/// @tparam NodeType : ID‚ğæ“¾‚·‚éŒ^
 /// 
 template <class Type>
 class TypeID

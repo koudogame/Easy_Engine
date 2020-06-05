@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{70D9641D-42FA-4D21-9075-77546B9A0698}</ProjectGuid>
+    <ProjectGuid>{130A618B-5F52-4B9F-8C69-6F3537797431}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>EasyEnginever15</RootNamespace>
+    <RootNamespace>Temporary</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -70,32 +70,27 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -103,24 +98,27 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -130,87 +128,23 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="application.cpp" />
-    <ClCompile Include="engine.cpp" />
-    <ClCompile Include="input_device_manager.cpp" />
-    <ClCompile Include="keyboard.cpp" />
-    <ClCompile Include="keyboard_controller.cpp" />
-    <ClCompile Include="level_node.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="move3d_component.cpp" />
-    <ClCompile Include="rendering_component.cpp" />
-    <ClCompile Include="rendering_manager.cpp" />
-    <ClCompile Include="scene.cpp" />
-    <ClCompile Include="shader_loader.cpp" />
-    <ClCompile Include="texture_loader.cpp" />
-    <ClCompile Include="transform2d_component.cpp" />
-    <ClCompile Include="wavefrontobj_loader.cpp" />
-    <ClCompile Include="xinput.cpp" />
-    <ClCompile Include="xinput_controller.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="application.hpp" />
-    <ClInclude Include="application_status.hpp" />
     <ClInclude Include="component.hpp" />
-    <ClInclude Include="controller.hpp" />
-    <ClInclude Include="easing.hpp" />
-    <ClInclude Include="egeg_math.hpp" />
-    <ClInclude Include="factory.hpp" />
-    <ClInclude Include="input_device.hpp" />
-    <ClInclude Include="input_device_manager.hpp" />
-    <ClInclude Include="job.hpp" />
-    <ClInclude Include="job_container.hpp" />
-    <ClInclude Include="job_scheduler.hpp" />
-    <ClInclude Include="keyboard.hpp" />
-    <ClInclude Include="keyboard_controller.hpp" />
-    <ClInclude Include="level_actor.hpp" />
-    <ClInclude Include="level_camera.hpp" />
-    <ClInclude Include="level_light.hpp" />
+    <ClInclude Include="level.hpp" />
+    <ClInclude Include="level_entity.hpp" />
     <ClInclude Include="level_node.hpp" />
     <ClInclude Include="level_scene.hpp" />
-    <ClInclude Include="material.hpp" />
-    <ClInclude Include="mesh.hpp" />
-    <ClInclude Include="model_loader.hpp" />
-    <ClInclude Include="move3d_component.hpp" />
-    <ClInclude Include="name.hpp" />
-    <ClInclude Include="non_copyable.hpp" />
-    <ClInclude Include="property.hpp" />
-    <ClInclude Include="rendering_manager.hpp" />
-    <ClInclude Include="rendering_manager_child.hpp" />
-    <ClInclude Include="render_component.hpp" />
-    <ClInclude Include="return_value.hpp" />
-    <ClInclude Include="egeg.hpp" />
-    <ClInclude Include="egeg_def.hpp" />
-    <ClInclude Include="engine.hpp" />
-    <ClInclude Include="id.hpp" />
-    <ClInclude Include="raw_number.hpp" />
-    <ClInclude Include="scene.hpp" />
-    <ClInclude Include="shader.hpp" />
-    <ClInclude Include="shader_loader.hpp" />
-    <ClInclude Include="table.hpp" />
-    <ClInclude Include="task.hpp" />
-    <ClInclude Include="task_order.hpp" />
-    <ClInclude Include="texture_loader.hpp" />
-    <ClInclude Include="transform2d_component.hpp" />
-    <ClInclude Include="transform3d_component.hpp" />
-    <ClInclude Include="vertex.hpp" />
-    <ClInclude Include="wavefrontobj_loader.hpp" />
-    <ClInclude Include="xinput.hpp" />
-    <ClInclude Include="xinput_controller.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="egeg_math.inl" />
+    <ClInclude Include="level_space.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

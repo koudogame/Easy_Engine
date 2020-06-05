@@ -11,6 +11,8 @@
 
 BEGIN_EGEG
 
+using TaskManager = JobScheduler<Job<void(uint64_t)>>;
+
 ///
 /// @class Task
 /// @brief タスクマネージャーに登録するジョブ単位
