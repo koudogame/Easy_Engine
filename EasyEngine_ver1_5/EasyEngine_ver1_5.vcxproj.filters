@@ -92,6 +92,9 @@
     <ClCompile Include="level_node.cpp">
       <Filter>EasyEngine\00_Level</Filter>
     </ClCompile>
+    <ClCompile Include="transform2d_component.cpp">
+      <Filter>EasyEngine\01_Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="egeg.hpp">
@@ -219,6 +222,18 @@
     </ClInclude>
     <ClInclude Include="level_light.hpp">
       <Filter>EasyEngine\00_Level</Filter>
+    </ClInclude>
+    <ClInclude Include="level_scene.hpp">
+      <Filter>EasyEngine\00_Level</Filter>
+    </ClInclude>
+    <ClInclude Include="render_component.hpp">
+      <Filter>EasyEngine\01_Component</Filter>
+    </ClInclude>
+    <ClInclude Include="transform2d_component.hpp">
+      <Filter>EasyEngine\01_Component</Filter>
+    </ClInclude>
+    <ClInclude Include="transform3d_component.hpp">
+      <Filter>EasyEngine\01_Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

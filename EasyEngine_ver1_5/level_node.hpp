@@ -120,6 +120,12 @@ public :
     ///
     template <class NodeType_>
     NodeType_* getChild( size_t Index=0 ) const noexcept;
+    ///
+    /// @brief     子ノードの削除
+    ///
+    /// @param[in] Child : 削除する子ノード
+    ///
+    void removeChild( LevelNode* Child );
 
     ///
     /// @brief     コンポーネントの追加

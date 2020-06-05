@@ -13,7 +13,7 @@ BEGIN_EGEG
 /// @class  LevelActor
 /// @brief  レベルノード「アクター」
 ///
-/// @details アクターです。ゲーム中に出てくるキャラクター等はこのクラスを継承してください。
+/// @details アクターです。ゲームに出てくるキャラクター等はこのクラスを継承してください。
 ///
 class LevelActor :
     public LevelNode

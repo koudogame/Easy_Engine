@@ -16,6 +16,9 @@ BEGIN_EGEG
 class Component
 {
 public :
+    Component( LevelNode* Owner ) noexcept :
+        owner_{ Owner }
+    {}
     virtual ~Component() = default;
 
     ///

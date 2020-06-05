@@ -152,6 +152,7 @@
     <ClCompile Include="scene.cpp" />
     <ClCompile Include="shader_loader.cpp" />
     <ClCompile Include="texture_loader.cpp" />
+    <ClCompile Include="transform2d_component.cpp" />
     <ClCompile Include="wavefrontobj_loader.cpp" />
     <ClCompile Include="xinput.cpp" />
     <ClCompile Include="xinput_controller.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="level_camera.hpp" />
     <ClInclude Include="level_light.hpp" />
     <ClInclude Include="level_node.hpp" />
+    <ClInclude Include="level_scene.hpp" />
     <ClInclude Include="material.hpp" />
     <ClInclude Include="mesh.hpp" />
     <ClInclude Include="model_loader.hpp" />
@@ -182,6 +184,7 @@
     <ClInclude Include="property.hpp" />
     <ClInclude Include="rendering_manager.hpp" />
     <ClInclude Include="rendering_manager_child.hpp" />
+    <ClInclude Include="render_component.hpp" />
     <ClInclude Include="return_value.hpp" />
     <ClInclude Include="egeg.hpp" />
     <ClInclude Include="egeg_def.hpp" />
@@ -195,6 +198,8 @@
     <ClInclude Include="task.hpp" />
     <ClInclude Include="task_order.hpp" />
     <ClInclude Include="texture_loader.hpp" />
+    <ClInclude Include="transform2d_component.hpp" />
+    <ClInclude Include="transform3d_component.hpp" />
     <ClInclude Include="vertex.hpp" />
     <ClInclude Include="wavefrontobj_loader.hpp" />
     <ClInclude Include="xinput.hpp" />
