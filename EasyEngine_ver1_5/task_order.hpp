@@ -20,6 +20,8 @@ BEGIN_EGEG
 enum TaskOrder : uint32_t
 {
     kActorUpdate = 5U,
+    kMove,
+    kAnimation,
     kRender,
 };
 

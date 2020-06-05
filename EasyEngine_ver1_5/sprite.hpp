@@ -19,7 +19,8 @@ BEGIN_EGEG
 ///
 /// @details 初期化時にストリームから受け取るデータは <br>
 ///           std::string : 読み込む画像ファイルパス <br>
-///                                         　です。
+///           float       : 切り取り範囲横幅        <br>
+///           float       : 切り取り範囲縦幅　です。
 ///
 class Sprite :
     public Actor2D

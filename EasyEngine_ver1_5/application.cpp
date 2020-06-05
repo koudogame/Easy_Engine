@@ -20,8 +20,7 @@ BEGIN_EGEG
 ******************************************************************************/
 namespace
 {
-    using Ratio = std::ratio_divide<std::ratio<1,kFps<uintmax_t>>, std::micro>;
-    constexpr long long kUsPerFrame = Ratio::num / Ratio::den;
+    constexpr long long kUsPerFrame = static_cast<long long>(kTPF<std::micro>);
 }
 
 

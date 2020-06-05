@@ -30,7 +30,7 @@ public :
     /// @details オーナーはActor2Dから派生していることが確定しているので <br>
     ///           戻り値の型はActor2D*
     ///
-    Actor2D* getOwner() const noexcept { return static_cast<Actor2D*>(getOwner()); }
+    Actor2D* getOwner() const noexcept { return static_cast<Actor2D*>(Component::getOwner()); }
 };
 
 END_EGEG

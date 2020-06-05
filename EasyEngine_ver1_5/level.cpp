@@ -61,7 +61,7 @@ bool Level::initScene()
 
     auto* renderer = EasyEngine::getRenderingManager();
     
-    // swap chain
+     // swap chain
     DXGI_SWAP_CHAIN_DESC sc_desc{};
     sc_desc.BufferCount = 1;
     sc_desc.BufferDesc.Width = kWindowWidth<UINT>;
@@ -80,16 +80,14 @@ bool Level::initScene()
     if( FAILED(hr) ) return false;
     hr = factory->CreateSwapChain( renderer->getD3DDevice().Get(), &sc_desc, &swap_chain_ );
     if( FAILED(hr) ) return false;
-
-    // render target view
+     // render target view
     ComPtr<ID3D11Texture2D> back_buffer;
     hr = swap_chain_->GetBuffer( 0, _uuidof(ID3D11Texture2D), &back_buffer );
     if( FAILED(hr) ) return false;
     ComPtr<ID3D11RenderTargetView> rtv;
     hr = renderer->getD3DDevice()->CreateRenderTargetView( back_buffer.Get(), nullptr, &rtv );
     if( FAILED(hr) ) return false;
-
-    // viewport
+     // viewport
     D3D11_VIEWPORT vp{
         0.0F,
         0.0F,
@@ -98,8 +96,7 @@ bool Level::initScene()
         0.0F,
         1.0F 
     };
-
-    // depth stencil texture
+     // depth stencil texture
     D3D11_TEXTURE2D_DESC texture_desc{};
     texture_desc.Width              = kWindowWidth<UINT>;
     texture_desc.Height             = kWindowHeight<UINT>;
@@ -120,9 +117,25 @@ bool Level::initScene()
     ComPtr<ID3D11DepthStencilView> dsv;
     hr = renderer->getD3DDevice()->CreateDepthStencilView( texture.Get(), &dsv_desc, &dsv );
     if( FAILED(hr) ) return false;
+     // blend state
+    D3D11_BLEND_DESC blend_desc{};
+    blend_desc.RenderTarget[0] = 
+    { // BlendMode 「Normal」
+        true,                           // BlendEnable
+        D3D11_BLEND_SRC_ALPHA,          // SrcBlend
+        D3D11_BLEND_INV_SRC_ALPHA,      // DestBlend
+        D3D11_BLEND_OP_ADD,             // BlendOp
+        D3D11_BLEND_ONE,                // SrcBlendAlpha
+        D3D11_BLEND_ZERO,               // DestBlendAlpha
+        D3D11_BLEND_OP_ADD,             // BlendOpAlpha
+        D3D11_COLOR_WRITE_ENABLE_ALL    // RenderTargetWriteMask
+    };
+    ComPtr<ID3D11BlendState> bs;
+    hr = renderer->getD3DDevice()->CreateBlendState( &blend_desc, &bs );
+    if( FAILED(hr) ) return false;
 
     // シーンステート設定
-    scene_.setState( {rtv}, {vp}, {}, dsv );
+    scene_.setState( {rtv}, {vp}, {}, dsv, nullptr, 0, nullptr, bs );
 
     return true;
 }

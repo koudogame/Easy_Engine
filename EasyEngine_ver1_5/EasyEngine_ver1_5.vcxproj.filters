@@ -12,9 +12,6 @@
     <Filter Include="EasyEngine\99_System">
       <UniqueIdentifier>{546e8911-b30d-40a4-8979-001f81f58e91}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EasyEngine\05_TemplateLibrary">
-      <UniqueIdentifier>{43b9b7b4-2bbb-4b7f-8e94-b29339ee5f23}</UniqueIdentifier>
-    </Filter>
     <Filter Include="EasyEngine\03_Input">
       <UniqueIdentifier>{0794ad0e-ce30-4829-bfb7-c3a98dbc1428}</UniqueIdentifier>
     </Filter>
@@ -65,6 +62,12 @@
     </Filter>
     <Filter Include="EasyEngine\01_Component\Common">
       <UniqueIdentifier>{1ef37a41-79dd-45d4-8372-5d0117e484f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\06_TemplateLibrary">
+      <UniqueIdentifier>{43b9b7b4-2bbb-4b7f-8e94-b29339ee5f23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EasyEngine\05_Animation">
+      <UniqueIdentifier>{d2ddac4f-7d76-4a07-aeae-aac0a5f42b94}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +140,9 @@
     <ClCompile Include="rendering_component.cpp">
       <Filter>EasyEngine\01_Component\Common</Filter>
     </ClCompile>
+    <ClCompile Include="move3d_component.cpp">
+      <Filter>EasyEngine\01_Component\3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="egeg.hpp">
@@ -155,34 +161,34 @@
       <Filter>EasyEngine\99_System</Filter>
     </ClInclude>
     <ClInclude Include="id.hpp">
-      <Filter>EasyEngine\05_TemplateLibrary</Filter>
+      <Filter>EasyEngine\06_TemplateLibrary</Filter>
     </ClInclude>
     <ClInclude Include="raw_number.hpp">
-      <Filter>EasyEngine\05_TemplateLibrary</Filter>
+      <Filter>EasyEngine\06_TemplateLibrary</Filter>
     </ClInclude>
     <ClInclude Include="return_value.hpp">
-      <Filter>EasyEngine\05_TemplateLibrary</Filter>
+      <Filter>EasyEngine\06_TemplateLibrary</Filter>
     </ClInclude>
     <ClInclude Include="job.hpp">
-      <Filter>EasyEngine\05_TemplateLibrary</Filter>
+      <Filter>EasyEngine\06_TemplateLibrary</Filter>
     </ClInclude>
     <ClInclude Include="job_container.hpp">
-      <Filter>EasyEngine\05_TemplateLibrary</Filter>
+      <Filter>EasyEngine\06_TemplateLibrary</Filter>
     </ClInclude>
     <ClInclude Include="non_copyable.hpp">
-      <Filter>EasyEngine\05_TemplateLibrary</Filter>
+      <Filter>EasyEngine\06_TemplateLibrary</Filter>
     </ClInclude>
     <ClInclude Include="job_scheduler.hpp">
-      <Filter>EasyEngine\05_TemplateLibrary</Filter>
+      <Filter>EasyEngine\06_TemplateLibrary</Filter>
     </ClInclude>
     <ClInclude Include="property.hpp">
-      <Filter>EasyEngine\05_TemplateLibrary</Filter>
+      <Filter>EasyEngine\06_TemplateLibrary</Filter>
     </ClInclude>
     <ClInclude Include="table.hpp">
-      <Filter>EasyEngine\05_TemplateLibrary</Filter>
+      <Filter>EasyEngine\06_TemplateLibrary</Filter>
     </ClInclude>
     <ClInclude Include="factory.hpp">
-      <Filter>EasyEngine\05_TemplateLibrary</Filter>
+      <Filter>EasyEngine\06_TemplateLibrary</Filter>
     </ClInclude>
     <ClInclude Include="input_device.hpp">
       <Filter>EasyEngine\03_Input\Device</Filter>
@@ -275,7 +281,7 @@
       <Filter>EasyEngine\04_Rendering\Loader</Filter>
     </ClInclude>
     <ClInclude Include="name.hpp">
-      <Filter>EasyEngine\05_TemplateLibrary</Filter>
+      <Filter>EasyEngine\06_TemplateLibrary</Filter>
     </ClInclude>
     <ClInclude Include="task_order.hpp">
       <Filter>EasyEngine\02_TaskSystem</Filter>
@@ -291,6 +297,12 @@
     </ClInclude>
     <ClInclude Include="component.hpp">
       <Filter>EasyEngine\01_Component\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="easing.hpp">
+      <Filter>EasyEngine\05_Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="move3d_component.hpp">
+      <Filter>EasyEngine\01_Component\3D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

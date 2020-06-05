@@ -46,13 +46,16 @@ namespace
  // 初期化
 bool Sprite::initialize( std::istream& DataStream )
 {
-    const Table<std::string> kInitialData{ DataStream };
+    const Table<std::string, float, float> kInitialData{ DataStream };
 
     if( !(shader_ = SpriteShader::create()) ) return false;
     if( !createMesh() ) return false;
     if( !loadTexture(kInitialData.get<0>()) ) return false;
     initComponent();
     registerTask();
+
+    width_  = kInitialData.get<1>();
+    height_ = kInitialData.get<2>();
 
 	return true;
 }
@@ -90,11 +93,13 @@ void Sprite::update( uint64_t )
     if( FAILED(hr) ) return;
     memcpy( mpd.pData, kUVs, sizeof(VertexUVType)*kVertexPositions.size() );
     d3d_dc->Unmap( mesh_.vertices.get<TagVertexUV>().Get(), 0 );
-
 }
 
 
  // ワールド変換行列を計算
+ //
+ // 3D空間のx,y面における右下の空間で座標変換を行っているイメージ
+ // 座標の変換後、2D空間から3D空間へ変換している
 DirectX::XMMATRIX Sprite::calcWorldMatrix() const
 {
     using namespace DirectX;
@@ -114,9 +119,7 @@ DirectX::XMMATRIX Sprite::calcWorldMatrix() const
     affine = XMMatrixMultiply( affine, kScaling );
     affine = XMMatrixMultiply( affine, kRotation );
     affine = XMMatrixMultiply( affine, kTranslation );
-    affine = XMMatrixMultiply( affine, normalize );
-    
-    return affine;
+    return XMMatrixMultiply( affine, normalize );
 }
 
 
@@ -216,7 +219,7 @@ void Sprite::initComponent()
 void Sprite::registerTask()
 {
     task_.setJob( this, &Sprite::update );
-    EasyEngine::getTaskManager()->registerJob( &task_, TaskOrder::kActorUpdate );
+    EasyEngine::getTaskManager()->registerJob( &task_, TaskOrder::kAnimation );
 }
 
 END_EGEG

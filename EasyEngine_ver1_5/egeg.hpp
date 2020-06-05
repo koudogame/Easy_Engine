@@ -33,6 +33,7 @@ namespace easy_engine {} ///< エンジン用名前空間
 #include "raw_number.hpp"
 #include "return_value.hpp"
 #include "table.hpp"
+#include "sprite.hpp"
 
 USING_NS_EGEG;
 

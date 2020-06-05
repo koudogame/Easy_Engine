@@ -152,6 +152,7 @@
     <ClCompile Include="level.cpp" />
     <ClCompile Include="level_manager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="move3d_component.cpp" />
     <ClCompile Include="rendering_component.cpp" />
     <ClCompile Include="rendering_manager.cpp" />
     <ClCompile Include="scene.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="component2d.hpp" />
     <ClInclude Include="component3d.hpp" />
     <ClInclude Include="controller.hpp" />
+    <ClInclude Include="easing.hpp" />
     <ClInclude Include="egeg_math.hpp" />
     <ClInclude Include="factory.hpp" />
     <ClInclude Include="input_device.hpp" />
@@ -190,6 +192,7 @@
     <ClInclude Include="material.hpp" />
     <ClInclude Include="mesh.hpp" />
     <ClInclude Include="model_loader.hpp" />
+    <ClInclude Include="move3d_component.hpp" />
     <ClInclude Include="name.hpp" />
     <ClInclude Include="non_copyable.hpp" />
     <ClInclude Include="property.hpp" />
