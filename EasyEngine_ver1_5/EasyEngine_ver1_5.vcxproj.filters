@@ -36,12 +36,6 @@
     <Filter Include="EasyEngine\01_Component">
       <UniqueIdentifier>{88bfecb1-66fe-42b2-9972-56ac81f570df}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Test">
-      <UniqueIdentifier>{44236455-8999-4ae6-8c36-a49878f30cf1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Test\Shader">
-      <UniqueIdentifier>{40553f19-410d-44b0-970e-987ee6814f30}</UniqueIdentifier>
-    </Filter>
     <Filter Include="EasyEngine\00_Level">
       <UniqueIdentifier>{6697cc4c-4d3e-46f5-afb7-3ee84d309571}</UniqueIdentifier>
     </Filter>
@@ -80,9 +74,6 @@
     <ClCompile Include="scene.cpp">
       <Filter>EasyEngine\04_Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="rendering_manager.cpp">
-      <Filter>EasyEngine\04_Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="texture_loader.cpp">
       <Filter>EasyEngine\04_Rendering\Loader</Filter>
     </ClCompile>
@@ -98,8 +89,17 @@
     <ClCompile Include="transform2d_component.cpp">
       <Filter>EasyEngine\01_Component</Filter>
     </ClCompile>
-    <ClCompile Include="move3d_component.cpp">
-      <Filter>EasyEngine\01_Component\3D</Filter>
+    <ClCompile Include="transform3d_component.cpp">
+      <Filter>EasyEngine\01_Component</Filter>
+    </ClCompile>
+    <ClCompile Include="rendering_manager.cpp">
+      <Filter>EasyEngine\04_Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="default_base_scene.cpp">
+      <Filter>EasyEngine\00_Level</Filter>
+    </ClCompile>
+    <ClCompile Include="render_component.cpp">
+      <Filter>EasyEngine\01_Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -190,14 +190,8 @@
     <ClInclude Include="scene.hpp">
       <Filter>EasyEngine\04_Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="rendering_manager.hpp">
-      <Filter>EasyEngine\04_Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="texture_loader.hpp">
       <Filter>EasyEngine\04_Rendering\Loader</Filter>
-    </ClInclude>
-    <ClInclude Include="rendering_manager_child.hpp">
-      <Filter>EasyEngine\04_Rendering</Filter>
     </ClInclude>
     <ClInclude Include="shader_loader.hpp">
       <Filter>EasyEngine\04_Rendering\Loader</Filter>
@@ -244,8 +238,14 @@
     <ClInclude Include="easing.hpp">
       <Filter>EasyEngine\05_Animation</Filter>
     </ClInclude>
-    <ClInclude Include="move3d_component.hpp">
-      <Filter>EasyEngine\01_Component\3D</Filter>
+    <ClInclude Include="rendering_manager.hpp">
+      <Filter>EasyEngine\04_Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering_manager_child.hpp">
+      <Filter>EasyEngine\04_Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="default_base_scene.hpp">
+      <Filter>EasyEngine\00_Level</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

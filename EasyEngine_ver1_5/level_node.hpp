@@ -12,6 +12,7 @@
 #include <unordered_map>
 #include <istream>
 #include <memory>
+#include "factory.hpp"
 #include "id.hpp"
 
 BEGIN_EGEG
@@ -27,7 +28,7 @@ class Component;
 /// @brief  レベルノード
 ///
 /// @details このクラスを直接継承したノードは、 <br>
-///          static constexpr NodeType kNodeType を定義してください。
+///          static constexpr NodeType 型の kNodeType を定義してください。
 ///
 class LevelNode
 {
@@ -150,6 +151,21 @@ public :
     template <class ComponentType>
     ComponentType* getComponent() const;
 
+    ///
+    /// @brief     子ノードに対する再帰的な処理の実行
+    ///
+    /// @tparam    FunctionType : 呼び出す関数のラッパー
+    /// @param[in] Function     : 関数オブジェクト
+    /// @param[in] Args...      : 呼び出す関数に渡す引数リスト( 第二引数以降 )
+    ///
+    /// @details   呼び出す関数は、 <br>
+    ///            戻り値　 void       : 子ノードをループするので戻り値は意味がない <br>
+    ///            第一引数 LevelNode* :  処理の対象となる子ノード <br>
+    ///            以降任意の引数  　です。
+    ///
+    template <class FunctionType, class ...ArgTypes>
+    void forChild( FunctionType Function, ArgTypes ...Args );
+
 private :
     ///< コンポーネントのデリーター
     struct ComponentDeleter
@@ -209,6 +225,22 @@ ComponentType* LevelNode::getComponent() const
 
     return static_cast<ComponentType*>( find_itr->second.get() );
 }
+
+
+// 子ノードに対する再帰的な処理の実行
+template <class FunctionType, class ...ArgTypes>
+void LevelNode::forChild( FunctionType F, ArgTypes ...Args )
+{
+    for( auto& child : childs_ )
+    {
+        F( child, Args );
+    }
+}
+
+
+// ファクトリを定義
+template class Factory<uint32_t, LevelNode>;
+using LevelNodeFactory = Factory<uint32_t, LevelNode>;
 
 END_EGEG
 #endif /// !INCLUDED_EGEG_LEVEL_NODE_HEADER_

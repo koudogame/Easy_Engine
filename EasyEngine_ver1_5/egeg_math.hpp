@@ -28,7 +28,7 @@ struct Vector2D :
     explicit constexpr Vector2D( float S ) noexcept : XMFLOAT2( S, S ) {}
     constexpr Vector2D( float X, float Y ) noexcept : XMFLOAT2( X, Y ) {}
 
-    explicit Vector2D( DirectX::FXMVECTOR V ) noexcept;
+    Vector2D( DirectX::FXMVECTOR V ) noexcept;
     Vector2D& operator=( DirectX::FXMVECTOR V ) noexcept;
 
     operator DirectX::XMVECTOR() const noexcept;
@@ -76,7 +76,7 @@ struct Vector3D :
     explicit constexpr Vector3D( float S ) noexcept : XMFLOAT3( S, S, S ) {}
     constexpr Vector3D( float X, float Y, float Z ) noexcept : XMFLOAT3( X, Y, Z ) {}
 
-    explicit Vector3D( DirectX::FXMVECTOR V ) noexcept;
+    Vector3D( DirectX::FXMVECTOR V ) noexcept;
     Vector3D& operator=( DirectX::FXMVECTOR V ) noexcept;
 
     operator DirectX::XMVECTOR() const noexcept;
@@ -124,7 +124,7 @@ struct Vector4D :
     explicit constexpr Vector4D( float S ) noexcept : XMFLOAT4( S, S, S, S ) {}
     constexpr Vector4D( float X, float Y, float Z, float W ) : XMFLOAT4( X, Y, Z, W ) {}
 
-    explicit Vector4D( DirectX::FXMVECTOR V ) noexcept;
+    Vector4D( DirectX::FXMVECTOR V ) noexcept;
     Vector4D& operator=( DirectX::FXMVECTOR V ) noexcept;
 
     operator DirectX::XMVECTOR() const noexcept;
@@ -175,7 +175,7 @@ struct Matrix3x3 :
         XMFLOAT3X3( m00, m01, m02, m10, m11, m12, m20, m21, m22 )
     {}
 
-    explicit Matrix3x3( DirectX::FXMMATRIX M ) noexcept;
+    Matrix3x3( DirectX::FXMMATRIX M ) noexcept;
     Matrix3x3& operator=( DirectX::FXMMATRIX M ) noexcept;
 
     operator DirectX::XMMATRIX() const noexcept;
@@ -204,7 +204,7 @@ struct Matrix4x3 :
         XMFLOAT4X3( m00, m01, m02, m10, m11, m12, m20, m21, m22, m30, m31, m32 )
     {}
 
-    explicit Matrix4x3( DirectX::FXMMATRIX M ) noexcept;
+    Matrix4x3( DirectX::FXMMATRIX M ) noexcept;
     Matrix4x3& operator=( DirectX::FXMMATRIX M ) noexcept;
 
     operator DirectX::XMMATRIX() const noexcept;
@@ -232,7 +232,7 @@ struct Matrix3x4 :
         XMFLOAT3X4( m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23 )
     {}
 
-    explicit Matrix3x4( DirectX::FXMMATRIX M ) noexcept;
+    Matrix3x4( DirectX::FXMMATRIX M ) noexcept;
     Matrix3x4& operator=( DirectX::FXMMATRIX M ) noexcept;
 
     operator DirectX::XMMATRIX() const noexcept;
@@ -264,7 +264,7 @@ struct Matrix4x4 :
                     m30, m31, m32, m33 )
     {}
 
-    explicit Matrix4x4( DirectX::FXMMATRIX M ) noexcept;
+    Matrix4x4( DirectX::FXMMATRIX M ) noexcept;
     Matrix4x4& operator=( DirectX::FXMMATRIX M ) noexcept;
 
     operator DirectX::XMMATRIX() const noexcept;

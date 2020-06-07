@@ -142,19 +142,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="application.cpp" />
+    <ClCompile Include="default_base_scene.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="input_device_manager.cpp" />
     <ClCompile Include="keyboard.cpp" />
     <ClCompile Include="keyboard_controller.cpp" />
     <ClCompile Include="level_node.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="move3d_component.cpp" />
-    <ClCompile Include="rendering_component.cpp" />
     <ClCompile Include="rendering_manager.cpp" />
+    <ClCompile Include="render_component.cpp" />
     <ClCompile Include="scene.cpp" />
     <ClCompile Include="shader_loader.cpp" />
     <ClCompile Include="texture_loader.cpp" />
     <ClCompile Include="transform2d_component.cpp" />
+    <ClCompile Include="transform3d_component.cpp" />
     <ClCompile Include="wavefrontobj_loader.cpp" />
     <ClCompile Include="xinput.cpp" />
     <ClCompile Include="xinput_controller.cpp" />
@@ -162,6 +163,7 @@
   <ItemGroup>
     <ClInclude Include="application.hpp" />
     <ClInclude Include="application_status.hpp" />
+    <ClInclude Include="default_base_scene.hpp" />
     <ClInclude Include="component.hpp" />
     <ClInclude Include="controller.hpp" />
     <ClInclude Include="easing.hpp" />
@@ -182,7 +184,6 @@
     <ClInclude Include="material.hpp" />
     <ClInclude Include="mesh.hpp" />
     <ClInclude Include="model_loader.hpp" />
-    <ClInclude Include="move3d_component.hpp" />
     <ClInclude Include="name.hpp" />
     <ClInclude Include="non_copyable.hpp" />
     <ClInclude Include="property.hpp" />

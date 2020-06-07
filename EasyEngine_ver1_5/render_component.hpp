@@ -5,6 +5,7 @@
 #ifndef INCLUDED_EGEG_RENDER_COMPONENT_HEADER_
 #define INCLUDED_EGEG_RENDER_COMPONENT_HEADER_
 
+#include <unordered_set>
 #include "component.hpp"
 #include "mesh.hpp"
 #include "shader.hpp"
@@ -64,6 +65,27 @@ public :
     ///
     bool getState() const noexcept { return is_render_; }
 
+    ///
+    /// @brief  シーンに入る
+    ///
+    /// @param[in] Scene : 対象シーン
+    ///
+    /// @details コンポジット。オーナーの子についても同処理を呼び出します。
+    ///         
+    /// @note 関数の再帰呼び出しを行うので、RenderComponentを持たないノードを挟んだ呼び出しは行われない。
+    ///
+    void entryScene( LevelScene* Scene );
+    ///
+    /// @brief  シーンから退出
+    ///
+    /// @param[in] Scene : 対象シーン
+    ///
+    /// @details コンポジット。オーナーの子についても同処理を呼び出します。
+    ///
+    /// @note 関数の再帰呼び出しを行うので、RenderComponentを持たないノードを挟んだ呼び出しは行われない。
+    ///
+    void exitScene( LevelScene* Scene );
+
 // override
     bool initialize() override;
     void finalize() override;
@@ -72,6 +94,7 @@ private :
     bool is_render_;
     const Mesh* mesh_;
     const IShader* shader_;
+    std::unordered_set<LevelScene*> scenes_;
 };
 
 END_EGEG

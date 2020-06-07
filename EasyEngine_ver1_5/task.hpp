@@ -8,6 +8,7 @@
 #include <cstdint>
 #include <functional>
 #include "job.hpp"
+#include "job_scheduler.hpp"
 
 BEGIN_EGEG
 

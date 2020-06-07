@@ -9,6 +9,7 @@
 #include <wrl.h>
 #include <d3d11.h>
 #include "non_copyable.hpp"
+#include "task.hpp"
 #include "texture_loader.hpp"
 #include "shader_loader.hpp"
 #include "wavefrontobj_loader.hpp"
@@ -48,6 +49,13 @@ public :
     Microsoft::WRL::ComPtr<ID3D11DeviceContext> getD3DDeviceContext() const noexcept { return d3d_immediate_context_; }
 
     ///
+    /// @brief  メインの描画先を取得
+    ///
+    /// @return メインの描画先へのビュー
+    ///
+    Microsoft::WRL::ComPtr<ID3D11RenderTargetView> getMainRenderTarget() const noexcept { return main_render_target_; }
+
+    ///
     /// @brief  テクスチャローダーの取得
     ///
     /// @return テクスチャローダー
@@ -68,12 +76,21 @@ public :
     ///
     WavefrontobjLoader* getObjLoader() const noexcept { return obj_loader_.get(); }
 
+    ///
+    /// @brief  画面更新
+    ///
+    /// @param[in] : タスクマネージャーに登録するためのダミー
+    ///
+    void present( uint64_t );
 private :
     RenderingManager() = default;
 
+    Task task_;
     D3D_FEATURE_LEVEL d3d_feature_level_;
     Microsoft::WRL::ComPtr<ID3D11Device> d3d_device_;
     Microsoft::WRL::ComPtr<ID3D11DeviceContext> d3d_immediate_context_;
+    Microsoft::WRL::ComPtr<ID3D11RenderTargetView> main_render_target_;
+    Microsoft::WRL::ComPtr<IDXGISwapChain> dxgi_swap_chain_;
     std::unique_ptr<TextureLoader> texture_loader_;
     std::unique_ptr<ShaderLoader>  shader_loader_;
     std::unique_ptr<WavefrontobjLoader> obj_loader_;

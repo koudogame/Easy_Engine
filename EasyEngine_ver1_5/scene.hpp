@@ -11,7 +11,6 @@
 #include <wrl.h>
 #include <d3d11.h>
 #include "non_copyable.hpp"
-#include "camera.hpp"
 
 BEGIN_EGEG
 
@@ -44,7 +43,7 @@ public :
     ///
     /// @param[in] Camera : カメラ
     ///
-    void setCamera( const Camera* Camera ) noexcept { camera_ = Camera; }
+    void setCamera( const void* Camera ) noexcept { /*camera_ = Camera;*/ }
 
     ///
     /// @brief シーンステートの設定
@@ -114,7 +113,7 @@ private :
     std::array<float, 4U> blend_factor_;
     UINT blend_mask_ = 0;
     std::array<Microsoft::WRL::ComPtr<ID3D11Buffer>, 3U> cbuffers_;
-    const Camera* camera_ = nullptr;
+    const void* camera_ = nullptr;
     std::unordered_set<const RenderingComponent*> models_;
 };
 

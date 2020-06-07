@@ -22,7 +22,8 @@ enum TaskOrder : uint32_t
     kActorUpdate = 5U,
     kMove,
     kAnimation,
-    kRender,
+    kRendering,
+    kRenderEnd, // ベースシーンを描画
 };
 
 END_EGEG

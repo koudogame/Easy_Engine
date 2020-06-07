@@ -14,7 +14,8 @@ BEGIN_EGEG
 /// @class  Transform2DComponent
 /// @brief  2D座標変換コンポーネント
 ///
-/// @details スクリーン座標系で扱われます。
+/// @details 座標はスクリーン座標系で扱われます。 <br>
+///          角度は度数法で扱われます。
 ///
 class Transform2DComponent :
     public Component
@@ -24,7 +25,7 @@ public :
         Component{ Owner } {}
 
     ///
-    /// @brief  軸のセット
+    /// @brief  軸をセット
     ///
     /// @param[in] Pivot : 軸
     ///
@@ -33,14 +34,14 @@ public :
     ///
     void setPivot( const Vector2D& Pivot ) noexcept { move(); pivot_ = Pivot; }
     ///
-    /// @brief  軸の取得
+    /// @brief  軸を取得
     ///
     /// @return 軸
     ///
     const Vector2D& getPivot() const noexcept { return pivot_; }
 
     ///
-    /// @brief  座標のセット
+    /// @brief  座標をセット
     ///
     /// @param[in] Position : 座標
     ///
@@ -48,29 +49,29 @@ public :
     ///
     void setPosition( const Vector2D& Position ) noexcept { move(); position_ = Position; }
     ///
-    /// @brief  座標の取得
+    /// @brief  座標を取得
     ///
     /// @return 座標
     ///
     const Vector2D& getPosition() const noexcept { return position_; }
     
     ///
-    /// @brief  回転度のセット
+    /// @brief  回転度をセット
     ///
-    /// @param[in] RotationDeg : 回転度
+    /// @param[in] Rotation : 回転度
     ///
     /// @details   度数法の値をセットしてください。
     ///
-    void setRotation( const float RotationDeg ) noexcept { move(); rotation_deg_ = RotationDeg; }
+    void setRotation( const float Rotation ) noexcept { move(); rotation_ = Rotation; }
     ///
-    /// @brief  回転度の取得
+    /// @brief  回転度を取得
     ///
     /// @return 回転度
     ///
-    float getRotation() const noexcept { return rotation_deg_; }
+    float getRotation() const noexcept { return rotation_; }
 
     ///
-    /// @brief  拡大率のセット
+    /// @brief  拡大率をセット
     ///
     /// @param[in] Scale : 拡大率
     ///
@@ -78,22 +79,22 @@ public :
     ///
     void setScale( const Vector2D& Scale ) noexcept { move(); scale_ = Scale; }
     ///
-    /// @brief  拡大率の取得
+    /// @brief  拡大率を取得
     ///
     /// @return 拡大率
     ///
     const Vector2D& getScale() const noexcept { return scale_; }
 
     ///
-    /// @brief  ローカル変換行列を計算
+    /// @brief  ローカル座標変換行列を計算
     ///
-    /// @return ローカル変換行列
+    /// @return ローカル座標変換行列
     ///
-    Matrix4x4 calcLocalTransformMatrix() const;
+    const Matrix4x4& calcLocalTransformMatrix() const;
     ///
-    /// @brief  ワールド変換行列を計算
+    /// @brief  グローバル座標変換行列を計算
     ///
-    /// @return ワールド変換行列
+    /// @return グローバル座標変換行列
     ///
     Matrix4x4 calcGlobalTransformMatrix() const;
 
@@ -103,9 +104,10 @@ public :
 
 private :
     void move() noexcept { is_moved_ = true; }
+
     Vector2D pivot_;
     Vector2D position_;
-    float    rotation_deg_;
+    float    rotation_;
     Vector2D scale_;
     mutable bool is_moved_;
     mutable Matrix4x4 transform_cache_;

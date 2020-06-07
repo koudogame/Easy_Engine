@@ -10,7 +10,6 @@
 
 BEGIN_EGEG
 
-
 /******************************************************************************
 
     Transform2DComponent
@@ -19,18 +18,25 @@ BEGIN_EGEG
  // 初期化
 bool Transform2DComponent::initialize()
 {
-    is_moved_     = false;
+    is_moved_     = true;
     pivot_		  = Vector2D{ 0.0F, 0.0F };
     position_	  = Vector2D{ 0.0F, 0.0F };
-    rotation_deg_ = 0.0F;
+    rotation_     = 0.0F;
     scale_        = Vector2D{ 1.0F, 1.0F };
+    transform_cache_ = DirectX::XMMatrixIdentity();
 
     return true;
 }
 
 
- // ローカル変換行列を計算
-Matrix4x4 Transform2DComponent::calcLocalTransformMatrix() const
+ // 終了
+void Transform2DComponent::finalize()
+{
+}
+
+
+ // ローカル座標変換行列を計算
+const Matrix4x4& Transform2DComponent::calcLocalTransformMatrix() const
 {
     using namespace DirectX;
 
@@ -42,7 +48,6 @@ Matrix4x4 Transform2DComponent::calcLocalTransformMatrix() const
     const auto kTranslation{ XMMatrixTranslationFromVector( getPosition() ) };
 
     transform_cache_ = Matrix4x4{ XMMatrixMultiply( kToPivot, kScaling ) };
-    transform_cache_ = Matrix4x4{ XMMatrixMultiply( transform_cache_, kScaling ) };
     transform_cache_ = Matrix4x4{ XMMatrixMultiply( transform_cache_, kRotation ) };
     transform_cache_ = Matrix4x4{ XMMatrixMultiply( transform_cache_, kTranslation ) };
 
@@ -51,19 +56,19 @@ Matrix4x4 Transform2DComponent::calcLocalTransformMatrix() const
 }
 
 
- // ワールド変換行列を計算
+ // グローバル座標変換行列を計算
 Matrix4x4 Transform2DComponent::calcGlobalTransformMatrix() const
 {
     using namespace DirectX;
 
-    Matrix4x4 world = calcLocalTransformMatrix();
+    Matrix4x4 global = calcLocalTransformMatrix();
     while( auto* parent = getOwner()->getParent() )
     {
         if( auto* parent_transform = parent->getComponent<Transform2DComponent>() )
-            world = Matrix4x4{ XMMatrixMultiply(world, parent_transform->calcLocalTransformMatrix() ) };
+            global = Matrix4x4{ XMMatrixMultiply(global, parent_transform->calcLocalTransformMatrix() ) };
     }
 
-    return world;
+    return global;
 }
 
 END_EGEG

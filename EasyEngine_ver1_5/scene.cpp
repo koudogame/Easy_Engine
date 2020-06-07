@@ -7,8 +7,8 @@
 #include "scene.hpp"
 #include <DirectXMath.h>
 #include "application_status.hpp"
-#include "egeg_math.hpp"
-#include "rendering_component.hpp"
+#include "egeg_math.hpp"/*
+#include "rendering_component.hpp"*/
 
 
 BEGIN_EGEG
@@ -124,66 +124,66 @@ void Scene::clear( ID3D11DeviceContext* DC, const std::array<float, 4U>& Color )
  // 描画
 void Scene::render( ID3D11DeviceContext* DC )
 {
-    using namespace DirectX;
+    //using namespace DirectX;
 
-    DC->ClearDepthStencilView( depth_stencil_view_.Get(), D3D11_CLEAR_DEPTH, 1.0F, 0 );
+    //DC->ClearDepthStencilView( depth_stencil_view_.Get(), D3D11_CLEAR_DEPTH, 1.0F, 0 );
  
-    std::vector<ID3D11RenderTargetView*> render_target_views;
-    render_target_views.reserve( render_target_views_.size() );
-    for( auto& rtv : render_target_views_ )
-        render_target_views.push_back( rtv.Get() );
-    DC->OMSetRenderTargets( render_target_views.size(), render_target_views.data(), depth_stencil_view_.Get() );
-    DC->OMSetDepthStencilState( depth_stencil_state_.Get(), stencil_reference_ );
-    DC->OMSetBlendState( blend_state_.Get(), blend_factor_.data(), blend_mask_ );
-    DC->RSSetState( rasterizer_state_.Get() );
-    DC->RSSetViewports( viewports_.size(), viewports_.data() );
-    DC->RSSetScissorRects( scissor_rects_.size(), scissor_rects_.data() );
-    
-    ID3D11Buffer* cbuffers[3];
-    for( int i = 0; i < 3; ++i )
-        cbuffers[i] = cbuffers_.at(i).Get();
+    //std::vector<ID3D11RenderTargetView*> render_target_views;
+    //render_target_views.reserve( render_target_views_.size() );
+    //for( auto& rtv : render_target_views_ )
+    //    render_target_views.push_back( rtv.Get() );
+    //DC->OMSetRenderTargets( render_target_views.size(), render_target_views.data(), depth_stencil_view_.Get() );
+    //DC->OMSetDepthStencilState( depth_stencil_state_.Get(), stencil_reference_ );
+    //DC->OMSetBlendState( blend_state_.Get(), blend_factor_.data(), blend_mask_ );
+    //DC->RSSetState( rasterizer_state_.Get() );
+    //DC->RSSetViewports( viewports_.size(), viewports_.data() );
+    //DC->RSSetScissorRects( scissor_rects_.size(), scissor_rects_.data() );
+    //
+    //ID3D11Buffer* cbuffers[3];
+    //for( int i = 0; i < 3; ++i )
+    //    cbuffers[i] = cbuffers_.at(i).Get();
 
-    // 定数バッファのビュー変換行列を更新
-    XMFLOAT4X4 view{};
-    if( !camera_ )
-        XMStoreFloat4x4( &view, XMMatrixIdentity() );
-    else
-        XMStoreFloat4x4( &view, XMMatrixTranspose(camera_->calcViewMatrix()) );
-    D3D11_MAPPED_SUBRESOURCE mpd{};
-    HRESULT hr = DC->Map( cbuffers[kView], 0, D3D11_MAP_WRITE_DISCARD, 0, &mpd );
-    if( FAILED(hr) ) return;
-    memcpy( mpd.pData, &view, sizeof(XMFLOAT4X4) );
-    DC->Unmap( cbuffers[kView], 0 );
+    //// 定数バッファのビュー変換行列を更新
+    //XMFLOAT4X4 view{};
+    //if( !camera_ )
+    //    XMStoreFloat4x4( &view, XMMatrixIdentity() );
+    //else
+    //    XMStoreFloat4x4( &view, XMMatrixTranspose(camera_->calcViewMatrix()) );
+    //D3D11_MAPPED_SUBRESOURCE mpd{};
+    //HRESULT hr = DC->Map( cbuffers[kView], 0, D3D11_MAP_WRITE_DISCARD, 0, &mpd );
+    //if( FAILED(hr) ) return;
+    //memcpy( mpd.pData, &view, sizeof(XMFLOAT4X4) );
+    //DC->Unmap( cbuffers[kView], 0 );
 
-    for( const auto& model : models_ )
-    {
-        if( !model->getState() ) continue;
+    //for( const auto& model : models_ )
+    //{
+    //    if( !model->getState() ) continue;
 
-        // 定数バッファのワールド変換行列を更新
-        XMFLOAT4X4 world{};
-        XMStoreFloat4x4( 
-            &world, 
-            XMMatrixTranspose(model->getOwner()->calcWorldMatrix())
-        );
-        hr = DC->Map( cbuffers[kWorld], 0, D3D11_MAP_WRITE_DISCARD, 0, &mpd );
-        if( FAILED(hr) ) return;
-        memcpy( mpd.pData, &world, sizeof(XMFLOAT4X4) );
-        DC->Unmap( cbuffers[kWorld], 0 );
-        DC->VSSetConstantBuffers( 0, 3, cbuffers );
+    //    // 定数バッファのワールド変換行列を更新
+    //    XMFLOAT4X4 world{};
+    //    XMStoreFloat4x4( 
+    //        &world, 
+    //        XMMatrixTranspose(model->getOwner()->calcWorldMatrix())
+    //    );
+    //    hr = DC->Map( cbuffers[kWorld], 0, D3D11_MAP_WRITE_DISCARD, 0, &mpd );
+    //    if( FAILED(hr) ) return;
+    //    memcpy( mpd.pData, &world, sizeof(XMFLOAT4X4) );
+    //    DC->Unmap( cbuffers[kWorld], 0 );
+    //    DC->VSSetConstantBuffers( 0, 3, cbuffers );
 
-        // モデルの描画
-        DC->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST );
-        DC->IASetIndexBuffer( model->getMesh().vertices.get<TagVertexIndex>().Get(), DXGI_FORMAT_R32_UINT, 0 );
-        IShader::VertexData vertices = model->getMesh().vertices.extraction<
-            TagVertexPosition,
-            TagVertexUV,
-            TagVertexNormal>();
-        for( const auto& kMesh : model->getMesh().sub_mesh_list )
-        {
-            kMesh.shader->shading( DC, vertices, kMesh.material );
-            DC->DrawIndexed( kMesh.num_vertices, kMesh.start_index, kMesh.base_vertex );
-        }
-    }
+    //    // モデルの描画
+    //    DC->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST );
+    //    DC->IASetIndexBuffer( model->getMesh().vertices.get<TagVertexIndex>().Get(), DXGI_FORMAT_R32_UINT, 0 );
+    //    IShader::VertexData vertices = model->getMesh().vertices.extraction<
+    //        TagVertexPosition,
+    //        TagVertexUV,
+    //        TagVertexNormal>();
+    //    for( const auto& kMesh : model->getMesh().sub_mesh_list )
+    //    {
+    //        kMesh.shader->shading( DC, vertices, kMesh.material );
+    //        DC->DrawIndexed( kMesh.num_vertices, kMesh.start_index, kMesh.base_vertex );
+    //    }
+    //}
 }
 
 END_EGEG

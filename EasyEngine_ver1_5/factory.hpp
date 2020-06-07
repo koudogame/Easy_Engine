@@ -37,10 +37,12 @@ BEGIN_EGEG
 /// @details インスタンス化を禁止しています。メンバ関数は静的関数です。                      <br>
 ///           ファクトリを使用する際はテンプレートの明示的なインスタンス化を行って下さい。      <br>
 ///           ファクトリへのオブジェクトの登録はREGISTER_WITH_FACTORYマクロを使用して下さい。 <br>
-///           使用例 )                                                                  <br>
-///             テンプレートのインスタンス化                                               <br>
-///              class ElementType;                                                     <br>
-///              template class Factory<uint32_t, ElementType, ...>;
+///           使用例 )                                                                <br>
+///             テンプレートのインスタンス化                                              <br>
+///              class ElementType;                                                   <br>
+///              template class Factory<uint32_t, ElementType, ...>;                   <br>
+///             ファクトリに別名をつける                                                  <br>
+///              using HogeFactoty = Factory<uint32_t, ElementType, ...>;
 ///
 template <class KeyType, class BaseType, class ...CtorArgTypes>
 class Factory
