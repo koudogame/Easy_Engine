@@ -247,6 +247,9 @@
     <ClInclude Include="default_base_scene.hpp">
       <Filter>EasyEngine\00_Level</Filter>
     </ClInclude>
+    <ClInclude Include="level.hpp">
+      <Filter>EasyEngine\00_Level</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="egeg_math.inl">

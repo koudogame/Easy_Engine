@@ -12,6 +12,8 @@
 
 BEGIN_EGEG
 
+class LevelScene;   ///< 循環参照回避
+
 ///
 /// @class  RenderComponent
 /// @brief  描画コンポーネント

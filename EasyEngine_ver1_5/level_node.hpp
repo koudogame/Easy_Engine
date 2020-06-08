@@ -14,21 +14,34 @@
 #include <memory>
 #include "factory.hpp"
 #include "id.hpp"
+#include "name.hpp"
 
 BEGIN_EGEG
 
+///
+/// @def    REGISTER_LEVEL_NODE
+/// @brief  ファクトリにレベルノードを登録
+///
+/// @param[in] Type     : 登録するノードクラス型
+/// @param[in] NodeName : ノード名
+///
+#define REGISTER_LEVEL_NODE( Type, NodeName ) \
+static constexpr const char Type##NodeName[] = #NodeName; \
+REGISTER_WITH_FACTORY( LevelNodeFactory, Type, Name<Type##NodeName> )
+
 class Level;
-class LevelWorld;
-class LevelScene;
-class LevelSpace;
 class Component;
 
 ///
 /// @class  LevelNode
 /// @brief  レベルノード
 ///
-/// @details このクラスを直接継承したノードは、 <br>
-///          static constexpr NodeType 型の kNodeType を定義してください。
+/// @details 要件 <br>
+///             このクラスを直接継承したノードは、 <br>
+///             static constexpr NodeType 型の kNodeType を定義してください。  <br>
+///          注意点
+///             finalize関数を実装する際、その中でleaveFromParent関数を呼び出してください。 <br>
+///             デストラクタにも同様の処理が記述されていますが、必ずしもfinalizeと解放が同時に行われるとは限りません
 ///
 class LevelNode
 {
@@ -42,7 +55,7 @@ public :
         kLight
     };
 
-    virtual ~LevelNode() = default;
+    virtual ~LevelNode();
 
     ///
     /// @brief  初期化
@@ -90,6 +103,12 @@ public :
     /// @return 親ノード
     ///
     LevelNode* getParent() const noexcept { return parent_; }
+    ///
+    /// @brief     親ノードから抜ける
+    ///
+    /// @details   親ノードがない場合、何も行われません。
+    ///
+    void leaveFromParent();
 
     ///
     /// @brief     子ノードの追加
@@ -98,7 +117,7 @@ public :
     ///
     /// @details   追加した順序で格納されていきます。
     ///
-    void addChild( LevelNode* Child ) { childs_.push_back(Child); }
+    void addChild( std::unique_ptr<LevelNode>&& Child ) { childs_.push_back(std::move(Child)); }
     ///
     /// @brief     子ノードの取得
     /// 
@@ -108,7 +127,7 @@ public :
     ///
     /// @details   インデックスが子ノードの数より多い場合、nullptrを返却します。
     ///
-    LevelNode* getChild( size_t Index=0 ) const noexcept { return Index<childs_.size() ? childs_[Index] : nullptr; }
+    LevelNode* getChild( size_t Index=0 ) const noexcept { return Index<childs_.size() ? childs_[Index].get() : nullptr; }
     ///
     /// @brief     子ノードの取得
     ///
@@ -127,6 +146,32 @@ public :
     /// @param[in] Child : 削除する子ノード
     ///
     void removeChild( LevelNode* Child );
+    ///
+    /// @brief     子ノードに対する処理の実行
+    ///
+    /// @tparam    FunctionType : 呼び出す関数のラッパー
+    /// @param[in] Function     : 関数オブジェクト
+    /// @param[in] Args...      : 呼び出す関数に渡す引数リスト( 第二引数以降 )
+    ///
+    /// @details   呼び出す関数は、 <br>
+    ///            戻り値　 void       : 子ノードをループするので戻り値は意味がない <br>
+    ///            第一引数 LevelNode* :  処理の対象となる子ノード <br>
+    ///            以降任意の引数 <br>
+    //             の形です。
+    ///
+    template <class FunctionType, class ...ArgTypes>
+    void forChild( FunctionType Function, ArgTypes ...Args );
+
+    ///
+    /// @brief     再帰呼び出しのエントリー
+    ///
+    /// @tparam ReturnType  : 呼び出す関数の戻り値
+    /// @tparam ArgTypes    : 呼び出す関数の引数リスト
+    /// @param[in] Function : 呼び出す関数のアドレス
+    /// @param[in] Args     : 呼び出す関数に渡すパラメータ
+    ///
+    template <class ReturnType, class ...ArgTypes>
+    void recursizeEntry( ReturnType(LevelNode::*Function)(ArgTypes...), ArgTypes ...Args );
 
     ///
     /// @brief     コンポーネントの追加
@@ -151,21 +196,6 @@ public :
     template <class ComponentType>
     ComponentType* getComponent() const;
 
-    ///
-    /// @brief     子ノードに対する再帰的な処理の実行
-    ///
-    /// @tparam    FunctionType : 呼び出す関数のラッパー
-    /// @param[in] Function     : 関数オブジェクト
-    /// @param[in] Args...      : 呼び出す関数に渡す引数リスト( 第二引数以降 )
-    ///
-    /// @details   呼び出す関数は、 <br>
-    ///            戻り値　 void       : 子ノードをループするので戻り値は意味がない <br>
-    ///            第一引数 LevelNode* :  処理の対象となる子ノード <br>
-    ///            以降任意の引数  　です。
-    ///
-    template <class FunctionType, class ...ArgTypes>
-    void forChild( FunctionType Function, ArgTypes ...Args );
-
 private :
     ///< コンポーネントのデリーター
     struct ComponentDeleter
@@ -175,7 +205,7 @@ private :
 
     Level* level_ = nullptr;
     LevelNode* parent_ = nullptr;
-    std::vector<LevelNode*> childs_;
+    std::vector<std::unique_ptr<LevelNode>> childs_;
     std::unordered_map<uint32_t, std::unique_ptr<Component, ComponentDeleter>> components_;
 };
 
@@ -227,14 +257,24 @@ ComponentType* LevelNode::getComponent() const
 }
 
 
-// 子ノードに対する再帰的な処理の実行
+// 子ノードに対する処理の実行
 template <class FunctionType, class ...ArgTypes>
 void LevelNode::forChild( FunctionType F, ArgTypes ...Args )
 {
     for( auto& child : childs_ )
     {
-        F( child, Args );
+        F( child.get(), Args... );
     }
+}
+
+
+// 再帰処理エントリー
+template <class ReturnType, class ...ArgTypes>
+void LevelNode::recursizeEntry( ReturnType(LevelNode::*Function)(ArgTypes...), ArgTypes ...Args )
+{
+    (this->*Function)( Args... );
+    for( auto& child : childs_ )
+        child->recursizeEntry( Function, Args... );
 }
 
 

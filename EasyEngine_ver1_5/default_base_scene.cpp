@@ -123,6 +123,7 @@ bool DefaultBaseScene::initialize( std::istream& DataStream )
 void DefaultBaseScene::finalize()
 {
     EasyEngine::getTaskManager()->unregisterJob( &task_ );
+    leaveFromParent();
 }
 
 

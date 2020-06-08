@@ -15,13 +15,35 @@ BEGIN_EGEG
 	LevelNode
 
 ******************************************************************************/
+ // デストラクタ
+LevelNode::~LevelNode()
+{
+	leaveFromParent();
+}
+
+
  // 子ノードの削除
 void LevelNode::removeChild( LevelNode* Child )
 {
-	auto find_itr = std::find( childs_.begin(), childs_.end(), Child );
+	auto find_itr = std::find_if( childs_.begin(), childs_.end(), 
+		[=]( const std::unique_ptr<LevelNode>& Ptr )
+	{
+		return Ptr.get()==Child;
+	});
 	if( find_itr != childs_.end() )
 	{
 		childs_.erase( find_itr );
+	}
+}
+
+
+ // 親ノードとの親子関係を切る
+void LevelNode::leaveFromParent()
+{
+	if( parent_ )
+	{
+		parent_->removeChild( this );
+		parent_ = nullptr;
 	}
 }
 

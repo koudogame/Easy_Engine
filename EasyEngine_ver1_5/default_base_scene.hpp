@@ -56,6 +56,8 @@ private :
     Microsoft::WRL::ComPtr<ID3D11BlendState> blend_state_;
 };
 
+REGISTER_LEVEL_NODE( DefaultBaseScene, DefaultBaseScene );
+
 END_EGEG
 #endif /// !INCLUDED_EGEG_DEFAULT_BASE_SCENE_HEADER_
 /// EOF

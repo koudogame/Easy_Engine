@@ -176,6 +176,7 @@
     <ClInclude Include="job_scheduler.hpp" />
     <ClInclude Include="keyboard.hpp" />
     <ClInclude Include="keyboard_controller.hpp" />
+    <ClInclude Include="level.hpp" />
     <ClInclude Include="level_actor.hpp" />
     <ClInclude Include="level_camera.hpp" />
     <ClInclude Include="level_light.hpp" />
