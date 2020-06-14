@@ -113,7 +113,7 @@ bool DefaultBaseScene::initialize( std::istream& DataStream )
     if( !initializeSceneState() ) return false;
 
     task_.setJob( this, &DefaultBaseScene::render );
-    EasyEngine::getTaskManager()->registerJob( &task_, TaskOrder::kRenderEnd );
+    EasyEngine::getTaskManager()->registerJob( &task_, TaskOrder::kRendering );
 
     return true;
 }
@@ -260,6 +260,8 @@ bool DefaultBaseScene::updateViewMatrix( ID3D11DeviceContext* DC ) const
     if( FAILED(hr) ) return false;
     memcpy( mpd.pData, &view, sizeof(DirectX::XMFLOAT4X4) );
     DC->Unmap( cbuffers_.at(kView).Get(), 0 );
+
+    return true;
 }
 
 
@@ -283,6 +285,8 @@ bool DefaultBaseScene::updateWorldMatrix( ID3D11DeviceContext* DC, LevelNode* No
     if( FAILED(hr) ) return false;
     memcpy( mpd.pData, &world, sizeof(DirectX::XMFLOAT4X4) );
     DC->Unmap( cbuffers_.at(kWorld).Get(), 0 );
+
+    return true;
 }
 
 END_EGEG

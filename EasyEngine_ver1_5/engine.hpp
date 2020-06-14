@@ -81,6 +81,7 @@ private :
     static std::unique_ptr<InputDeviceManager> input_device_manager_;
     static std::unique_ptr<RenderingManager> rendering_manager_;
     static std::unique_ptr<LevelManager> level_manager_;
+    static Level level_;
 };
 
 END_EGEG

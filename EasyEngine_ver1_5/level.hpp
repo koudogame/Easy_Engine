@@ -6,13 +6,24 @@
 #define INCLUDED_EGEG_LEVEL_HEADER_
 
 #include "task.hpp"
-#include "level_node.hpp"
+#include "level_empty.hpp"
 
 BEGIN_EGEG
 
 ///
 /// @class  Level
 /// @brief  レベル
+///
+/// @detailes  レベルはツリー構造のレベルノードにより構成されます。           <br>
+///                                                                    <br>
+///            ルートノードの直接の子に当たる集合に、ベースシーンは位置します。 <br>
+///            ベースシーンは必ず、他のシーンよりも先に配置して下さい。        <br>
+///            この要件により、ベースシーンへのアクセスを一意なものにできます。 <br>
+///            ベースシーンへアクセス )                                   <br>
+///             Level level;                                           <br>
+///                 ...levelを初期化...                                 <br>
+///             LevelNode* root_node = level->getRootNode();           <br>
+///             LevelScene* base_scene = root_node->getChild<LevelScene>( 0 );
 ///
 class Level
 {
@@ -24,7 +35,7 @@ public :
     ///
     bool load( const std::string& LevelFilePath );
     ///
-    /// @brief  読み込んであるノードを解放
+    /// @brief  レベルをアンロード
     ///
     void unload();
 
@@ -48,13 +59,16 @@ public :
     ///
     /// @brief  ルートノードを取得
     ///
-    LevelNode* getRootNode() const noexcept { return root_node_; }
+    LevelNode* getRootNode() const noexcept { return root_node_.get(); }
 
 private :
+    bool loadNodes( std::istream& );
+    std::unique_ptr<LevelNode> loadNode( std::string&, std::istream& );
+
     Task task_update_;
     Task task_render_;
     TaskManager task_manager_;
-    LevelNode* root_node_ = nullptr;
+    std::unique_ptr<LevelNode> root_node_ = nullptr;
 };
 
 END_EGEG

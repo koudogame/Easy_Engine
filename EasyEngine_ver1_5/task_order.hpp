@@ -14,16 +14,13 @@ BEGIN_EGEG
 /// @enum  TaskOrder
 /// @brief タスク優先度
 ///
-/// @details 必要な時自由に書き換えて下さい。 <br>
-///           エンジン部分で使用する可能性が有るため、0~4の値は使用しないことを推奨します。
+/// @brief エンジン内で使用しているタスク優先順位です。
 ///           
 enum TaskOrder : uint32_t
 {
-    kActorUpdate = 5U,
-    kMove,
-    kAnimation,
+    kInputDeviceUpdate,
+    kLevelUpdate,
     kRendering,
-    kRenderEnd, // ベースシーンを描画
 };
 
 END_EGEG

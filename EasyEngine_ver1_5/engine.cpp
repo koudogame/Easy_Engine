@@ -38,6 +38,7 @@ std::unique_ptr<EasyEngine::TaskManagerType> EasyEngine::task_manager_{};
 std::unique_ptr<InputDeviceManager> EasyEngine::input_device_manager_{};
 std::unique_ptr<RenderingManager> EasyEngine::rendering_manager_{};
 std::unique_ptr<LevelManager> EasyEngine::level_manager_{};
+Level EasyEngine::level_{};
 
 
 /******************************************************************************
@@ -61,6 +62,10 @@ DetailedReturnValue<bool> EasyEngine::initialize()
     ret = initializeManager();
     if( !ret ) return ret;
 
+
+    auto result = level_.load( "Resource/Levels/test.lvl" );
+    auto* root = level_.getRootNode();
+
 	return Success{};
 }
 
@@ -68,7 +73,8 @@ DetailedReturnValue<bool> EasyEngine::initialize()
  // 終了処理
 void EasyEngine::finalize()
 {
-    level_manager_.reset();
+    //level_manager_.reset();
+    level_.unload();
     rendering_manager_.reset();
     input_device_manager_.reset();
     task_manager_.reset();
@@ -136,9 +142,9 @@ DetailedReturnValue<bool> EasyEngine::initializeManager()
     if( !rendering_manager_ )
         return { Failure{}, "描画マネージャーの生成に失敗しました。" };
 
-    level_manager_ = LevelManager::create();
-    if( !level_manager_ )
-        return { Failure{}, "レベルマネージャ―の生成に失敗しました。" };
+    //level_manager_ = LevelManager::create();
+    //if( !level_manager_ )
+        //return { Failure{}, "レベルマネージャ―の生成に失敗しました。" };
     
     return Success{};
 }

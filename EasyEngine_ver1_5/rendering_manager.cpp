@@ -102,7 +102,7 @@ std::unique_ptr<RenderingManager> RenderingManager::create()
 	created->obj_loader_->setManager( *created.get() );
 
 	created->task_.setJob( created.get(), &RenderingManager::present );
-	EasyEngine::getTaskManager()->registerJob( &created->task_, TaskOrder::kRenderEnd+1 );
+	EasyEngine::getTaskManager()->registerJob( &created->task_, TaskOrder::kRendering+1 );
 
 	return created;
 }

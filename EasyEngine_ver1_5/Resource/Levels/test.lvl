@@ -1,0 +1,30 @@
+BeginLevel
+
+DefaultBaseScene ;
+
+Empty
+    Empty
+        Empty ;
+    ;
+    Empty ;
+    Empty ;
+;
+
+Empty ;
+
+Empty
+    Empty
+        Empty ;
+        Empty ;
+    ;
+    Empty
+        Empty 
+            Empty ;
+        ;
+        Empty ;
+    ;
+    Empty ;
+;
+
+EndLevel
+

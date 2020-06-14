@@ -18,6 +18,7 @@ BEGIN_EGEG
  // デストラクタ
 LevelNode::~LevelNode()
 {
+	childs_.clear();
 	leaveFromParent();
 }
 

@@ -101,6 +101,9 @@
     <ClCompile Include="render_component.cpp">
       <Filter>EasyEngine\01_Component</Filter>
     </ClCompile>
+    <ClCompile Include="level.cpp">
+      <Filter>EasyEngine\00_Level</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="egeg.hpp">
@@ -248,6 +251,15 @@
       <Filter>EasyEngine\00_Level</Filter>
     </ClInclude>
     <ClInclude Include="level.hpp">
+      <Filter>EasyEngine\00_Level</Filter>
+    </ClInclude>
+    <ClInclude Include="level_manager.hpp">
+      <Filter>EasyEngine\00_Level</Filter>
+    </ClInclude>
+    <ClInclude Include="level_empty.hpp">
+      <Filter>EasyEngine\00_Level</Filter>
+    </ClInclude>
+    <ClInclude Include="mini_scene_reverse.hpp">
       <Filter>EasyEngine\00_Level</Filter>
     </ClInclude>
   </ItemGroup>

@@ -147,6 +147,7 @@
     <ClCompile Include="input_device_manager.cpp" />
     <ClCompile Include="keyboard.cpp" />
     <ClCompile Include="keyboard_controller.cpp" />
+    <ClCompile Include="level.cpp" />
     <ClCompile Include="level_node.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="rendering_manager.cpp" />
@@ -179,11 +180,14 @@
     <ClInclude Include="level.hpp" />
     <ClInclude Include="level_actor.hpp" />
     <ClInclude Include="level_camera.hpp" />
+    <ClInclude Include="level_empty.hpp" />
     <ClInclude Include="level_light.hpp" />
+    <ClInclude Include="level_manager.hpp" />
     <ClInclude Include="level_node.hpp" />
     <ClInclude Include="level_scene.hpp" />
     <ClInclude Include="material.hpp" />
     <ClInclude Include="mesh.hpp" />
+    <ClInclude Include="mini_scene_reverse.hpp" />
     <ClInclude Include="model_loader.hpp" />
     <ClInclude Include="name.hpp" />
     <ClInclude Include="non_copyable.hpp" />

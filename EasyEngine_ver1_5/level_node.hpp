@@ -26,8 +26,8 @@ BEGIN_EGEG
 /// @param[in] NodeName : ノード名
 ///
 #define REGISTER_LEVEL_NODE( Type, NodeName ) \
-static constexpr const char Type##NodeName[] = #NodeName; \
-REGISTER_WITH_FACTORY( LevelNodeFactory, Type, Name<Type##NodeName> )
+static constexpr const char Type##Name[] = #NodeName; \
+REGISTER_WITH_FACTORY( LevelNodeFactory, Type, Name<Type##Name> )
 
 class Level;
 class Component;
@@ -48,6 +48,7 @@ class LevelNode
 public :
     enum class NodeType
     {
+        kEmpty,
         kScene,
         kSpace,
         kActor,
@@ -163,17 +164,6 @@ public :
     void forChild( FunctionType Function, ArgTypes ...Args );
 
     ///
-    /// @brief     再帰呼び出しのエントリー
-    ///
-    /// @tparam ReturnType  : 呼び出す関数の戻り値
-    /// @tparam ArgTypes    : 呼び出す関数の引数リスト
-    /// @param[in] Function : 呼び出す関数のアドレス
-    /// @param[in] Args     : 呼び出す関数に渡すパラメータ
-    ///
-    template <class ReturnType, class ...ArgTypes>
-    void recursizeEntry( ReturnType(LevelNode::*Function)(ArgTypes...), ArgTypes ...Args );
-
-    ///
     /// @brief     コンポーネントの追加
     ///
     /// @tparam    ComponentType : 追加するコンポーネントの型
@@ -220,7 +210,7 @@ NodeType* LevelNode::getChild( size_t Index ) const noexcept
         if( child->getNodeType()==NodeType::kNodeType &&
             count++ ==Index )
         {
-            return static_cast<NodeType*>(child);
+            return static_cast<NodeType*>(child.get());
         }
     }
     return nullptr;
@@ -268,19 +258,9 @@ void LevelNode::forChild( FunctionType F, ArgTypes ...Args )
 }
 
 
-// 再帰処理エントリー
-template <class ReturnType, class ...ArgTypes>
-void LevelNode::recursizeEntry( ReturnType(LevelNode::*Function)(ArgTypes...), ArgTypes ...Args )
-{
-    (this->*Function)( Args... );
-    for( auto& child : childs_ )
-        child->recursizeEntry( Function, Args... );
-}
-
-
 // ファクトリを定義
-template class Factory<uint32_t, LevelNode>;
-using LevelNodeFactory = Factory<uint32_t, LevelNode>;
+template class Factory<std::string, LevelNode>;
+using LevelNodeFactory = Factory<std::string, LevelNode>;
 
 END_EGEG
 #endif /// !INCLUDED_EGEG_LEVEL_NODE_HEADER_

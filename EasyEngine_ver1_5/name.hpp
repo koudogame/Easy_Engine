@@ -18,7 +18,7 @@ BEGIN_EGEG
 ///          égópó· )                                                <br>
 ///           êÈåæ                                                  <br>
 ///             static constexpr const char kHogeName = "hoge";     <br>
-///             Name<kHogeName> generator;
+///             Name<kHogeName> name_generator{};
 ///
 template <const char Name_[]>
 struct Name
