@@ -70,6 +70,11 @@ public :
         std::get<TagType>(property_).set( std::move(Element) );
     }
     template <class TagType>
+    typename TagType::ElemTy& get() noexcept
+    {
+        return std::get<TagType>(property_).get();
+    }
+    template <class TagType>
     const typename TagType::ElemTy& get() const noexcept
     {
         return std::get<TagType>(property_).get();
@@ -78,7 +83,7 @@ public :
     ///
     /// @brief  プロパティの抽出
     ///
-    /// @tparam ExtractionTypes : 抽出するタグリス
+    /// @tparam ExtractionTypes : 抽出するタグリスト
     ///
     /// @return 抽出したデータを保持したプロパティ
     ///

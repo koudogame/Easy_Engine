@@ -165,10 +165,12 @@ void DefaultBaseScene::render( uint64_t )
         if( !model->getState() ) continue;
         if( !updateWorldMatrix(device_context.Get(), model->getOwner()) ) return;
 
-        device_context->IASetIndexBuffer( model->getMesh()->vertices.get<TagVertexIndex>().Get(), DXGI_FORMAT_R32_UINT, 0 );
+
+        auto mesh = model->getMesh();
+        device_context->IASetIndexBuffer( mesh->get<Tag<Vertex>>().get<TagVertexIndex>().Get(), DXGI_FORMAT_R32_UINT, 0 );
         
-        auto vertices_data = model->getMesh()->vertices.extraction<TagVertexPosition, TagVertexUV, TagVertexNormal>();
-        for( const auto& mesh : model->getMesh()->sub_mesh_list )
+        auto vertices_data = mesh->get<Tag<Vertex>>().extraction<TagVertexPosition, TagVertexUV, TagVertexNormal>();
+        for( const auto& mesh : model->getMesh()->sub_mesh_list ) // ‚±‚±SubMesh->Mesh‚É’PˆÊ•ÏX
         {
             mesh.shader->shading( device_context.Get(), vertices_data, mesh.material );
             device_context->DrawIndexed( mesh.num_vertices, mesh.start_index, mesh.base_vertex );

@@ -7,35 +7,18 @@
 
 #include <memory>
 #include <vector>
+#include "property.hpp"
 #include "shader.hpp"
 #include "vertex.hpp"
 #include "material.hpp"
 
 BEGIN_EGEG
 
-///
-/// @struct SubMesh
-/// @brief  サブメッシュ
-///
-struct SubMesh
-{
-    IShader* shader;
-    Material material;
-    size_t num_vertices = 0U;
-    size_t start_index  = 0U;
-    size_t base_vertex  = 0U;
-};
-
-
-///
-/// @struct Mesh
-/// @brief  メッシュ
-///
-struct Mesh
-{
-    Vertex vertices;
-    std::vector<SubMesh> sub_mesh_list;
-};
+using Mesh = Property<
+        Tag<Vertex>,
+        Tag<Material>,
+        Tag<IShader*>,
+        Tag<size_t>>;
 
 END_EGEG
 #endif /// !INCLUDED_EGEG_MESH_HEADER_
